@@ -9,4 +9,7 @@
     right: 0;
 }
 
-
+.header-right-box{
+    margin: 0;
+    padding-right: 30px;
+}
