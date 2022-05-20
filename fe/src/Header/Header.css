@@ -9,6 +9,10 @@
     right: 0;
 }
 
+.header-nav-button-box{
+    display: flex;
+}
+
 .header-right-box{
     margin: 0;
     padding-right: 30px;
