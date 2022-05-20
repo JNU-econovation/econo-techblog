@@ -1,3 +1,4 @@
+import LoginButton from './components/LoginButton';
 import test_logo from './img/test_logo.png';
 import './Header.css';
 
@@ -10,7 +11,7 @@ const Header = () => {
             </div>
             <div className="header-right-box">
                 searchbar
-                
+                <LoginButton />
             </div>
         </div>
     )
