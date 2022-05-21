@@ -1,0 +1,16 @@
+.login-button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    color : white;
+    background-color: rgb(233, 135, 23);
+    border: 1px rgb(233, 135, 23) solid;
+    border-radius: 10px;
+}
+
+.login-button:hover{
+    transition: all ease-out 0.5s;
+    background-color: rgb(196, 116, 24);
+    border: 1px rgb(196, 116, 24) solid;
+}
