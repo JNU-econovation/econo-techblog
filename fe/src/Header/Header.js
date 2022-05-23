@@ -1,5 +1,6 @@
 import LoginButton from './components/LoginButton';
 import NavItem from './components/NavItem';
+import Search from './components/Search';
 import test_logo from './img/test_logo.png';
 import './Header.css';
 
@@ -15,6 +16,7 @@ const Header = () => {
                 <NavItem />
             </div>
             <div className="header-right-box">
+                <Search />
                 <LoginButton />
             </div>
         </div>
