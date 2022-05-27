@@ -22,7 +22,11 @@
     "extends": [
       "prettier",
       "airbnb"
-    ]
+    ],
+    "rules": {
+      "linebreak-style": 0,
+      "no-undef": 0
+    }
   },
   "browserslist": {
     "production": [
