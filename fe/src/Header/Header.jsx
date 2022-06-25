@@ -8,13 +8,13 @@ import './Header.css';
 function Header() {
   return (
     <div className="header">
-      <img alt="econovation logo" src={testLogo} />
-      <div className="header-nav-button-box">
+      <img className="header-logo" src={testLogo} alt="econovation logo" />
+      <ul className="header-nav-button-box">
         <NavItem />
         <NavItem />
         <NavItem />
         <NavItem />
-      </div>
+      </ul>
       <div className="header-right-box">
         <Search />
         <LoginButton />
