@@ -7,7 +7,7 @@ import './Header.css';
 
 function Header() {
   return (
-    <div className="header">
+    <header className="header">
       <img className="header-logo" src={testLogo} alt="econovation logo" />
       <ul className="header-nav-button-box">
         <NavItem />
@@ -19,7 +19,7 @@ function Header() {
         <Search />
         <LoginButton />
       </div>
-    </div>
+    </header>
   );
 }
 
