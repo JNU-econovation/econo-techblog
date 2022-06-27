@@ -1,0 +1,30 @@
+#Root Query
+type Query{
+    findByUserId(userId : Int!): Int!
+    findByPostId(postId : Int!): Int!
+}
+#Root Mutation
+type Mutation{
+    createPost(post : PostRequestDto!): Int!
+    deletePost(userId : Int!):Boolean
+    updatePost(postId : Int): Int!
+    createCategoryByPostId(postId : Int!, category : String!) : Int
+}
+
+type Post{
+    userId:Int!
+    content:String
+    official:Boolean!
+    title:String!
+    categoty:String
+    created_at : DateTime!
+    modified_at : DateTime!
+}
+
+input PostRequestDto{
+    userId:Int!
+    content:String
+    official:Boolean!
+    title:String!
+    categoty:String
+}

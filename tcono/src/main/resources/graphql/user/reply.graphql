@@ -1,0 +1,28 @@
+type Mutation{
+    createByReply(replyRequestDto : ReplyRequestDto) : Int!
+    deleteByReplyId(replyId : Int!) : Boolean!
+    updateByReply(replyRequestDto : ReplyRequestDto) : Int!
+}
+
+type Query{
+    findByUserName(userName : String!) : Reply!
+}
+
+input ReplyRequestDto{
+    content : String!
+    groupNum : Int!
+    depth : Int!
+    depth_order : Int!
+}
+
+type Reply{
+    replyId : Int!
+    userId : Int!
+    postId : Int!
+    content : String!
+    groupNum : Int!
+    depth : Int!
+    depth_order : Int!
+    created_at : Date!
+    modified_at : Date!
+}
