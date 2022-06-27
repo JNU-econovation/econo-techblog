@@ -4,9 +4,9 @@ import '../css/SignUpBtn.css';
 
 function SignUpBtn() {
   return (
-    <button type="submit" className="sign-up-button">
-      가입하기
-    </button>
+    <div className="box-element">
+      <button type="submit">가입하기</button>
+    </div>
   );
 }
 
