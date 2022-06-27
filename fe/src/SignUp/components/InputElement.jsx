@@ -6,7 +6,7 @@ import '../css/InputElement.css';
 
 function InputElement({ placeHolder, classNames }) {
   return (
-    <div className="input-element">
+    <div className="box-element">
       <input className={classNames} placeholder={placeHolder} />
     </div>
   );
