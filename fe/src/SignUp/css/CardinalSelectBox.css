@@ -1,0 +1,15 @@
+.cardinal-select-box{
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    width: 80%;
+    height:35px;
+
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    color: black;
+    opacity : 0.35;
+    border-radius: 20px;
+}
