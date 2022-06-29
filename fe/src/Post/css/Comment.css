@@ -1,0 +1,21 @@
+.comment {
+    display: flex;
+    margin: 20px 0px;
+    width: 90%;
+}
+
+.comment-info {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.writer {
+    font-size: 15px;
+}
+
+.comment-desc {
+    font-size: 13px;
+    color: #999;
+}

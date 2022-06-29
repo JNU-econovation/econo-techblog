@@ -1,0 +1,30 @@
+.post-info {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.spec-info {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    color: #7f7f7f;
+    font-size: 15px;
+}
+
+.spec-info img {
+    margin: 0px 10px;
+}
+
+.writer-img {
+    width: 30px;
+    height: 30px;
+    border: solid 1px #707070;
+    border-radius: 70%;
+    background-color: #d5d5d5;
+}
+
+.info-divider {
+    margin-right: 10px;
+    color: #7f7f7f;
+}
