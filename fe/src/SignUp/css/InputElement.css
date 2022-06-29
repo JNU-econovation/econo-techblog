@@ -1,0 +1,11 @@
+.box-element{
+    width: 100%;
+}
+.box-element input{
+    background-color: #f1f1f1;
+    border : 1px solid #f1f1f1;
+    border-radius: 20px;
+    height: 35px;
+    width: inherit;
+    margin: 5px 0;
+}

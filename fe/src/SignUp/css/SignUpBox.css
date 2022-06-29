@@ -1,0 +1,17 @@
+.sign-up-box{
+    display: flex;
+    margin: auto;
+    width: 30%;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.sign-up-box-title{
+    color:#2269fa;
+    
+}

@@ -3,7 +3,7 @@ import React from 'react';
 import './NavItem.css';
 
 function NavItem() {
-  return <div className="nav-item">Tech</div>;
+  return <li className="nav-item">Tech</li>;
 }
 
 export default NavItem;

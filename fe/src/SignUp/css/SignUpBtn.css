@@ -1,0 +1,14 @@
+.box-element{
+    width: 80%;
+}
+.box-element button{
+    display: block;
+    background-color:#2269fa;
+    color: white;
+    border: 1px solid#2269fa;
+    margin: 10px auto;
+    width: inherit;
+    height: 35px;
+    border-radius: 20px;
+    cursor: pointer;
+}
