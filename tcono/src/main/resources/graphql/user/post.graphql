@@ -1,30 +1,70 @@
+type Post{
+    Id:ID!
+    content:String
+    official:Boolean!
+    title:String!
+    categoty:[Category!]!
+}
+# Test
+type User{
+    Id : ID!
+    year : Int!
+    post : [Post!]!
+    userName : String!
+    password : String!
+    userEmail : String!
+}
+
+type Category{
+    Id : ID!
+    user : User!
+    categoryName : [String]!
+}
+
 #Root Query
 type Query{
-    findByUserId(userId : Int!): Int!
-    findByPostId(postId : Int!): Int!
+#    -----------Post------------------------------
+
+    findAllPosts: [Post!]!
+    findPostByPostId(Id : ID!) : Post!
+
+#    ---------REPLY--------------------
+    findReplyByUserName(userName : String!) : Reply!
+
+#    -----------USER------------------------------
+    findUserByUserName(userName : String!) : [User]!
+    findUserByUserEmail(userEmail : String!) : User!
+
+#    -----------Category-------------------------
+    findUserByCategoryName(categoryName : String!) : [User]!
 }
+
 #Root Mutation
 type Mutation{
-    createPost(post : PostRequestDto!): Int!
-    deletePost(userId : Int!):Boolean
-    updatePost(postId : Int): Int!
-    createCategoryByPostId(postId : Int!, category : String!) : Int
+    createPost(content : String!,title:String!, categoty:[String!]!): Post!
+    deletePost(userId : ID):Boolean
+    updatePost(content : String!,title:String!, categoty:[String]): Int!
+    createCategoryByPostId(postId : ID!, category : String!) : Int
+
+#    Reply--------------
+#    createByReply(replyRequestDto : ReplyRequestDto) : Int!
+    deleteByReplyId(replyId : ID!) : Boolean!
+#    updateByReply( : ) : Int!
+
+#    User--------------------------------
+    createUser( usstDerRequeto : UserRequest!): User!
+    deleteUserById(userId: Int!): Boolean!
+    updateUserRole( userId : Int!): User!
 }
 
-type Post{
-    userId:Int!
-    content:String
-    official:Boolean!
-    title:String!
-    categoty:String
-    created_at : DateTime!
-    modified_at : DateTime!
-}
-
-input PostRequestDto{
-    userId:Int!
-    content:String
-    official:Boolean!
-    title:String!
-    categoty:String
+type Reply{
+    Id : ID!
+    user : User!
+    post : Post!
+    content : String!
+    groupNum : Int!
+    depth : Int!
+    depth_order : Int!
+    created_at : String!
+    modified_at : String!
 }
