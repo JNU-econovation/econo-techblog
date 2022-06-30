@@ -23,9 +23,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+//	SpringBoot Mail Setting
+	implementation 'org.springframework.boot::spring-boot-starter-mail'
+
 //	GraphQL Setting
-//	implementation group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '11.0.0'
-//	implementation group: 'com.graphql-java-kickstart', name: 'graphql-java-tools', version: '11.0.0'
 	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
 	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
 
@@ -33,6 +34,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mockito:mockito-all:1.9.5'
 	testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:11.0.0'
 }
 

@@ -13,6 +13,26 @@ type User{
     userName : String!
     password : String!
     userEmail : String!
+    Role : Role!
+    createAt : String!
+    modifiedAt : String!
+}
+
+enum Role{
+    ADMIN
+    USER
+    GUEST
+}
+
+type conformationToken{
+#    Email Service를 이용하기 위한 Table
+    id : ID!
+    expirationDate : String!
+    expired : Boolean!
+    userId : Int!
+    created_at : String!
+    modified_at : String!
+
 }
 
 type Category{
@@ -24,14 +44,15 @@ type Category{
 #Root Query
 type Query{
 #    -----------Post------------------------------
-
     findAllPosts: [Post!]!
     findPostByPostId(Id : ID!) : Post!
 
 #    ---------REPLY--------------------
     findReplyByUserName(userName : String!) : Reply!
+    findReplyByEmail(userEmail : String!) : Reply!
 
 #    -----------USER------------------------------
+
     findUserByUserName(userName : String!) : [User]!
     findUserByUserEmail(userEmail : String!) : User!
 
@@ -47,14 +68,15 @@ type Mutation{
     createCategoryByPostId(postId : ID!, category : String!) : Int
 
 #    Reply--------------
-#    createByReply(replyRequestDto : ReplyRequestDto) : Int!
+#    createByReply( : ) : Int!
     deleteByReplyId(replyId : ID!) : Boolean!
 #    updateByReply( : ) : Int!
 
 #    User--------------------------------
-    createUser( usstDerRequeto : UserRequest!): User!
+    createUser( userEmail : String!, password : String!, year : Int!, userName : String!) : UserPayLoad!
+    userLogin(userEmail : String, password : String!) : UserPayLoad!
     deleteUserById(userId: Int!): Boolean!
-    updateUserRole( userId : Int!): User!
+    updateUserRole(userId : Int!, role : Role!): Role!
 }
 
 type Reply{
