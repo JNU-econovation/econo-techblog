@@ -1,0 +1,27 @@
+.liked {
+    margin: 30px 0px;
+}
+
+.liked-btn {
+    display: flex;
+    align-items: center;
+    border-radius: 39px;
+    border: solid 1px #bbb;
+    background-color: #fff;
+    padding: 5px 12px;
+    color: #999;
+    margin-left: auto;
+}
+
+.liked-btn span {
+    font-size: 12px;
+}
+
+.liked-btn img {
+    width: 13px;
+    margin-left: 5px;
+}
+
+.on {
+    color: black;
+}

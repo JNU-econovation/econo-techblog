@@ -7,6 +7,7 @@ import PostInfo from './components/PostInfo';
 import Tags from './components/Tags';
 import PostDesc from './components/PostDesc';
 import CommentList from './components/CommentList';
+import Liked from './components/Liked';
 
 const Post = function () {
   return (
@@ -16,6 +17,7 @@ const Post = function () {
         <PostInfo />
         <Tags />
         <PostDesc />
+        <Liked />
         <CommentList />
       </div>
     </div>
