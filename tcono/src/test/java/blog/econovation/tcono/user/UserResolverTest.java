@@ -134,12 +134,23 @@ public class UserResolverTest {
                 .password("12345")
                 .year(20)
                 .userName("이서현2");
-        userRepositort.save(user1);
+        User savedUser = userRepositort.save(user1);
         userRepository.update(user2);
-
-        User findUser = userRepository.findByName("이서현1");
-        asseertThat(findUser.getName()).isEqualTo(user2.getName());
+        asseertThat(savedUser.getName()).isEqualTo(user2.getName());
     }
 
 //  회원정보 삭제 테스트
+    @Test
+    @Transactional
+    public void deleteUser(){
+        User user = User.builder()
+                .userEmail("Test1@gmail.com")
+                .password("123")
+                .year(22)
+                .userName("이서현1");
+        User savedUser = userRepository.save(user);
+        Long deletedId = userRepository.deleteById(1);
+//        assert
+        assertThat(deletedID).isEqualTo(savedUser.getId());
+    }
 }
