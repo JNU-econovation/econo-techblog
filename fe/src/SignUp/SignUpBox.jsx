@@ -6,39 +6,26 @@ import SignUpBtn from './components/SignUpBtn';
 import './css/SignUpBox.css';
 
 function SignUpBox() {
-  const [password, setPassword] = useState('');
-  const [rePassword, setRePassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [isAgree, setIsAgree] = useState(false);
+
+  const onChange = (e) => {
+    setIsAgree(() => e.target.checked);
+  };
+
   return (
     <div className="sign-up-box">
       <h3 className="sign-up-box-title">Sign Up</h3>
-      <InputElement
-        placeHolder="이메일"
-        classNames="input-email"
-        setInput={setEmail}
-        inputValue={email}
-      />
+      <InputElement placeHolder="이메일" classNames="input-email" />
       <span>이메일 인증하기</span>
-      <InputElement
-        placeHolder="비밀번호"
-        classNames="input-password"
-        setInput={setPassword}
-        inputValue={password}
-      />
+      <InputElement placeHolder="비밀번호" classNames="input-password" />
       <InputElement
         placeHolder="비밀번호 확인"
         classNames="input-password-confirm"
-        setInput={setRePassword}
-        inputValue={rePassword}
       />
-      <InputElement
-        placeHolder="이름"
-        classNames="input-name"
-        setInput={setName}
-        inputValue={name}
-      />
+      <InputElement placeHolder="이름" classNames="input-name" />
       <CardinalSelectBox />
+      <input type="checkbox" checked={isAgree} onChange={onChange} />
+      개인정보 동의합니다.
       <SignUpBtn />
     </div>
   );
