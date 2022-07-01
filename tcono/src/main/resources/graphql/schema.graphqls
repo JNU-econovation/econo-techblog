@@ -76,6 +76,7 @@ type Mutation{
 
 #    User--------------------------------
     createUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
+    updateUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
     userLogin(userEmail : String, password : String!) : Boolean!
     deleteUserById(userId: Int!): Boolean!
     updateUserRole(userId : Int!, role : Role!): Role!
