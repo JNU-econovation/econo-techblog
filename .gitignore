@@ -1,4 +1,5 @@
 .tcono/src/main/resources/application.properties
+.tcono/src/main/resources/email.properties
 ./.idea/
 ./.gradle/
 

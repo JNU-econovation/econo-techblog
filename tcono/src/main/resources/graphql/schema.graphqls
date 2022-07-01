@@ -1,9 +1,20 @@
+scalar Void
+
 type Post{
     Id:ID!
     content:String
     official:Boolean!
     title:String!
     categoty:[Category!]!
+}
+
+type ConfirmationToken{
+    id : ID!
+    expirationDate:String!
+    expired : Boolean!
+    userId : String!
+    createAt : String!
+    modifiedAt : String!
 }
 # Test
 type User{
@@ -22,17 +33,6 @@ enum Role{
     ADMIN
     USER
     GUEST
-}
-
-type conformationToken{
-#    Email Service를 이용하기 위한 Table
-    id : ID!
-    expirationDate : String!
-    expired : Boolean!
-    userId : Int!
-    created_at : String!
-    modified_at : String!
-
 }
 
 type Category{
@@ -73,10 +73,13 @@ type Mutation{
 #    updateByReply( : ) : Int!
 
 #    User--------------------------------
-    createUser( userEmail : String!, password : String!, year : Int!, userName : String!) : UserPayLoad!
-    userLogin(userEmail : String, password : String!) : UserPayLoad!
+    createUser( userEmail : String!, password : String!, year : Int!, userName : String!) : User!
+    userLogin(userEmail : String, password : String!) : Boolean!
     deleteUserById(userId: Int!): Boolean!
     updateUserRole(userId : Int!, role : Role!): Role!
+    confirmEmail(token : String!) : Void!
+
+#   Auth-----------------------------------
 }
 
 type Reply{

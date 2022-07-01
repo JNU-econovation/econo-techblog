@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 public class UserResolverTest {
-    @Mock private User user;
-
+    @Mock
+    private User user;
+    @Mock
+    UserRepository userRepository;
 /**
  * Arrange
  * ACT
@@ -26,21 +28,19 @@ public class UserResolverTest {
     @Before
     public void initMocks(){
         MockitoAnnotations.initMocks(this);
-//    Initializes objects annotated with Mockito annotations for given testClass: @Mock, @Spy, @Captor, @InjectMocks
 
     }
-//    findUserByUserName(userName : String!) : [User]!
-
-//    findUserByUserEmail(userEmail : String!) : User!
 
     @Before
     public void createResolver(){
-
 //        given  : arrange
-        UserMutationResolver userMutationResolver = new UserMutationResolver();
-        UserQueryResolver userQueryResolver = new UserQueryResolver();
-        @InjectMocks private UserMutationResolver;
-        @InjectMocks private UserQueryResolver;
+
+
+        @InjectMocks
+        private UserMutationResolver userMutationResolver;
+
+        @InjectMocks
+        private UserQueryResolver userQueryResolver;
 
 //        when : act
 
@@ -48,12 +48,13 @@ public class UserResolverTest {
 //        then : assert
         verify()
     }
-
-    public void
-    @Before
+//    회원가입 테스트
+    //    랜덤 키값을 형성하기 때문에 함수가 호출됐는지를 테스트한다.
     @Test
     @Transactional
-    public void
+    public void (){
+
+    }
 
 // 회원조회 테스트
     @Test
