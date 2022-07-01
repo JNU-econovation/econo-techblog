@@ -63,6 +63,7 @@ type Query{
 
 #Root Mutation
 type Mutation{
+    #    -----------Post------------------------------
     createPost(content : String!,title:String!, categoty:[String!]!): Post!
     deletePost(userId : ID):Boolean
     updatePost(content : String!,title:String!, categoty:[String]): Int!
@@ -74,13 +75,14 @@ type Mutation{
 #    updateByReply( : ) : Int!
 
 #    User--------------------------------
-    createUser( userEmail : String!, password : String!, year : Int!, userName : String!) : User!
+    createUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
     userLogin(userEmail : String, password : String!) : Boolean!
     deleteUserById(userId: Int!): Boolean!
     updateUserRole(userId : Int!, role : Role!): Role!
     confirmEmail(token : String!) : Void!
 
 #   Auth-----------------------------------
+
 }
 
 type Reply{
