@@ -19,7 +19,7 @@ type ConfirmationToken{
 
 # Test
 type User{
-    Id : ID!
+    id : ID!
     year : Int!
     post : [Post!]!
     userName : String!
@@ -46,14 +46,14 @@ type Category{
 type Query{
 #    -----------Post------------------------------
     findAllPosts: [Post!]!
-    findPostByPostId(Id : ID!) : Post!
+    findPostByPostId(id : ID!) : Post!
 
 #    ---------REPLY--------------------
     findReplyByUserName(userName : String!) : Reply!
     findReplyByEmail(userEmail : String!) : Reply!
 
 #    -----------USER------------------------------
-
+    findUserById(id : ID!) : User!
     findUserByUserName(userName : String!) : [User]!
     findUserByUserEmail(userEmail : String!) : User!
 
