@@ -4,7 +4,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
-public class authServiceTest {
+public class ConfirmationTokenResolverTest {
 
     @InjectMocks
     ConfirmationTokenMutationResolver ConfirmationTokenMutationResolver;
