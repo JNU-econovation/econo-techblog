@@ -16,6 +16,7 @@ type ConfirmationToken{
     createAt : String!
     modifiedAt : String!
 }
+
 # Test
 type User{
     Id : ID!
