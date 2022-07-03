@@ -67,7 +67,7 @@ public class UserResolverTest {
     //     회원Id조회 테스트
     @Test
     @Transactional
-    public void findUserById() {
+    public void findUserByIdTest() {
         //        given : when
         User user = User.builder()
                 .userEmail("Test@gmail.com")
