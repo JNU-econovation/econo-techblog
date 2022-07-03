@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Transactional  // resetAutoIncrement() 실행을 위해 필요
 public class UserResolverTest {
     /**
      * Arrange
