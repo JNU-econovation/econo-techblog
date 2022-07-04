@@ -1,0 +1,20 @@
+.login-box{
+    display: flex;
+    width: 30%;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.login-box-title{
+    color:#2269fa;   
+}
+
+.login-link-container{
+    display: flex;
+    justify-content: space-between;
+}
