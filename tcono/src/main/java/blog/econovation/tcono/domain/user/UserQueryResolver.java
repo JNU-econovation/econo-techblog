@@ -2,6 +2,7 @@ package blog.econovation.tcono.domain.user;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,8 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-@Service
 @RequiredArgsConstructor
+@Component
+@Transactional(readOnly = true)
 public class UserQueryResolver implements GraphQLQueryResolver {
 
     private static final String NOT_FOUND_USER_MESSAGE = "해당 회원을 찾을 수 없습니다";
@@ -21,7 +23,7 @@ public class UserQueryResolver implements GraphQLQueryResolver {
     /**
      * Get User By One userId
      * GraphQL Schema Query : user(userId:Long):User!
-     * @param userId
+     * @param Long : userId
      * @return User
      */
     @Transactional
@@ -55,10 +57,8 @@ public class UserQueryResolver implements GraphQLQueryResolver {
      */
     @Transactional
     public User findUserByUserEmail(String userEmail) {
-        User user = userRepository.findByUserEmail(userEmail);
-        if(user == null){
-            throw new IllegalArgumentException(NOT_FOUND_EMAIL_MESSAGE);
-        }
+        User user = userRepository.findByUserEmail(userEmail)
+                .orElse(null);
         return user;
     }
 
