@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import './css/InputElement.css';
 
-function InputElement({ placeHolder, classNames, value, setValue }) {
+function InputElement({ placeHolder, classNames, value, setValue, type }) {
   const onChange = (e) => {
     setValue(() => e.target.value);
   };
@@ -16,6 +16,7 @@ function InputElement({ placeHolder, classNames, value, setValue }) {
         placeholder={placeHolder}
         value={value}
         onChange={onChange}
+        type={type}
       />
     </div>
   );
@@ -26,5 +27,6 @@ InputElement.propTypes = {
   classNames: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
 };
 export default InputElement;
