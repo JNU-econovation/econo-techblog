@@ -2,6 +2,7 @@ package blog.econovation.tcono.domain.user;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,17 +11,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-@Service
 @RequiredArgsConstructor
+@Component
+@Transactional(readOnly = true)
 public class UserQueryResolver implements GraphQLQueryResolver {
 
     private static final String NOT_FOUND_USER_MESSAGE = "해당 회원을 찾을 수 없습니다";
+    private static final String NOT_FOUND_EMAIL_MESSAGE = "해당 이메일을 찾을 수 없습니다.";
     private final UserRepository userRepository;
 
     /**
-     * Get User One Data
+     * Get User By One userId
      * GraphQL Schema Query : user(userId:Long):User!
-     * @param userId
+     * @param Long : userId
      * @return User
      */
     @Transactional
@@ -30,10 +33,8 @@ public class UserQueryResolver implements GraphQLQueryResolver {
         return user;
     }
 
-
-
     /**
-     * Get User One userName
+     * Get User By One userName
      * GraphQL Schema Query : user(userId:Long):User!
      * @param String : userName
      * @return List<UserResponseDto>
@@ -48,8 +49,17 @@ public class UserQueryResolver implements GraphQLQueryResolver {
         return findUser;
     }
 
+    /**
+     * Get User By One userEmail
+     * GraphQL Schema Query : user(userEmail:String):User!
+     * @param String : userEmail
+     * @return User
+     */
+    @Transactional
     public User findUserByUserEmail(String userEmail) {
-
+        User user = userRepository.findByUserEmail(userEmail)
+                .orElse(null);
+        return user;
     }
 
 }
