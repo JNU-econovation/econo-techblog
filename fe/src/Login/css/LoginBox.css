@@ -13,8 +13,3 @@
 .login-box-title{
     color:#2269fa;   
 }
-
-.login-link-container{
-    display: flex;
-    justify-content: space-between;
-}
