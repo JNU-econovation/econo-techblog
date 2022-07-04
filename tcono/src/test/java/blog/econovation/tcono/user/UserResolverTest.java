@@ -3,9 +3,8 @@ package blog.econovation.tcono.user;
 import blog.econovation.tcono.domain.user.User;
 import blog.econovation.tcono.domain.user.UserMutationResolver;
 import blog.econovation.tcono.domain.user.UserQueryResolver;
-import org.aspectj.lang.annotation.After;
+import blog.econovation.tcono.domain.user.UserRepository;
 import org.aspectj.lang.annotation.Before;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,19 +27,15 @@ public class UserResolverTest {
      * ACT
      * Assert
      */
+    @InjectMocks
+    private UserMutationResolver userMutationResolver;
+
+    @InjectMocks
+    private UserQueryResolver userQueryResolver;
+
+    @Mock
+    UserRepository userRepository;
 //  테스트시 핑요한  Resolver Instance 생성
-    @Before
-    public void createUserResolver() {
-//        given  : arrange
-        @InjectMocks
-        private UserMutationResolver userMutationResolver;
-
-        @InjectMocks
-        private UserQueryResolver userQueryResolver;
-
-        @Mock
-        UserRepository userRepository;
-    }
 
     @Before
     public void initMocks() {
@@ -59,7 +54,7 @@ public class UserResolverTest {
                 .userName("이서현");
         when(userMutationResolver.createUser(user)).thenReturn(user);
 //        when : act
-        User findUser = userQueryResoler.findUserById(1L);
+        User findUser = userQueryResolver.findUserById(1L);
 //        then: assert
         assertThat(findUser.getName()).isEqualto(user.getUserName());
     }
