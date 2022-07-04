@@ -15,10 +15,11 @@ import java.util.stream.Stream;
 public class UserQueryResolver implements GraphQLQueryResolver {
 
     private static final String NOT_FOUND_USER_MESSAGE = "해당 회원을 찾을 수 없습니다";
+    private static final String NOT_FOUND_EMAIL_MESSAGE = "해당 이메일을 찾을 수 없습니다.";
     private final UserRepository userRepository;
 
     /**
-     * Get User One Data
+     * Get User By One userId
      * GraphQL Schema Query : user(userId:Long):User!
      * @param userId
      * @return User
@@ -30,10 +31,8 @@ public class UserQueryResolver implements GraphQLQueryResolver {
         return user;
     }
 
-
-
     /**
-     * Get User One userName
+     * Get User By One userName
      * GraphQL Schema Query : user(userId:Long):User!
      * @param String : userName
      * @return List<UserResponseDto>
@@ -48,8 +47,19 @@ public class UserQueryResolver implements GraphQLQueryResolver {
         return findUser;
     }
 
+    /**
+     * Get User By One userEmail
+     * GraphQL Schema Query : user(userEmail:String):User!
+     * @param String : userEmail
+     * @return User
+     */
+    @Transactional
     public User findUserByUserEmail(String userEmail) {
-
+        User user = userRepository.findByUserEmail(userEmail);
+        if(user == null){
+            throw new IllegalArgumentException(NOT_FOUND_EMAIL_MESSAGE);
+        }
+        return user;
     }
 
 }
