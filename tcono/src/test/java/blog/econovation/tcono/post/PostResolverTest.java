@@ -23,9 +23,6 @@ import static org.mockito.Mockito.when;
 @Transactional  // resetAutoIncrement() 실행을 위해 필요
 public class PostResolverTest {
 
-    @Before
-    public void createPostResolver() {
-//        given  : arrange
         @InjectMocks
         private PostMutationResolver postMutationResolver;
 
@@ -34,9 +31,6 @@ public class PostResolverTest {
 
         @Mock
         PostRepository postRepository;
-
-    }
-
 
     @Before
     public void initMocks() {
