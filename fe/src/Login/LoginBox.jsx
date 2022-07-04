@@ -4,6 +4,7 @@ import InputElement from '../components/InputElement';
 import './css/LoginBox.css';
 import LoginBtn from './LoginBtn';
 import SignUpLinkBtn from './SignUpLinkBtn';
+import LoginLink from './LoginLink';
 
 function LoginBox() {
   return (
@@ -13,11 +14,7 @@ function LoginBox() {
       <InputElement placeHolder="Password" />
       <LoginBtn />
       <SignUpLinkBtn />
-      <div className="login-link-container">
-        <div>아이디 찾기</div>
-        <div>|</div>
-        <div>비밀번호 찾기</div>
-      </div>
+      <LoginLink />
     </div>
   );
 }
