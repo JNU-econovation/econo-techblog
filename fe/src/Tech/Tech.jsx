@@ -10,7 +10,7 @@ import Recent from './components/Recent';
 const Tech = function () {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const POST_PER_PAGE = 5;
+  const postPerPage = 5;
   const getMovies = async () => {
     const response = await fetch(
       'https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year',
@@ -22,8 +22,8 @@ const Tech = function () {
     getMovies();
   }, []);
 
-  const indexOfLast = currentPage * POST_PER_PAGE;
-  const indexOfFirst = indexOfLast - POST_PER_PAGE;
+  const indexOfLast = currentPage * postPerPage;
+  const indexOfFirst = indexOfLast - postPerPage;
   const currentPosts = (posts) => {
     let slicePosts = 0;
     slicePosts = posts.slice(indexOfFirst, indexOfLast);
