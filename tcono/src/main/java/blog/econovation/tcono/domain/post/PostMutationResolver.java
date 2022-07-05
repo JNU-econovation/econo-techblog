@@ -62,6 +62,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
     public Long createCategoryByPostId(Long postId, String category) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
+        //TODO
         //post에 있는 기존의 category 제거하는 로직
         //String 형태의 category 쪼개는 로직
 

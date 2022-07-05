@@ -39,7 +39,7 @@ public class Post extends BaseTimeEntity {
 
 //    public void addComment(Comment comment) {
 //        commentList.add(comment);
-}
+
 
     //내용 수정
     public void updatePost(String title, String content) {
@@ -48,7 +48,13 @@ public class Post extends BaseTimeEntity {
     }
 
     public static Post create(Long postId, String title, String content) {
-        return new Post(postId, title, content, false);
+        Post post= Post.builder()
+                .Id(postId)
+                .title(title)
+                .content(content)
+                .build();
+
+        return post;
     }
 }
 
