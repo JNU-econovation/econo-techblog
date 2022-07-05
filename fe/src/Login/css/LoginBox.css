@@ -1,6 +1,5 @@
-.sign-up-box{
+.login-box{
     display: flex;
-    margin: auto;
     width: 30%;
     height: fit-content;
     flex-direction: column;
@@ -11,14 +10,6 @@
     border-radius: 20px;
 }
 
-.sign-up-box span{
-    color: #3e467d;
-    text-align: left;
-    font-size: 14px;
-    margin: 0;
-
-}
-.sign-up-box-title{
-    color:#2269fa;
-    
+.login-box-title{
+    color:#2269fa;   
 }
