@@ -1,9 +1,8 @@
 package blog.econovation.tcono.user;
 
 import blog.econovation.tcono.domain.user.User;
-import blog.econovation.tcono.domain.user.UserMutationResolver;
-import blog.econovation.tcono.domain.user.UserQueryResolver;
 import blog.econovation.tcono.domain.user.UserRepository;
+import blog.econovation.tcono.service.UserService;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,10 +27,7 @@ public class UserResolverTest {
      * Assert
      */
     @InjectMocks
-    private UserMutationResolver userMutationResolver;
-
-    @InjectMocks
-    private UserQueryResolver userQueryResolver;
+    private UserService userService;
 
     @Mock
     UserRepository userRepository;
@@ -52,9 +48,9 @@ public class UserResolverTest {
                 .password("1234")
                 .year(20)
                 .userName("이서현");
-        when(userMutationResolver.createUser(user)).thenReturn(user);
+        when(userService.createUser(user)).thenReturn(user);
 //        when : act
-        User findUser = userQueryResolver.findUserById(1L);
+        User findUser = userService.findUserById(1L);
 //        then: assert
         assertThat(findUser.getName()).isEqualto(user.getUserName());
     }
@@ -106,10 +102,10 @@ public class UserResolverTest {
     @Test(expected = NullPointerException.class)
     @Transactional
     public void confirmEmailTest(){
-        EmailMutationResolver emailMutationResolverMocks = mock(EmailMutationResolver.class);
+        EmailService emailServiceMocks = mock(EmailService.class);
         doThrow(NullPointerException.class)
-                .when(emailMutationResolverMocks);
-        verify(emailMutationResolverMocks,times(1));
+                .when(emailServiceMocks);
+        verify(emailServiceMocks,times(1));
     }
 //  로그인 테스트
 
@@ -128,7 +124,7 @@ public class UserResolverTest {
                 .password("12345")
                 .year(20)
                 .userName("이서현2");
-        User savedUser = userRepositort.save(user1);
+        User savedUser = userRepository.save(user1);
         userRepository.update(user2);
         asseertThat(savedUser.getName()).isEqualTo(user2.getName());
     }

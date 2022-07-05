@@ -41,10 +41,11 @@ public class PostResolverTest {
     @Transactional
     public void createPostTest() {
 //        given : when
-                Post post = Post.builder()
-                .content("거꾸로해도우영우,인도인토마토별똥별우영우")
-                .title("인도인토마토별똥별우영우")
-                .category(new String[]{"인도인", "별똥별", "토마토", "우영우"});
+        Post post = Post.builder()
+        .content("거꾸로해도우영우,인도인토마토별똥별우영우")
+        .title("인도인토마토별똥별우영우")
+        .category(new String[]{"인도인", "별똥별", "토마토", "우영우"});
+
         when(postMutationResolver.createPost(post)).thenReturn(post);
 //        when : act
         Post findPost = postRepository.findById(1L)
