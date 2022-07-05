@@ -1,13 +1,36 @@
 .pagination {
     display: flex;
     justify-content: center;
-    margin: 60px 0px;
+    margin-top: 50px;
 }
 
-.pagination button {
-    border: none;
-    background-color: inherit;
-    margin: 4px;
-    font-size: 15px;
+ul {
+    list-style: none;
+    padding: 0px;
+}
+
+ul.pagination li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+ul.pagination li:first-child,
+ul.pagination li:last-child {
+    display: none;
+}
+
+
+ul.pagination li a {
+    text-decoration: none;
     color: #7b7b7b;
+}
+
+ul.pagination li.active a {
+    color: #000;
+    font-weight: bold;
+}
+
+ul.pagination li.disabled a {
+    display: none;
 }

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import Pagination from 'react-js-pagination';
 import './css/Tech.css';
+import './css/Pagination.css';
+
 import Banner from './components/Banner';
 import Official from './components/Official';
 import Recent from './components/Recent';
-import Pagination from './components/Pagination';
 
 const Tech = function () {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
+  const postPerPage = 5;
   const getMovies = async () => {
     const response = await fetch(
       'https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year',
@@ -20,8 +22,8 @@ const Tech = function () {
     getMovies();
   }, []);
 
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
+  const indexOfLast = currentPage * postPerPage;
+  const indexOfFirst = indexOfLast - postPerPage;
   const currentPosts = (posts) => {
     let slicePosts = 0;
     slicePosts = posts.slice(indexOfFirst, indexOfLast);
@@ -46,9 +48,13 @@ const Tech = function () {
             />
           ))}
           <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={movies.length}
-            setCurrentPage={setCurrentPage}
+            activePage={currentPage}
+            itemsCountPerPage={5}
+            totalItemsCount={movies.length}
+            pageRangeDisplayed={3}
+            prevPageText="<"
+            nextPageText=">"
+            onChange={setCurrentPage}
           />
         </div>
       </div>
