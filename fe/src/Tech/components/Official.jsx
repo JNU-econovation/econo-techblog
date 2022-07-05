@@ -30,19 +30,17 @@ const Official = function () {
           <span>{result.desc}</span>
         </div>
         <div className="official-bottom">
-          <div className="official-bottom-left">
-            <PostDetails src={date} alt="date" info={result.date} />
-            <span className="info-divider">|</span>
-            <PostDetails src={looked} alt="looked" info={result.looked} />
-            <span className="info-divider">|</span>
-            <PostDetails src={liked} alt="liked" info={result.liked} />
-          </div>
           <PostDetails
             className="official-bottom-right"
             src={liked}
             alt="liked"
             info={result.author}
           />
+          <PostDetails src={date} alt="date" info={result.date} />
+          <span className="info-divider">|</span>
+          <PostDetails src={looked} alt="looked" info={result.looked} />
+          <span className="info-divider">|</span>
+          <PostDetails src={liked} alt="liked" info={result.liked} />
         </div>
       </div>
     </div>
