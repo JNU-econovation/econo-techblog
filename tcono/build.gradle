@@ -26,6 +26,9 @@ dependencies {
 //	SpringBoot Mail Setting
 	implementation 'org.springframework.boot::spring-boot-starter-mail'
 
+//	SpringBoot Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 //	GraphQL Setting
 	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
 	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
