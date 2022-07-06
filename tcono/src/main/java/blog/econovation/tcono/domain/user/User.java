@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,8 +18,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Getter
@@ -33,6 +32,7 @@ public class User extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = false)
+    @Range(min =1, max = 50)
     private Long year;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -29,10 +29,10 @@ public class UserService {
      * @return User
      */
     @Transactional
-    public User findUserById(Long id) {
+    public Long findUserById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
-        return user;
+        return user.getId();
     }
 
     /**
