@@ -34,4 +34,4 @@ import java.text.MessageFormat;
             return password.matches(regexPassword);
         }
     }
-}
+
