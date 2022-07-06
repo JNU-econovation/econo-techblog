@@ -23,7 +23,7 @@ public class ConfirmationToken extends BaseTimeEntity {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2",strategy="uuid2")
     @Column(length=6)
-    private Long uid;
+    private Long id;
 
     @Column
     private LocalDateTime expirationDate;
@@ -31,19 +31,29 @@ public class ConfirmationToken extends BaseTimeEntity {
     @Column
     private boolean expired;
 
-    //일부러 FK 사용 안함
+    //FK 사용하지 않고 INPUT으로 받고
     @Column
-    private String userId;
+    private Long userId;
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public static ConfirmationToken createEmailConfirmationToken(String userId){
+
+/**    이메일 토큰 생성 로직
+ * @Param userId
+ */
+    public static ConfirmationToken createEmailConfirmationToken(Long userId){
         ConfirmationToken confirmationToken = new ConfirmationToken();
         confirmationToken.expirationDate = LocalDateTime.now().plusMinutes(EMAIL_TOKEN_EXPIRATION_TIME_VALUE);
         confirmationToken.expired = false;
         confirmationToken.userId = userId;
         return confirmationToken;
+    }
+    /**
+     * 토큰 사용 만료
+     */
+    public void useToken(){
+        expired = true;
     }
 }
