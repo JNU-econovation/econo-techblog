@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 @Getter
 @NoArgsConstructor
 @Entity
+@Builder
 @DynamicInsert
 public class User extends BaseTimeEntity {
 

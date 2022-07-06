@@ -2,6 +2,9 @@ package blog.econovation.tcono.service;
 
 import blog.econovation.tcono.domain.user.User;
 import blog.econovation.tcono.domain.user.UserRepository;
+import blog.econovation.tcono.web.dto.UserCreateRequestDto;
+import blog.econovation.tcono.web.dto.UserResponseDto;
+import blog.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,16 +33,18 @@ public class UserService {
      * @return User
      */
     @Transactional
-    public Long findUserById(Long id) {
-        User user = userRepository.findById(id)
+    public User findUserById(Long id) {
+        User findUser = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
-        return user.getId();
+        log.info("이름 : " + findUser.getUserName() + "\n기수 : " + findUser.getYear() + "\n이메일 : " + findUser.getUserEmail() + "비밀번호 : " + findUser.getPassword());
+        return findUser;
     }
 
     /**
      * Get User By One userName
      * @param String : userName
      * @return List<UserResponseDto>
+     * 동명이인이 있을 수 있어서 List를 받는다.
      */
     @Transactional
     public List<UserResponseDto> findUserByUserName(String userName) {
@@ -57,9 +63,8 @@ public class UserService {
      */
     @Transactional
     public User findUserByUserEmail(String userEmail) {
-        User user = userRepository.findByuserEmail(userEmail)
-                .orElse(null);
-        return user;
+        User findUser = userRepository.findByuserEmail(userEmail);
+        return findUser;
     }
 
     /**
@@ -68,17 +73,21 @@ public class UserService {
      * @return User
      *
      */
-    public final createrUser(String userEmail, String password, int year, String userName) {
+    @Transactional
+    public Long createrUser(UserCreateRequestDto userCreateRequestDto) {
 
+        return user.getId();
     }
 
     /**
      * delete One User Data
      * @Param userId
-     * @return boolean
+     * @return void
      */
-    public Boolean deleteUserById(final Long userId) {
-        return true;
+    public void deleteUserById(final Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
+        userRepository.delete(user);
     }
 
     /**
@@ -86,8 +95,9 @@ public class UserService {
      * @Param userEmail : String!, password : String!, year : Int!, userName : String!
      * @return boolean
      */
-    public User updateUser(String userEmail, String password, int year, String userName) {
-        return User;
+    public User updateUser(UserUpdateRequestDto userUpdateRequestDto) {
+        User user = userRepository.save(userUpdateRequestDto.toEntity());
+        return user;
     }
 
     /**
@@ -116,4 +126,5 @@ public class UserService {
      */
     public void confirmEmail(String token) {
     }
+
 }

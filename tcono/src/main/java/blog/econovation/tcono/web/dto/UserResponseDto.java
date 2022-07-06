@@ -1,8 +1,9 @@
 package blog.econovation.tcono.web.dto;
 
 
+import lombok.Data;
 import lombok.Getter;
-
+@Data
 @Getter
 public class UserResponseDto {
     private Long year;
