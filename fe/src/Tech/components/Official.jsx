@@ -7,6 +7,7 @@ import Tags from './Tags';
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
+import Partition from './Partition';
 
 const result = {
   author: '에코노베이션',
@@ -30,16 +31,11 @@ const Official = function () {
           <span>{result.desc}</span>
         </div>
         <div className="official-bottom">
-          <PostDetails
-            className="official-bottom-right"
-            src={liked}
-            alt="liked"
-            info={result.author}
-          />
+          <PostDetails src={liked} alt="liked" info={result.author} />
           <PostDetails src={date} alt="date" info={result.date} />
-          <span className="info-divider">|</span>
+          <Partition />
           <PostDetails src={looked} alt="looked" info={result.looked} />
-          <span className="info-divider">|</span>
+          <Partition />
           <PostDetails src={liked} alt="liked" info={result.liked} />
         </div>
       </div>
