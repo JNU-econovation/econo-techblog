@@ -1,0 +1,7 @@
+.title-input{
+    border: none;
+}
+
+.title-input:focus{
+    outline: none;
+}
