@@ -43,7 +43,7 @@ function HashtagInput() {
   };
 
   const onKeyDown = (e) => {
-    if (inputState === '') {₩
+    if (inputState === '') {
       if (e.keyCode === BACK_SPACE_CODE) {
         const newList = hashtagList.splice(0, hashtagList.length - 1);
         setHashtagList(() => newList);
