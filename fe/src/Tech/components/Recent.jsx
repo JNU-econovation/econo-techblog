@@ -9,6 +9,7 @@ import PostDetails from './PostDetails';
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
+import Partition from './Partition';
 
 const Recent = function ({ id, title, summary }) {
   return (
@@ -25,9 +26,9 @@ const Recent = function ({ id, title, summary }) {
         <div className="recent-bottom">
           <div className="recent-bottom-left">
             <PostDetails src={date} alt="date" info={id} />
-            <span className="info-divider">|</span>
+            <Partition />
             <PostDetails src={looked} alt="looked" info={id} />
-            <span className="info-divider">|</span>
+            <Partition />
             <PostDetails src={liked} alt="liked" info={id} />
           </div>
           <PostDetails
