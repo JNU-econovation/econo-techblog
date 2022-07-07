@@ -26,9 +26,15 @@ dependencies {
 //	SpringBoot Mail Setting
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-
 //	SpringBoot Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+// H2 DataBase Setting
+	//=====add=====
+	runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	//=====add=====
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 //	GraphQL Setting
 	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'

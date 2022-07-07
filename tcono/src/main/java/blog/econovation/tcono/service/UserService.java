@@ -2,30 +2,26 @@ package blog.econovation.tcono.service;
 
 import blog.econovation.tcono.domain.user.User;
 import blog.econovation.tcono.domain.user.UserRepository;
-import blog.econovation.tcono.web.dto.UserCreateRequestDto;
-import blog.econovation.tcono.web.dto.UserResponseDto;
 import blog.econovation.tcono.web.dto.UserUpdateRequestDto;
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
 @Slf4j
-@Component
+@Service
 @Transactional(rollbackFor = Exception.class)
 public class UserService {
 
     private static final String NOT_FOUND_USER_MESSAGE = "해당 회원을 찾을 수 없습니다";
     private static final String NOT_FOUND_EMAIL_MESSAGE = "해당 이메일을 찾을 수 없습니다.";
+
     private final UserRepository userRepository;
+    private final ConfirmationTokenService confirmationTokenService;
 
     /**
      * Get User By One userId
@@ -47,13 +43,18 @@ public class UserService {
      * 동명이인이 있을 수 있어서 List를 받는다.
      */
     @Transactional
-    public List<UserResponseDto> findUserByUserName(String userName) {
+    public List<User> findUserByUserName(String userName) {
         List<User> users = userRepository.findByUserName(userName);
-        List<UserResponseDto> findUser = users.stream().map(user -> new UserResponseDto().).collect(Collectors.toList());
-        if(findUser.isEmpty()){
+//        List<UserResponseDto> findUser = users.stream().map(user -> new UserResponseDto.builder()
+//                .year(user.getYear())
+//                .userName(user.getUserName())
+//                .password(user.getPassword())
+//                .userEmail(user.getUserEmail())
+//                .build()).collect(Collectors.toList());
+        if(users.isEmpty()){
             throw new IllegalArgumentException(NOT_FOUND_USER_MESSAGE);
         }
-        return findUser;
+        return users;
     }
 
     /**
@@ -66,6 +67,7 @@ public class UserService {
         User findUser = userRepository.findByuserEmail(userEmail);
         return findUser;
     }
+//    ----User Authentication------------------------------------------------------------------
 
     /**
      * create One User Data
@@ -73,12 +75,23 @@ public class UserService {
      * @return User
      *
      */
-    @Transactional
-    public Long createrUser(UserCreateRequestDto userCreateRequestDto) {
+//    @Transactional
+//    public Long createrUser(UserCreateRequestDto userCreateRequestDto) {
+//
+//        return user.getId();
+//    }
 
-        return user.getId();
+    /**
+     * Auth Process : confirmEmail and make Auth process
+     * @Param token : String!
+     * @return vpod
+     */
+    public void confirmEmail(String token) {
+        confirmationTokenService.findByIdAndExpirationDateAfterAndExpired(token);
     }
 
+
+//    -------------------------------------------------------------------------------------
     /**
      * delete One User Data
      * @Param userId
@@ -114,17 +127,12 @@ public class UserService {
      * @Param userId : Int!, role : Role!
      * @return enum Role
      */
+    /**
     public String updateUserRole(Long userId, String Role) {
         log.info("Role : " + this.Role + "-> " + Role);
         return Role;
     }
+    */
 
-    /**
-     * Auth Process : confirmEmail and make Auth process
-     * @Param token : String!
-     * @return vpod
-     */
-    public void confirmEmail(String token) {
-    }
 
 }

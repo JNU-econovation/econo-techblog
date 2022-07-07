@@ -7,6 +7,8 @@ import blog.econovation.tcono.web.dto.UserResponseDto;
 import blog.econovation.tcono.web.dto.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,6 @@ import java.util.List;
 @RequestMapping("/api")
 @RestController
 public class UserController {
-    userLogin(userEmail :String, password :String!) :Boolean!
 
     private final UserService userService;
 
@@ -40,7 +41,7 @@ public class UserController {
 
     @GetMapping("/users/{userName}")
     public String findUserByUserName(@PathVariable String userName, Model model) {
-        List<UserResponseDto> findUser = userService.findUserByUserName(userName);
+        List<User> findUser = userService.findUserByUserName(userName);
         model.addAttribute("user", findUser);
         return userName;
     }

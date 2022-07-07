@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -22,8 +23,8 @@ public class ConfirmationToken extends BaseTimeEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2",strategy="uuid2")
-    @Column(length=6)
-    private Long id;
+    @Column(length=30)
+    private UUID id;
 
     @Column
     private LocalDateTime expirationDate;
@@ -34,10 +35,6 @@ public class ConfirmationToken extends BaseTimeEntity {
     //FK 사용하지 않고 INPUT으로 받고
     @Column
     private Long userId;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
 
 /**    이메일 토큰 생성 로직
