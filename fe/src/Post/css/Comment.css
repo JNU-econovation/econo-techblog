@@ -1,9 +1,6 @@
 .comment {
     display: flex;
     margin: 20px 0px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .comment-info {
@@ -20,4 +17,5 @@
 .comment-desc {
     font-size: 13px;
     color: #999;
+    margin-top: 10px;
 }
