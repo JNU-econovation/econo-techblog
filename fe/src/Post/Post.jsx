@@ -18,8 +18,9 @@ const Post = function () {
         <Tags />
         <PostDesc />
         <Liked />
-        <CommentList />
       </div>
+      <div className="post-partition" />
+      <CommentList />
     </div>
   );
 };

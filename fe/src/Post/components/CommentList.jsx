@@ -3,6 +3,7 @@ import React from 'react';
 import '../css/CommentList.css';
 
 import Comment from './Comment';
+import CommentBox from './CommentBox';
 
 const result = [
   {
@@ -26,13 +27,7 @@ const CommentList = function () {
   return (
     <div className="comment-list">
       <span className="comment-num">{`댓글 ${result.length}개`}</span>
-      <div className="comment">
-        <div className="writer-img" />
-        <div className="comment-info">
-          <span className="writer">이서현</span>
-          <input />
-        </div>
-      </div>
+      <CommentBox />
       {result.map((comment) => (
         <Comment key={comment.id} name={comment.name} desc={comment.desc} />
       ))}
