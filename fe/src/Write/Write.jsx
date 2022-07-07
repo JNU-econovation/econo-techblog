@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@toast-ui/editor/dist/toastui-editor.css';
-
 import { Editor } from '@toast-ui/react-editor';
+
+import HashtagInput from './HashtagInput';
 
 function Write() {
   const editorRef = useRef();
@@ -15,7 +16,8 @@ function Write() {
   };
   return (
     <div className="write">
-      <Editor ref={editorRef} />
+      <HashtagInput />
+      <Editor ref={editorRef} initialValue="여기에 내용을 입력하세요.." />
       <button type="submit" onClick={onSubmit}>
         제출하기
       </button>
