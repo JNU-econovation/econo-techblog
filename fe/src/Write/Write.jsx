@@ -4,6 +4,8 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 
 import HashtagInput from './HashtagInput';
+import TitleInput from './TitleInput';
+import CategorySelectBox from './CategorySelectBox';
 
 function Write() {
   const editorRef = useRef();
@@ -16,10 +18,18 @@ function Write() {
   };
   return (
     <div className="write">
+      <CategorySelectBox />
+      <TitleInput />
       <HashtagInput />
-      <Editor ref={editorRef} initialValue="여기에 내용을 입력하세요.." />
+      <Editor
+        ref={editorRef}
+        initialValue=""
+        placeholder="여기에 내용을 입력하세요.."
+        previewStyle="vertical"
+        height="80vh"
+      />
       <button type="submit" onClick={onSubmit}>
-        제출하기
+        작성완료
       </button>
     </div>
   );
