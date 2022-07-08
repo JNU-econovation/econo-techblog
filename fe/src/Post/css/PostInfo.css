@@ -1,7 +1,17 @@
 .post-info {
+    margin-top: 50px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #bbb;
+}
+
+.post-info-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-info-left {
     display: flex;
     align-items: center;
-    margin-top: 50px;
 }
 
 .post-info-author {
@@ -17,4 +27,10 @@
     height: 40px;
     border-radius: 70%;
     margin-right: 10px;
+}
+
+.select-btn {
+    margin-left: auto;
+    border: none;
+    background-color: #fff;
 }

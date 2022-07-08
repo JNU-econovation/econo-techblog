@@ -1,0 +1,27 @@
+.select-box {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    float: right;
+    top: 10px;
+}
+
+.select-box button {
+    width: 140px;
+    padding: 10px;
+    border: solid 1px #bbb;
+    font-size: 13px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.select-box button:first-child {
+    color: #7f7f7f;
+}
+
+.select-box button:last-child {
+    margin-top: -1px;
+    color: #f00;
+}
