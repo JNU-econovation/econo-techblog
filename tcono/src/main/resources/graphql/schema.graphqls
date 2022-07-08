@@ -11,6 +11,7 @@ input User{
     createAt : String!
     modifiedAt : String!
 }
+
 input Post{
     Id:ID!
     content:String
@@ -21,12 +22,12 @@ input Post{
     like: Int!
     mainCategory: [MainCategory]!
 }
+
 input Category{
     Id : ID!
     Post : Post!
     categoryName : [String]!
 }
-
 
 input PostCreateRequestDto{
     content: String
@@ -107,20 +108,20 @@ type Category{
 
 #Root Query
 type Query{
-#    -----------Post------------------------------
+    #    -----------Post------------------------------
     findAllPosts(mainCategory : MainCategory!): [Post!]!
     findPostByPostId(id : ID!) : Post!
 
-#    ---------REPLY--------------------
+    #    ---------REPLY--------------------
     findReplyByUserName(userName : String!) : Reply!
     findReplyByEmail(userEmail : String!) : Reply!
 
-#    -----------USER------------------------------
+    #    -----------USER------------------------------
     findUserById(id : ID!) : User!
     findUserByUserName(userName : String!) : [User]!
     findUserByUserEmail(userEmail : String!) : User!
 
-#    -----------Category-------------------------
+    #    -----------Category-------------------------
     findUserByCategoryName(categoryName : String!) : [User]!
 }
 
@@ -133,12 +134,12 @@ type Mutation{
     increaseLikePost(postId : ID): Int!
     decreaseLikePost(postId : ID): Int!
 
-#    Reply--------------
-#    createByReply( : ) : Int!
+    #    Reply--------------
+    #    createByReply( : ) : Int!
     deleteByReplyId(replyId : ID!) : Boolean!
-#    updateByReply( : ) : Int!
+    #    updateByReply( : ) : Int!
 
-#    User--------------------------------
+    #    User--------------------------------
     createUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
     updateUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
     userLogin(userEmail : String, password : String!) : Boolean!
@@ -146,7 +147,7 @@ type Mutation{
     updateUserRole(userId : Int!, role : Role!): Role!
     confirmEmail(token : String!) : Void!
 
-#   Auth-----------------------------------
+    #   Auth-----------------------------------
 
 }
 
