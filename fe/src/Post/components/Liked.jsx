@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import heart from '../img/heart.png';
+import clickheart from '../img/clickheart.png';
 import '../css/Liked.css';
 
 const Liked = function () {
@@ -15,7 +16,11 @@ const Liked = function () {
         type="button"
       >
         <span>좋아요</span>
-        <img src={heart} alt="liked" />
+        {liked ? (
+          <img src={clickheart} alt="liked" />
+        ) : (
+          <img src={heart} alt="liked" />
+        )}
       </button>
     </div>
   );
