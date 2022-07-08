@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CardinalSelectBox from './components/CardinalSelectBox';
+import CardinalSelectBox from '../components/CardinalSelectBox';
 
 import InputElement from '../components/InputElement';
 import SignUpBtn from './components/SignUpBtn';
@@ -15,7 +15,7 @@ function SignUpBox() {
   const [passwdStatus, setPasswdStatus] = useState('');
 
   useEffect(() => {
-    if (password === '' && confirmPasswd) {
+    if (password === '' && confirmPasswd === '') {
       setPasswdStatus('');
     } else if (password === confirmPasswd) {
       setPasswdStatus('비밀번호가 일치합니다.');

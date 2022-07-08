@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../css/CardinalSelectBox.css';
+import './css/CardinalSelectBox.css';
 
 function CardinalSelectBox() {
   // const year = new Date().getFullYear() - 2000;
