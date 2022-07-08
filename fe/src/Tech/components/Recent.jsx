@@ -3,13 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/Recent.css';
 
-import Tags from './Tags';
-import PostDetails from './PostDetails';
-
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
-import Partition from './Partition';
+
+import PostDetails from '../../components/PostDetails';
+import Partition from '../../components/Partition';
+import Tags from './Tags';
 
 const Recent = function ({ id, title, summary }) {
   return (

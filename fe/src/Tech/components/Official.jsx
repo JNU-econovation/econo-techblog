@@ -1,13 +1,12 @@
 import React from 'react';
 import '../css/Official.css';
 
-import PostDetails from './PostDetails';
-import Tags from './Tags';
-
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
-import Partition from './Partition';
+import PostDetails from '../../components/PostDetails';
+import Tags from './Tags';
+import Partition from '../../components/Partition';
 
 const result = {
   author: '에코노베이션',
