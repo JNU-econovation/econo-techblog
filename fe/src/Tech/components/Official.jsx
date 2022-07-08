@@ -1,9 +1,11 @@
 import React from 'react';
 import '../css/Official.css';
 
+import noImg from '../img/no_img.png';
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
+
 import PostDetails from '../../components/PostDetails';
 import Tags from './Tags';
 import Partition from '../../components/Partition';
@@ -30,7 +32,10 @@ const Official = function () {
           <span>{result.desc}</span>
         </div>
         <div className="official-bottom">
-          <PostDetails src={liked} alt="liked" info={result.author} />
+          <div className="official-bottom-left">
+            <img src={noImg} alt="no-img" />
+            <span>{result.author}</span>
+          </div>
           <PostDetails src={date} alt="date" info={result.date} />
           <Partition />
           <PostDetails src={looked} alt="looked" info={result.looked} />

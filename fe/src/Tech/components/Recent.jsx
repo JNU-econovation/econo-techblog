@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/Recent.css';
 
+import noImg from '../img/no_img.png';
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
@@ -31,12 +32,10 @@ const Recent = function ({ id, title, summary }) {
             <Partition />
             <PostDetails src={liked} alt="liked" info={id} />
           </div>
-          <PostDetails
-            className="recent-bottom-right"
-            src={liked}
-            alt="liked"
-            info={id}
-          />
+          <div className="recent-bottom-right">
+            <span>{id}</span>
+            <img src={noImg} alt="no-img" />
+          </div>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import PostDetails from '../../components/PostDetails';
 import Partition from '../../components/Partition';
 import '../css/PostInfo.css';
 
+import noImg from '../img/no_img.png';
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
@@ -17,8 +18,8 @@ const result = {
 const PostInfo = function () {
   return (
     <div className="post-info">
-      <div className="spec-info">
-        <div className="writer-img" />
+      <div className="post-info-author">
+        <img src={noImg} alt="no-img" />
         <span>{result.author}</span>
       </div>
       <PostDetails src={date} alt="date" info={result.date} />

@@ -43,3 +43,16 @@
     align-items: center;
 }
 
+.official-bottom-left {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.official-bottom-left img{
+    width: 30px;
+    height: 30px;
+    border-radius: 70%;
+    margin-right: 10px;
+}
+
