@@ -1,3 +1,5 @@
+scalar Void
+
 type Post{
     Id:ID!
     content:String
@@ -5,14 +7,33 @@ type Post{
     title:String!
     categoty:[Category!]!
 }
+
+type ConfirmationToken{
+    id : ID!
+    expirationDate:String!
+    expired : Boolean!
+    userId : String!
+    createAt : String!
+    modifiedAt : String!
+}
+
 # Test
 type User{
-    Id : ID!
+    id : ID!
     year : Int!
     post : [Post!]!
     userName : String!
     password : String!
     userEmail : String!
+    Role : Role!
+    createAt : String!
+    modifiedAt : String!
+}
+
+enum Role{
+    ADMIN
+    USER
+    GUEST
 }
 
 type Category{
@@ -24,14 +45,15 @@ type Category{
 #Root Query
 type Query{
 #    -----------Post------------------------------
-
     findAllPosts: [Post!]!
-    findPostByPostId(Id : ID!) : Post!
+    findPostByPostId(id : ID!) : Post!
 
 #    ---------REPLY--------------------
     findReplyByUserName(userName : String!) : Reply!
+    findReplyByEmail(userEmail : String!) : Reply!
 
 #    -----------USER------------------------------
+    findUserById(id : ID!) : User!
     findUserByUserName(userName : String!) : [User]!
     findUserByUserEmail(userEmail : String!) : User!
 
@@ -41,20 +63,27 @@ type Query{
 
 #Root Mutation
 type Mutation{
+    #    -----------Post------------------------------
     createPost(content : String!,title:String!, categoty:[String!]!): Post!
     deletePost(userId : ID):Boolean
     updatePost(content : String!,title:String!, categoty:[String]): Int!
     createCategoryByPostId(postId : ID!, category : String!) : Int
 
 #    Reply--------------
-#    createByReply(replyRequestDto : ReplyRequestDto) : Int!
+#    createByReply( : ) : Int!
     deleteByReplyId(replyId : ID!) : Boolean!
 #    updateByReply( : ) : Int!
 
 #    User--------------------------------
-    createUser( usstDerRequeto : UserRequest!): User!
+    createUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
+    updateUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
+    userLogin(userEmail : String, password : String!) : Boolean!
     deleteUserById(userId: Int!): Boolean!
-    updateUserRole( userId : Int!): User!
+    updateUserRole(userId : Int!, role : Role!): Role!
+    confirmEmail(token : String!) : Void!
+
+#   Auth-----------------------------------
+
 }
 
 type Reply{
