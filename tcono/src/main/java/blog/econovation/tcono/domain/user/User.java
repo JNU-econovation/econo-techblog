@@ -1,7 +1,9 @@
 package blog.econovation.tcono.domain.user;
 
 import blog.econovation.tcono.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -19,16 +21,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+@Table(name="User")
 @DynamicInsert
 public class User extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="USER_ID")
     private Long id;
 
@@ -36,9 +41,9 @@ public class User extends BaseTimeEntity {
     @Range(min =1, max = 50)
     private Long year;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "POST_ID")
-    private Post post;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "POST_ID")
+//    private Post post;
 
     @Column(nullable = false)
     private String userName;
