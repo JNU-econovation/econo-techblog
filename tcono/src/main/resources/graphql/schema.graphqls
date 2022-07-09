@@ -1,11 +1,75 @@
 scalar Void
 
+input User{
+    id : ID!
+    year : Int!
+    post : [Post!]!
+    userName : String!
+    password : String!
+    userEmail : String!
+    Role : Role!
+    createAt : String!
+    modifiedAt : String!
+}
+
+input Post{
+    Id:ID!
+    content:String
+    official:Boolean!
+    title:String!
+    category:[Category!]!
+    views: Int!
+    like: Int!
+    mainCategory: [MainCategory]!
+}
+
+input Category{
+    Id : ID!
+    Post : Post!
+    categoryName : [String]!
+}
+
+input PostCreateRequestDto{
+    content: String
+    title: String
+    category: String
+}
+
+type PostCreateResponseDto{
+    user: [User!]!
+    content: String
+    title: String
+    mainCategory: MainCategory
+    category: String
+}
+
+input PostUpdateRequestDto{
+    content: String
+    title: String
+    category: String
+}
+
+type PostUpdateResponseDto{
+    user: [User!]!
+    content: String
+    title: String
+    category: String
+    views: Int
+    likes: Int
+    #    private LocalDateTime createdDate;
+    #    private LocalDateTime modifiedDate;
+}
+
+enum MainCategory {
+    TECH,CULTURE,TROUBLE_SHOOTING
+}
+
 type Post{
     Id:ID!
     content:String
     official:Boolean!
     title:String!
-    categoty:[Category!]!
+    category:[Category!]!
 }
 
 type ConfirmationToken{
@@ -44,37 +108,38 @@ type Category{
 
 #Root Query
 type Query{
-#    -----------Post------------------------------
-    findAllPosts: [Post!]!
+    #    -----------Post------------------------------
+    findAllPosts(mainCategory : MainCategory!): [Post!]!
     findPostByPostId(id : ID!) : Post!
 
-#    ---------REPLY--------------------
+    #    ---------REPLY--------------------
     findReplyByUserName(userName : String!) : Reply!
     findReplyByEmail(userEmail : String!) : Reply!
 
-#    -----------USER------------------------------
+    #    -----------USER------------------------------
     findUserById(id : ID!) : User!
     findUserByUserName(userName : String!) : [User]!
     findUserByUserEmail(userEmail : String!) : User!
 
-#    -----------Category-------------------------
+    #    -----------Category-------------------------
     findUserByCategoryName(categoryName : String!) : [User]!
 }
 
 #Root Mutation
 type Mutation{
     #    -----------Post------------------------------
-    createPost(content : String!,title:String!, categoty:[String!]!): Post!
+    createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!
     deletePost(userId : ID):Boolean
-    updatePost(content : String!,title:String!, categoty:[String]): Int!
-    createCategoryByPostId(postId : ID!, category : String!) : Int
+    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!
+    increaseLikePost(postId : ID): Int!
+    decreaseLikePost(postId : ID): Int!
 
-#    Reply--------------
-#    createByReply( : ) : Int!
+    #    Reply--------------
+    #    createByReply( : ) : Int!
     deleteByReplyId(replyId : ID!) : Boolean!
-#    updateByReply( : ) : Int!
+    #    updateByReply( : ) : Int!
 
-#    User--------------------------------
+    #    User--------------------------------
     createUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
     updateUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
     userLogin(userEmail : String, password : String!) : Boolean!
@@ -82,7 +147,7 @@ type Mutation{
     updateUserRole(userId : Int!, role : Role!): Role!
     confirmEmail(token : String!) : Void!
 
-#   Auth-----------------------------------
+    #   Auth-----------------------------------
 
 }
 
