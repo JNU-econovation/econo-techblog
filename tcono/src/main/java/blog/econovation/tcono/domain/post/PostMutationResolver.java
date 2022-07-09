@@ -82,7 +82,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
     public int increaseLikePost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-        post.addLike();
+        post.increaseLike();
         return post.getLike();
     }
 
@@ -96,7 +96,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
     public int decreaseLikePost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-        post.deleteLike();
+        post.decreaseLike();
         return post.getLike();
     }
 
