@@ -29,5 +29,12 @@ public class UserCreateRequestDto {
     @NotNull
     private String userName;
 
+    public User toEntity(){
+        return User.builder()
+                .userEmail(userEmail)
+                .password(password)
+                .year(year)
+                .userName(userName).build();
+    }
 
 }
