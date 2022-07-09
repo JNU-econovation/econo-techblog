@@ -17,9 +17,9 @@ public class PostUpdateResponseDto {
     private String category; //태그
     private int views;
     private int likes;
-    private LocalDateTime createdDate;
+    private String createdDate;
 
-    private LocalDateTime modifiedDate;
+    private String modifiedDate;
 
     @Builder
     public PostUpdateResponseDto(Post post, String category) {

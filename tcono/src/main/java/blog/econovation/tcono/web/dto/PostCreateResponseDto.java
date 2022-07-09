@@ -20,13 +20,13 @@ public class PostCreateResponseDto {
     private String categoryName; //태그
     private int views;
     private int likes;
-    private LocalDateTime createdDate;
+    private String createdDate;
 
     @Builder
     public PostCreateResponseDto(Post post, String categoryName) {
         this.user = post.getUser();
         this.content = post.getContent();
-        this.title = post.getTitle();
+        this.title = post.getCreatedDate();
         this.categoryName = categoryName;
         this.views=INITIAL_VIEWS;
         this.likes = INITIAL_LIKES;
