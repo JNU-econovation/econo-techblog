@@ -103,28 +103,6 @@ public class UserService {
             return userRepository.save(user);
         }
         throw new IllegalArgumentException(NOT_FOUND_USER_MESSAGE);
-//        이후에 DB삽입
-//       return user.getId();
-    }
-    /**
-     * Login User Process
-     * @Param userEmail : String, password : String!
-     * @return Boolean
-     */
-    public String login(UserLoginRequestDto userLoginRequestDto) {
-        User user = userLoginRequestDto.toEntity();
-        String userEmail = user.getUserEmail();
-        String password = user.getPassword();
-//        password Hash
-
-        User findUser = userRepository.findByuserEmail(userEmail).get();
-//        회원 정보 DB 비교
-        boolean isUser = findUser.getPassword().equals(password);
-
-        if(isUser){
-            return "Success";
-        }
-        throw new IllegalArgumentException(NOT_CORRECT_USER_MESSAGE);
     }
 
 //    ----------------------------------------
@@ -139,8 +117,7 @@ public class UserService {
         ConfirmationToken findConfirmationToken = confirmationTokenService.findByIdAndExpirationDateAfterAndExpired(token);
         User findUser = findUserById(findConfirmationToken.getUserId());
         findConfirmationToken.useToken();	// 토큰 만료 로직을 구현해주면 된다. ex) expired 값을 true로 변경
-        // 유저의 이메일 인증 값 변경 로직을 구현해주면 된다. ex) emailVerified 값을 true로 변경
-        return findUser.emailVerifiedSuccess();
+        return findUser.emailVerifiedSuccess();  // 유저의 이메일 인증 값 변경 로직을 구현해주면 된다. ex) emailVerified 값을 true로 변경
     }
 
 
@@ -174,6 +151,7 @@ public class UserService {
      * @return enum Role
      */
     /**
+     *
     public String updateUserRole(Long userId, String Role) {
         log.info("Role : " + this.Role + "-> " + Role);
         return Role;

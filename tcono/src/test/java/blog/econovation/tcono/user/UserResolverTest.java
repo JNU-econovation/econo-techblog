@@ -98,14 +98,14 @@ public class UserResolverTest {
 
     //    회원가입 인증 테스트
     //    랜덤 키값을 형성하기 때문에 함수가 호출됐는지를 테스트한다.
-    @Test(expected = NullPointerException.class)
-    @Transactional
-    public void confirmEmailTest(){
-        EmailService emailServiceMocks = mock(EmailService.class);
-        doThrow(NullPointerException.class)
-                .when(emailServiceMocks);
-        verify(emailServiceMocks,times(1));
-    }
+//    @Test(expected = NullPointerException.class)
+//    @Transactional
+//    public void confirmEmailTest(){
+//        EmailService emailServiceMocks = mock(EmailService.class);
+//        doThrow(NullPointerException.class)
+//                .when(emailServiceMocks);
+//        verify(emailServiceMocks,times(1));
+//    }
 //  로그인 테스트
 
 //  회원 정보 수정 테스트

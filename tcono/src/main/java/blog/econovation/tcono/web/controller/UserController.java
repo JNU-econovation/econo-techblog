@@ -1,11 +1,11 @@
 package blog.econovation.tcono.web.controller;
 
 import blog.econovation.tcono.domain.user.User;
+import blog.econovation.tcono.service.LoginService;
 import blog.econovation.tcono.service.UserService;
 import blog.econovation.tcono.web.dto.UserCreateRequestDto;
 import blog.econovation.tcono.web.dto.UserLoginRequestDto;
 import blog.econovation.tcono.web.dto.UserUpdateRequestDto;
-import blog.econovation.tcono.web.login.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{userEmail}")
-    public String findUserByUserEmail(String userEmail, Model model) {
+    public String findUserByUserEmail(@PathVariable String userEmail, Model model) {
         User user = userService.findUserByUserEmail(userEmail);
         model.addAttribute("user", user);
         return user.getUserEmail();
@@ -84,8 +84,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute UserLoginRequestDto userLoginRequestDto, BindingResult bindingResult,
-                          @RequestParam(defaultValue = "/") String redirectURL,
-                          HttpServletRequest request) {
+                          @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
