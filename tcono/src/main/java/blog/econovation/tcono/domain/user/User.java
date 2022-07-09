@@ -58,4 +58,16 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     @ColumnDefault("'ROLE_GUEST'")
     private Role role;
+
+    @Column(nullable = false)
+    @ColumnDefault("'false'")
+    private boolean emailVerified;
+
+    /**
+     * 토큰 사용 만료
+     */
+    public boolean emailVerifiedSuccess(){
+        emailVerified = true;
+        return true;
+    }
 }

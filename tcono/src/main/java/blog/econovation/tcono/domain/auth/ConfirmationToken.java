@@ -23,7 +23,7 @@ public class ConfirmationToken extends BaseTimeEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2",strategy="uuid2")
-    @Column(length=30)
+    @Column(length=6)
     private UUID id;
 
     @Column

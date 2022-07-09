@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -46,13 +45,13 @@ public class UserResolverTest {
         User user = User.builder()
                 .userEmail("Test@gmail.com")
                 .password("1234")
-                .year(20)
-                .userName("이서현");
-        when(userService.createUser(user)).thenReturn(user);
+                .year(22L)
+                .userName("이서현").build();
+//        when(userService.createUser(user)).thenReturn(user);
 //        when : act
-        User findUser = userService.findUserById(1L);
+        User findUser = userService.findUserById(user.getId());
 //        then: assert
-        assertThat(findUser.getName()).isEqualto(user.getUserName());
+        assertThat(findUser.getId()).isEqualTo(user.getId());
     }
 
     //     회원Id조회 테스트
