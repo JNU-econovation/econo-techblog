@@ -49,3 +49,15 @@
 .recent-bottom-left{
     display: flex;
 }
+
+.recent-bottom-right {
+    display: flex;
+    align-items: center;
+}
+
+.recent-bottom-right img{
+    width: 30px;
+    height: 30px;
+    border-radius: 70%;
+    margin-left: 10px;
+}

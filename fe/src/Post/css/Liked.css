@@ -23,5 +23,6 @@
 }
 
 .on {
-    color: black;
+    color: #ff3535;
+    border: solid 1px #ff3535;
 }

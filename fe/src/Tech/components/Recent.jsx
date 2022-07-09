@@ -3,13 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/Recent.css';
 
-import Tags from './Tags';
-import PostDetails from './PostDetails';
-
+import noImg from '../img/no_img.png';
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
-import Partition from './Partition';
+
+import PostDetails from '../../components/PostDetails';
+import Partition from '../../components/Partition';
+import Tags from './Tags';
 
 const Recent = function ({ id, title, summary }) {
   return (
@@ -31,12 +32,10 @@ const Recent = function ({ id, title, summary }) {
             <Partition />
             <PostDetails src={liked} alt="liked" info={id} />
           </div>
-          <PostDetails
-            className="recent-bottom-right"
-            src={liked}
-            alt="liked"
-            info={id}
-          />
+          <div className="recent-bottom-right">
+            <span>{id}</span>
+            <img src={noImg} alt="no-img" />
+          </div>
         </div>
       </div>
     </div>

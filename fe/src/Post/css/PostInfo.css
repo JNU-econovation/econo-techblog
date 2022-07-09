@@ -1,10 +1,20 @@
 .post-info {
-    display: flex;
-    align-items: center;
     margin-top: 50px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #bbb;
 }
 
-.spec-info {
+.post-info-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-info-left {
+    display: flex;
+    align-items: center;
+}
+
+.post-info-author {
     display: flex;
     align-items: center;
     margin-right: 20px;
@@ -12,19 +22,15 @@
     font-size: 15px;
 }
 
-.spec-info img {
-    margin: 0px 10px;
-}
-
-.writer-img {
-    width: 30px;
-    height: 30px;
-    border: solid 1px #707070;
+.post-info-author img {
+    width: 40px;
+    height: 40px;
     border-radius: 70%;
-    background-color: #d5d5d5;
+    margin-right: 10px;
 }
 
-.info-divider {
-    margin-right: 10px;
-    color: #7f7f7f;
+.select-btn {
+    margin-left: auto;
+    border: none;
+    background-color: #fff;
 }

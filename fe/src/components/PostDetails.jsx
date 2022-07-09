@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/PostDetails.css';
+import './css/PostDetails.css';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 

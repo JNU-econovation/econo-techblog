@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../css/CommentBox.css';
+import noImg from '../img/no_img.png';
 
 const CommentBox = function () {
   const [comment, setComment] = useState('');
@@ -8,9 +9,9 @@ const CommentBox = function () {
   };
   return (
     <div className="comment-box">
-      <div className="writer-img" />
+      <img src={noImg} alt="no-img" />
       <div className="comment-box-info">
-        <span className="writer">이서현</span>
+        <span className="comment-box-writer">이서현</span>
         <div className="comment-content">
           <textarea className="comment-box-input" onChange={onChange} />
           <button type="button" disabled={!comment}>

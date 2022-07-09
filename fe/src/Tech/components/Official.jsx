@@ -1,13 +1,14 @@
 import React from 'react';
 import '../css/Official.css';
 
-import PostDetails from './PostDetails';
-import Tags from './Tags';
-
+import noImg from '../img/no_img.png';
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
-import Partition from './Partition';
+
+import PostDetails from '../../components/PostDetails';
+import Tags from './Tags';
+import Partition from '../../components/Partition';
 
 const result = {
   author: '에코노베이션',
@@ -31,7 +32,10 @@ const Official = function () {
           <span>{result.desc}</span>
         </div>
         <div className="official-bottom">
-          <PostDetails src={liked} alt="liked" info={result.author} />
+          <div className="official-bottom-left">
+            <img src={noImg} alt="no-img" />
+            <span>{result.author}</span>
+          </div>
           <PostDetails src={date} alt="date" info={result.date} />
           <Partition />
           <PostDetails src={looked} alt="looked" info={result.looked} />

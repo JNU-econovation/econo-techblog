@@ -1,15 +1,16 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
+import noImg from '../img/no_img.png';
 
 import '../css/Comment.css';
 
 const Comment = function ({ name, desc }) {
   return (
     <div className="comment">
-      <div className="writer-img" />
+      <img src={noImg} alt="no-img" />
       <div className="comment-info">
-        <span className="writer">{name}</span>
+        <span className="comment-writer">{name}</span>
         <span className="comment-desc">{desc}</span>
       </div>
     </div>
