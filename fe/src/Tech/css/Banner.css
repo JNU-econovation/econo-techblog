@@ -1,0 +1,21 @@
+.banner{
+    background-color: #2269fb;
+    color: #fff;
+    font-weight: 500;
+    padding: 50px 0px;
+}
+
+.banner-text {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.banner-text h2 {
+    font-size: 30px;
+}
+
+.banner p {
+    font-size: 15px;
+    line-height: 1.8;
+}

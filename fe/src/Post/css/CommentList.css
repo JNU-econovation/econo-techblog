@@ -1,0 +1,16 @@
+.comment-list {
+    margin-top: 50px;
+    padding: 70px 0px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.writer {
+    display: flex;
+}
+
+
