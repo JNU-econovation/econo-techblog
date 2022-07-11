@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Pagination from 'react-js-pagination';
 import './css/Tech.css';
-import './css/Pagination.css';
+import '../components/css/Pagination.css';
 
 import Banner from './components/Banner';
 import Official from './components/Official';
