@@ -3,24 +3,15 @@ package blog.econovation.tcono.service;
 import blog.econovation.tcono.domain.auth.ConfirmationToken;
 import blog.econovation.tcono.domain.auth.ConfirmationTokenRepository;
 import blog.econovation.tcono.domain.user.User;
-import blog.econovation.tcono.domain.user.UserRepository;
 import blog.econovation.tcono.web.dto.UserCreateRequestDto;
-import blog.econovation.tcono.web.dto.UserLoginRequestDto;
 import blog.econovation.tcono.web.dto.UserUpdateRequestDto;
+import blog.econovation.tcono.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 
@@ -79,8 +70,7 @@ public class UserService {
      */
     @Transactional
     public User findUserByUserEmail(String userEmail) {
-        Optional<User> findUser = userRepository.findByuserEmail(userEmail);
-        return findUser.get();
+        return userRepository.findByUserEmail(userEmail).get(0);
     }
 //    ----User Authentication------------------------------------------------------------------
 
@@ -94,9 +84,7 @@ public class UserService {
 //        이메일 인증 절차
         User user = userCreateRequestDto.toEntity();
 //        중복 이메일 검사
-        User existUserEmail = userRepository.findByuserEmail(user.getUserEmail())
-                .ofNullable(user)
-                .get();
+        User existUserEmail = userRepository.findByUserEmail(user.getUserEmail()).stream().findFirst().get();
 //        없는 이메일일 경우에만 회원가입을 실시
         if(!existUserEmail.toString().isEmpty()){
             UUID token = confirmationTokenService.createEmailConfirmationToken(user.getId(), user.getUserEmail());
@@ -113,7 +101,7 @@ public class UserService {
      * @Param token : String!
      * @return vpod
      */
-    public boolean confirmEmail(String token) {
+    public boolean confirmEmail(UUID token) {
         ConfirmationToken findConfirmationToken = confirmationTokenService.findByIdAndExpirationDateAfterAndExpired(token);
         User findUser = findUserById(findConfirmationToken.getUserId());
         findConfirmationToken.useToken();	// 토큰 만료 로직을 구현해주면 된다. ex) expired 값을 true로 변경

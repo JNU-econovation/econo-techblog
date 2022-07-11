@@ -1,7 +1,7 @@
 package blog.econovation.tcono.service;
 
-import blog.econovation.tcono.domain.auth.ConfirmationToken;
 import blog.econovation.tcono.domain.auth.ConfirmationTokenRepository;
+import blog.econovation.tcono.domain.auth.ConfirmationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class ConfirmationTokenService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(receiverEmail);
         mailMessage.setSubject("회원가입 이메일 인증");
-        mailMessage.setText("http://localhost:8090/confirm-email?token="+emailConfirmationToken.getId());
+        mailMessage.setText("http://localhost:8080/api/confirm-email?token="+emailConfirmationToken.getId());
         emailSenderService.sendEmail(mailMessage);
 
         return emailConfirmationToken.getId();
@@ -46,7 +46,7 @@ public class ConfirmationTokenService {
      *
      * @param confirmationTokenId
      */
-    public ConfirmationToken findByIdAndExpirationDateAfterAndExpired(String confirmationTokenId) {
+    public ConfirmationToken findByIdAndExpirationDateAfterAndExpired(UUID confirmationTokenId) {
         Optional<ConfirmationToken> confirmationToken = confirmationTokenRepository.findByIdAndExpirationDateAfterAndExpired(confirmationTokenId, LocalDateTime.now(), false);
         return confirmationToken.orElseThrow(()-> new BadRequestException(TOKEN_NOT_FOUND));
     }

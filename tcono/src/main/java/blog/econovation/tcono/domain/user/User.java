@@ -3,15 +3,12 @@ package blog.econovation.tcono.domain.user;
 import blog.econovation.tcono.domain.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,6 +16,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
@@ -35,6 +33,7 @@ public class User extends BaseTimeEntity {
 
     @Column(nullable = false)
     @Range(min =1, max = 50)
+    @NotNull
     private Long year;
 
 //    @OneToMany(cascade = CascadeType.ALL)
@@ -42,21 +41,24 @@ public class User extends BaseTimeEntity {
 //    private Post post;
 
     @Column(nullable = false)
+    @NotNull
     private String userName;
 
     @Column(nullable = false)
+    @NotNull
     private String password;
 
     @Column(nullable = false)
+    @NotNull
     private String userEmail;
 
     @Enumerated(EnumType.STRING)
+    @ColumnDefault("'USER'")
     @Column(nullable = false)
-    @ColumnDefault("'ROLE_GUEST'")
     private Role role;
 
     @Column(nullable = false)
-    @ColumnDefault("'false'")
+    @ColumnDefault("false")
     private boolean emailVerified;
 
     /**
