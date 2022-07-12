@@ -9,7 +9,7 @@ import people from '../img/people.png';
 
 const SidebarItem = function ({ id, name, num, isSelected, onClick }) {
   return (
-    <li
+    <div
       className={isSelected ? 'sidebar-item selected' : 'sidebar-item'}
       onClick={() => onClick(id)}
     >
@@ -18,7 +18,7 @@ const SidebarItem = function ({ id, name, num, isSelected, onClick }) {
         <img src={people} alt="person" />
         <span>{num}</span>
       </div>
-    </li>
+    </div>
   );
 };
 

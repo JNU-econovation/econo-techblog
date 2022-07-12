@@ -55,8 +55,17 @@ const Sidebar = function () {
       <div className="sidebar-box">
         <UserSearch />
         <p>Join</p>
-        <ul className="sidebar-nav">
-          {navArr.map((elem) => (
+        <SidebarItem
+          key={navArr[0].id}
+          id={navArr[0].id}
+          name={navArr[0].name}
+          num={navArr[0].num}
+          isSelected={navArr[0].isSelected}
+          onClick={onClick}
+        />
+        <p>User</p>
+        <div className="sidebar-nav">
+          {navArr.slice(1).map((elem) => (
             <SidebarItem
               key={elem.id}
               id={elem.id}
@@ -66,7 +75,7 @@ const Sidebar = function () {
               onClick={onClick}
             />
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
