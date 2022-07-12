@@ -20,14 +20,14 @@
     opacity: 0.5;
 }
 
-.sidebar-item-right img {
-    width: 14px;
-    margin-right: 3px;
-}
-
 .sidebar-item-right {
     display: flex;
     align-items: center;
+}
+
+.sidebar-item-right img {
+    width: 16px;
+    margin-right: 3px;
 }
 
 .selected {
