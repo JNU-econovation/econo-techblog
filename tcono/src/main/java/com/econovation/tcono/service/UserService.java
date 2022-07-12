@@ -4,6 +4,7 @@ import com.econovation.tcono.domain.auth.ConfirmationToken;
 import com.econovation.tcono.domain.auth.ConfirmationTokenRepository;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.web.dto.UserCreateRequestDto;
+import com.econovation.tcono.web.dto.UserFindDto;
 import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.econovation.tcono.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -65,6 +67,16 @@ public class UserService {
         return users;
     }
 
+    @Transactional
+    public User findUserByYearAndUserName(UserFindDto userFindDto){
+        List<User> findUser = userRepository.findByUserName(userFindDto.getUserName()).stream()
+                .filter(m -> m.getUserName().equals(userFindDto.getUserName()))
+                .collect(Collectors.toList());
+        if(findUser.isEmpty()){
+            throw new IllegalArgumentException(NOT_CORRECT_USER_MESSAGE);
+        }
+        return findUser.stream().findFirst().get();
+    }
     /**
      * Get User By One userEmail
      * @param String : userEmail

@@ -2,6 +2,7 @@ package com.econovation.tcono.web.controller;
 
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.web.dto.UserCreateRequestDto;
+import com.econovation.tcono.web.dto.UserFindDto;
 import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.econovation.tcono.service.LoginService;
 import com.econovation.tcono.service.UserService;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -34,18 +37,17 @@ public class UserController {
     private final LoginService loginService;
 
     @GetMapping("/api/user/{userId}")
-    public User findUserById(@PathVariable Long userId) {
-//        User findUser = userService.findUserById(userId);
-        //        model.addAttribute("user", findUser);
-        return userService.findUserById(userId);
-    }
+    public User findUserById(@PathVariable Long userId) { return userService.findUserById(userId);}
 
     @GetMapping("/api/usernames/{userName}")
     public String findUserByUserName(@PathVariable String userName) {
         List<User> findUser = userService.findUserByUserName(userName);
         return userName;
     }
-
+    @GetMapping("/api/find-email/")
+    public User findEmail(@Valid @ModelAttribute UserFindDto userFindDto){
+        return userService.findUserByYearAndUserName(userFindDto);
+    }
 //    @GetMapping("api/user/{userEmail}")
 //    public User findUserByUserEmail(@PathVariable String userEmail) {
 //        return userService.findUserByUserEmail(userEmail);
