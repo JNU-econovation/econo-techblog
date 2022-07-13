@@ -1,12 +1,12 @@
 package com.econovation.tcono.domain.user;
 
+
 import com.econovation.tcono.domain.BaseTimeEntity;
 import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.validator.constraints.Range;
