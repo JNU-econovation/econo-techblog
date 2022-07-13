@@ -1,6 +1,8 @@
 .hashtag-input-container{
     display: flex;
-    height: 100%;
+    height: 63%;
+    width: 99%;
+    border: 1px solid #d3d3d3;
 }
 
 .hashtag-element{
@@ -13,6 +15,7 @@
 
 .hashtag-input{
     border:none;
+    font-family: 'Noto Sans KR';
 }
 
 .hashtag-input:focus{
