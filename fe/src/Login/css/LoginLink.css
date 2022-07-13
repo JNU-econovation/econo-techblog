@@ -2,14 +2,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 34px 0px;
-    width: 100%;
+    width: 74%;
+    margin-bottom: 30px;
 }
 
 .login-link__content a{
     height: 100%;
     text-decoration: none;
     padding: 0px 30px;
+    font-size: 14px;
+    font-family: 'Noto Sans KR';
+    color: #000000;
 }
 
 .login-link__content div{

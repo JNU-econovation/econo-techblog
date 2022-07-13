@@ -7,7 +7,7 @@ import './css/Login.css';
 function Login() {
   return (
     <div className="login">
-      <img src={MainLogo} className="main-logo" alt="main-logo" />
+      <img src={MainLogo} className="login-logo" alt="login-logo" />
       <LoginBox />
     </div>
   );
