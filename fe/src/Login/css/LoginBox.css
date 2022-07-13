@@ -1,6 +1,6 @@
 .login-box{
     display: flex;
-    width: 30%;
+    width: 435px;
     height: fit-content;
     flex-direction: column;
     justify-content: center;
@@ -10,6 +10,23 @@
     border-radius: 20px;
 }
 
-.login-box-title{
-    color:#2269fa;   
+
+.login-box__title{
+    color:#2269fa;
+    margin-bottom: 35px;
+    font-size: 25px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+
+}
+
+.login-box-id__input{
+    margin-bottom: 16px;
+}
+
+.login-box-pw__input{
+    margin-bottom: 58px;
 }

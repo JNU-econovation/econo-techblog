@@ -1,13 +1,10 @@
-.box-element{
-    width: 80%;
-}
-.box-element button{
+.sign-up__button{
     display: block;
     background-color:#2269fa;
     color: white;
     border: 1px solid#2269fa;
     margin: 10px auto;
-    width: inherit;
+    width: 80%;
     height: 35px;
     border-radius: 20px;
     cursor: pointer;
