@@ -9,9 +9,13 @@ import LoginLink from './LoginLink';
 function LoginBox() {
   return (
     <div className="login-box">
-      <h3 className="login-box-title">Sign in</h3>
-      <InputElement placeHolder="ID" />
-      <InputElement placeHolder="Password" />
+      <h3 className="login-box__title">Sign in</h3>
+      <InputElement classNames="login-box-id__input" placeHolder="ID" />
+      <InputElement
+        classNames="login-box-pw__input"
+        placeHolder="Password"
+        type="password"
+      />
       <LoginBtn />
       <SignUpLinkBtn />
       <LoginLink />
