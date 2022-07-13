@@ -9,11 +9,9 @@ function SignUpBtn() {
   };
 
   return (
-    <div className="box-element">
-      <button type="submit" onClick={onClick}>
-        가입하기
-      </button>
-    </div>
+    <button className="sign-up__button" type="submit" onClick={onClick}>
+      가입하기
+    </button>
   );
 }
 
