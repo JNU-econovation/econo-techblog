@@ -1,4 +1,17 @@
-.login-link-container{
+.login-link__content{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 34px 0px;
+    width: 100%;
+}
+
+.login-link__content a{
+    height: 100%;
+    text-decoration: none;
+    padding: 0px 30px;
+}
+
+.login-link__content div{
+    height: 100%;
 }
