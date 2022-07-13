@@ -1,0 +1,50 @@
+.write{
+    margin: auto;
+    width: 80%;
+}
+
+.write-title{
+    color: #4e87fb;
+
+}
+
+.write__grid{
+    display: grid;
+    align-items: center;
+    grid-template-rows: 3vh 3vh 3vh 70vh;
+    grid-template-columns: 20% 80%;
+    row-gap: 3px;
+}
+
+.write-category__title{
+    background-color: #f2f2f2;
+    text-align: left;
+    align-items: center;
+    height: 100%;
+    border-bottom: 2px solid #d5d5d5;
+
+}
+
+.write-editor{
+    height: 100%;
+}
+
+.write-submit__button{
+    background-color: #4e87fb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 114px;
+    cursor: pointer;
+}
+
+.write-cancel__button{
+    background-color: #d2d2d2;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 114px;
+    cursor: pointer;
+}
