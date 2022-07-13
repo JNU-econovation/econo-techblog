@@ -41,6 +41,7 @@ type PostCreateResponseDto{
     title: String
     mainCategory: MainCategory
     category: String
+    createdDate : String
 }
 
 input PostUpdateRequestDto{
@@ -56,8 +57,8 @@ type PostUpdateResponseDto{
     category: String
     views: Int
     likes: Int
-    #    private LocalDateTime createdDate;
-    #    private LocalDateTime modifiedDate;
+    createdDate : String
+    modifiedDate: String
 }
 
 enum MainCategory {
