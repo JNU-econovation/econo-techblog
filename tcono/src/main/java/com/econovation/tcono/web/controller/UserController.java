@@ -11,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,10 +46,6 @@ public class UserController {
     public User findEmail(@Valid @ModelAttribute UserFindDto userFindDto){
         return userService.findUserByYearAndUserName(userFindDto);
     }
-//    @GetMapping("api/user/{userEmail}")
-//    public User findUserByUserEmail(@PathVariable String userEmail) {
-//        return userService.findUserByUserEmail(userEmail);
-//    }
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @PutMapping("/api/user/{userId}")
