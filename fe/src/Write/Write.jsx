@@ -21,13 +21,31 @@ function Write() {
     <div className="write">
       <h3 className="write-title">게시판 글쓰기</h3>
       <div className="write__grid">
-        <div className="write-category__title">게시판</div>
-        <CategorySelectBox />
-        <div className="write-category__title">제목</div>
-        <TitleInput />
-        <div className="write-category__title">태그</div>
-        <HashtagInput />
-        <div className="write-category__title">본문</div>
+        <div className="write-item">
+          게시판
+          <span>*</span>
+        </div>
+        <div className="write-item__select">
+          <CategorySelectBox />
+        </div>
+        <div className="write-item">
+          제목
+          <span>*</span>
+        </div>
+        <div className="write-item__input">
+          <TitleInput />
+        </div>
+        <div className="write-item">
+          태그
+          <span>*</span>
+        </div>
+        <div className="write-item__input">
+          <HashtagInput />
+        </div>
+        <div className="write-item">
+          본문
+          <span>*</span>
+        </div>
         <div className="write-editor">
           <Editor
             ref={editorRef}
@@ -38,12 +56,18 @@ function Write() {
           />
         </div>
       </div>
-      <button className="write-cancel__button" type="button">
-        취소
-      </button>
-      <button className="write-submit__button" type="submit" onClick={onSubmit}>
-        작성완료
-      </button>
+      <div className="write-button__container">
+        <button className="write-cancel__button" type="button">
+          취소
+        </button>
+        <button
+          className="write-submit__button"
+          type="submit"
+          onClick={onSubmit}
+        >
+          작성완료
+        </button>
+      </div>
     </div>
   );
 }
