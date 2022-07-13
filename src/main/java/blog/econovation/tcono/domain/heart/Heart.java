@@ -18,7 +18,7 @@ public class Heart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HEART_ID")
-    private int Id;
+    private Long Id;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
