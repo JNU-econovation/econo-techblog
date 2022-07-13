@@ -31,7 +31,7 @@ public class Post extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POST_ID")
-    private Long Id;
+    private int Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
@@ -41,18 +41,17 @@ public class Post extends BaseTimeEntity {
 
     private Boolean official; //인기글
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
     private int views; //조회수
-    @Column(columnDefinition = "integer default 0", nullable = false)
     private int hearts; //좋아요
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="HEART_ID")
-    private Set<Heart> Heart = new HashSet<>();
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Heart> Heart = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="CATEGORY_ID",nullable = false)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Category> categoryList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private MainCategory mainCategory; //대분류
