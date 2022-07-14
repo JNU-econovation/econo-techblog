@@ -1,4 +1,11 @@
 .email-verify-btn{
     background-color: white;
     border: none;
+    width: 70%;
+    text-align: left;
+    margin: 5px 0;
+}
+
+.email-verify-btn:focus{
+    outline: none;
 }
