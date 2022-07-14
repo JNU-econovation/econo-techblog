@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './css/CategorySelectBox.css';
+
 function CategorySelectBox() {
   return (
     <select name="category" className="category-select-box">

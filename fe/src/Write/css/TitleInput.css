@@ -1,5 +1,14 @@
+.title-input-container{
+    display: flex;
+    height: 63%;
+    width: 99%;
+    border: 1px solid #d3d3d3;
+}
 .title-input{
     border: none;
+    width: 100%;
+    font-family: 'Noto Sans KR';
+    
 }
 
 .title-input:focus{
