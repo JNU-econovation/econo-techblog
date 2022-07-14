@@ -149,7 +149,6 @@ type Mutation{
     confirmEmail(token : String!) : Void!
 
     #   Auth-----------------------------------
-
 }
 
 type Reply{

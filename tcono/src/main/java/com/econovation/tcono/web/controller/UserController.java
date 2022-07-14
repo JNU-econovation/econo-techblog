@@ -37,6 +37,9 @@ public class UserController {
     @GetMapping("/api/user/{userId}")
     public User findUserById(@PathVariable Long userId) { return userService.findUserById(userId);}
 
+    @GetMapping("/api/unique-email/{userEmail}")
+    public boolean findUserById(@PathVariable String userEmail) { return userService.isUniqueEmail(userEmail);}
+
     @GetMapping("/api/usernames/{userName}")
     public String findUserByUserName(@PathVariable String userName) {
         List<User> findUser = userService.findUserByUserName(userName);

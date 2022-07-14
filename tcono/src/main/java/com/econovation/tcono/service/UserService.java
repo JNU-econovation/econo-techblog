@@ -89,6 +89,18 @@ public class UserService {
 //    ----User Authentication------------------------------------------------------------------
 
     /**
+     * return true if email is Unique
+     * @param String : userEmail
+     * @return boolean
+     */
+    @Transactional
+    public boolean isUniqueEmail(String userEmail) {
+        if(userRepository.findByUserEmail(userEmail).isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+    /**
      * create One User Data
      * @Param userEmail : String!, password : String!, year : Int!, userName : String!
      * @return User
