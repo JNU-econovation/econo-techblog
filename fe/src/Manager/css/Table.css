@@ -40,3 +40,13 @@
 .table-td-name span{
     width: 60px;
 }
+
+.table-setting-btn {
+    border: none;
+    background-color: inherit;
+}
+
+.table-setting-btn img {
+    margin-top: 6px;
+    width: 14px;
+}

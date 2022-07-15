@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+
+import '../css/PostInfo.css';
 import PostDetails from '../../components/PostDetails';
 import Partition from '../../components/Partition';
-import '../css/PostInfo.css';
+import SelectBox from './SelectBox';
 
 import noImg from '../img/no_img.png';
 import date from '../img/day.png';
 import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
-import SelectBox from './SelectBox';
+import more from '../img/post_more.png';
 
 const result = {
   author: '에코노베이션',
@@ -36,7 +38,7 @@ const PostInfo = function () {
           <PostDetails src={liked} alt="liked" info={result.liked} />
         </div>
         <button type="button" className="select-btn" onClick={onClick}>
-          ・・・
+          <img src={more} alt="more" />
         </button>
       </div>
       {isOpen && <SelectBox />}

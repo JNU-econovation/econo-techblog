@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import '../css/Table.css';
 import noImg from '../img/no_img.png';
+import settings from '../img/settings.png';
 
 const Table = function ({ data }) {
   const columns = ['이름', '이메일', '사용자 타입', '기수', '설정'];
@@ -36,7 +37,11 @@ const Table = function ({ data }) {
             <td>{email}</td>
             <td>{usertype}</td>
             <td>{year}</td>
-            <td></td>
+            <td>
+              <button type="button" className="table-setting-btn">
+                <img src={settings} alt="settings" />
+              </button>
+            </td>
           </tr>
         ))}
       </tbody>

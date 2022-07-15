@@ -3,6 +3,7 @@
     flex-direction: column;
     position: relative;
     float: right;
+    margin-right: 15px;
     top: 10px;
 }
 

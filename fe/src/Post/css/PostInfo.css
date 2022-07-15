@@ -34,3 +34,7 @@
     border: none;
     background-color: #fff;
 }
+
+.select-btn img {
+    width: 20px;
+}

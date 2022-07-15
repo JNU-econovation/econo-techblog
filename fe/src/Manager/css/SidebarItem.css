@@ -5,7 +5,7 @@
     background-color: #fff;
     border-radius: 15px;
     padding: 17px 20px;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .sidebar-item span:first-child {
@@ -20,14 +20,14 @@
     opacity: 0.5;
 }
 
-.sidebar-item-right img {
-    width: 14px;
-    margin-right: 3px;
-}
-
 .sidebar-item-right {
     display: flex;
     align-items: center;
+}
+
+.sidebar-item-right img {
+    width: 16px;
+    margin-right: 3px;
 }
 
 .selected {

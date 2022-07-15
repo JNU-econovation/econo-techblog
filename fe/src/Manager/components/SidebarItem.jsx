@@ -5,20 +5,20 @@ import PropTypes from 'prop-types';
 
 import '../css/SidebarItem.css';
 
-import person from '../img/ID.png';
+import people from '../img/people.png';
 
 const SidebarItem = function ({ id, name, num, isSelected, onClick }) {
   return (
-    <li
+    <div
       className={isSelected ? 'sidebar-item selected' : 'sidebar-item'}
       onClick={() => onClick(id)}
     >
       <span>{name}</span>
       <div className="sidebar-item-right">
-        <img src={person} alt="person" />
+        <img src={people} alt="person" />
         <span>{num}</span>
       </div>
-    </li>
+    </div>
   );
 };
 
