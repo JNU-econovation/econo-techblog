@@ -9,12 +9,19 @@ const CommentBox = function () {
   };
   return (
     <div className="comment-box">
-      <img src={noImg} alt="no-img" />
-      <div className="comment-box-info">
-        <span className="comment-box-writer">이서현</span>
-        <div className="comment-content">
-          <textarea className="comment-box-input" onChange={onChange} />
-          <button type="button" disabled={!comment}>
+      <img src={noImg} alt="no-img" className="comment-box__img" />
+      <div className="comment-box__info">
+        <span className="comment-box-__info__writer">이서현</span>
+        <div className="comment-box__info__content">
+          <textarea
+            className="comment-box__info__content__input"
+            onChange={onChange}
+          />
+          <button
+            type="button"
+            disabled={!comment}
+            className="comment-box__info__content__btn"
+          >
             확인
           </button>
         </div>

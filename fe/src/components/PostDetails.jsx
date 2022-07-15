@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const PostDetails = function ({ src, alt, info }) {
   return (
     <div className="post-details">
-      <img src={src} alt={alt} />
+      <img src={src} alt={alt} className="post-details__img" />
       <span>{info}</span>
     </div>
   );

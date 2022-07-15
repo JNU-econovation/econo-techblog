@@ -4,17 +4,17 @@
     border-bottom: solid 1px #bbb;
 }
 
-.post-info-list {
+.post-info__list {
     display: flex;
     justify-content: space-between;
 }
 
-.post-info-left {
+.post-info__list__left {
     display: flex;
     align-items: center;
 }
 
-.post-info-author {
+.post-info__list__left__author {
     display: flex;
     align-items: center;
     margin-right: 20px;
@@ -22,19 +22,19 @@
     font-size: 15px;
 }
 
-.post-info-author img {
+.post-info__list__left__author__img {
     width: 40px;
     height: 40px;
     border-radius: 70%;
     margin-right: 10px;
 }
 
-.select-btn {
+.post-info__button {
     margin-left: auto;
     border: none;
     background-color: #fff;
 }
 
-.select-btn img {
+.post-info__button__img {
     width: 20px;
 }

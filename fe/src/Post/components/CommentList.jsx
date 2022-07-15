@@ -26,7 +26,7 @@ const result = [
 const CommentList = function () {
   return (
     <div className="comment-list">
-      <span className="comment-num">{`댓글 ${result.length}개`}</span>
+      <span className="comment-list__num">{`댓글 ${result.length}개`}</span>
       <CommentBox />
       {result.map((comment) => (
         <Comment key={comment.id} name={comment.name} desc={comment.desc} />

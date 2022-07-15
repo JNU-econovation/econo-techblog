@@ -7,7 +7,8 @@
     top: 10px;
 }
 
-.select-box button {
+.select-box__edit-btn,
+.select-box__delete-btn {
     width: 140px;
     padding: 10px;
     border: solid 1px #bbb;
@@ -18,11 +19,11 @@
     justify-content: space-between;
 }
 
-.select-box button:first-child {
+.select-box__edit-btn {
     color: #7f7f7f;
 }
 
-.select-box button:last-child {
+.select-box__delete-btn {
     margin-top: -1px;
     color: #f00;
 }
