@@ -1,10 +1,12 @@
 package com.econovation.tcono.web.dto;
 
 import com.econovation.tcono.domain.user.User;
+<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/web/dto/UserUpdateRequestDto.java
 import lombok.AccessLevel;
+=======
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/web/dto/UserUpdateRequestDto.java
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
@@ -12,7 +14,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserUpdateRequestDto {
     @NotBlank
     private String userEmail;
@@ -34,6 +35,6 @@ public class UserUpdateRequestDto {
         return User.builder()
                 .userEmail(userEmail)
                 .year(year)
-                .userName(userEmail).build();
+                .userName(userName).build();
     }
 }

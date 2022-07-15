@@ -23,6 +23,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+//	update null field setting
+	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
 //	SpringBoot Mail Setting
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
@@ -36,6 +40,7 @@ dependencies {
 	//=====add=====
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+<<<<<<< HEAD
 
 
 ////	GraphQL Setting
@@ -43,6 +48,14 @@ dependencies {
 	implementation 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'
 	implementation 'com.graphql-java:graphql-java-tools:5.1.0'
 	implementation 'com.graphql-java:graphql-java-servlet:5.0.0'
+=======
+//	GraphQL Setting
+	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
+	implementation 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'
+	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
+	implementation 'com.graphql-java:graphql-java-servlet:5.0.0'
+
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
 
 	implementation 'org.springframework.session:spring-session-core'
 

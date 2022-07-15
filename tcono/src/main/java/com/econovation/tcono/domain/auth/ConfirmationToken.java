@@ -4,6 +4,7 @@ import com.econovation.tcono.domain.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
+@Slf4j
 public class ConfirmationToken extends BaseTimeEntity {
 
     private static final long EMAIL_TOKEN_EXPIRATION_TIME_VALUE = 5L;
@@ -23,7 +25,6 @@ public class ConfirmationToken extends BaseTimeEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2",strategy="uuid2")
-    @Column(length=6)
     private UUID id;
 
     @Column
@@ -41,6 +42,7 @@ public class ConfirmationToken extends BaseTimeEntity {
  * @Param userId
  */
     public static ConfirmationToken createEmailConfirmationToken(Long userId){
+        System.out.println(userId);
         ConfirmationToken confirmationToken = new ConfirmationToken();
         confirmationToken.expirationDate = LocalDateTime.now().plusMinutes(EMAIL_TOKEN_EXPIRATION_TIME_VALUE);
         confirmationToken.expired = false;
@@ -51,6 +53,6 @@ public class ConfirmationToken extends BaseTimeEntity {
      * 토큰 사용 만료
      */
     public void useToken(){
-        expired = true;
+        this.expired = true;
     }
 }

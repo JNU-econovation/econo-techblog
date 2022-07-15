@@ -18,7 +18,11 @@
 //    @Transactional
 //    public CommentCreateResponseDto createCommentsByPostId(CommentCreateRequestDto commentCreateRequestDto) {
 //
+<<<<<<< HEAD
 //        User user= userRepository.findByuserEmail(commentCreateRequestDto.getUserEmail())
+=======
+//        User user= userRepository.findByUserEmail(commentCreateRequestDto())
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
 //                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
 //
 //        Post post = postRepository.findById(commentCreateRequestDto.getPostId())

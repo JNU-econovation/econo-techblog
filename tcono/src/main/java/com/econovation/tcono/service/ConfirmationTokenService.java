@@ -1,7 +1,13 @@
 package com.econovation.tcono.service;
 
+<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/service/ConfirmationTokenService.java
 import com.econovation.tcono.domain.auth.ConfirmationToken;
 import com.econovation.tcono.domain.auth.ConfirmationTokenRepository;
+=======
+import com.econovation.tcono.domain.auth.ConfirmationTokenRepository;
+import com.econovation.tcono.domain.auth.ConfirmationToken;
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/service/ConfirmationTokenService.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
@@ -10,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class ConfirmationTokenService {
     private final ConfirmationTokenRepository confirmationTokenRepository;
@@ -35,7 +42,7 @@ public class ConfirmationTokenService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(receiverEmail);
         mailMessage.setSubject("회원가입 이메일 인증");
-        mailMessage.setText("http://localhost:8090/confirm-email?token="+emailConfirmationToken.getId());
+        mailMessage.setText("http://localhost:8080/api/confirm-email/"+emailConfirmationToken.getId());
         emailSenderService.sendEmail(mailMessage);
 
         return emailConfirmationToken.getId();
@@ -46,9 +53,9 @@ public class ConfirmationTokenService {
      *
      * @param confirmationTokenId
      */
-    public ConfirmationToken findByIdAndExpirationDateAfterAndExpired(String confirmationTokenId) {
+    public ConfirmationToken findByIdAndExpirationDateAfterAndExpired(UUID confirmationTokenId) {
         Optional<ConfirmationToken> confirmationToken = confirmationTokenRepository.findByIdAndExpirationDateAfterAndExpired(confirmationTokenId, LocalDateTime.now(), false);
-        return confirmationToken.orElseThrow(()-> new BadRequestException(TOKEN_NOT_FOUND));
+        return confirmationToken.get();
     }
 
 }
