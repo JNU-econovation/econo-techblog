@@ -4,12 +4,9 @@
     -moz-appearance: none;
     appearance: none;
 
-    width: 80%;
-    height:35px;
 
     background-color: #f1f1f1;
     border: 1px solid #f1f1f1;
-    color: black;
-    opacity : 0.35;
-    border-radius: 20px;
+    color: rgba(1, 1, 1, 0.35);
+    border-radius: 40px;
 }
