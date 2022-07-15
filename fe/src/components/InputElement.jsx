@@ -10,15 +10,13 @@ function InputElement({ placeHolder, classNames, value, setValue, type }) {
     setValue(() => e.target.value);
   };
   return (
-    <div className="box-element">
-      <input
-        className={classNames}
-        placeholder={placeHolder}
-        value={value}
-        onChange={onChange}
-        type={type}
-      />
-    </div>
+    <input
+      className={`element__input ${classNames}`}
+      placeholder={placeHolder}
+      value={value}
+      onChange={onChange}
+      type={type}
+    />
   );
 }
 

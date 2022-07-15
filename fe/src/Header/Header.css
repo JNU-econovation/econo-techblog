@@ -2,6 +2,8 @@
     display: flex;
     position: sticky;
     align-items: center;
+    justify-content: space-between;
+    height:6vh;
     top: 0;
     left: 0;
     right: 0;
@@ -11,12 +13,15 @@
 }
 
 .header-nav-button-box{
-
-list-style-type: none;
+  list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
 .header-right-box{
+  display: flex;
+  align-items: center;
+  padding-left: auto;
 }
+
