@@ -1,6 +1,10 @@
 package com.econovation.tcono.Interceptor;
 
+<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/Interceptor/LoginCheckInterceptor.java
+import com.econovation.tcono.web.controller.SessionConst;
+=======
 import com.econovation.tcono.web.SessionConst;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/Interceptor/LoginCheckInterceptor.java
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 

@@ -1,5 +1,9 @@
 package com.econovation.tcono.post;
 
+import com.econovation.tcono.domain.post.Post;
+import com.econovation.tcono.domain.post.PostMutationResolver;
+import com.econovation.tcono.domain.post.PostQueryResolver;
+import com.econovation.tcono.domain.post.PostRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

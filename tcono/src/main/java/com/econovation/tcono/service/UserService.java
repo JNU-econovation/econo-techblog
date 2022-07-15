@@ -3,10 +3,17 @@ package com.econovation.tcono.service;
 import com.econovation.tcono.domain.auth.ConfirmationToken;
 import com.econovation.tcono.domain.auth.ConfirmationTokenRepository;
 import com.econovation.tcono.domain.user.User;
+<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/service/UserService.java
+import com.econovation.tcono.domain.user.UserRepository;
+import com.econovation.tcono.web.dto.UserCreateRequestDto;
+import com.econovation.tcono.web.dto.UserLoginRequestDto;
+import com.econovation.tcono.web.dto.UserUpdateRequestDto;
+=======
 import com.econovation.tcono.web.dto.UserCreateRequestDto;
 import com.econovation.tcono.web.dto.UserFindDto;
 import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.econovation.tcono.domain.user.UserRepository;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/service/UserService.java
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -88,6 +95,18 @@ public class UserService {
     }
 //    ----User Authentication------------------------------------------------------------------
 
+    /**
+     * return true if email is Unique
+     * @param String : userEmail
+     * @return boolean
+     */
+    @Transactional
+    public boolean isUniqueEmail(String userEmail) {
+        if(userRepository.findByUserEmail(userEmail).isEmpty()) {
+            return true;
+        }
+        return false;
+    }
     /**
      * create One User Data
      * @Param userEmail : String!, password : String!, year : Int!, userName : String!

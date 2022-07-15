@@ -1,8 +1,13 @@
 package com.econovation.tcono.domain.user;
 
+<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/domain/user/User.java
+import com.econovation.tcono.domain.BaseTimeEntity;
+import com.econovation.tcono.domain.post.Post;
+=======
 
 import com.econovation.tcono.domain.BaseTimeEntity;
 import com.econovation.tcono.web.dto.UserUpdateRequestDto;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/domain/user/User.java
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +16,11 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.validator.constraints.Range;
 
+<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/domain/user/User.java
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+=======
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,12 +29,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/domain/user/User.java
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/domain/user/User.java
+@Table(name="Users")
+=======
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/domain/user/User.java
 @DynamicInsert
 public class User extends BaseTimeEntity {
 
@@ -38,9 +53,9 @@ public class User extends BaseTimeEntity {
     @NotNull
     private Long year;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "POST_ID")
-//    private Post post;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "POST_ID")
+    private List<Post> postList=new ArrayList<>();
 
     @Column(nullable = false)
     @NotNull

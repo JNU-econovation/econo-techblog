@@ -12,7 +12,11 @@ import java.util.List;
 @Data
 @Getter
 public class PostUpdateResponseDto {
+<<<<<<< HEAD
+    private Long userId;
+=======
     private User user;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
     private String content;
     private String title;
     private String category; //해시태그
@@ -23,7 +27,11 @@ public class PostUpdateResponseDto {
 
     @Builder
     public PostUpdateResponseDto(Post post, List<Category> categoryListByPost) {
+<<<<<<< HEAD
+        this.userId=post.getUserId();
+=======
         this.user=post.getUser();
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
         this.content = post.getContent();
         this.title = post.getTitle();
         this.category = categoryListByPost.toString();

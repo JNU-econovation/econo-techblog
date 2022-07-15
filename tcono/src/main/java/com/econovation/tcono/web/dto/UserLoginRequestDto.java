@@ -1,23 +1,20 @@
 package com.econovation.tcono.web.dto;
 
 import com.econovation.tcono.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
-
-@Data
 @Getter
-@Setter
-@NoArgsConstructor
 public class UserLoginRequestDto {
-    @NotEmpty
-    private String userEmail;
-    @NotEmpty
     private String password;
+    private String userEmail;
+
+    @Builder
+    public UserLoginRequestDto(String password, String userEmail) {
+        this.password = password;
+        this.userEmail = userEmail;
+    }
+
 
     public User toEntity(){
         return User.builder()

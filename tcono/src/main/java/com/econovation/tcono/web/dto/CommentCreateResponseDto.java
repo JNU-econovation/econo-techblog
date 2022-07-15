@@ -13,8 +13,11 @@ public class CommentCreateResponseDto {
     private int depth;
     private int group;
 
-    private String createdDate=
+<<<<<<< HEAD
+    private String createdDate;
 
+=======
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
     @Builder
     public void CommentCreateRequestDto(Long userId, Long postId, String content, int depth, int group){
         this.userId=userId;

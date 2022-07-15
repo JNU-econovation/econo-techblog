@@ -1,7 +1,11 @@
 package com.econovation.tcono.domain.post;
 
 import com.econovation.tcono.domain.BaseTimeEntity;
+<<<<<<< HEAD
 import com.econovation.tcono.domain.heart.Heart;
+=======
+//import com.econovation.tcono.domain.heart.Heart;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
 import com.econovation.tcono.domain.user.User;
 import jdk.jfr.Category;
 import lombok.AllArgsConstructor;
@@ -17,7 +21,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
 @Entity
 @Getter
 @DynamicInsert
@@ -30,9 +37,16 @@ public class Post extends BaseTimeEntity {
     @Column(name = "POST_ID")
     private Long Id;
 
+<<<<<<< HEAD
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "USER_ID")
+//    private User user;
+    private Long userId;
+=======
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
     private String content;
     private String title;
     private Boolean official; //인기글
@@ -42,8 +56,8 @@ public class Post extends BaseTimeEntity {
     @Column(columnDefinition = "integer default 0", nullable = false)
     private int hearts; //좋아요
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<Heart> Heart = new ArrayList<>();
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+//    private List<Heart> Heart = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "post", orphanRemoval = true)
 //    private List<Comment> comments = new ArrayList<>();
@@ -52,8 +66,13 @@ public class Post extends BaseTimeEntity {
     private MainCategory mainCategory; //대분류
 
     @Builder
+<<<<<<< HEAD
+    public Post(Long userId, String content, String title, MainCategory mainCategory) {
+        this.userId=userId;
+=======
     public Post(User user, String content, String title, MainCategory mainCategory) {
         this.user = user;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
         this.content = content;
         this.title = title;
         this.mainCategory = mainCategory;

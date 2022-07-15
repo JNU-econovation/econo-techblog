@@ -11,7 +11,11 @@ import java.util.List;
 @Data
 @Getter
 public class PostCreateResponseDto {
+<<<<<<< HEAD
+    private Long userId;
+=======
     private User user;
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
     private String content;
     private String title;
     private String categoryListByPost;
@@ -21,7 +25,11 @@ public class PostCreateResponseDto {
 
 
     public PostCreateResponseDto(Post post, List<Category> categoryListByPost) {
+<<<<<<< HEAD
+        this.userId=post.getUserId();
+=======
         this.user=post.getUser();
+>>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e
         this.content = post.getContent();
         this.title = post.getCreatedDate();
         this.categoryListByPost=categoryListByPost.toString();
