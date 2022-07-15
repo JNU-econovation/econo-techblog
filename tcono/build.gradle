@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.7'
+	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
@@ -36,17 +36,21 @@ dependencies {
 	//=====add=====
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-//	GraphQL Setting
-	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
-	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
+
+
+////	GraphQL Setting
+//	testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:11.0.0'
+	implementation 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'
+	implementation 'com.graphql-java:graphql-java-tools:5.1.0'
+	implementation 'com.graphql-java:graphql-java-servlet:5.0.0'
 
 	implementation 'org.springframework.session:spring-session-core'
-    implementation 'junit:junit:4.13.1'
+
+    implementation 'junit:junit:4.13.2'
     compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mockito:mockito-all:1.9.5'
-	testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:11.0.0'
+	testImplementation 'org.mockito:mockito-all:1.10.19'
 }
 
 tasks.named('test') {
