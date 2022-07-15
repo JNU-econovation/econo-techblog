@@ -1,7 +1,7 @@
 .sign-up-box{
     display: flex;
     margin: auto;
-    width: 30%;
+    width: 475px;
     height: fit-content;
     flex-direction: column;
     justify-content: center;
@@ -20,5 +20,39 @@
 }
 .sign-up-box-title{
     color:#2269fa;
+    font-size: 25px;
+    margin-bottom: 38px;
     
+}
+
+.sign-up-box-email__input{
+    width: 70%;
+}
+
+.sign-up-box-password__input{
+    width: 70%;
+    margin-bottom: 12px;
+}
+
+.sign-up-box-password-confirm__input{
+    width: 70%;
+    margin-bottom: 63px;
+}
+
+.sign-up-box-name__input{
+    width: 70%;
+    margin-bottom: 12px;
+}
+
+.sign-up-box-cardinal__select{
+    width: 71%;
+    height:50px;
+    margin-bottom: 45px;
+}
+
+.sign-up-box--agree__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
 }

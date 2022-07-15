@@ -21,7 +21,7 @@ function EmailStatus({ email }) {
 
   const verifyEmail = () => {
     if (reg.test(email)) {
-      setStatus(() => '올바른 이메일 형식입니다.(인증하기)');
+      setStatus(() => '올바른 이메일 형식입니다.(중복확인)');
       setCanVerify(() => true);
     } else {
       setStatus(() => '올바른 이메일 형식이 아닙니다.');

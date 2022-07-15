@@ -24,9 +24,11 @@
 }
 
 .login-box-id__input{
+    width:76%;
     margin-bottom: 16px;
 }
 
 .login-box-pw__input{
+    width:76%;
     margin-bottom: 58px;
 }
