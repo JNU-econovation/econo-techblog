@@ -3,12 +3,8 @@ package com.econovation.tcono.user;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
 import com.econovation.tcono.service.UserService;
-<<<<<<< HEAD:tcono/src/test/java/com/econovation/tcono/user/UserResolverTest.java
-import org.aspectj.lang.annotation.Before;
-=======
 import com.econovation.tcono.web.dto.UserUpdateRequestDto;
-import org.junit.Before;
->>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/test/java/blog/econovation/tcono/user/UserResolverTest.java
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,8 +13,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doThrow;
@@ -68,8 +62,8 @@ public class UserResolverTest {
         User user = User.builder()
                 .userEmail("Test@gmail.com")
                 .password("1234")
-                .year(20L)
-                .userName("이서현").build();
+                .year(20)
+                .userName("이서현");
 
         User savedUser = userRepository.save(user);
 
@@ -77,9 +71,9 @@ public class UserResolverTest {
         User findUser = userRepository.findById(user.getId())
                     .orElseThrow(()-> new IllegalArgumentException("Wrong UserId:< " + user.getId() + ">"));
 //    then
-        assertThat(findUser.getUserName()).isEqualTo("이서현");
-        assertThat(findUser.getYear()).isEqualTo((20L));
-        assertThat(findUser.getUserEmail()).isEqualTo("Test@gmail.com");
+        assertThat(findUser.getName()).isEqualTo("이서현");
+        assertThat(findUser.getYear().isEqualto(20));
+        assertThat(findUser.getEmail().isEqualto("Test@gmail.com"));
 }
     // 회원이름조회 테스트
     @Test
@@ -89,17 +83,17 @@ public class UserResolverTest {
         User user = User.builder()
                 .userEmail("Test@gmail.com")
                 .password("1234")
-                .year(20L)
-                .userName("이서현").build();
+                .year(20)
+                .userName("이서현");
         User savedUser = userRepository.save(user);
 
         //        when : act
-        User findUser = userRepository.findById(user.getId())
+        User findUser = userRepository.findById(user.getuserName())
                 .orElseThrow(()-> new IllegalArgumentException("Wrong UserId:< " + user.getId() + ">"));
 //    then
-        assertThat(user.getUserName()).isEqualTo("이서현");
-        assertThat(user.getYear()).isEqualTo(20);
-        assertThat(user.getUserEmail()).isEqualTo("Test@gmail.com");
+        assertThat(user.getName()).isEqualTo("이서현");
+        assertThat(user.getYear().isEqualto(20));
+        assertThat(user.getEmail().isEqualto("Test@gmail.com"));
     }
 
     //    회원가입 인증 테스트
@@ -131,7 +125,7 @@ public class UserResolverTest {
                 .userName("이서현2").build();
         userRepository.save(user1);
         user1.update(new UserUpdateRequestDto("Test2@gmail.com", 20L, "이서현2"));
-        assertThat(user1.getUserName()).isEqualTo(user2.getUserName());
+        asseertThat(user1.getName()).isEqualTo(user2.getUserName());
     }
 
 //  회원정보 삭제 테스트
@@ -141,12 +135,11 @@ public class UserResolverTest {
         User user = User.builder()
                 .userEmail("Test1@gmail.com")
                 .password("123")
-                .year(22L)
-                .userName("이서현1").build();
+                .year(22)
+                .userName("이서현1");
         User savedUser = userRepository.save(user);
-        userRepository.delete(savedUser);
+        Long deletedId = userRepository.deleteById(1);
 //        assert
-        Long deletedId = userRepository.findById(2L).get().getId();
-        assertThat(deletedId).isEqualTo(savedUser.getId());
+        assertThat(deletedID).isEqualTo(savedUser.getId());
     }
 }

@@ -1,8 +1,4 @@
-<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/config/WebConfig.java
-package com.econovation.tcono.config;
-=======
 package com.econovation.tcono;
->>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/com/econovation/tcono/WebConfig.java
 
 import com.econovation.tcono.Interceptor.LogInterceptor;
 import com.econovation.tcono.Interceptor.LoginCheckInterceptor;
@@ -19,12 +15,12 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LogInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/*.ico","**/*.graphql","**/*.graphqls" ,"/error", "/api/user/**","/api/confirm-email/**","/api/unique-email/**");
+                .excludePathPatterns("/css/**", "/*.ico", "/error", "/api/user/**","/api/confirm-email/**");
 
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/", "/api/user/**","/api/user","**/*.graphql","**/*.graphqls","/api/confirm-email/**", "/api/login", "/api/logout","/api/find-email/**",
+                .excludePathPatterns("/", "/api/user/**","/api/user","/api/confirm-email/**", "/api/login", "/api/logout","/api/find-email/**",
                         "/css/**", "/*.ico", "/error");
     }
 }

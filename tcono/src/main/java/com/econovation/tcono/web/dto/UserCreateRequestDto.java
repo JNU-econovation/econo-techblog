@@ -2,11 +2,7 @@ package com.econovation.tcono.web.dto;
 
 import com.econovation.tcono.domain.auth.Password;
 import com.econovation.tcono.domain.user.User;
-<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/web/dto/UserCreateRequestDto.java
-import lombok.AccessLevel;
-=======
 import lombok.AllArgsConstructor;
->>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/web/dto/UserCreateRequestDto.java
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

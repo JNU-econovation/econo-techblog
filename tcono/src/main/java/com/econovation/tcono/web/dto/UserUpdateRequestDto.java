@@ -1,10 +1,6 @@
 package com.econovation.tcono.web.dto;
 
 import com.econovation.tcono.domain.user.User;
-<<<<<<< HEAD:tcono/src/main/java/com/econovation/tcono/web/dto/UserUpdateRequestDto.java
-import lombok.AccessLevel;
-=======
->>>>>>> 3511556d4c5fdf308ee96f20f9e11bd248b24c5e:tcono/src/main/java/blog/econovation/tcono/web/dto/UserUpdateRequestDto.java
 import lombok.Data;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Range;
