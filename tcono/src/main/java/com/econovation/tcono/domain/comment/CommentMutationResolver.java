@@ -18,7 +18,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     @Transactional
     public CommentCreateResponseDto createCommentsByPostId(CommentCreateRequestDto commentCreateRequestDto) {
 
-        User user= userRepository.findByuserEmail(commentCreateRequestDto.getUserEmail())
+        User user= userRepository.findById(commentCreateRequestDto.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
 
         Post post = postRepository.findById(commentCreateRequestDto.getPostId())

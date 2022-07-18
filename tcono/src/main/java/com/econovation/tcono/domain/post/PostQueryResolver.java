@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Component
@@ -19,10 +20,9 @@ public class PostQueryResolver implements GraphQLQueryResolver {
      * 각 대분류에 맞는 Post 보내기
      * 페이징 처리(10개)
      */
-
     @Transactional
-    public List<Post> findAllPosts(MainCategory mainCategory) {
-        List<Post> post = postRepository.findByMainCategory(MainCategory.getMainCategory(mainCategory));
+    public List<Post> findAllPosts(MainCategory mainCategory,Pageable pageable) {
+        List<Post> post = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategory), pageable);
         return post;
     }
 
@@ -38,5 +38,15 @@ public class PostQueryResolver implements GraphQLQueryResolver {
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
         post.increaseViews();
         return post;
+    }
+    /**
+     * @param : string Keyword
+     * @return List<Post>
+     * title로 like 검색 기능
+     */
+    @Transactional
+    public List<Post> search(String keyword, Pageable pageable){
+        List<Post> postList = postRepository.findByTitleContaining(keyword,pageable);
+        return postList;
     }
 }

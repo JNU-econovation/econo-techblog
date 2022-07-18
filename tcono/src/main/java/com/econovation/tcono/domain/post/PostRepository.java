@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +16,10 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select p from Post p where p.mainCategory= :mainCategory")
-    List<Post> findAllByMainCategory(@Param("mainCategory") MainCategory mainCategory);
+    List<Post> findAllByMainCategory(@Param("mainCategory") MainCategory mainCategory, Pageable pageable);
 
-
-    @Query("select p from Post p where p.id=:id")
+    @Query("select p from Post p where p.Id=:id")
     Optional<Post> findById(@Param("id") Long id);
+
+    List<Post> findByTitleContaining(String keyword, Pageable pageable);
 }

@@ -41,7 +41,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
         categoryListToEntity(postCreateRequestDto.getCategory())
                 .forEach(x -> categoryRepository.save(postCreateRequestDto.toCategoryEntity(post, x)));
 
-        List<Category> categoryListByPost = categoryRepository.findByPost(post);
+        List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
         return new PostCreateResponseDto(post, categoryListByPost);
     }
 
@@ -60,7 +60,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
         categoryListToEntity(postUpdateRequestDto.getCategory())
                 .forEach(x -> categoryRepository.save(postUpdateRequestDto.toCategoryEntity(post, x)));
 
-        List<Category> categoryListByPost = categoryRepository.findByPost(post);
+        List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
         return new PostUpdateResponseDto(post, categoryListByPost);
     }
 
