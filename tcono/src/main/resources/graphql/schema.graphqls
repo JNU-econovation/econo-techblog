@@ -1,15 +1,5 @@
 scalar Void
 
-#input Post{
-#    Id:ID!
-#    userId:Int
-#    content:String
-#    official:Boolean!
-#    title:String!
-#    views:Int!
-#    hearts:Int!
-#    mainCategory: MainCategory
-#}
 type Post{
     id:ID!
     userId:Int
@@ -20,7 +10,6 @@ type Post{
     hearts:Int!
     mainCategory: MainCategory
 }
-
 
 type Heart{
     Id:ID!
@@ -51,16 +40,15 @@ input PostCreateRequestDto{
     content: String
     title: String
     mainCategory:MainCategory
-    category: String
+    categorySplitByComma:String
 }
 
 type PostCreateResponseDto{
     userId: Int
     content: String
     title: String
-    categoryListByPost: String
-    views: Int
-    likes: Int
+    mainCategory: MainCategory
+    categorySplitByComma: String
     createdDate: String
 }
 
@@ -96,17 +84,6 @@ input HeartRequestDto {
     postId : Int
     userId:Int
 }
-
-#input Post{
-#    Id:ID!
-#    userId:Int
-#    content:String
-#    official:Boolean!
-#    title:String!
-#    views:Int!
-#    hearts:Int!
-#    mainCategory: MainCategory
-#}
 
 # 타입 시스템 정의
 schema {
