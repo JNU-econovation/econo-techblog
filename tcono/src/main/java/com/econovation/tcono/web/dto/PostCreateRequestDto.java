@@ -12,15 +12,15 @@ import lombok.Getter;
 @Getter
 public class PostCreateRequestDto {
 
-    private Long userId;
+    private User user;
     private String content;
     private String title;
     private MainCategory mainCategory;
     private String category;
 
     @Builder
-    public PostCreateRequestDto(Long userId, String content, String title, MainCategory mainCategory, String category) {
-        this.userId=userId;
+    public PostCreateRequestDto(User user, String content, String title, MainCategory mainCategory, String category) {
+        this.user=user;
         this.content = content;
         this.title = title;
         this.mainCategory = mainCategory;
@@ -29,7 +29,7 @@ public class PostCreateRequestDto {
 
     public Post toPostEntity(User user) {
         return Post.builder()
-                .userId(userId)
+                .user(user)
                 .content(content)
                 .title(title)
                 .mainCategory(mainCategory)

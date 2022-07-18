@@ -1,14 +1,13 @@
 package com.econovation.tcono.domain.post;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.econovation.tcono.web.dto.PostCreateRequestDto;
 import com.econovation.tcono.web.dto.PostCreateResponseDto;
 import com.econovation.tcono.web.dto.PostUpdateRequestDto;
 import com.econovation.tcono.web.dto.PostUpdateResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -16,30 +15,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 @Component
 @RequiredArgsConstructor
 public class PostMutationResolver implements GraphQLMutationResolver {
     private static final String NOT_FOUND_POST_MESSAGE = "해당 페이지가 존재하지 않습니다.";
     private static final String NOT_FOUND_USER_MESSAGE = "해당 유저가 존재하지 않습니다.";
-
     private PostRepository postRepository;
     private CategoryRepository categoryRepository;
     private UserRepository userRepository;
 
-    @Autowired
-    public PostMutationResolver(PostRepository postRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
-        this.postRepository = postRepository;
-        this.categoryRepository = categoryRepository;
-        this.userRepository = userRepository;
-    }
-
     /**
      * Post create 구현
      *
+     * @param postCreateRequestDto
      * @return Post
      */
+    @Transactional
     public PostCreateResponseDto createPost(PostCreateRequestDto postCreateRequestDto) {
-        User user = userRepository.findById(postCreateRequestDto.getUserId())
+        User user = userRepository.findById(postCreateRequestDto.getUser().getId())
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
         Post post = postRepository.save(postCreateRequestDto.toPostEntity(user));
 
@@ -57,6 +51,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      * @param postUpdateRequestDto
      * @return PostResponseDto
      */
+    @Transactional
     public PostUpdateResponseDto updatePost(Long id, PostUpdateRequestDto postUpdateRequestDto) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
@@ -74,6 +69,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      * @param category
      * @return Stream<String>
      */
+    @Transactional
     public Stream<String> categoryListToEntity(String category) {
         List<String> categoryList = Arrays.asList(category.split(","));
         return categoryList.stream();
@@ -84,6 +80,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      * @param postId
      * @return boolean
      */
+    @Transactional
     public boolean deletePost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
@@ -98,6 +95,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      * @param postId
      * @return boolean
      */
+    @Transactional
     public List<Post> createOfficial(Long postId) {
         List<Post> post = postRepository.findAll().stream()
                 .filter(x -> x.getHearts() > 10 && x.getViews() > 10)

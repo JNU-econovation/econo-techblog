@@ -1,7 +1,8 @@
 package com.econovation.tcono.domain.user;
 
+
 import com.econovation.tcono.domain.BaseTimeEntity;
-import com.econovation.tcono.domain.post.Post;
+import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,16 +11,20 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Users")
 @DynamicInsert
 public class User extends BaseTimeEntity {
 
@@ -30,35 +35,44 @@ public class User extends BaseTimeEntity {
 
     @Column(nullable = false)
     @Range(min =1, max = 50)
+    @NotNull
     private Long year;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "POST_ID")
-    private List<Post> postList=new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "POST_ID")
+//    private Post post;
 
     @Column(nullable = false)
+    @NotNull
     private String userName;
 
     @Column(nullable = false)
+    @NotNull
     private String password;
 
     @Column(nullable = false)
+    @NotNull
     private String userEmail;
 
     @Enumerated(EnumType.STRING)
+    @ColumnDefault("'USER'")
     @Column(nullable = false)
-    @ColumnDefault("'ROLE_GUEST'")
     private Role role;
 
     @Column(nullable = false)
-    @ColumnDefault("'false'")
+    @ColumnDefault("false")
     private boolean emailVerified;
 
     /**
      * 토큰 사용 만료
      */
-    public boolean emailVerifiedSuccess(){
+    public void emailVerifiedSuccess(){
         emailVerified = true;
-        return true;
+    }
+
+    public void update(UserUpdateRequestDto userUpdateRequestDto){
+        this.userEmail = userUpdateRequestDto.toEntity().getUserEmail();
+        this.userName = userUpdateRequestDto.toEntity().getUserName();
+        this.year = userUpdateRequestDto.toEntity().getYear();
     }
 }

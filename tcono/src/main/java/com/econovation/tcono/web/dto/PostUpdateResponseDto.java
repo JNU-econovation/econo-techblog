@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Getter
 public class PostUpdateResponseDto {
-    private Long userId;
+    private User user;
     private String content;
     private String title;
     private String category; //해시태그
@@ -23,7 +23,7 @@ public class PostUpdateResponseDto {
 
     @Builder
     public PostUpdateResponseDto(Post post, List<Category> categoryListByPost) {
-        this.userId=post.getUserId();
+        this.user=post.getUser();
         this.content = post.getContent();
         this.title = post.getTitle();
         this.category = categoryListByPost.toString();

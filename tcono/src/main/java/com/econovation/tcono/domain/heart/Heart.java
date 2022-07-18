@@ -19,18 +19,17 @@ public class Heart {
     @Column(name = "HEART_ID")
     private Long Id;
 
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name = "USER_ID")
-//    private User user;
-    private Long userId;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "POST_ID")
     private Post post;
 
     @Builder
-    public Heart(Post post) {
-        this.userId = post.getUserId();
+    public Heart(User user, Post post) {
+        this.user = user;
         this.post = post;
     }
 }

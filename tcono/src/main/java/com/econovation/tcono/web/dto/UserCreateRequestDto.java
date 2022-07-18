@@ -2,29 +2,33 @@ package com.econovation.tcono.web.dto;
 
 import com.econovation.tcono.domain.auth.Password;
 import com.econovation.tcono.domain.user.User;
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
+@Setter
+@NoArgsConstructor
 public class UserCreateRequestDto {
-    @NotBlank
+
+
+    @NotEmpty
     private String userEmail;
 
-    @NotNull
+    @NotEmpty
     @Password
     private String password;
 
-    @NotNull
+    @NotEmpty
     @Range(min =1, max = 50)
     private Long year;
 
-    @NotNull
+    @NotEmpty
     private String userName;
 
     public User toEntity(){

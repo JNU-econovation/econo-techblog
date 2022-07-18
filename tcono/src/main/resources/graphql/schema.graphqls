@@ -10,17 +10,17 @@ scalar Void
 #    hearts:Int!
 #    mainCategory: MainCategory
 #}
-
 type Post{
-    Id:ID!
+    id:ID!
     userId:Int
     content:String
-    official:Boolean!
     title:String!
+    official:Boolean!
     views:Int!
     hearts:Int!
     mainCategory: MainCategory
 }
+
 
 type Heart{
     Id:ID!
@@ -58,9 +58,10 @@ type PostCreateResponseDto{
     userId: Int
     content: String
     title: String
-    mainCategory: MainCategory
-    category: String
-    createdDate : String
+    categoryListByPost: String
+    views: Int
+    likes: Int
+    createdDate: String
 }
 
 input PostUpdateRequestDto{
@@ -79,16 +80,16 @@ type PostUpdateResponseDto{
     createdDate : String
     modifiedDate: String
 }
-input Post{
-    Id:ID!
-    userId:Int
-    content:String
-    official:Boolean!
-    title:String!
-    views:Int!
-    hearts:Int!
-    mainCategory: MainCategory
-}
+#input Post{
+#    Id:ID!
+#    userId:Int
+#    content:String
+#    official:Boolean!
+#    title:String!
+#    views:Int!
+#    hearts:Int!
+#    mainCategory: MainCategory
+#}
 
 input HeartRequestDto {
     id:ID
@@ -109,15 +110,15 @@ input HeartRequestDto {
 
 # 타입 시스템 정의
 schema {
-    query: Query
-    mutation: Mutation
+#    query: Query
+    mutation: Mutation,
 }
 
 #Root Query
 type Query{
-    #    -----------Post------------------------------
-    findAllPosts(mainCategory : MainCategory!): [Post!]!
-    findPostByPostId(id : ID!) : Post!
+    #    -----------Post------------------------f------
+    findAllPosts(mainCategory : MainCategory): [Post!]!
+    findPostByPostId(id : Int) : Post!
 
     #    ---------Comment--------------------
 }
@@ -125,14 +126,14 @@ type Query{
 #Root Mutation
 type Mutation{
     #    -----------Post------------------------------
-    createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!
-    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!
-    deletePost(postId : ID):Boolean
-    createOfficial(postID: ID): [Post!]!
-
-    #    -----------Heart------------------------------
-    updateHeartState(heartRequestDto:HeartRequestDto): Int!
-
-    #    -----------Comment------------------------------
-
+    createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
+#    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
+#    deletePost(postId : ID):Boolean,
+#    createOfficial(postID: ID): [Post!]!,
+#
+#    #    -----------Heart------------------------------
+#    updateHeartState(heartRequestDto:HeartRequestDto): Int!
+#
+#    #    -----------Comment------------------------------
+#
 }

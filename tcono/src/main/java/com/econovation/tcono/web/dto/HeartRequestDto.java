@@ -10,18 +10,19 @@ import lombok.Getter;
 @Data
 @Getter
 public class HeartRequestDto {
-    private Long postId;
-    private Long userId;
+    private Post post;
+    private User user;
 
     @Builder
-    public HeartRequestDto(Long postId,Long userId) {
-        this.postId=postId;
-        this.userId=userId;
+    public HeartRequestDto(Post post, User user) {
+        this.post=post;
+        this.user=user;
     }
 
-    public Heart toEntity(Post post) {
+    public Heart toEntity() {
         return Heart.builder()
                 .post(post)
+                .user(user)
                 .build();
     }
 }
