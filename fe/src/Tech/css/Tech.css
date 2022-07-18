@@ -3,11 +3,33 @@
     margin: 70px auto;
 }
 
+.tech-official-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .tech__title {
     font-size: 18px;
     font-weight: bold;
 }
 
-.tech__recent {
+.tech-write_button {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    background-color: #2269fb;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 15px;
+}
+
+.tech-write__img {
+    height: 12px;
+    margin-right: 8px;
+}
+
+.tech-recent {
     margin-top: 70px;
 }
