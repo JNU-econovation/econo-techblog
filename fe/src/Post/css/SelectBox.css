@@ -7,8 +7,8 @@
     top: 10px;
 }
 
-.select-box__edit-btn,
-.select-box__delete-btn {
+.select-box-eidt__button,
+.select-box-delete__button {
     width: 140px;
     padding: 10px;
     border: solid 1px #bbb;
@@ -19,11 +19,11 @@
     justify-content: space-between;
 }
 
-.select-box__edit-btn {
+.select-box-eidt__button {
     color: #7f7f7f;
 }
 
-.select-box__delete-btn {
+.select-box-delete__button {
     margin-top: -1px;
     color: #f00;
 }

@@ -13,11 +13,11 @@
     margin-left: auto;
 }
 
-.liked__button__span {
+.liked__span {
     font-size: 12px;
 }
 
-.liked__button__img {
+.liked__img {
     width: 13px;
     margin-left: 5px;
 }

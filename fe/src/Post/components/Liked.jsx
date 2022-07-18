@@ -15,11 +15,11 @@ const Liked = function () {
         className={liked ? 'liked__button liked__button--on' : 'liked__button'}
         type="button"
       >
-        <span className="liked__button__span">좋아요</span>
+        <span className="liked__span">좋아요</span>
         {liked ? (
-          <img src={clickheart} alt="liked" className="liked__button__img" />
+          <img src={clickheart} alt="liked" className="liked__img" />
         ) : (
-          <img src={heart} alt="liked" className="liked__button__img" />
+          <img src={heart} alt="liked" className="liked__img" />
         )}
       </button>
     </div>

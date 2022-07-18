@@ -25,14 +25,10 @@ const PostInfo = function () {
   };
   return (
     <div className="post-info">
-      <div className="post-info__list">
-        <div className="post-info__list__left">
-          <div className="post-info__list__left__author">
-            <img
-              src={noImg}
-              alt="no-img"
-              className="post-info__list__left__author__img"
-            />
+      <div className="post-info__content">
+        <div className="post-info-left">
+          <div className="post-info-author">
+            <img src={noImg} alt="no-img" className="post-info-author__img" />
             <span>{result.author}</span>
           </div>
           <PostDetails src={date} alt="date" info={result.date} />
@@ -42,7 +38,7 @@ const PostInfo = function () {
           <PostDetails src={liked} alt="liked" info={result.liked} />
         </div>
         <button type="button" className="post-info__button" onClick={onClick}>
-          <img src={more} alt="more" className="post-info__button__img" />
+          <img src={more} alt="more" className="post-info__img" />
         </button>
       </div>
       {isOpen && <SelectBox />}

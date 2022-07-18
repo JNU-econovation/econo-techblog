@@ -12,14 +12,14 @@ import Liked from './components/Liked';
 const Post = function () {
   return (
     <div className="post">
-      <div className="post__middle">
+      <div className="post-middle">
         <Title />
         <PostInfo />
         <Tags />
         <PostDesc />
         <Liked />
       </div>
-      <div className="post__partition" />
+      <div className="post-partition" />
       <CommentList />
     </div>
   );
