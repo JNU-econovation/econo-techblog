@@ -24,26 +24,26 @@
     border-bottom: solid 1px #f2f2f2;
 }
 
-.table__tr__user__img {
+.table-user__img {
     width: 30px;
 }
 
-.table__tr__user {
+.table-user {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.table__tr__user__name{
+.table-user__name{
     width: 60px;
 }
 
-.table__tr__setting-btn {
+.table-setting-btn {
     border: none;
     background-color: inherit;
 }
 
-.table__tr__setting-btn__img {
+.table-setting-btn__img {
     margin-top: 6px;
     width: 14px;
 }

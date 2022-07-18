@@ -12,17 +12,17 @@
     font-size: 15px;
     font-weight: 500;
 }
-.sidebar-item__right {
+.sidebar-item-right {
     display: flex;
     align-items: center;
 }
 
-.sidebar-item__right__img {
+.sidebar-item-right__img {
     width: 16px;
     margin-right: 3px;
 }
 
-.sidebar-item__right__num {
+.sidebar-item-right__num {
     font-size: 14px;
     font-weight: 500;
     color: #000;

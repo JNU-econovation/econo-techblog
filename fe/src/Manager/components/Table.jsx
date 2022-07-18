@@ -29,20 +29,20 @@ const Table = function ({ data }) {
         {data.map(({ name, email, usertype, year }) => (
           <tr key={email} className="table__tr">
             <td>
-              <div className="table__tr__user">
-                <img src={noImg} alt="noImg" className="table__tr__user__img" />
-                <span className="table__tr__user__name">{name}</span>
+              <div className="table-user">
+                <img src={noImg} alt="noImg" className="table-user__img" />
+                <span className="table-user__name">{name}</span>
               </div>
             </td>
             <td>{email}</td>
             <td>{usertype}</td>
             <td>{year}</td>
             <td>
-              <button type="button" className="table__tr__setting-btn">
+              <button type="button" className="table-setting-btn">
                 <img
                   src={settings}
                   alt="settings"
-                  className="table__tr__setting-btn__img"
+                  className="table-setting-btn__img"
                 />
               </button>
             </td>

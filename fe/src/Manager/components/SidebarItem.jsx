@@ -16,9 +16,9 @@ const SidebarItem = function ({ id, name, num, isSelected, onClick }) {
       onClick={() => onClick(id)}
     >
       <span className="sidebar-item__name">{name}</span>
-      <div className="sidebar-item__right">
-        <img src={people} alt="person" className="sidebar-item__right__img" />
-        <span className="sidebar-item__right__num">{num}</span>
+      <div className="sidebar-item-right">
+        <img src={people} alt="person" className="sidebar-item-right__img" />
+        <span className="sidebar-item-right__num">{num}</span>
       </div>
     </div>
   );
