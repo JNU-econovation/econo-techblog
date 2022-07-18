@@ -1,13 +1,13 @@
-.posts{
+.tech__posts{
     width: 80%;
     margin: 70px auto;
 }
 
-.posts p {
+.tech__title {
     font-size: 18px;
     font-weight: bold;
 }
 
-.recent-posts {
+.tech__recent {
     margin-top: 70px;
 }

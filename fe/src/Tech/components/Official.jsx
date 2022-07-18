@@ -22,19 +22,25 @@ const result = {
 const Official = function () {
   return (
     <div className="official">
-      <div className="official-img" />
+      <div className="official__img" />
       <div className="official-info">
-        <div className="official-top">
+        <div className="official-info-top">
           <span className="official-title">{result.title}</span>
           <Tags />
         </div>
-        <div className="official-middle">
+        <div className="official-info-middle">
           <span>{result.desc}</span>
         </div>
-        <div className="official-bottom">
-          <div className="official-bottom-left">
-            <img src={noImg} alt="no-img" />
-            <span>{result.author}</span>
+        <div className="official-info-bottom">
+          <div className="official-info-bottom-left">
+            <img
+              src={noImg}
+              alt="no-img"
+              className="official-info-bottom-left__img"
+            />
+            <span className="official-info-bottom-left__span">
+              {result.author}
+            </span>
           </div>
           <PostDetails src={date} alt="date" info={result.date} />
           <Partition />

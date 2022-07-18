@@ -32,13 +32,13 @@ const Tech = function () {
   return (
     <div className="tech">
       <Banner />
-      <div className="posts">
-        <div className="official-posts">
-          <p>Official</p>
+      <div className="tech__posts">
+        <div className="tech__official">
+          <p className="tech__title">Official</p>
           <Official />
         </div>
-        <div className="recent-posts">
-          <p>Recent posts</p>
+        <div className="tech__recent">
+          <p className="tech___title">Recent posts</p>
           {currentPosts(movies).map((item) => (
             <Recent
               key={item.id}

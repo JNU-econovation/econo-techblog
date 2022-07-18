@@ -15,26 +15,30 @@ import Tags from './Tags';
 const Recent = function ({ id, title, summary }) {
   return (
     <div className="recent">
-      <div className="recent-img" />
+      <div className="recent__img" />
       <div className="recent-info">
-        <div className="recent-top">
-          <span className="recent-title">{title}</span>
+        <div className="recent-info-top">
+          <span className="recent-info-top__span">{title}</span>
           <Tags />
         </div>
-        <div className="recent-middle">
+        <div className="recent-info-middle">
           <span>{summary}</span>
         </div>
-        <div className="recent-bottom">
-          <div className="recent-bottom-left">
+        <div className="recent-info-bottom">
+          <div className="recent-info-bottom-left">
             <PostDetails src={date} alt="date" info={id} />
             <Partition />
             <PostDetails src={looked} alt="looked" info={id} />
             <Partition />
             <PostDetails src={liked} alt="liked" info={id} />
           </div>
-          <div className="recent-bottom-right">
+          <div className="recent-info-bottom-right">
             <span>{id}</span>
-            <img src={noImg} alt="no-img" />
+            <img
+              src={noImg}
+              alt="no-img"
+              className="recent-info-bottom-right__img"
+            />
           </div>
         </div>
       </div>
