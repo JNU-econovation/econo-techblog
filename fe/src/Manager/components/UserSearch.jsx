@@ -10,8 +10,9 @@ const UserSearch = function () {
   };
   return (
     <div className="user-search">
-      <img src={search} alt="search" />
+      <img src={search} alt="search" className="user-search__img" />
       <input
+        className="user-search__input"
         placeholder="사용자를 검색하시오."
         value={user}
         onChange={onChange}

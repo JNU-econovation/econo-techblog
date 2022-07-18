@@ -61,8 +61,8 @@ const Manager = function () {
   return (
     <div className="manager">
       <Sidebar />
-      <div className="manager-userlist">
-        <h2>전체 회원 관리</h2>
+      <div className="manager__userlist">
+        <h2 className="managet__userlist__title">전체 회원 관리</h2>
         <Table data={userList} />
         <Pagination
           activePage={currentPage}

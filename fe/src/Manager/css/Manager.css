@@ -3,14 +3,14 @@
     flex: 1;
 }
 
-.manager-userlist{
+.manager__userlist{
     flex: 7;
     display: flex;
     flex-direction: column;
     padding-top: 30px;
 }
 
-.manager-userlist h2 {
+.managet__userlist__title {
     font-size: 20px;
     width: 90%;
     margin-left: auto;

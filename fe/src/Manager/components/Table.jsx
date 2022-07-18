@@ -18,7 +18,7 @@ const Table = function ({ data }) {
         <col width="20%" />
         <col width="8%" />
       </colgroup>
-      <thead>
+      <thead className="table__thead">
         <tr>
           {columns.map((column) => (
             <th key={column}>{column}</th>
@@ -27,19 +27,23 @@ const Table = function ({ data }) {
       </thead>
       <tbody>
         {data.map(({ name, email, usertype, year }) => (
-          <tr key={email} className="table-tr">
+          <tr key={email} className="table__tr">
             <td>
-              <div className="table-td-name">
-                <img src={noImg} alt="noImg" />
-                <span>{name}</span>
+              <div className="table__tr__user">
+                <img src={noImg} alt="noImg" className="table__tr__user__img" />
+                <span className="table__tr__user__name">{name}</span>
               </div>
             </td>
             <td>{email}</td>
             <td>{usertype}</td>
             <td>{year}</td>
             <td>
-              <button type="button" className="table-setting-btn">
-                <img src={settings} alt="settings" />
+              <button type="button" className="table__tr__setting-btn">
+                <img
+                  src={settings}
+                  alt="settings"
+                  className="table__tr__setting-btn__img"
+                />
               </button>
             </td>
           </tr>

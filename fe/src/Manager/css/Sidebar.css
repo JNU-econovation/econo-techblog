@@ -4,18 +4,18 @@
     padding: 40px 0px;
 }
 
-.sidebar-box {
+.sidebar__box {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.sidebar p {
+.sidebar__box__title {
     margin: 30px auto 0px auto;
     color: #000;
     opacity: 0.5;
 }
 
-.sidebar-nav {
+.sidebar__box__nav {
     padding: 0px;
 }
