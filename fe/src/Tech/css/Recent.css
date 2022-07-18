@@ -44,6 +44,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 14px;
 }
 
 .recent-bottom-left{
@@ -60,4 +61,8 @@
     height: 30px;
     border-radius: 70%;
     margin-left: 10px;
+}
+
+.recent-bottom-right span {
+    color: #7f7f7f;
 }
