@@ -1,47 +1,67 @@
 scalar Void
 
-input User{
-    id : ID!
-    year : Int!
-    post : [Post!]!
-    userName : String!
-    password : String!
-    userEmail : String!
-    Role : Role!
-    createAt : String!
-    modifiedAt : String!
-}
-
-input Post{
-    Id:ID!
+#input Post{
+#    Id:ID!
+#    userId:Int
+#    content:String
+#    official:Boolean!
+#    title:String!
+#    views:Int!
+#    hearts:Int!
+#    mainCategory: MainCategory
+#}
+type Post{
+    id:ID!
+    userId:Int
     content:String
-    official:Boolean!
     title:String!
-    category:[Category!]!
-    views: Int!
-    like: Int!
-    mainCategory: [MainCategory]!
+    official:Boolean!
+    views:Int!
+    hearts:Int!
+    mainCategory: MainCategory
 }
 
-input Category{
+
+type Heart{
+    Id:ID!
+    userId:Int
+    post:Post
+}
+
+enum Role{
+    ADMIN
+    USER
+    GUEST
+}
+
+enum MainCategory{
+    TECH
+    CULTURE
+    TROUBLE_SHOOTING
+}
+
+type Category{
     Id : ID!
-    Post : Post!
-    categoryName : [String]!
+    Post : Post
+    categoryName :String
 }
 
 input PostCreateRequestDto{
+    userId:Int
     content: String
     title: String
+    mainCategory:MainCategory
     category: String
 }
 
 type PostCreateResponseDto{
-    user: [User!]!
+    userId: Int
     content: String
     title: String
-    mainCategory: MainCategory
-    category: String
-    createdDate : String
+    categoryListByPost: String
+    views: Int
+    likes: Int
+    createdDate: String
 }
 
 input PostUpdateRequestDto{
@@ -51,7 +71,7 @@ input PostUpdateRequestDto{
 }
 
 type PostUpdateResponseDto{
-    user: [User!]!
+    userId: Int
     content: String
     title: String
     category: String
@@ -60,106 +80,60 @@ type PostUpdateResponseDto{
     createdDate : String
     modifiedDate: String
 }
+#input Post{
+#    Id:ID!
+#    userId:Int
+#    content:String
+#    official:Boolean!
+#    title:String!
+#    views:Int!
+#    hearts:Int!
+#    mainCategory: MainCategory
+#}
 
-enum MainCategory {
-    TECH,CULTURE,TROUBLE_SHOOTING
+input HeartRequestDto {
+    id:ID
+    postId : Int
+    userId:Int
 }
 
-type Post{
-    Id:ID!
-    content:String
-    official:Boolean!
-    title:String!
-    category:[Category!]!
-}
+#input Post{
+#    Id:ID!
+#    userId:Int
+#    content:String
+#    official:Boolean!
+#    title:String!
+#    views:Int!
+#    hearts:Int!
+#    mainCategory: MainCategory
+#}
 
-type ConfirmationToken{
-    id : ID!
-    expirationDate:String!
-    expired : Boolean!
-    userId : String!
-    createAt : String!
-    modifiedAt : String!
-}
-
-# Test
-type User{
-    id : ID!
-    year : Int!
-    post : [Post!]!
-    userName : String!
-    password : String!
-    userEmail : String!
-    Role : Role!
-    createAt : String!
-    modifiedAt : String!
-}
-
-enum Role{
-    ADMIN
-    USER
-    GUEST
-}
-
-type Category{
-    Id : ID!
-    user : User!
-    categoryName : [String]!
+# 타입 시스템 정의
+schema {
+#    query: Query
+    mutation: Mutation,
 }
 
 #Root Query
 type Query{
-    #    -----------Post------------------------------
-    findAllPosts(mainCategory : MainCategory!): [Post!]!
-    findPostByPostId(id : ID!) : Post!
+    #    -----------Post------------------------f------
+    findAllPosts(mainCategory : MainCategory): [Post!]!
+    findPostByPostId(id : Int) : Post!
 
-    #    ---------REPLY--------------------
-    findReplyByUserName(userName : String!) : Reply!
-    findReplyByEmail(userEmail : String!) : Reply!
-
-    #    -----------USER------------------------------
-    findUserById(id : ID!) : User!
-    findUserByUserName(userName : String!) : [User]!
-    findUserByUserEmail(userEmail : String!) : User!
-
-    #    -----------Category-------------------------
-    findUserByCategoryName(categoryName : String!) : [User]!
+    #    ---------Comment--------------------
 }
 
 #Root Mutation
 type Mutation{
     #    -----------Post------------------------------
-    createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!
-    deletePost(userId : ID):Boolean
-    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!
-    increaseLikePost(postId : ID): Int!
-    decreaseLikePost(postId : ID): Int!
-
-    #    Reply--------------
-    #    createByReply( : ) : Int!
-    deleteByReplyId(replyId : ID!) : Boolean!
-    #    updateByReply( : ) : Int!
-
-    #    User--------------------------------
-    createUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
-    updateUser(userEmail : String!, password : String!, year : Int!, userName : String!) : User!
-    userLogin(userEmail : String, password : String!) : Boolean!
-    deleteUserById(userId: Int!): Boolean!
-    updateUserRole(userId : Int!, role : Role!): Role!
-    confirmEmail(token : String!) : Void!
-
-    #   Auth-----------------------------------
-
-}
-
-type Reply{
-    Id : ID!
-    user : User!
-    post : Post!
-    content : String!
-    groupNum : Int!
-    depth : Int!
-    depth_order : Int!
-    created_at : String!
-    modified_at : String!
+    createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
+#    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
+#    deletePost(postId : ID):Boolean,
+#    createOfficial(postID: ID): [Post!]!,
+#
+#    #    -----------Heart------------------------------
+#    updateHeartState(heartRequestDto:HeartRequestDto): Int!
+#
+#    #    -----------Comment------------------------------
+#
 }
