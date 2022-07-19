@@ -1,4 +1,11 @@
-.table {
+.userlist__title{
+    font-size: 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.userlist-table {
     width: 90%;
     margin: 0px auto;
     border-radius: 15px;
@@ -7,7 +14,7 @@
     border-collapse: collapse;
 }
 
-.table__thead {
+.userlist-table__thead {
     background-color: #f5f5f5;
     font-size: 13px;
     font-weight: 500;
@@ -15,7 +22,7 @@
     height: 40px;
 }
 
-.table__tr {
+.userlist-table__tr {
     height: 60px;
     font-size: 12px;
     font-weight: 500;
@@ -24,26 +31,26 @@
     border-bottom: solid 1px #f2f2f2;
 }
 
-.table-user__img {
+.userlist-table-user__img {
     width: 30px;
 }
 
-.table-user {
+.userlist-table-user {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.table-user__name{
+.userlist-table-user__name{
     width: 60px;
 }
 
-.table-setting-btn {
+.userlist-setting-btn {
     border: none;
     background-color: inherit;
 }
 
-.table-setting-btn__img {
+.userlist-setting-btn__img {
     margin-top: 6px;
     width: 14px;
 }
