@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
 .my-posts{
     margin-left: 2vw;
 }
@@ -21,3 +30,19 @@
     width: 75vw;
     height: 31vh;
 }
+
+.my-posts-nav__button{
+    appearance: none;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.nav__button--active{
+    font-weight: bold;
+    border-bottom: 7px solid #2269fb;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+}
+
