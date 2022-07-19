@@ -1,4 +1,4 @@
-.find-info-box{
+.find-id-box{
     display: flex;
     margin: auto;
     width: 30%;
@@ -11,6 +11,19 @@
     border-radius: 20px;
 }
 
-.find-info-box-title {
+.find-id-box-title {
     color: #2269fa;
+}
+
+
+.find-id-name__input{
+    display: block;
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+.find-id-cardinal__select{
+    display: block;
+    height: 56px;
+    width: 71%;
 }
