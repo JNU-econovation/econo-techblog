@@ -7,7 +7,7 @@ import looked from '../img/feather_eye.png';
 import liked from '../img/heart.png';
 
 import PostDetails from '../../components/PostDetails';
-import Tags from './Tags';
+import Tags from '../../components/Tags';
 import Partition from '../../components/Partition';
 
 const result = {

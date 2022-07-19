@@ -10,7 +10,7 @@ import liked from '../img/heart.png';
 
 import PostDetails from '../../components/PostDetails';
 import Partition from '../../components/Partition';
-import Tags from './Tags';
+import Tags from '../../components/Tags';
 
 const Recent = function ({ id, title, summary }) {
   return (
@@ -18,7 +18,7 @@ const Recent = function ({ id, title, summary }) {
       <div className="recent__img" />
       <div className="recent-info">
         <div className="recent-info-top">
-          <span className="recent-info-top__span">{title}</span>
+          <span className="recent-info__title">{title}</span>
           <Tags />
         </div>
         <div className="recent-info-middle">
