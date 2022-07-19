@@ -15,7 +15,9 @@ function Profile() {
             <p> 21기 | 일반 회원</p>
           </div>
         </div>
-        <button type="button">내 정보 수정</button>
+        <button className="profile-edit__button" type="button">
+          내 정보 수정
+        </button>
       </div>
       <div className="profile-stat__container">
         <div className="profile-stat-like__container">

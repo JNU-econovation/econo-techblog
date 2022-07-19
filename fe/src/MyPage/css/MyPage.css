@@ -1,4 +1,9 @@
+.my-page{
+    height: 92vh;
+}
+
 .my-page h2{
+    margin: 3vh 0 2vh 3vw;
     color: white;
 }
 
