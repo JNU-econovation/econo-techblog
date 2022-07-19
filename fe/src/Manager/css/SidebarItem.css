@@ -1,0 +1,38 @@
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 17px 20px;
+    margin-top: 5px;
+}
+
+.sidebar-item__name {
+    font-size: 15px;
+    font-weight: 500;
+}
+.sidebar-item-right {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-item-right__img {
+    width: 16px;
+    margin-right: 3px;
+}
+
+.sidebar-item-right__num {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+    opacity: 0.5;
+}
+
+.sidebar-item--selected {
+    background-color: #2269fa;
+}
+
+.sidebar-item--selected > .sidebar-item__name {
+    color: #fff;
+}

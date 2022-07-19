@@ -1,0 +1,18 @@
+.post {
+   display: flex;
+   flex-direction: column;
+}
+
+.post-middle {
+    width: 70%;
+    margin-top: 70px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post-partition {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px #bbb;
+}

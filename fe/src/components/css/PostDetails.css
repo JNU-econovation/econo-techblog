@@ -1,0 +1,12 @@
+.post-details {
+    display: flex;
+    align-items: center;
+    color: #7f7f7f;
+    font-size: 15px;
+}
+
+.post-details__img {
+    height: 12px;
+    margin: 0px 10px;
+}
+

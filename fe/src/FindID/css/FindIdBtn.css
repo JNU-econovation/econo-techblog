@@ -1,0 +1,12 @@
+.find-id-btn{
+    display: block;
+    background-color:#2269fa;
+    color: white;
+    border: 1px solid#2269fa;
+    margin: 10px auto;
+    width: 70%;
+    height: 56px;
+    margin-bottom: 60px;
+    border-radius: 40px;
+    cursor: pointer;
+}

@@ -1,0 +1,12 @@
+.cardinal-select-box{
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    color: rgba(1, 1, 1, 0.35);
+    border-radius: 40px;
+}

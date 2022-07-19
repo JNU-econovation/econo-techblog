@@ -1,0 +1,12 @@
+.tags {
+    margin: 25px 0px;
+}
+
+.tags__tag {
+    font-size: 12px;
+    border-radius: 13px;
+    color: #fff;
+    background-color: #96b3ed;
+    padding: 4px 10px 4px 10px;
+    margin-right: 10px;
+}
