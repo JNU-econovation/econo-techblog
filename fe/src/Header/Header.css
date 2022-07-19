@@ -13,15 +13,24 @@
 }
 
 .header-nav-button-box{
+  display: flex;
+  align-items: center;
+  height: 100%;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  color: #1c4961;
 }
 
 .header-right-box{
   display: flex;
   align-items: center;
   padding-left: auto;
+  padding-right: 50px;
+}
+
+.header-logo{
+  height: 100%;
 }
 
