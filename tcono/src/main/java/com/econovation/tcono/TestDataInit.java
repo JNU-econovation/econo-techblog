@@ -27,6 +27,7 @@ public class TestDataInit {
                 .password("12a3f2awkcnwi4!")
                 .year(23L)
                 .userName("이서현")
+                .pinCode("1234")
                 .build();
         userRepository.save(findUser);
     }

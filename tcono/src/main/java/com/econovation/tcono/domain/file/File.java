@@ -4,6 +4,7 @@ import com.econovation.tcono.domain.BaseTimeEntity;
 import com.econovation.tcono.domain.post.Post;
 import com.econovation.tcono.domain.user.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -29,6 +30,7 @@ import javax.persistence.OneToOne;
 @DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class File extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,13 +43,12 @@ public class File extends BaseTimeEntity{
     @JoinColumn(name="POST_ID")
     private Post post;
 
-    private String filePath;
+    private String storeFileName;
 
-    private int fileSize;
+    private String uploadFileName;
 
-    @JoinColumn(name="USER_ID")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private User user;
+    @Column(updatable = false)
+    private Long userId;
 
     @ColumnDefault("false")
     private boolean isDeleted;
