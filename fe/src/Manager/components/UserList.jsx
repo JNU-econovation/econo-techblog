@@ -9,7 +9,57 @@ import '../../components/css/Pagination.css';
 import noImg from '../img/no_img.png';
 import settings from '../img/settings.png';
 
-const UserList = function ({ data }) {
+const UserList = function () {
+  const data = [
+    {
+      name: '이윤성',
+      email: '181111@jnu.ac.kr',
+      usertype: '관리자',
+      year: '21기',
+    },
+    {
+      name: '이윤성',
+      email: '181111@jnu.ac.kr',
+      usertype: '관리자',
+      year: '21기',
+    },
+    {
+      name: '이윤성',
+      email: '181111@jnu.ac.kr',
+      usertype: '관리자',
+      year: '21기',
+    },
+    {
+      name: '이윤성',
+      email: '181111@jnu.ac.kr',
+      usertype: '관리자',
+      year: '21기',
+    },
+    {
+      name: '이윤성',
+      email: '181111@jnu.ac.kr',
+      usertype: '관리자',
+      year: '21기',
+    },
+    {
+      name: '이윤성',
+      email: '181111@jnu.ac.kr',
+      usertype: '관리자',
+      year: '21기',
+    },
+    {
+      name: '이윤성',
+      email: '181111@jnu.ac.kr',
+      usertype: '관리자',
+      year: '21기',
+    },
+    {
+      name: '이윤성',
+      email: '181111@jnu.ac.kr',
+      usertype: '관리자',
+      year: '21기',
+    },
+  ];
   const columns = ['이름', '이메일', '사용자 타입', '기수', '설정'];
   const [currentPage, setCurrentPage] = useState(1);
   const onClick = (e) => {
@@ -77,10 +127,6 @@ const UserList = function ({ data }) {
       />
     </div>
   );
-};
-
-UserList.propTypes = {
-  data: PropTypes.array.isRequired,
 };
 
 export default UserList;
