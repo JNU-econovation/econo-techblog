@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../css/Tags.css';
+import './css/Tags.css';
 
 const result = {
   tags: ['CSS', 'HTML'],

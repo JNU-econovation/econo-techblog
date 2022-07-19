@@ -1,8 +1,4 @@
-.tags {
-    margin: 25px 0px;
-}
-
-.tags__tag {
+.tag {
     font-size: 12px;
     border-radius: 13px;
     color: #fff;
