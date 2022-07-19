@@ -14,17 +14,17 @@ public class CommentQueryResolver implements GraphQLQueryResolver {
     private CommentRepository commentRepository;
     private UserRepository userRepository;
     private PostRepository postRepository;
-
-    @Transactional
-    public List(int postId) {
-        Post post = postRepository.findById()
-                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-
-        //TODO
-        // optional로 받아야 할지 고민해보기
-        List<Comment> commentList = commentRepository.findByPostId(postId);
-        return CommentCreateResponseDto;
-    }
+//
+//    @Transactional
+//    public List(int postId) {
+//        Post post = postRepository.findById(postId)
+//                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
+//
+//        //TODO
+//        // optional로 받아야 할지 고민해보기
+//        List<Comment> commentList = commentRepository.findByPostId(postId);
+//        return CommentCreateResponseDto;
+//    }
 
 
 }

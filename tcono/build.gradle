@@ -27,6 +27,10 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
 
+//	file upload and download
+	implementation 'commons-io:commons-io:2.8.0'
+	implementation 'commons-fileupload:commons-fileupload:1.4'
+
 //	SpringBoot Mail Setting
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 

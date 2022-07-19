@@ -40,10 +40,8 @@ public class UserService {
      */
     @Transactional
     public User findUserById(Long id) {
-        User findUser = userRepository.findById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
-        log.info("이름 : " + findUser.getUserName() + "\n기수 : " + findUser.getYear() + "\n이메일 : " + findUser.getUserEmail() + "비밀번호 : " + findUser.getPassword());
-        return findUser;
     }
 
     /**
@@ -55,16 +53,15 @@ public class UserService {
     @Transactional
     public List<User> findUserByUserName(String userName) {
         List<User> users = userRepository.findByUserName(userName);
-//        List<UserResponseDto> findUser = users.stream().map(user -> new UserResponseDto.builder()
-//                .year(user.getYear())
-//                .userName(user.getUserName())
-//                .password(user.getPassword())
-//                .userEmail(user.getUserEmail())
-//                .build()).collect(Collectors.toList());
         if(users.isEmpty()){
             throw new IllegalArgumentException(NOT_FOUND_USER_MESSAGE);
         }
         return users;
+    }
+
+    public User findUserByPinCode(String pinCode){
+        return userRepository.findUserByPinCode(pinCode)
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
     }
 
     @Transactional

@@ -60,6 +60,10 @@ public class User extends BaseTimeEntity {
     private Role role;
 
     @Column(nullable = false)
+    @NotNull
+    private String pinCode;
+
+    @Column(nullable = false)
     @ColumnDefault("false")
     private boolean emailVerified;
 

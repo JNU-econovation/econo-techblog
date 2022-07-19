@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface HeartRepository extends JpaRepository<Heart, Long> {
     /**
      * 게시물(post)에 특정 회원이 회원(user)이 좋아요(heart)를 눌렀는지?
@@ -16,7 +18,7 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
      * @Param post
      * @return Optional<Post>
      */
-    @Query("select h from Heart h where h.userId=:userId AND h.post=:post")
+    @Query("select h from Heart h where h.user.id=:userId AND h.post=:post")
     Optional<Heart>findHeartByUserIdAndUserId(@Param("userId") Long userId, @Param("post") Post post);
 
     /**
@@ -25,7 +27,7 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
      * @param post
      */
     @Modifying
-    @Query("delete from Heart h where h.userId=:userId AND h.post=:post")
+    @Query("delete from Heart h where h.user.id=:userId AND h.post=:post")
     Optional<Heart> deleteHeartByUserIdAndPost(@Param("userId") Long userId,@Param("post") Post post);
 
 }

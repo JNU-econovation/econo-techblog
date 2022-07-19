@@ -87,16 +87,16 @@ input HeartRequestDto {
 
 # 타입 시스템 정의
 schema {
-#    query: Query
+    #    query: Query
     mutation: Mutation,
 }
 
 #Root Query
 type Query{
     #    -----------Post------------------------f------
-    findAllPosts(mainCategory : MainCategory): [Post!]!
+    findAllPosts(mainCategory : MainCategory, page : Int): [Post!]!
     findPostByPostId(id : Int) : Post!
-
+    search(keyword : String , page : Int) : [Post]!
     #    ---------Comment--------------------
 }
 
@@ -104,13 +104,13 @@ type Query{
 type Mutation{
     #    -----------Post------------------------------
     createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
-#    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
-#    deletePost(postId : ID):Boolean,
-#    createOfficial(postID: ID): [Post!]!,
-#
-#    #    -----------Heart------------------------------
-#    updateHeartState(heartRequestDto:HeartRequestDto): Int!
-#
-#    #    -----------Comment------------------------------
-#
+    #    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
+    #    deletePost(postId : ID):Boolean,
+    #    createOfficial(postID: ID): [Post!]!,
+    #
+    #    #    -----------Heart------------------------------
+    #    updateHeartState(heartRequestDto:HeartRequestDto): Int!
+    #
+    #    #    -----------Comment------------------------------
+    #
 }

@@ -31,11 +31,15 @@ public class UserCreateRequestDto {
     @NotEmpty
     private String userName;
 
+    @NotEmpty
+    private String pinCode;
+
     public User toEntity(){
         return User.builder()
                 .userEmail(userEmail)
                 .password(password)
                 .year(year)
+                .pinCode(pinCode)
                 .userName(userName).build();
     }
 

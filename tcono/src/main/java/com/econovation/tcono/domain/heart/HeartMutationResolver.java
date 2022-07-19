@@ -37,7 +37,7 @@ public class HeartMutationResolver implements GraphQLMutationResolver {
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
 
         //해당 User가 heart를 눌렀는지 조사
-        Optional<Heart> findHeart = heartRepository.findHeartByUserAndPost(user, post);
+        Optional<Heart> findHeart = heartRepository.findHeartByUserIdAndUserId(user.getId(), post);
 
         return findHeart.isPresent();
     }
@@ -49,7 +49,7 @@ public class HeartMutationResolver implements GraphQLMutationResolver {
 
         //좋아요 삭제
         if (isHeart) {
-            heartRepository.deleteHeartByUserAndPost(heartRequestDto.getUser(),heartRequestDto.getPost());
+            heartRepository.deleteHeartByUserIdAndPost(heartRequestDto.getUser().getId(),heartRequestDto.getPost());
             return post.decreaseHearts();
         } else { // 좋아요 추가
             heartRepository.save(heartRequestDto.toEntity());

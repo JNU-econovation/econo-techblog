@@ -15,19 +15,19 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     private static final String NOT_FOUND_POST_MESSAGE ="해당 페이지는 존재하지 않습니다.";
     private UserRepository userRepository;
     private PostRepository postRepository;
-    @Transactional
-    public CommentCreateResponseDto createCommentsByPostId(CommentCreateRequestDto commentCreateRequestDto) {
-
-        User user= userRepository.findByuserEmail(commentCreateRequestDto.getUserEmail())
-                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
-
-        Post post = postRepository.findById(commentCreateRequestDto.getPostId())
-                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-
-        if(commentCreateRequestDto.getDepth()==0){
-
-        }
-    }
+//    @Transactional
+//    public CommentCreateResponseDto createCommentsByPostId(CommentCreateRequestDto commentCreateRequestDto) {
+//
+//        User user= userRepository.findById(commentCreateRequestDto.getUserId())
+//                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
+//
+//        Post post = postRepository.findById(commentCreateRequestDto.getPostId())
+//                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
+//
+//        if(commentCreateRequestDto.getDepth()==0){
+//
+//        }
+//    }
 
     /*
     update : content만 수정해서 save
