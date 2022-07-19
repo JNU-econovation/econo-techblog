@@ -22,7 +22,8 @@
     background-color: #2269fb;
     color: #fff;
     font-size: 12px;
-    padding: 5px 15px;
+    font-weight: 500;
+    padding: 8px 15px;
 }
 
 .tech-write__img {

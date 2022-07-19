@@ -23,9 +23,10 @@
     align-items: center;
 }
 
-.recent-info-top__span {
+.recent-info__title {
     font-weight: bold;
     font-size: 18px;
+    margin-right: 20px;
 }
 
 .recent-info-middle {
