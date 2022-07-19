@@ -1,0 +1,9 @@
+.my-posts h3{
+    color: white;
+}
+
+.my-posts__container{
+    background-color: white;
+    border: 2px solid #f1f1f1;
+    border-radius: 15px;
+}
