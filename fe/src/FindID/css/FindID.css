@@ -1,5 +1,6 @@
-.find-info{
+.find-id{
     display: flex;
     flex: 1;
+    height: 94vh;
     background-color: #f2f2f2;
 }
