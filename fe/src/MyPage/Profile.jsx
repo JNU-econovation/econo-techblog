@@ -5,7 +5,6 @@ import './css/Profile.css';
 function Profile() {
   return (
     <div className="profile">
-      <h2>내 정보</h2>
       <h3>프로필</h3>
       <div className="profile__container">
         <div className="profile-content__container">

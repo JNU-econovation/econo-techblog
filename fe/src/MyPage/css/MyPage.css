@@ -1,13 +1,17 @@
-.my-page{
+.my-page h2{
+    color: white;
+}
+
+.my-page__content{
     display: flex;
 }
 
 .my-page-wallpaper-color{
     position: absolute;
+    top:0;
     z-index: -1;
-    height: 30vh;
+    height: 40vh;
     width: 100vw;
     background-color: #2269fb;
-    
 }
 
