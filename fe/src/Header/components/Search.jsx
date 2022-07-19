@@ -1,21 +1,47 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 
-import SearchInput from './SearchInput';
 import searchButton from '../img/search_button.png';
+import './Search.css';
 
 function Search() {
-  const [isSearchOn, setIsSearchOn] = useState(false);
+  const [isSearchBarOn, setIsSearchBarOn] = useState(false);
   const onClick = () => {
-    setIsSearchOn(!isSearchOn);
+    setIsSearchBarOn(() => !isSearchBarOn);
   };
 
   return (
-    <>
-      {isSearchOn && <SearchInput />}
-      <button type="button" onClick={onClick}>
-        <img alt="search-button" src={searchButton} />
-      </button>
-    </>
+    <div>
+      {isSearchBarOn ? (
+        <div className="search">
+          <input
+            className="search-input"
+            placeholder="검색어를 입력하세요..."
+          />
+          <button className="search-button" type="button" onClick={onClick}>
+            <img
+              className="search-button-img"
+              alt="search-button"
+              src={searchButton}
+            />
+          </button>
+        </div>
+      ) : (
+        <div className="search">
+          <button
+            className="search__button--inactive"
+            type="button"
+            onClick={onClick}
+          >
+            <img
+              className="search-button__img--inactive"
+              alt="search-button"
+              src={searchButton}
+            />
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 

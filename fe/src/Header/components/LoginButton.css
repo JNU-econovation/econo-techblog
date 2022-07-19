@@ -2,11 +2,14 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    height: 26px;
+    text-align: center;
+    width: 85px;
     margin: 0;
     color : white;
-    background-color: rgb(233, 135, 23);
-    border: 1px rgb(233, 135, 23) solid;
-    border-radius: 10px;
+    background-color: #ff9100;
+    border: 1px #ff9100 solid;
+    border-radius: 17px;
 }
 
 .login-button:hover{
