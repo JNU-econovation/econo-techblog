@@ -62,7 +62,7 @@ const Manager = function () {
     <div className="manager">
       <Sidebar />
       <div className="manager-userlist">
-        <h2>전체 회원 관리</h2>
+        <h2 className="manager-userlist__title">전체 회원 관리</h2>
         <Table data={userList} />
         <Pagination
           activePage={currentPage}

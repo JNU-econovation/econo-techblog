@@ -10,12 +10,12 @@
     margin-right: auto;
 }
 
-.sidebar p {
+.sidebar-box__title {
     margin: 30px auto 0px auto;
     color: #000;
     opacity: 0.5;
 }
 
-.sidebar-nav {
+.sidebar-box-nav {
     padding: 0px;
 }

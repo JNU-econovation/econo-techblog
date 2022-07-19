@@ -54,7 +54,7 @@ const Sidebar = function () {
     <div className="sidebar">
       <div className="sidebar-box">
         <UserSearch />
-        <p>Join</p>
+        <p className="sidebar-box__title">Join</p>
         <SidebarItem
           key={navArr[0].id}
           id={navArr[0].id}
@@ -63,8 +63,8 @@ const Sidebar = function () {
           isSelected={navArr[0].isSelected}
           onClick={onClick}
         />
-        <p>User</p>
-        <div className="sidebar-nav">
+        <p className="sidebar-box__title">User</p>
+        <div className="sidebar-box-nav">
           {navArr.slice(1).map((elem) => (
             <SidebarItem
               key={elem.id}

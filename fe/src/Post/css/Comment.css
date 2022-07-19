@@ -3,7 +3,7 @@
     margin: 20px 0px;
 }
 
-.comment img {
+.comment__img {
     width: 45px;
     height: 45px;
     border-radius: 70%;
@@ -18,11 +18,11 @@
     margin-left: 10px;
 }
 
-.commnet-writer {
+.comment-info__writer {
     font-size: 15px;
 }
 
-.comment-desc {
+.comment-info__desc {
     font-size: 13px;
     color: #999;
     margin-top: 10px;

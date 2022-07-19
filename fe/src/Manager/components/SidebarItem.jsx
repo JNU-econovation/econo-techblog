@@ -10,13 +10,15 @@ import people from '../img/people.png';
 const SidebarItem = function ({ id, name, num, isSelected, onClick }) {
   return (
     <div
-      className={isSelected ? 'sidebar-item selected' : 'sidebar-item'}
+      className={
+        isSelected ? 'sidebar-item sidebar-item--selected' : 'sidebar-item'
+      }
       onClick={() => onClick(id)}
     >
-      <span>{name}</span>
+      <span className="sidebar-item__name">{name}</span>
       <div className="sidebar-item-right">
-        <img src={people} alt="person" />
-        <span>{num}</span>
+        <img src={people} alt="person" className="sidebar-item-right__img" />
+        <span className="sidebar-item-right__num">{num}</span>
       </div>
     </div>
   );

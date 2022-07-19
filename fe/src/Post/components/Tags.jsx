@@ -10,7 +10,7 @@ const Tags = function () {
   return (
     <div className="tags">
       {result.tags.map((tag) => (
-        <span className="tag">{`#${tag}`}</span>
+        <span className="tags__tag">{`#${tag}`}</span>
       ))}
     </div>
   );

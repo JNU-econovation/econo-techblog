@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Pagination from 'react-js-pagination';
 import './css/Tech.css';
 import '../components/css/Pagination.css';
+import write from './img/write.png';
 
 import Banner from './components/Banner';
 import Official from './components/Official';
@@ -32,13 +33,19 @@ const Tech = function () {
   return (
     <div className="tech">
       <Banner />
-      <div className="posts">
-        <div className="official-posts">
-          <p>Official</p>
+      <div className="tech__posts">
+        <div className="tech-official">
+          <div className="tech-official-top">
+            <p className="tech__title">Official</p>
+            <button type="button" className="tech-write_button">
+              <img src={write} alt="write" className="tech-write__img" />
+              <span>글쓰기</span>
+            </button>
+          </div>
           <Official />
         </div>
-        <div className="recent-posts">
-          <p>Recent posts</p>
+        <div className="tech-recent">
+          <p className="tech__title">Recent posts</p>
           {currentPosts(movies).map((item) => (
             <Recent
               key={item.id}

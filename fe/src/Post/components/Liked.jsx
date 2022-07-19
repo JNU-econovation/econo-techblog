@@ -12,14 +12,14 @@ const Liked = function () {
     <div className="liked">
       <button
         onClick={onClick}
-        className={liked ? 'liked-btn on' : 'liked-btn'}
+        className={liked ? 'liked__button liked__button--on' : 'liked__button'}
         type="button"
       >
-        <span>좋아요</span>
+        <span className="liked__span">좋아요</span>
         {liked ? (
-          <img src={clickheart} alt="liked" />
+          <img src={clickheart} alt="liked" className="liked__img" />
         ) : (
-          <img src={heart} alt="liked" />
+          <img src={heart} alt="liked" className="liked__img" />
         )}
       </button>
     </div>

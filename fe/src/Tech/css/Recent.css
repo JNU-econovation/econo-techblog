@@ -6,7 +6,7 @@
     height: 240px;
 }
 
-.recent-img {
+.recent__img {
     width: 150px;
     height: 150px;
     border-radius: 15px;
@@ -18,17 +18,17 @@
     padding: 30px 40px;
 }
 
-.recent-top {
+.recent-info-top {
     display: flex;
     align-items: center;
 }
 
-.recent-title {
+.recent-info-top__span {
     font-weight: bold;
     font-size: 18px;
 }
 
-.recent-middle {
+.recent-info-middle {
     margin: 20px 0px;
     font-size: 14px;
     line-height: 1.6;
@@ -40,22 +40,22 @@
     -webkit-box-orient: vertical;
 }
 
-.recent-bottom {
+.recent-info-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.recent-bottom-left{
+.recent-info-bottom-left{
     display: flex;
 }
 
-.recent-bottom-right {
+.recent-info-bottom-right {
     display: flex;
     align-items: center;
 }
 
-.recent-bottom-right img{
+.recent-info-bottom-right__img{
     width: 30px;
     height: 30px;
     border-radius: 70%;

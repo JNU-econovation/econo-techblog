@@ -8,32 +8,31 @@
     margin-top: 5px;
 }
 
-.sidebar-item span:first-child {
+.sidebar-item__name {
     font-size: 15px;
     font-weight: 500;
 }
+.sidebar-item-right {
+    display: flex;
+    align-items: center;
+}
 
-.sidebar-item span:last-child {
+.sidebar-item-right__img {
+    width: 16px;
+    margin-right: 3px;
+}
+
+.sidebar-item-right__num {
     font-size: 14px;
     font-weight: 500;
     color: #000;
     opacity: 0.5;
 }
 
-.sidebar-item-right {
-    display: flex;
-    align-items: center;
-}
-
-.sidebar-item-right img {
-    width: 16px;
-    margin-right: 3px;
-}
-
-.selected {
+.sidebar-item--selected {
     background-color: #2269fa;
 }
 
-.selected span {
+.sidebar-item--selected > .sidebar-item__name {
     color: #fff;
 }

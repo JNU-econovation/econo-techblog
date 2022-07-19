@@ -3,14 +3,14 @@
     margin: 20px 0px;
 }
 
-.comment-box img {
+.comment-box__img {
     width: 45px;
     height: 45px;
     border-radius: 70%;
     margin-right: 5px;
 }
 
-.comment-box-info {
+.comment-box__info {
     flex: 8;
     display: flex;
     flex-direction: column;
@@ -18,11 +18,11 @@
     margin-left: 10px;
 }
 
-.comment-box-writer {
+.comment-box__writer {
     font-size: 15px;
 }
 
-.comment-content {
+.comment-box__content {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -32,18 +32,18 @@
     margin-top: 10px;
 }
 
-.comment-content textarea {
+.comment-box__input {
     width: 100%;
     height: 60px;
     border: none;
     resize: none;
 }
 
-.comment-content textarea:focus {
+.comment-box__input:focus {
     outline: none;
 }
 
-.comment-content button {
+.comment-box__button {
     margin-top: 20px;
     border-radius: 39px;
     border: solid 1px #4e87fb;
@@ -53,7 +53,7 @@
     padding: 4px 17px;
 }
 
-.comment-content button:disabled {
+.comment-box__button:disabled {
     border: solid 1px #bbb;
     color: #bbb;
 }
