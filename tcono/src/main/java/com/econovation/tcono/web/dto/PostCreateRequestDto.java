@@ -7,29 +7,31 @@ import com.econovation.tcono.domain.post.Category;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
 @Getter
+@NoArgsConstructor
 public class PostCreateRequestDto {
 
-    private User user;
+    private Long userId;
     private String content;
     private String title;
     private MainCategory mainCategory;
-    private String category;
+    private String categorySplitByComma;//해시태그
 
     @Builder
-    public PostCreateRequestDto(User user, String content, String title, MainCategory mainCategory, String category) {
-        this.user=user;
-        this.content = content;
-        this.title = title;
-        this.mainCategory = mainCategory;
-        this.category = category;
+    public PostCreateRequestDto(Long userId, String content, String title, MainCategory mainCategory, String categorySplitByComma) {
+        this.userId=userId;
+        this.content=content;
+        this.title=title;
+        this.mainCategory=mainCategory;
+        this.categorySplitByComma=categorySplitByComma;//request할 때 ,로 구분됨
     }
 
-    public Post toPostEntity(User user) {
+    public Post toPostEntity() {
         return Post.builder()
-                .user(user)
+                .userId(userId)
                 .content(content)
                 .title(title)
                 .mainCategory(mainCategory)
