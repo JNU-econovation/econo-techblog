@@ -10,10 +10,10 @@ function Header() {
     <header className="header">
       <img className="header-logo" src={testLogo} alt="econovation logo" />
       <ul className="header-nav-button-box">
-        <NavItem navName="Home" />
-        <NavItem navName="Tech" />
-        <NavItem navName="Culture" />
-        <NavItem navName="Trouble Shooting" />
+        <NavItem navName="Home" link="/" />
+        <NavItem navName="Tech" link="/tech" />
+        <NavItem navName="Culture" link="/culture" />
+        <NavItem navName="Trouble Shooting" link="/troubleshooting" />
       </ul>
       <div className="header-right-box">
         <Search />
