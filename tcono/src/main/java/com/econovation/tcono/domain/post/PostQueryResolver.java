@@ -1,5 +1,6 @@
 package com.econovation.tcono.domain.post;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostQueryResolver implements GraphQLQueryResolver{
     private static final String NOT_FOUND_POST_MESSAGE = "해당 페이지가 없습니다.";
-
+    @Autowired
     private final PostRepository postRepository;
 
     /**
@@ -48,6 +49,7 @@ public class PostQueryResolver implements GraphQLQueryResolver{
     public int increaseViews(Post post) {
         postRepository.updateViews(post.getId());
         return post.getViews();
+    }
         
     /**
      * @param : string Keyword
