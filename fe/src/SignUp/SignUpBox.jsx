@@ -3,28 +3,29 @@ import CardinalSelectBox from '../components/CardinalSelectBox';
 
 import InputElement from '../components/InputElement';
 import SignUpBtn from './components/SignUpBtn';
-import './css/SignUpBox.css';
 import EmailStatus from './EmailStatus';
+import { isEmptyStatus, isSamePasswd } from './util/VerifyPassword';
+import './css/SignUpBox.css';
 
 function SignUpBox() {
   const [isAgree, setIsAgree] = useState(false);
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [passwd, setPasswd] = useState('');
   const [confirmPasswd, setconfirmPasswd] = useState('');
   const [name, setName] = useState('');
   const [passwdStatus, setPasswdStatus] = useState('');
 
   useEffect(() => {
-    if (password === '' && confirmPasswd === '') {
+    if (isEmptyStatus(passwd, confirmPasswd)) {
       setPasswdStatus('');
-    } else if (password === confirmPasswd) {
+    } else if (isSamePasswd(passwd, confirmPasswd)) {
       setPasswdStatus('비밀번호가 일치합니다.');
     } else {
       setPasswdStatus('비밀번호가 일치하지 않습니다.');
     }
-  }, [password, confirmPasswd]);
+  }, [passwd, confirmPasswd]);
 
-  const onChange = (e) => {
+  const onCheckHandler = (e) => {
     setIsAgree(() => e.target.checked);
   };
 
@@ -41,8 +42,8 @@ function SignUpBox() {
       <InputElement
         placeHolder="비밀번호"
         classNames="sign-up-box-password__input"
-        value={password}
-        setValue={setPassword}
+        value={passwd}
+        setValue={setPasswd}
         type="password"
       />
       <InputElement
@@ -61,7 +62,7 @@ function SignUpBox() {
       />
       <CardinalSelectBox classNames="sign-up-box-cardinal__select" />
       <div className="sign-up-box--agree__container">
-        <input type="checkbox" checked={isAgree} onChange={onChange} />
+        <input type="checkbox" checked={isAgree} onChange={onCheckHandler} />
         <span>이용약관 및 개인정보 처리방침에 동의합니다.</span>
       </div>
       <SignUpBtn />
