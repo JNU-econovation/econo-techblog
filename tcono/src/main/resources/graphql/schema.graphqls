@@ -15,6 +15,7 @@ type Heart{
     Id:ID!
     userId:Int
     post:Post
+    isHeart:Boolean
 }
 
 enum Role{
@@ -24,6 +25,7 @@ enum Role{
 }
 
 enum MainCategory{
+    TOTAL
     TECH
     CULTURE
     TROUBLE_SHOOTING
@@ -68,16 +70,6 @@ type PostUpdateResponseDto{
     createdDate : String
     modifiedDate: String
 }
-#input Post{
-#    Id:ID!
-#    userId:Int
-#    content:String
-#    official:Boolean!
-#    title:String!
-#    views:Int!
-#    hearts:Int!
-#    mainCategory: MainCategory
-#}
 
 input HeartRequestDto {
     id:ID
@@ -87,7 +79,7 @@ input HeartRequestDto {
 
 # 타입 시스템 정의
 schema {
-    #    query: Query
+    query: Query
     mutation: Mutation,
 }
 
@@ -104,12 +96,12 @@ type Query{
 type Mutation{
     #    -----------Post------------------------------
     createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
-    #    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
-    #    deletePost(postId : ID):Boolean,
-    #    createOfficial(postID: ID): [Post!]!,
+    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
+    deletePost(postId : ID):Boolean,
+    createOfficial(postID: ID): [Post!]!,
     #
     #    #    -----------Heart------------------------------
-    #    updateHeartState(heartRequestDto:HeartRequestDto): Int!
+    updateHeartState(heartRequestDto:HeartRequestDto): Int!
     #
     #    #    -----------Comment------------------------------
     #
