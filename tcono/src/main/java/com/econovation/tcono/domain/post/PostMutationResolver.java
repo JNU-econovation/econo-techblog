@@ -33,15 +33,15 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      */
     @Transactional
     public PostCreateResponseDto createPost(PostCreateRequestDto postCreateRequestDto) {
-        User user = userRepository.findById(postCreateRequestDto.getUser().getId())
+        User user = userRepository.findById(postCreateRequestDto.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
-        Post post = postRepository.save(postCreateRequestDto.toPostEntity(user));
+        Post post = postRepository.save(postCreateRequestDto.toPostEntity());
 
         //category entity 생성 후 save
-        categoryListToEntity(postCreateRequestDto.getCategory())
+        categoryListToEntity(postCreateRequestDto.getCategorySplitByComma())
                 .forEach(x -> categoryRepository.save(postCreateRequestDto.toCategoryEntity(post, x)));
 
-        List<Category> categoryListByPost = categoryRepository.findByPost(post);
+        List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
         return new PostCreateResponseDto(post, categoryListByPost);
     }
 
@@ -60,7 +60,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
         categoryListToEntity(postUpdateRequestDto.getCategory())
                 .forEach(x -> categoryRepository.save(postUpdateRequestDto.toCategoryEntity(post, x)));
 
-        List<Category> categoryListByPost = categoryRepository.findByPost(post);
+        List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
         return new PostUpdateResponseDto(post, categoryListByPost);
     }
 
@@ -94,7 +94,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      *
      * @param postId
      * @return boolean
-     */git
+     */
     @Transactional
     public List<Post> createOfficial(Long postId) {
         List<Post> post = postRepository.findAll().stream()

@@ -1,6 +1,8 @@
 package com.econovation.tcono.domain.user;
 
+
 import com.econovation.tcono.domain.BaseTimeEntity;
+import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,14 +18,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="User")
 @DynamicInsert
 public class User extends BaseTimeEntity {
 
@@ -34,6 +35,7 @@ public class User extends BaseTimeEntity {
 
     @Column(nullable = false)
     @Range(min =1, max = 50)
+    @NotNull
     private Long year;
 
 //    @OneToMany(cascade = CascadeType.ALL)
@@ -41,28 +43,41 @@ public class User extends BaseTimeEntity {
 //    private Post post;
 
     @Column(nullable = false)
+    @NotNull
     private String userName;
 
     @Column(nullable = false)
+    @NotNull
     private String password;
 
     @Column(nullable = false)
+    @NotNull
     private String userEmail;
 
     @Enumerated(EnumType.STRING)
+    @ColumnDefault("'USER'")
     @Column(nullable = false)
-    @ColumnDefault("'ROLE_GUEST'")
     private Role role;
 
     @Column(nullable = false)
-    @ColumnDefault("'false'")
+    @NotNull
+    private String pinCode;
+
+    @Column(nullable = false)
+    @ColumnDefault("false")
     private boolean emailVerified;
 
     /**
      * 토큰 사용 만료
      */
-    public boolean emailVerifiedSuccess(){
+    public void emailVerifiedSuccess(){
         emailVerified = true;
-        return true;
+        role = Role.USER;
+    }
+
+    public void update(UserUpdateRequestDto userUpdateRequestDto){
+        this.userEmail = userUpdateRequestDto.toEntity().getUserEmail();
+        this.userName = userUpdateRequestDto.toEntity().getUserName();
+        this.year = userUpdateRequestDto.toEntity().getYear();
     }
 }

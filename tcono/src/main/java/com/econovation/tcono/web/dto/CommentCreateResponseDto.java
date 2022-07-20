@@ -13,7 +13,7 @@ public class CommentCreateResponseDto {
     private int depth;
     private int group;
 
-    private String createdDate=
+    private String createdDate;
 
     @Builder
     public void CommentCreateRequestDto(Long userId, Long postId, String content, int depth, int group){

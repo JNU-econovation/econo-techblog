@@ -1,6 +1,6 @@
 package com.econovation.tcono.Interceptor;
 
-import com.econovation.tcono.web.controller.SessionConst;
+import com.econovation.tcono.web.SessionConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -20,9 +20,9 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
         HttpSession session = request.getSession();
 
         if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
-            log.info("미인증 사용자 요청");
+            log.info("LoginCheckInterceptor/ Session :", session);
             //로그인으로 redirect
-            response.sendRedirect("/login?redirectURL=" + requestURI);
+//            response.sendRedirect("/api/login?redirectURL=" + requestURI);
             return false;
         }
         return true;
