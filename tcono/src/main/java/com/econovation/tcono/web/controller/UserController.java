@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,7 @@ public class UserController {
     public User findUserBypinCode(@PathVariable String pinCode) { return userService.findUserByPinCode(pinCode);}
 
     @GetMapping("/api/usernames/{userName}")
-    public String findUserByUserName(@PathVariable String userName) {
+    public String findUserByUserName(@PathVariable String userName){
         List<User> findUser = userService.findUserByUserName(userName);
         return userName;
     }
@@ -49,6 +50,9 @@ public class UserController {
     public User findEmail(@Valid @ModelAttribute UserFindDto userFindDto){
         return userService.findUserByYearAndUserName(userFindDto);
     }
+
+    @GetMapping("/api/user/email/{userEmail}")
+    public User findUserByEmail(@PathVariable String userEmail) { return userService.findUserByUserEmail(userEmail);}
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @PutMapping("/api/user/{userId}")

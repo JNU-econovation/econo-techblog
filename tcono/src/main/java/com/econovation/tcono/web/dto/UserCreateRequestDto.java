@@ -1,6 +1,7 @@
 package com.econovation.tcono.web.dto;
 
 import com.econovation.tcono.domain.auth.Password;
+import com.econovation.tcono.domain.user.Role;
 import com.econovation.tcono.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,7 +41,7 @@ public class UserCreateRequestDto {
                 .password(password)
                 .year(year)
                 .pinCode(pinCode)
+                .role(Role.GUEST)
                 .userName(userName).build();
     }
-
 }
