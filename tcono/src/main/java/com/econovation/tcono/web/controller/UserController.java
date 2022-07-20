@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +30,7 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
 
