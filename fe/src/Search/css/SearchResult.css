@@ -1,0 +1,22 @@
+.search-result {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+.search-result__text {
+    font-size: 20px;
+}
+
+.search-result__num {
+    margin-left: 5px;
+    color: #000;
+    opacity: 0.66;
+}
+
+.search-result__nav {
+    display: flex;
+    border-bottom: solid 3px rgb(112, 112, 112, 0.15);
+    margin-top: 28px;
+}
+

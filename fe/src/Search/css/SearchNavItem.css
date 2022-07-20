@@ -1,0 +1,18 @@
+.search-nav-item {
+    position: relative;
+    top: 3.5px;
+    color: #000;
+    opacity: 0.5;
+    margin-right: 100px;
+    text-align: start;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 15px;
+    cursor: pointer;
+}
+
+.search-nav-item--active {
+    color: #000;
+    opacity: 1;
+    border-bottom: solid 5px #000;
+}
