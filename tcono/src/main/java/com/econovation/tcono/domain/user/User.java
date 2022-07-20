@@ -72,6 +72,7 @@ public class User extends BaseTimeEntity {
      */
     public void emailVerifiedSuccess(){
         emailVerified = true;
+        role = Role.USER;
     }
 
     public void update(UserUpdateRequestDto userUpdateRequestDto){
