@@ -11,6 +11,7 @@
     border-radius: 20px;
 }
 
+
 .sign-up-box span{
     color: #3e467d;
     text-align: left;
@@ -55,4 +56,17 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
+}
+
+.sign-up__button{
+    padding: 0;
+    display: block;
+    background-color:#2269fa;
+    color: white;
+    border: none;
+    width: 70%;
+    height: 45px;
+    border-radius: 40px;
+    margin-bottom: 51px;
+    cursor: pointer;
 }
