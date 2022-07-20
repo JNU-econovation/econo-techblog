@@ -1,20 +1,13 @@
 .manager {
     display: flex;
-    flex: 1;
+    width:100%;
+    height: 100vh;
 }
 
-.manager-userlist{
+.manager-outlet{
     flex: 7;
-    display: flex;
-    flex-direction: column;
-    padding-top: 30px;
 }
 
-.managet-userlist__title {
-    font-size: 20px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
+
 
  
