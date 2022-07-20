@@ -1,11 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
+import Pagination from 'react-js-pagination';
 
 import '../css/SearchResult.css';
 import SearchNavItem from './SearchNavItem';
+import Recent from '../../Tech/components/Recent';
 
 const SearchResult = function ({ keyword }) {
+  const [movies, setMovies] = useState([]);
+  const getMovies = async () => {
+    const response = await fetch(
+      'https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year',
+    );
+    const json = await response.json();
+    setMovies(json.data.movies);
+  };
+  useEffect(() => {
+    getMovies();
+  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postPerPage = 5;
+  const indexOfLast = currentPage * postPerPage;
+  const indexOfFirst = indexOfLast - postPerPage;
+  const currentPosts = (posts) => {
+    let slicePosts = 0;
+    slicePosts = posts.slice(indexOfFirst, indexOfLast);
+    return slicePosts;
+  };
   const [navArr, setArr] = useState([
     {
       id: 1,
@@ -59,6 +81,25 @@ const SearchResult = function ({ keyword }) {
             onClick={onClick}
           />
         ))}
+      </div>
+      <div>
+        {currentPosts(movies).map((item) => (
+          <Recent
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            summary={item.summary}
+          />
+        ))}
+        <Pagination
+          activePage={currentPage}
+          itemsCountPerPage={5}
+          totalItemsCount={movies.length}
+          pageRangeDisplayed={3}
+          prevPageText="<"
+          nextPageText=">"
+          onChange={setCurrentPage}
+        />
       </div>
     </div>
   );
