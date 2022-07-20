@@ -4,7 +4,7 @@ import './css/Post.css';
 
 import Title from './components/Title';
 import PostInfo from './components/PostInfo';
-import Tags from './components/Tags';
+import Tags from '../components/Tags';
 import PostDesc from './components/PostDesc';
 import CommentList from './components/CommentList';
 import Liked from './components/Liked';

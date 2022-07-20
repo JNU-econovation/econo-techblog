@@ -16,7 +16,7 @@ const Sidebar = function () {
       id: 2,
       name: '전체 회원 관리',
       num: 67,
-      isSelected: true,
+      isSelected: false,
     },
     {
       id: 3,

@@ -1,0 +1,38 @@
+.userinfo {
+    width: 90%;
+    margin: 50px auto 0px auto;
+}
+
+.userinfo-top {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.userinfo__img {
+    width: 100px;
+    margin-right: 30px;
+}
+
+.userinfo-spec {
+    display: flex;
+    flex-direction: column;
+    color: #444;
+    line-height: 1.5;
+}
+
+.userinfo__name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.userlist-edit__button {
+    height: 30px;
+    width: 85px;
+    margin-left: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: #2269fa;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+}

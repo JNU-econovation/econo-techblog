@@ -1,13 +1,12 @@
-.table {
-    width: 90%;
-    margin: 0px auto;
+.postlist-table {
+    width: 100%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
     border-collapse: collapse;
 }
 
-.table__thead {
+.postlist-table__thead {
     background-color: #f5f5f5;
     font-size: 13px;
     font-weight: 500;
@@ -15,7 +14,7 @@
     height: 40px;
 }
 
-.table__tr {
+.postlist-table__tr {
     height: 60px;
     font-size: 12px;
     font-weight: 500;
@@ -24,26 +23,20 @@
     border-bottom: solid 1px #f2f2f2;
 }
 
-.table-user__img {
-    width: 30px;
+.postlist-table__checkbox {
+    width: 15px;
+    height: 15px;
 }
 
-.table-user {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.table-user__name{
-    width: 60px;
-}
-
-.table-setting-btn {
+.postlist-delete__button {
+    height: 30px;
+    width: 85px;
+    float: right;
+    position: relative;
+    top: -50px;
     border: none;
-    background-color: inherit;
-}
-
-.table-setting-btn__img {
-    margin-top: 6px;
-    width: 14px;
+    border-radius: 5px;
+    background-color: #d2d2d2;
+    font-size: 12px;
+    font-weight: 500;
 }
