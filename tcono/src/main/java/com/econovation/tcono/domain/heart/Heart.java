@@ -1,11 +1,11 @@
 package com.econovation.tcono.domain.heart;
 
 import com.econovation.tcono.domain.post.Post;
-import com.econovation.tcono.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
@@ -17,19 +17,25 @@ public class Heart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HEART_ID")
-    private Long Id;
+    private Long id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
-    private User user;
+//    @ManyToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name = "USER_ID")
+//    private User user;
+    @Column(nullable = false)
+    private Long userId;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "POST_ID")
     private Post post;
 
+    //좋아요 여부
+    private Boolean isHeart;
+
     @Builder
-    public Heart(User user, Post post) {
-        this.user = user;
+    public Heart(Long userId, Post post,Boolean isHeart) {
+        this.userId=userId;
         this.post = post;
+        this.isHeart=isHeart;
     }
 }

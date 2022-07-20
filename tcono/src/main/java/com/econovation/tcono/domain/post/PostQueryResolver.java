@@ -1,11 +1,11 @@
 package com.econovation.tcono.domain.post;
-
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostQueryResolver implements GraphQLQueryResolver{
     private static final String NOT_FOUND_POST_MESSAGE = "해당 페이지가 없습니다.";
+
     private final PostRepository postRepository;
 
     /**
@@ -38,9 +39,16 @@ public class PostQueryResolver implements GraphQLQueryResolver{
     public Post findPostByPostId(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-        post.increaseViews();
+        increaseViews(post);
         return post;
     }
+
+
+    @Transactional
+    public int increaseViews(Post post) {
+        postRepository.updateViews(post.getId());
+        return post.getViews();
+        
     /**
      * @param : string Keyword
      * @return List<Post>
