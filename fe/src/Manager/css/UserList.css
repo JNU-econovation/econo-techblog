@@ -1,8 +1,7 @@
 .userlist__title{
     font-size: 20px;
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 35px auto 15px auto;
 }
 
 .userlist-table {
@@ -35,6 +34,10 @@
     width: 30px;
 }
 
+.userlist-setting {
+    position: relative;
+}
+
 .userlist-table-user {
     display: flex;
     align-items: center;
@@ -54,3 +57,16 @@
     margin-top: 6px;
     width: 14px;
 }
+
+.userlist-setting-box {
+    display: none;
+}
+
+.userlist-setting-btn:hover + .userlist-setting-box {
+    display:block;
+}
+
+.userlist-setting-box:hover {
+    display: block;
+}
+

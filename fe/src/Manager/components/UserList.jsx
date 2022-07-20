@@ -8,52 +8,61 @@ import '../css/UserList.css';
 import '../../components/css/Pagination.css';
 import noImg from '../img/no_img.png';
 import settings from '../img/settings.png';
+import SettingBox from './SettingBox';
 
 const UserList = function () {
   const data = [
     {
+      id: 1,
       name: '이윤성',
       email: '181111@jnu.ac.kr',
       usertype: '관리자',
       year: '21기',
     },
     {
+      id: 2,
       name: '이윤성',
       email: '181111@jnu.ac.kr',
       usertype: '관리자',
       year: '21기',
     },
     {
+      id: 3,
       name: '이윤성',
       email: '181111@jnu.ac.kr',
       usertype: '관리자',
       year: '21기',
     },
     {
+      id: 4,
       name: '이윤성',
       email: '181111@jnu.ac.kr',
       usertype: '관리자',
       year: '21기',
     },
     {
+      id: 5,
       name: '이윤성',
       email: '181111@jnu.ac.kr',
       usertype: '관리자',
       year: '21기',
     },
     {
+      id: 6,
       name: '이윤성',
       email: '181111@jnu.ac.kr',
       usertype: '관리자',
       year: '21기',
     },
     {
+      id: 7,
       name: '이윤성',
       email: '181111@jnu.ac.kr',
       usertype: '관리자',
       year: '21기',
     },
     {
+      id: 8,
       name: '이윤성',
       email: '181111@jnu.ac.kr',
       usertype: '관리자',
@@ -62,9 +71,7 @@ const UserList = function () {
   ];
   const columns = ['이름', '이메일', '사용자 타입', '기수', '설정'];
   const [currentPage, setCurrentPage] = useState(1);
-  const onClick = (e) => {
-    console.log(e.screenX);
-  };
+  const onClick = () => {};
   return (
     <div>
       <h2 className="userlist__title">전체 회원 관리</h2>
@@ -84,8 +91,8 @@ const UserList = function () {
           </tr>
         </thead>
         <tbody>
-          {data.map(({ name, email, usertype, year }) => (
-            <tr key={email} className="userlist-table__tr">
+          {data.map(({ id, name, email, usertype, year }) => (
+            <tr key={id} className="userlist-table__tr">
               <td>
                 <div className="userlist-table-user">
                   <img
@@ -99,7 +106,7 @@ const UserList = function () {
               <td>{email}</td>
               <td>{usertype}</td>
               <td>{year}</td>
-              <td>
+              <td className="userlist-setting">
                 <button
                   type="button"
                   className="userlist-setting-btn"
@@ -111,6 +118,9 @@ const UserList = function () {
                     className="userlist-setting-btn__img"
                   />
                 </button>
+                <div className="userlist-setting-box">
+                  <SettingBox id={id} />
+                </div>
               </td>
             </tr>
           ))}
