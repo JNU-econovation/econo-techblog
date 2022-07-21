@@ -20,7 +20,7 @@ public class PostCreateResponseDto {
     private Long userId;
     private String content;
     private String title;
-    private MainCategory mainCategory;//대분류
+    private int mainCategoryNumber;//대분류
     private String categorySplitByComma;//해시태그
     private String createdDate;
     private int hearts;
@@ -32,7 +32,7 @@ public class PostCreateResponseDto {
         this.userId = post.getUserId();
         this.content = post.getContent();
         this.title = post.getTitle();
-        this.mainCategory = post.getMainCategory();
+        this.mainCategoryNumber = post.getMainCategory().getMainCategoryNumber(); //해당 post의 mainCategoryNumber을 보내줘야 함
         this.categorySplitByComma = StringUtils.join(categoryListByPost,",");
         this.createdDate = post.getCreatedDate();
         this.hearts=post.getHearts();

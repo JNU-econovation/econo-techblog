@@ -14,6 +14,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,8 +68,6 @@ public class Post extends BaseTimeEntity {
         this.title = title;
         this.mainCategory = mainCategory;
     }
-
-
     public int decreaseHearts() {
         this.hearts -= 1;
         return hearts;
