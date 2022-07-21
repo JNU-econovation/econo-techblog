@@ -11,19 +11,6 @@ type Post{
     mainCategory: MainCategory
 }
 
-type Heart{
-    Id:ID!
-    userId:Int
-    post:Post
-    isHeart:Boolean
-}
-
-enum Role{
-    ADMIN
-    USER
-    GUEST
-}
-
 enum MainCategory{
     TOTAL
     TECH
@@ -37,6 +24,8 @@ type Category{
     categoryName :String
 }
 
+#====PostCreateDto====#
+
 input PostCreateRequestDto{
     userId:Int
     content: String
@@ -46,18 +35,22 @@ input PostCreateRequestDto{
 }
 
 type PostCreateResponseDto{
+    postId:Int
     userId: Int
     content: String
     title: String
     mainCategory: MainCategory
     categorySplitByComma: String
     createdDate: String
+    hearts:Int
+    views:Int
 }
 
+#====PostUpdateDto======#
 input PostUpdateRequestDto{
     content: String
     title: String
-    category: String
+    categorySplitByComma: String
 }
 
 type PostUpdateResponseDto{
@@ -71,10 +64,12 @@ type PostUpdateResponseDto{
     modifiedDate: String
 }
 
+#====HeartRequestDto====#
+
 input HeartRequestDto {
-    id:ID
     postId : Int
     userId:Int
+    isHeart:Boolean
 }
 
 # 타입 시스템 정의
@@ -96,11 +91,11 @@ type Query{
 type Mutation{
     #    -----------Post------------------------------
     createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
-    updatePost(postId: ID, postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
+#    updatePost(postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
     deletePost(postId : ID):Boolean,
     createOfficial(postID: ID): [Post!]!,
     #
-    #    #    -----------Heart------------------------------
+    #       -----------Heart------------------------------
     updateHeartState(heartRequestDto:HeartRequestDto): Int!
     #
     #    #    -----------Comment------------------------------
