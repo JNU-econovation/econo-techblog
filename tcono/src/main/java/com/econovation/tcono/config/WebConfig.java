@@ -28,7 +28,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+        registry.addMapping("/**").allowedOrigins("http://13.124.120.147:3000").maxAge(3600); // 3600초 동안 preflight 결과를 캐시에 저장
+        registry.addMapping("/**").allowedOrigins("http://13.124.120.147:8080").maxAge(3600); // 3600초 동안 preflight 결과를 캐시에 저장
         registry.addMapping("/api/**").allowedOrigins("*").allowedMethods("GET", "POST","DELETE","PUT");
     }
 }
