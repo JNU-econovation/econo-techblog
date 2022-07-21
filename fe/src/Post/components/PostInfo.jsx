@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
+/* eslint-disable object-curly-newline */
 
 import '../css/PostInfo.css';
 import PostDetails from '../../components/PostDetails';
@@ -7,14 +10,7 @@ import SelectBox from './SelectBox';
 import noImg from '../img/no_img.png';
 import more from '../img/post_more.png';
 
-const result = {
-  author: '에코노베이션',
-  date: '2022.05.04',
-  looked: '21',
-  liked: '21',
-};
-
-const PostInfo = function () {
+const PostInfo = function ({ author, date, views, hearts }) {
   const [isOpen, setOpen] = useState(false);
   const onClick = () => {
     setOpen(!isOpen);
@@ -25,9 +21,9 @@ const PostInfo = function () {
         <div className="post-info-left">
           <div className="post-info-author">
             <img src={noImg} alt="no-img" className="post-info-author__img" />
-            <span>{result.author}</span>
+            <span>{author}</span>
           </div>
-          <PostDetails date="2022.05.04" views="21" hearts="21" />
+          <PostDetails date={date} views={views} hearts={hearts} />
         </div>
         <button type="button" className="post-info__button" onClick={onClick}>
           <img src={more} alt="more" className="post-info__img" />
@@ -36,6 +32,13 @@ const PostInfo = function () {
       {isOpen && <SelectBox />}
     </div>
   );
+};
+
+PostInfo.propTypes = {
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  views: PropTypes.string.isRequired,
+  hearts: PropTypes.string.isRequired,
 };
 
 export default PostInfo;

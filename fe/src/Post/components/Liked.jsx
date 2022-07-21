@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
+
 import heart from '../img/heart.png';
 import clickheart from '../img/clickheart.png';
 import '../css/Liked.css';
 
-const Liked = function () {
-  const [liked, setLiked] = useState(false);
+const Liked = function ({ liked, setLiked }) {
   const onClick = () => {
     setLiked(!liked);
   };
@@ -24,6 +26,11 @@ const Liked = function () {
       </button>
     </div>
   );
+};
+
+Liked.propTypes = {
+  liked: PropTypes.bool.isRequired,
+  setLiked: PropTypes.func.isRequired,
 };
 
 export default Liked;
