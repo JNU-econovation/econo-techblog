@@ -4,12 +4,8 @@ import PropTypes from 'prop-types';
 import '../css/Recent.css';
 
 import noImg from '../img/no_img.png';
-import date from '../img/day.png';
-import looked from '../img/feather_eye.png';
-import liked from '../img/heart.png';
 
 import PostDetails from '../../components/PostDetails';
-import Partition from '../../components/Partition';
 import Tags from '../../components/Tags';
 
 const Recent = function ({ id, title, summary }) {
@@ -26,11 +22,7 @@ const Recent = function ({ id, title, summary }) {
         </div>
         <div className="recent-info-bottom">
           <div className="recent-info-bottom-left">
-            <PostDetails src={date} alt="date" info={id} />
-            <Partition />
-            <PostDetails src={looked} alt="looked" info={id} />
-            <Partition />
-            <PostDetails src={liked} alt="liked" info={id} />
+            <PostDetails date="2022.05.04" views="21" hearts="21" />
           </div>
           <div className="recent-info-bottom-right">
             <span>{id}</span>

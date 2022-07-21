@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 
 import '../css/PostInfo.css';
 import PostDetails from '../../components/PostDetails';
-import Partition from '../../components/Partition';
 import SelectBox from './SelectBox';
 
 import noImg from '../img/no_img.png';
-import date from '../img/day.png';
-import looked from '../img/feather_eye.png';
-import liked from '../img/heart.png';
 import more from '../img/post_more.png';
 
 const result = {
@@ -31,11 +27,7 @@ const PostInfo = function () {
             <img src={noImg} alt="no-img" className="post-info-author__img" />
             <span>{result.author}</span>
           </div>
-          <PostDetails src={date} alt="date" info={result.date} />
-          <Partition />
-          <PostDetails src={looked} alt="looked" info={result.looked} />
-          <Partition />
-          <PostDetails src={liked} alt="liked" info={result.liked} />
+          <PostDetails date="2022.05.04" views="21" hearts="21" />
         </div>
         <button type="button" className="post-info__button" onClick={onClick}>
           <img src={more} alt="more" className="post-info__img" />

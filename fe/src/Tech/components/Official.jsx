@@ -2,13 +2,8 @@ import React from 'react';
 import '../css/Official.css';
 
 import noImg from '../img/no_img.png';
-import date from '../img/day.png';
-import looked from '../img/feather_eye.png';
-import liked from '../img/heart.png';
-
 import PostDetails from '../../components/PostDetails';
 import Tags from '../../components/Tags';
-import Partition from '../../components/Partition';
 
 const result = {
   author: '에코노베이션',
@@ -42,11 +37,7 @@ const Official = function () {
               {result.author}
             </span>
           </div>
-          <PostDetails src={date} alt="date" info={result.date} />
-          <Partition />
-          <PostDetails src={looked} alt="looked" info={result.looked} />
-          <Partition />
-          <PostDetails src={liked} alt="liked" info={result.liked} />
+          <PostDetails date="2022.05.04" views="21" hearts="21" />
         </div>
       </div>
     </div>
