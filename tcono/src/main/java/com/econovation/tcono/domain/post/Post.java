@@ -3,7 +3,6 @@ package com.econovation.tcono.domain.post;
 import com.econovation.tcono.domain.BaseTimeEntity;
 import com.econovation.tcono.domain.heart.Heart;
 import com.econovation.tcono.domain.user.User;
-import jdk.jfr.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -51,8 +50,12 @@ public class Post extends BaseTimeEntity {
 //    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 //    private List<Heart> Heart = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "post", orphanRemoval = true)
+//    @OneToMany(mappedBy = "post", ,cascade=CascadeType.All)
 //    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+    private List<Category> categories = new ArrayList<>();
+
 
     @Enumerated(EnumType.STRING)
     private MainCategory mainCategory; //대분류
