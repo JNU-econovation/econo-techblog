@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/Official.css';
 
 import noImg from '../img/no_img.png';
@@ -15,6 +15,14 @@ const result = {
 };
 
 const Official = function () {
+  const [officialNum, setOfficialNum] = useState(0);
+  const onChangePost = (index) => {
+    if (index > 1) {
+      setOfficialNum(0);
+    } else {
+      setOfficialNum(officialNum + 1);
+    }
+  };
   return (
     <div className="official">
       <div className="official__img" />
@@ -40,6 +48,13 @@ const Official = function () {
           <PostDetails date="2022.05.04" views="21" hearts="21" />
         </div>
       </div>
+      <button
+        className="official__next"
+        type="button"
+        onClick={() => onChangePost(officialNum)}
+      >
+        {'>'}
+      </button>
     </div>
   );
 };
