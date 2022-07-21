@@ -96,15 +96,16 @@ public class PostMutationResolver implements GraphQLMutationResolver {
     /**
      * 좋아요 10 이상, views가 10 이상인 글 official로 보내주고, 등록함
      *
-     * @param postId
      * @return boolean
      */
     @Transactional
-    public List<Post> createOfficial(Long postId) {
+    public List<Post> findOfficial(){
         List<Post> post = postRepository.findAll().stream()
-                .filter(x -> x.getHearts() > 10 && x.getViews() > 10)
+                .filter(x -> x.getViews() > 2)
                 .limit(3)
                 .collect(Collectors.toList());
+
+                // && x.getViews() > 10)
 
         post.forEach(Post::updateOfficial);
         return post;
