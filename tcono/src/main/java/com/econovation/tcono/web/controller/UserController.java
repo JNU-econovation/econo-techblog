@@ -31,7 +31,7 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://13.124.120.147:3000")
+@CrossOrigin("*")
 @RestController
 public class UserController {
 
