@@ -20,11 +20,9 @@ public class Comment extends BaseTimeEntity {//자식 댓글
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COMMENT_ID")
-    private Long Id;
+    private Long commentId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    private Long userId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POST_ID")
     private Post post;
@@ -36,16 +34,24 @@ public class Comment extends BaseTimeEntity {//자식 댓글
 
     private int group;// 부모댓글의 Id
 
+    private Boolean isRemoved = false;//제거 유무
+
     @Builder
-    public Comment(User user, Post post, String content, int depth, int group) {
-        this.user = user;
+    public Comment(Long userId, Post post, String content, int depth, int group) {
+        this.userId = userId;
         this.post = post;
         this.content = content;
-        this.depth=depth;
-        this.group=group;
+        this.depth = depth;
+        this.group = group;
     }
 
+    //==수정==/
     public void updateComment(String content) {
         this.content = content;
+    }
+
+    //==삭제==/
+    public void remove() {
+        this.isRemoved = true;
     }
 }

@@ -15,21 +15,19 @@ public class PostUpdateResponseDto {
     private Long userId;
     private String content;
     private String title;
-    private String category; //해시태그
+    private String categorySplitByComma;
     private int views;
     private int hearts;
     private String createdDate;
-    private String modifiedDate;
 
     @Builder
-    public PostUpdateResponseDto(Post post, List<Category> categoryListByPost) {
+    public PostUpdateResponseDto(Post post, List<Category>categoryList) {
         this.userId=post.getUserId();
         this.content = post.getContent();
         this.title = post.getTitle();
-        this.category = categoryListByPost.toString();
+        this.categorySplitByComma=categoryList.toString();
         this.views=post.getViews();
         this.hearts = post.getHearts();
         this.createdDate= post.getCreatedDate();
-        this.modifiedDate=post.getModifiedDate();
     }
 }

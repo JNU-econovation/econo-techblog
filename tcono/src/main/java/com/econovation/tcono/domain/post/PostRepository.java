@@ -19,7 +19,10 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select p from Post p where p.mainCategory= :mainCategory")
-    List<Post> findAllByMainCategory(@Param("mainCategory") MainCategory mainCategory, Pageable pageable);
+    List<Post> findAllByMainCategory(@Param("mainCategory") MainCategory mainCategory);
+
+    //Pageable pageable);
+
 
     @Query("select p from Post p where p.id=:id")
     Optional<Post> findById(@Param("id") Long id);

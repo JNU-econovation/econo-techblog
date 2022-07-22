@@ -1,13 +1,13 @@
 package com.econovation.tcono.domain.post;
 
-import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.econovation.tcono.web.dto.PostCreateRequestDto;
 import com.econovation.tcono.web.dto.PostCreateResponseDto;
-//import com.econovation.tcono.web.dto.PostUpdateRequestDto;
-//import com.econovation.tcono.web.dto.PostUpdateResponseDto;
+import com.econovation.tcono.web.dto.PostUpdateRequestDto;
+import com.econovation.tcono.web.dto.PostUpdateResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class PostMutationResolver implements GraphQLMutationResolver {
@@ -41,13 +42,18 @@ public class PostMutationResolver implements GraphQLMutationResolver {
 //                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
         Post post = postRepository.save(postCreateRequestDto.toPostEntity());
 
-        //category entity 생성 후 save
-        categoryListToEntity(postCreateRequestDto.getCategorySplitByComma())
-                .forEach(x -> categoryRepository.save(postCreateRequestDto.toCategoryEntity(post, x)));
+        //,로 구분된 category를 List형태로 바꿈
+        List<String> categories = categoryListToEntity(postCreateRequestDto.getCategorySplitByComma());
 
+        //category 저장
+        categories.stream().forEach(x -> categoryRepository.save(postCreateRequestDto.toCategoryEntity(post, x)));
+        
+        log.info(categories.toString());
+        
+        
         List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
         return new PostCreateResponseDto(post, categoryListByPost);
-    }
+    }   
 
     /**
      * Post update 구현
@@ -55,28 +61,34 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      * @param postUpdateRequestDto
      * @return PostResponseDto
      */
-//    @Transactional
-//    public PostUpdateResponseDto updatePost(Long id, PostUpdateRequestDto postUpdateRequestDto) {
-//        Post post = postRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-//
-//        post.updatePost(postUpdateRequestDto.getContent(), postUpdateRequestDto.getTitle());
-//        categoryListToEntity(postUpdateRequestDto.getCategory())
-//                .forEach(x -> categoryRepository.save(postUpdateRequestDto.toCategoryEntity(post, x)));
-//
-//        List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
-//        return new PostUpdateResponseDto(post, categoryListByPost);
-//    }
-
-    /**
-     * ,로 구분되어 있는 카테고리 분리
-     * @param category
-     * @return Stream<String>
-     */
     @Transactional
-    public Stream<String> categoryListToEntity(String category) {
+    public PostUpdateResponseDto updatePost(Long id, PostUpdateRequestDto postUpdateRequestDto) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
+
+        List<Category> categories = categoryListToEntity(postUpdateRequestDto.getCategorySplitByComma())
+                .stream().map(x->new Category(x,post))
+                .collect(Collectors.toList());
+
+
+        post.updatePost(postUpdateRequestDto.getContent(), postUpdateRequestDto.getTitle(), categories);
+//        categoryListToEntity(postUpdateRequestDto.get)
+//                .forEach(x -> categoryRepository.save(postUpdateRequestDto.toCategoryEntity(post, x)));
+
+        List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
+        return new PostUpdateResponseDto(post, categoryListByPost);
+    }
+
+//    /**
+//     * String 을 List로 변환하기
+//     *
+//     * @param category
+//     * @return Stream<String>
+//     */
+    @Transactional
+    public List<String> categoryListToEntity(String category) {
         List<String> categoryList = Arrays.asList(category.split(","));
-        return categoryList.stream();
+        return categoryList;
     }
 
     /**

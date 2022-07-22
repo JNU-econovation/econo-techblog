@@ -35,14 +35,14 @@ public class PostQueryResolver implements GraphQLQueryResolver {
      * 각 대분류에 맞는 Post 보내기
      * 페이징 처리(10개)
      */
-    @Transactional
-    public List<PostResponseDto> findAllPosts(int mainCategoryNumber, int page) {
-        Pageable pageable = PageRequest.of(page, 5);
-        List<Post> post = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber));
-
-
-        return post;
-    }
+//    @Transactional
+//    public List<PostResponseDto> findAllPosts(int mainCategoryNumber, int page) {
+//        Pageable pageable = PageRequest.of(page, 5);
+//        List<Post> post = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber));
+//
+//
+//        return post;
+//    }
 
     /**
      * @param : postId

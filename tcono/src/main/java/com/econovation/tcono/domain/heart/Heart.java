@@ -32,6 +32,7 @@ public class Heart {
     //좋아요 여부
     private Boolean isHeart;
 
+
     @Builder
     public Heart(Long userId, Post post,Boolean isHeart) {
         this.userId=userId;

@@ -5,13 +5,17 @@ import com.econovation.tcono.domain.post.Category;
 import lombok.Builder;
 import lombok.Data;
 
+
 @Data
 @Builder
 public class PostUpdateRequestDto {
+    private Long postId;
     private String content;
     private String title;
 
-    private String category; //,로 구분된 category 여러개
+//    private Long mainCategoryNumber;
+
+    private String categorySplitByComma;
 
     public Post toPostEntity() {
         return Post.builder()
