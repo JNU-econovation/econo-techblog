@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "graphql.tools.schema-location-pattern",
+      "type": "java.lang.String",
+      "description": "Description for graphql.tools.schema-location-pattern."
+  }
+] }
