@@ -5,7 +5,7 @@ type Post{
     userId:Int
     content:String
     title:String!
-    official:Boolean!
+    official:Boolean
     views:Int!
     hearts:Int!
     mainCategory: MainCategory
@@ -30,7 +30,7 @@ input PostCreateRequestDto{
     userId:Int
     content: String
     title: String
-    mainCategory:MainCategory
+    mainCategoryNumber:Int
     categorySplitByComma:String
 }
 
@@ -39,7 +39,7 @@ type PostCreateResponseDto{
     userId: Int
     content: String
     title: String
-    mainCategory: MainCategory
+    mainCategoryNumber: Int
     categorySplitByComma: String
     createdDate: String
     hearts:Int
@@ -48,20 +48,37 @@ type PostCreateResponseDto{
 
 #====PostUpdateDto======#
 input PostUpdateRequestDto{
+    postId:Int
     content: String
     title: String
     categorySplitByComma: String
 }
 
 type PostUpdateResponseDto{
+    postId:Int
     userId: Int
     content: String
     title: String
-    category: String
-    views: Int
-    likes: Int
+    mainCategoryNumber:Int
+    categorySplitByComma: String
     createdDate : String
     modifiedDate: String
+    views: Int
+    likes: Int
+}
+
+#=====PostResponseDto=====#
+
+type PostResponseDto{
+    postId: Int
+    userName:String
+    content: String
+    title: String
+    mainCategoryNumber:Int
+    categoryList:String
+    createdDate:String
+    views:Int
+    hearts:Int
 }
 
 #====HeartRequestDto====#
@@ -81,9 +98,9 @@ schema {
 #Root Query
 type Query{
     #    -----------Post------------------------f------
-    findAllPosts(mainCategory : MainCategory, page : Int): [Post!]!
-    findPostByPostId(id : Int) : Post!
-    search(keyword : String , page : Int) : [Post]!
+#    findAllPosts(mainCategoryNumber:Int, page : Int): [PostResponseDto!]!
+    findPostByPostId(id : Int) : PostResponseDto!
+#    search(keyword : String , page : Int) : [PostResponseDto]!
     #    ---------Comment--------------------
 }
 
@@ -91,7 +108,7 @@ type Query{
 type Mutation{
     #    -----------Post------------------------------
     createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
-#    updatePost(postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
+    #    updatePost(postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
     deletePost(postId : ID):Boolean,
     findOfficial: [Post!]!,
     #
