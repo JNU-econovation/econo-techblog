@@ -25,9 +25,9 @@ public class PostQueryResolver implements GraphQLQueryResolver{
      * 페이징 처리(10개)
      */
     @Transactional
-    public List<Post> findAllPosts(MainCategory mainCategory, int page) {
+    public List<Post> findAllPosts(int mainCategoryNumber, int page) {
         Pageable pageable = PageRequest.of(page, 5);
-        List<Post> post = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategory), pageable);
+        List<Post> post = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber), pageable);
         return post;
     }
 
