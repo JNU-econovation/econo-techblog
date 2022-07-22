@@ -2,14 +2,17 @@ package com.econovation.tcono.config;
 
 import com.econovation.tcono.Interceptor.LogInterceptor;
 import com.econovation.tcono.Interceptor.LoginCheckInterceptor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
@@ -28,6 +31,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**").allowedOrigins("*");
+        registry.addMapping("/**").allowedOrigins("http://54.180.29.85:3000").maxAge(3600); // 3600초 동안 preflight 결과를 캐시에 저장
+        registry.addMapping("/**").allowedOrigins("http://54.180.29.85:8080").maxAge(3600); // 3600초 동안 preflight 결과를 캐시에 저장
+        registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").maxAge(3600).allowCredentials(true);
     }
 }
