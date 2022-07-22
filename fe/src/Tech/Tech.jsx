@@ -9,7 +9,7 @@ import write from './img/write.png';
 
 import Banner from './components/Banner';
 import Official from './components/Official';
-import Recent from './components/Recent';
+import PostBox from '../components/PostBox';
 
 const GET_POSTS = gql`
   query getPosts($mainCategory: String!) {
@@ -81,7 +81,7 @@ const Tech = function () {
         <div className="tech-recent">
           <p className="tech__title">Recent posts</p>
           {currentPosts(movies).map((item) => (
-            <Recent
+            <PostBox
               key={item.id}
               id={item.id}
               title={item.title}

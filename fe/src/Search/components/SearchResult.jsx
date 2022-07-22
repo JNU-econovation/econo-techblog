@@ -6,7 +6,7 @@ import { gql, useQuery } from '@apollo/client';
 import '../css/SearchResult.css';
 import '../../components/css/Pagination.css';
 import SearchNavItem from './SearchNavItem';
-import Recent from '../../Tech/components/Recent';
+import PostBox from '../../components/PostBox';
 
 const GET_SEARCH = gql`
   query getSearch($currentKeyword: String!, $page: Int!) {
@@ -109,7 +109,7 @@ const SearchResult = function () {
       </div>
       <div>
         {currentPosts(movies).map((item) => (
-          <Recent
+          <PostBox
             key={item.id}
             id={item.id}
             title={item.title}
