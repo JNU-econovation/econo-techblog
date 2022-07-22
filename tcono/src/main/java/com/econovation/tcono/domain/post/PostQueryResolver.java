@@ -1,5 +1,9 @@
 package com.econovation.tcono.domain.post;
+
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.econovation.tcono.domain.user.User;
+import com.econovation.tcono.domain.user.UserRepository;
+import com.econovation.tcono.web.dto.PostResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -13,10 +17,17 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class PostQueryResolver implements GraphQLQueryResolver{
+public class PostQueryResolver implements GraphQLQueryResolver {
     private static final String NOT_FOUND_POST_MESSAGE = "해당 페이지가 없습니다.";
+    private static final String NOT_FOUND_USER_MESSAGE="해당 유저가 없습니다";
     @Autowired
     private final PostRepository postRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * @param : mainCategory
@@ -25,9 +36,11 @@ public class PostQueryResolver implements GraphQLQueryResolver{
      * 페이징 처리(10개)
      */
     @Transactional
-    public List<Post> findAllPosts(int mainCategoryNumber, int page) {
+    public List<PostResponseDto> findAllPosts(int mainCategoryNumber, int page) {
         Pageable pageable = PageRequest.of(page, 5);
-        List<Post> post = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber), pageable);
+        List<Post> post = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber));
+
+
         return post;
     }
 
@@ -37,12 +50,17 @@ public class PostQueryResolver implements GraphQLQueryResolver{
      * 댓글 같이 보내기
      */
     @Transactional
-    public Post findPostByPostId(Long postId) {
+    public PostResponseDto findPostByPostId(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-        increaseViews(post);
-        return post;
+
+//        User user=userRepository.findById(post.getUserId())
+//                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
+
+        increaseViews(post); //조회수 증가
+        return new PostResponseDto(post.getId(),"수민",post.getContent(),post.getTitle(),post.getMainCategory().getMainCategoryNumber(),post.getCategoryList().toString(),post.getCreatedDate(),post.getHearts(),post.getViews());
     }
+    //user.getUserName()
 
 
     @Transactional
@@ -50,16 +68,16 @@ public class PostQueryResolver implements GraphQLQueryResolver{
         postRepository.updateViews(post.getId());
         return post.getViews();
     }
-        
+
     /**
      * @param : string Keyword
      * @return List<Post>
      * title로 like 검색 기능
      */
-    @Transactional
-    public List<Post> search(String keyword, int page){
-        Pageable pageable = PageRequest.of(page, 5);
-        List<Post> postList = postRepository.findByTitleContaining(keyword,pageable);
-        return postList;
-    }
+//    @Transactional
+//    public List<PostResponseDto> search(String keyword, int page) {
+//        Pageable pageable = PageRequest.of(page, 5);
+//        List<Post> postList = postRepository.findByTitleContaining(keyword, pageable);
+//        return postList;
+//    }
 }

@@ -1,20 +1,16 @@
 package com.econovation.tcono.domain.post;
 
 import com.econovation.tcono.domain.BaseTimeEntity;
-import com.econovation.tcono.domain.heart.Heart;
-import com.econovation.tcono.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +23,10 @@ import java.util.List;
 public class Post extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "POST_ID")
+    @Column(name = "POST_ID")
     private Long id;
 
-    //    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "USER_ID")
-//    private User user;
+    //post 작성자 이름
     @Column(updatable = false)
     private Long userId;
     private String content;
@@ -55,7 +49,7 @@ public class Post extends BaseTimeEntity {
 //    private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
-    private List<Category> categories = new ArrayList<>();
+    private List<Category> categoryList = new ArrayList<>();
 
 
     @Enumerated(EnumType.STRING)
@@ -78,17 +72,15 @@ public class Post extends BaseTimeEntity {
         return hearts;
     }
 
-    public int increaseViews() {
-        this.views += 1;
-        return views;
-    }
 
-    public void updatePost(String content, String title) {
+    public void updatePost(String content, String title,List<Category>categoryList) {
         this.content = content;
         this.title = title;
+        this.categoryList=categoryList;
     }
 
     public void updateOfficial() {
         this.official = true;
     }
+
 }
