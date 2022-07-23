@@ -4,11 +4,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './css/CardinalSelectBox.css';
 
-function CardinalSelectBox({ classNames }) {
-  // const year = new Date().getFullYear() - 2000;
+function CardinalSelectBox({ classNames, setValue }) {
+  const onChange = (e) => {
+    setValue(() => e.target.value);
+  };
 
   return (
-    <select name="cardinal" className={`cardinal-select-box ${classNames}`}>
+    <select
+      name="cardinal"
+      className={`cardinal-select-box ${classNames}`}
+      onChange={onChange}
+      defaultValue="23"
+    >
       <option disabled selected>
         기수
       </option>
@@ -31,6 +38,7 @@ function CardinalSelectBox({ classNames }) {
 
 CardinalSelectBox.propTypes = {
   classNames: PropTypes.string.isRequired,
+  setValue: PropTypes.func.isRequired,
 };
 
 export default CardinalSelectBox;
