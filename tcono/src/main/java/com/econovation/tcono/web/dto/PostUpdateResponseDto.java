@@ -6,28 +6,36 @@ import com.econovation.tcono.domain.user.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Getter
+@NoArgsConstructor
 public class PostUpdateResponseDto {
+    private Long postId;
     private Long userId;
     private String content;
     private String title;
+
+    private int mainCategoryNumber;
     private String categorySplitByComma;
+    private String createdDate;
     private int views;
     private int hearts;
-    private String createdDate;
+
 
     @Builder
-    public PostUpdateResponseDto(Post post, List<Category>categoryList) {
-        this.userId=post.getUserId();
+    public PostUpdateResponseDto(Post post, List<String>categoryName) {
+        this.postId=post.getId();
+        this.userId=post.getUserId();`
         this.content = post.getContent();
         this.title = post.getTitle();
-        this.categorySplitByComma=categoryList.toString();
+        this.mainCategoryNumber=post.getMainCategory().getMainCategoryNumber();
+        this.categorySplitByComma=String.join(",", categoryName);
+        this.createdDate= post.getCreatedDate();
         this.views=post.getViews();
         this.hearts = post.getHearts();
-        this.createdDate= post.getCreatedDate();
     }
 }

@@ -51,6 +51,7 @@ input PostUpdateRequestDto{
     postId:Int
     content: String
     title: String
+    mainCategoryNumber:Int
     categorySplitByComma: String
 }
 
@@ -62,9 +63,8 @@ type PostUpdateResponseDto{
     mainCategoryNumber:Int
     categorySplitByComma: String
     createdDate : String
-    modifiedDate: String
     views: Int
-    likes: Int
+    hearts: Int
 }
 
 #=====PostResponseDto=====#
@@ -108,7 +108,7 @@ type Query{
 type Mutation{
     #    -----------Post------------------------------
     createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
-    #    updatePost(postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
+    updatePost(postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
     deletePost(postId : ID):Boolean,
     findOfficial: [Post!]!,
     #
