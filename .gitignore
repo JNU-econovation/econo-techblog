@@ -2,4 +2,5 @@
 .tcono/src/main/resources/email.properties
 ./.idea/
 ./.gradle/
+.idea/workspace.xml
 

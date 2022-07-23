@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec79d42c-2991-4815-b692-2593af2ab946" name="Changes" comment="refactor : category entity 메서드 분리">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.mv.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.trace.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/domain/post/MainCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/domain/post/MainCategory.java" afterDir="false" />
+    <list default="true" id="ec79d42c-2991-4815-b692-2593af2ab946" name="Changes" comment="git conflict 해결">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/domain/post/PostQueryResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/domain/post/PostQueryResolver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/web/dto/PostCreateResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/web/dto/PostCreateResponseDto.java" afterDir="false" />
     </list>
@@ -43,6 +41,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -135,8 +136,24 @@
       <workItem from="1657820290018" duration="827000" />
       <workItem from="1657821195483" duration="1696000" />
       <workItem from="1658548625996" duration="127000" />
-      <workItem from="1658548756332" duration="31000" />
+      <workItem from="1658548756332" duration="604000" />
+      <workItem from="1658549530771" duration="280000" />
     </task>
+    <task id="LOCAL-00001" summary="fix : mainCategory numer 추가">
+      <created>1658548837875</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658548837875</updated>
+    </task>
+    <task id="LOCAL-00002" summary="git conflict 해결">
+      <created>1658549599493</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1658549599493</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,7 +173,9 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="refactor : category entity 메서드 분리" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor : category entity 메서드 분리" />
+    <MESSAGE value="fix : mainCategory numer 추가" />
+    <MESSAGE value="git conflict 해결" />
+    <option name="LAST_COMMIT_MESSAGE" value="git conflict 해결" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
