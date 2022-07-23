@@ -1,13 +1,47 @@
 import React, { useState, useEffect } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from 'prop-types';
+// import { useParams } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
+import { gql, useQuery } from '@apollo/client';
 
 import '../css/SearchResult.css';
+import '../../components/css/Pagination.css';
 import SearchNavItem from './SearchNavItem';
-import Recent from '../../Tech/components/Recent';
+import PostBox from '../../components/PostBox';
 
-const SearchResult = function ({ keyword }) {
+const GET_SEARCH = gql`
+  query getSearch($currentKeyword: String!, $page: Int!) {
+    search(keyword: $currentKeyword, page: $page) {
+      id
+      userId
+      content
+      title
+      official
+      views
+      hearts
+      mainCategoryNumber
+    }
+  }
+`;
+
+const SearchResult = function () {
+  // const { currentKeyword } = useParams();
+  const currentKeyword = 'C++';
+  const [currentPage, setCurrentPage] = useState(1);
+  const postPerPage = 5;
+  const indexOfLast = currentPage * postPerPage;
+  const indexOfFirst = indexOfLast - postPerPage;
+  const currentPosts = (posts) => {
+    let slicePosts = 0;
+    slicePosts = posts.slice(indexOfFirst, indexOfLast);
+    return slicePosts;
+  };
+  const result = useQuery(GET_SEARCH, {
+    variables: {
+      keyword: currentKeyword,
+      page: currentPage,
+    },
+  });
+  console.log(result);
   const [movies, setMovies] = useState([]);
   const getMovies = async () => {
     const response = await fetch(
@@ -19,15 +53,6 @@ const SearchResult = function ({ keyword }) {
   useEffect(() => {
     getMovies();
   }, []);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postPerPage = 5;
-  const indexOfLast = currentPage * postPerPage;
-  const indexOfFirst = indexOfLast - postPerPage;
-  const currentPosts = (posts) => {
-    let slicePosts = 0;
-    slicePosts = posts.slice(indexOfFirst, indexOfLast);
-    return slicePosts;
-  };
   const [navArr, setArr] = useState([
     {
       id: 1,
@@ -63,11 +88,11 @@ const SearchResult = function ({ keyword }) {
       }),
     );
   };
-  const result = [5, 3, 0, 2]; // 검색 결과
+  const postNum = [5, 3, 0, 2]; // 검색 결과
   return (
     <div className="search-result">
       <div className="search-result__text">
-        <span className="search-result__keyword">{keyword}</span>
+        <span className="search-result__keyword">{currentKeyword}</span>
         <span className="search-result__num">{`검색결과 (총 ${result[0]}건)`}</span>
       </div>
       <div className="search-result__nav">
@@ -76,7 +101,7 @@ const SearchResult = function ({ keyword }) {
             key={elem.id}
             id={elem.id}
             name={elem.name}
-            num={result[elem.id - 1]}
+            num={postNum[elem.id - 1]}
             active={elem.active}
             onClick={onClick}
           />
@@ -84,7 +109,7 @@ const SearchResult = function ({ keyword }) {
       </div>
       <div>
         {currentPosts(movies).map((item) => (
-          <Recent
+          <PostBox
             key={item.id}
             id={item.id}
             title={item.title}
@@ -103,10 +128,6 @@ const SearchResult = function ({ keyword }) {
       </div>
     </div>
   );
-};
-
-SearchResult.propTypes = {
-  keyword: PropTypes.string.isRequired,
 };
 
 export default SearchResult;

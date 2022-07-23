@@ -7,6 +7,14 @@
 
 .post-details__img {
     height: 12px;
-    margin: 0px 10px;
+    margin-top: 3px;
+    margin-right: 10px;
 }
 
+.post-details__bar {
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 4px;
+    height: 14px;
+}

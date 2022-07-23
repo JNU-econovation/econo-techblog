@@ -1,14 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/Official.css';
 
 import noImg from '../img/no_img.png';
-import date from '../img/day.png';
-import looked from '../img/feather_eye.png';
-import liked from '../img/heart.png';
-
 import PostDetails from '../../components/PostDetails';
 import Tags from '../../components/Tags';
-import Partition from '../../components/Partition';
 
 const result = {
   author: '에코노베이션',
@@ -20,6 +15,14 @@ const result = {
 };
 
 const Official = function () {
+  const [officialNum, setOfficialNum] = useState(0);
+  const onChangePost = (index) => {
+    if (index > 1) {
+      setOfficialNum(0);
+    } else {
+      setOfficialNum(officialNum + 1);
+    }
+  };
   return (
     <div className="official">
       <div className="official__img" />
@@ -42,13 +45,16 @@ const Official = function () {
               {result.author}
             </span>
           </div>
-          <PostDetails src={date} alt="date" info={result.date} />
-          <Partition />
-          <PostDetails src={looked} alt="looked" info={result.looked} />
-          <Partition />
-          <PostDetails src={liked} alt="liked" info={result.liked} />
+          <PostDetails date="2022.05.04" views="21" hearts="21" />
         </div>
       </div>
+      <button
+        className="official__next"
+        type="button"
+        onClick={() => onChangePost(officialNum)}
+      >
+        {'>'}
+      </button>
     </div>
   );
 };

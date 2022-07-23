@@ -61,3 +61,9 @@
 .official-info-bottom-left__span {
     color: #7f7f7f;
 }
+
+
+.official__next {
+    border: none;
+    background-color: inherit;
+}
