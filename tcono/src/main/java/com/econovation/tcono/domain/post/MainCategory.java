@@ -10,7 +10,7 @@ public enum MainCategory {
 
     private int mainCategoryNumber;
 
-    private static final String NOT_FOUND_MAINCATEGORY_MESSAGE ="해당 카테고리의 게시물이 없습니다";
+    private static final String NOT_FOUND_MAINCATEGORY_MESSAGE="해당 카테고리의 게시물이 없습니다";
 
     MainCategory(int mainCategoryNumber) {
         this.mainCategoryNumber = mainCategoryNumber;
