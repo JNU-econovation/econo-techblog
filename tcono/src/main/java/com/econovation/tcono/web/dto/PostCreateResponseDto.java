@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -23,13 +24,13 @@ public class PostCreateResponseDto {
     private int views;
 
 
-    public PostCreateResponseDto(Post post, List<Category> categoryList) {
+    public PostCreateResponseDto(Post post, List<String> categoryList) {
         this.postId=post.getId();
         this.userId = post.getUserId();
         this.content = post.getContent();
         this.title = post.getTitle();
         this.mainCategoryNumber = post.getMainCategory().getMainCategoryNumber(); //해당 post의 mainCategoryNumber을 보내줘야 함
-        this.categorySplitByComma=categoryList.toString();
+        this.categorySplitByComma= String.join(",", categoryList);
         this.createdDate = post.getCreatedDate();
         this.hearts=post.getHearts();
         this.views=post.getViews();
