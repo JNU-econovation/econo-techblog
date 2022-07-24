@@ -1,0 +1,23 @@
+.my-page{
+    height: 92vh;
+    font-family: 'Noto Sans KR';
+}
+
+.my-page h2{
+    margin: 3vh 0 2vh 3vw;
+    color: white;
+}
+
+.my-page__content{
+    display: flex;
+}
+
+.my-page-wallpaper-color{
+    position: absolute;
+    top:0;
+    z-index: -1;
+    height: 40vh;
+    width: 100vw;
+    background-color: #2269fb;
+}
+

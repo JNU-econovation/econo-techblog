@@ -1,0 +1,41 @@
+.bottom-banner {
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+}
+
+.banner-box {
+    min-width: 80%;
+    display: flex;
+    border-radius: 10px;
+    background-color: #d2e1fe;
+    padding: 4em;
+}
+
+.banner-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.banner-text-h2,
+.banner-text-p {
+    margin: 5px 0px;
+}
+
+
+.banner-img {
+    width: 550px;
+    height: 345px;
+    object-fit: cover;
+}
+
+.banner-btn{
+    width: 227px;
+    height: 55px;
+    border: none;
+    border-radius: 37px;
+    background-color: #0076ff;
+    color: #fff;
+    margin: 20px 0px;
+}

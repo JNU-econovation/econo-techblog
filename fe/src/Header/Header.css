@@ -1,0 +1,42 @@
+.header{
+    display: flex;
+    position: sticky;
+    align-items: center;
+    justify-content: space-between;
+    height:6vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #bebebe;
+    z-index : 10;
+    background-color:white;
+}
+
+.header-nav-button-box{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: #1c4961;
+}
+
+.header-right-box{
+  display: flex;
+  align-items: center;
+  padding-left: auto;
+  padding-right: 50px;
+}
+
+.header-logo{
+  height: 100%;
+}
+
+.header-logo__button{
+  appearance: none;
+  border: none;
+  background-color: white;
+  height: 97%;
+}

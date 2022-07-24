@@ -1,0 +1,50 @@
+.login-box{
+    display: flex;
+    width: 435px;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+    border-radius: 20px;
+}
+
+
+.login-box__title{
+    color:#2269fa;
+    margin-bottom: 35px;
+    font-size: 25px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+
+}
+
+.login-box-id__input{
+    width:76%;
+    margin-bottom: 16px;
+}
+
+.login-box-pw__input{
+    width:76%;
+    margin-bottom: 58px;
+}
+
+.login__button{
+    display: block;
+    background-color:#2269fa;
+    color: white;
+    border: 1px solid#2269fa;
+    width: 76%;
+    height: 56px;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.login-fail{
+    color: red;
+}

@@ -1,0 +1,21 @@
+.sidebar {
+    flex: 2;
+    background-color: #f2f2f2;
+    padding: 40px 0px;
+}
+
+.sidebar-box {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebar p {
+    margin: 30px auto;
+    color: #000;
+    opacity: 0.5;
+}
+
+.sidebar-nav {
+    padding: 0px;
+}

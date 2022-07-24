@@ -1,0 +1,19 @@
+.footer {
+    padding: 20px 60px 20px 60px;
+}
+
+.footerbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 55px;
+    background-color: #4E87FB;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 0px 10px 30px;
+    font-size: 5px;
+}
+
+.footertext {
+    margin: 2px;
+}

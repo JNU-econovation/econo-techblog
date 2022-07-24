@@ -1,0 +1,25 @@
+.hashtag-input-container{
+    display: flex;
+    height: 63%;
+    width: 99%;
+    border: 1px solid #d3d3d3;
+}
+
+.hashtag-element{
+    color: #4e87fb;
+    background-color: white;
+    border: none;
+    transition: all 0.125s ease-in 0s;
+    animation: 0.125s ease-in-out 0s 1 normal forwards;
+}
+
+.hashtag-input{
+    border:none;
+    font-family: 'Noto Sans KR';
+}
+
+.hashtag-input:focus{
+    border:none;
+    outline: none;  
+}
+

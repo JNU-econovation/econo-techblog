@@ -1,0 +1,20 @@
+.user-search {
+    display: flex;
+    align-items: center;
+    height: 47px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.user-search input {
+    border: none;
+    font-size: 14px;
+}
+
+.user-search input:focus {
+    outline: none;
+}
+
+.user-search img {
+    margin: 0px 20px;
+}

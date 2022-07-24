@@ -1,0 +1,15 @@
+.home-banner{
+    margin: 20px 10% 0 10%;
+    height: 70vh;
+    display: flex;
+    justify-content: space-between;
+    background-color: #2269FA;
+    border-radius: 12px;
+}
+
+.home-banner-text{
+    margin: auto 0%;
+    width: 30%;
+    height: auto;
+    color: white;
+}
