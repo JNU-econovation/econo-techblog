@@ -51,10 +51,12 @@ function FindIDBox() {
       {isModal ? (
         <div className="find-id-error__modal">
           <div className="find-id-error__modal-box">
-            <h3>아이디 찾기 실패</h3>
-            <button type="button" onClick={onModalHandler}>
-              X
-            </button>
+            <div className="find-id-error__modal-box--header">
+              <h3>아이디 찾기 실패</h3>
+              <button type="button" onClick={onModalHandler}>
+                X
+              </button>
+            </div>
             <div>
               잘못된 계정인증 요청입니다. 아이디 비밀번호 찾기를 다시하거나
               사이트 관리자에게 계정정보를 문의해주세요. 정보확인이 불가능한

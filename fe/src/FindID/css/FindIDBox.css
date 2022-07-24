@@ -61,6 +61,11 @@
 
 .find-id-error__modal {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -73,6 +78,15 @@
 .find-id-error__modal-box {
   background-color: white;
   color: black;
-  margin: auto 0;
   opacity: 1;
+  border-radius: 20px;
+}
+
+.find-id-error__modal-box--header {
+  display: flex;
+  background-color: #2269fa;
+}
+
+.find-id-error__modal-box--header h3 {
+  color: white;
 }
