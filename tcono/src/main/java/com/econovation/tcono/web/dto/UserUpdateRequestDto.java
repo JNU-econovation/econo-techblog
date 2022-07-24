@@ -1,5 +1,6 @@
 package com.econovation.tcono.web.dto;
 
+import com.econovation.tcono.domain.user.Role;
 import com.econovation.tcono.domain.user.User;
 import lombok.Data;
 import lombok.Getter;
@@ -21,16 +22,23 @@ public class UserUpdateRequestDto {
     @NotNull
     private String userName;
 
-    public UserUpdateRequestDto(String userEmail, Long year, String userName) {
+    @NotNull
+    private Role role;
+
+
+    public UserUpdateRequestDto(String userEmail, Long year, String userName,Role role) {
         this.userEmail = userEmail;
         this.year = year;
         this.userName = userName;
+        this.role = role;
     }
 
     public User toEntity(){
         return User.builder()
                 .userEmail(userEmail)
                 .year(year)
-                .userName(userName).build();
+                .userName(userName)
+                .role(role)
+                .build();
     }
 }
