@@ -7,6 +7,7 @@ import lombok.Getter;
 @Data
 @Getter
 public class CommentCreateResponseDto {
+    private Long commentId;//comment Id 정보
     private Long userId;
     private Long postId;
     private String content;
@@ -16,7 +17,8 @@ public class CommentCreateResponseDto {
     private String createdDate;
 
     @Builder
-    public void CommentCreateRequestDto(Long userId, Long postId, String content, int depth, int group){
+    public void CommentCreateRequestDto(Long commentId,Long userId, Long postId, String content, int depth, int group){
+        this.commentId=commentId;
         this.userId=userId;
         this.postId=postId;
         this.content=content;

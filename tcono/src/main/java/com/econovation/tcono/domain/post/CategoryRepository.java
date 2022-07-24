@@ -10,4 +10,9 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query("Select c from Category c where c.post=:post")
     List<Category>findAllByPost(@Param("post") Post post);
+
+    @Query("Select c.categoryName from Category c where c.post=:post")
+    List<String>findCategoriesByPost(@Param("post") Post post);
+
+
 }

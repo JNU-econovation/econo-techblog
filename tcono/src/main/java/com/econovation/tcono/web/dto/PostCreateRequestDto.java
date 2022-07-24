@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.jboss.jandex.Main;
 
+import java.util.List;
+
 @Data
 @Getter
 @NoArgsConstructor
@@ -19,15 +21,15 @@ public class PostCreateRequestDto {
     private String content;
     private String title;
     private int mainCategoryNumber;
-    private String categorySplitByComma;//해시태그
+    private String categorySplitByComma;
 
     @Builder
-    public PostCreateRequestDto(Long userId, String content, String title, int mainCategoryNumber, String categorySplitByComma) {
+    public PostCreateRequestDto(Long userId, String content, String title, int mainCategoryNumber,String categorySplitByComma) {
         this.userId=userId;
         this.content=content;
         this.title=title;
         this.mainCategoryNumber=mainCategoryNumber;
-        this.categorySplitByComma=categorySplitByComma;//request할 때 ,로 구분됨
+        this.categorySplitByComma = categorySplitByComma;
     }
 
     public Post toPostEntity() {

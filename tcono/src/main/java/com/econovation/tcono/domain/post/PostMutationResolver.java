@@ -1,13 +1,10 @@
 package com.econovation.tcono.domain.post;
 
-import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.econovation.tcono.web.dto.PostCreateRequestDto;
-import com.econovation.tcono.web.dto.PostCreateResponseDto;
-//import com.econovation.tcono.web.dto.PostUpdateRequestDto;
-//import com.econovation.tcono.web.dto.PostUpdateResponseDto;
+import com.econovation.tcono.web.dto.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class PostMutationResolver implements GraphQLMutationResolver {
@@ -41,42 +39,49 @@ public class PostMutationResolver implements GraphQLMutationResolver {
 //                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
         Post post = postRepository.save(postCreateRequestDto.toPostEntity());
 
-        //category entity 생성 후 save
-        categoryListToEntity(postCreateRequestDto.getCategorySplitByComma())
-                .forEach(x -> categoryRepository.save(postCreateRequestDto.toCategoryEntity(post, x)));
+        //,로 구분된 category를 List형태로 바꿈
+        List<String> categories = categoryListToEntity(postCreateRequestDto.getCategorySplitByComma());
 
-        List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
+        //category 저장
+        categories.stream().forEach(x -> categoryRepository.save(postCreateRequestDto.toCategoryEntity(post, x)));
+
+        List<String> categoryListByPost = categoryRepository.findCategoriesByPost(post);
         return new PostCreateResponseDto(post, categoryListByPost);
-    }
+    }   
 
     /**
-     * Post update 구현
+     * Post update 구
      *
      * @param postUpdateRequestDto
      * @return PostResponseDto
      */
-//    @Transactional
-//    public PostUpdateResponseDto updatePost(Long id, PostUpdateRequestDto postUpdateRequestDto) {
-//        Post post = postRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-//
-//        post.updatePost(postUpdateRequestDto.getContent(), postUpdateRequestDto.getTitle());
-//        categoryListToEntity(postUpdateRequestDto.getCategory())
-//                .forEach(x -> categoryRepository.save(postUpdateRequestDto.toCategoryEntity(post, x)));
-//
-//        List<Category> categoryListByPost = categoryRepository.findAllByPost(post);
-//        return new PostUpdateResponseDto(post, categoryListByPost);
-//    }
+    @Transactional
+    public PostUpdateResponseDto updatePost(PostUpdateRequestDto postUpdateRequestDto) {
+        Post post = postRepository.findById(postUpdateRequestDto.getPostId())
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
+
+        List<Category> categories = categoryListToEntity(postUpdateRequestDto.getCategorySplitByComma())
+                .stream().map(x->postUpdateRequestDto.toCategoryEntity(post,x))
+                .collect(Collectors.toList());
+
+        List<String>categoryName=categories.stream().map(Category::getCategoryName)
+                        .collect(Collectors.toList());
+
+        post.updatePost(postUpdateRequestDto.getContent(), postUpdateRequestDto.getTitle(), categories);
+
+        return new PostUpdateResponseDto(post, categoryName);
+    }
 
     /**
-     * ,로 구분되어 있는 카테고리 분리
+     * String 을 List로 변환하기
+     *
      * @param category
      * @return Stream<String>
      */
     @Transactional
-    public Stream<String> categoryListToEntity(String category) {
+    public List<String> categoryListToEntity(String category) {
         List<String> categoryList = Arrays.asList(category.split(","));
-        return categoryList.stream();
+        return categoryList;
     }
 
     /**
@@ -98,6 +103,7 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      *
      * @return boolean
      */
+    
     @Transactional
     public List<Post> findOfficial(){
         List<Post> post = postRepository.findAll().stream()
@@ -105,9 +111,18 @@ public class PostMutationResolver implements GraphQLMutationResolver {
                 .limit(3)
                 .collect(Collectors.toList());
 
-                // && x.getViews() > 10)
+        // 추후 조건 추가 : && x.getViews() > 10)
 
         post.forEach(Post::updateOfficial);
+
+//        List<String>categoryNameList=post.forEach(x->x.getCategoryList().stream()
+//                        .map(Category::getCategoryName))
+//
+//                .map(Category::getCategoryName).collect(Collectors.toList());
+//        String categoryName=String.join(",",categoryNameList);
+//
+//        List<PostResponseDto>postList=post.
+//                forEach(x->new PostResponseDto(x.getId(),userRepository.findById(x.getUserId()),x.getContent(),x.getTitle(),x.getMainCategory().getMainCategoryNumber(),x.getCategoryList().,x.getCreatedDate(),x.getHearts(),x.getViews()));
         return post;
     }
 }

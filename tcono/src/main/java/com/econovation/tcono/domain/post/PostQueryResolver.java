@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -36,12 +38,12 @@ public class PostQueryResolver implements GraphQLQueryResolver {
      * 페이징 처리(10개)
      */
     @Transactional
-    public List<PostResponseDto> findAllPosts(int mainCategoryNumber, int page) {
+    public List<Post> findAllPosts(int mainCategoryNumber, int page) {
         Pageable pageable = PageRequest.of(page, 5);
-        List<Post> post = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber));
 
-
-        return post;
+        List<Post> postList = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber),pageable);
+        postList.forEach(x->x.getCategoryList().toString());
+        return postList;
     }
 
     /**
@@ -57,8 +59,11 @@ public class PostQueryResolver implements GraphQLQueryResolver {
 //        User user=userRepository.findById(post.getUserId())
 //                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
 
+        List<String>categoryNameList=post.getCategoryList().stream().map(Category::getCategoryName).collect(Collectors.toList());
+        String categoryName=String.join(",",categoryNameList);
+
         increaseViews(post); //조회수 증가
-        return new PostResponseDto(post.getId(),"수민",post.getContent(),post.getTitle(),post.getMainCategory().getMainCategoryNumber(),post.getCategoryList().toString(),post.getCreatedDate(),post.getHearts(),post.getViews());
+        return new PostResponseDto(post.getId(),"수민",post.getContent(),post.getTitle(),post.getMainCategory().getMainCategoryNumber(),categoryName,post.getCreatedDate(),post.getHearts(),post.getViews());
     }
     //user.getUserName()
 
@@ -67,6 +72,12 @@ public class PostQueryResolver implements GraphQLQueryResolver {
     public int increaseViews(Post post) {
         postRepository.updateViews(post.getId());
         return post.getViews();
+    }
+
+    @Transactional
+    public List<String> categoryListToEntity(String category) {
+        List<String> categoryList = Arrays.asList(category.split(","));
+        return categoryList;
     }
 
     /**

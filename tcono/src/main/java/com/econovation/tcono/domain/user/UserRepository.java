@@ -1,5 +1,6 @@
 package com.econovation.tcono.domain.user;
 
+import com.econovation.tcono.domain.post.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

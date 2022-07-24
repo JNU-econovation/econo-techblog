@@ -10,11 +10,11 @@ import lombok.Getter;
 @Data
 @Getter
 public class CommentCreateRequestDto {
-    private Long userId;
-    private Long postId;
+    private Long userId; //유저정보
+    private Long postId; // 글정보
     private String content;
-    private int depth;
-    private int group;
+    private int depth; //댓글? 대댓글?
+    private int group;//부모댓글
 
     @Builder
     public CommentCreateRequestDto(Long userId, Long postId, String content, int depth, int group) {
@@ -25,14 +25,16 @@ public class CommentCreateRequestDto {
         this.group = group;
     }
 
-    public Comment toEntity(Post post, User user) {
+    public Comment toEntity(Post post) {
         return Comment.builder()
-                .user(user)
+                .userId(userId)
                 .post(post)
                 .content(content)
                 .depth(depth)
                 .group(group)
                 .build();
     }
+
+
 
 }
