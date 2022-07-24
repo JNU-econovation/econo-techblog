@@ -38,7 +38,7 @@ public class ConfirmationTokenService {
         mailMessage.setTo(receiverEmail);
         mailMessage.setSubject("회원가입 이메일 인증");
         mailMessage.setText("Econovation TechBlog 회원가입 인증 URL");
-        mailMessage.setText("http://13.124.120.147/api/confirm-email/"+emailConfirmationToken.getId());
+        mailMessage.setText("http://54.180.29.85/api/confirm-email/"+emailConfirmationToken.getId());
         emailSenderService.sendEmail(mailMessage);
 
         return emailConfirmationToken.getId();
