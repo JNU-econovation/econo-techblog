@@ -38,7 +38,7 @@ public class TestDataInit {
 
     @PostConstruct
     @Transactional
-    public Post initPost() {
+    public void initPost() {
         Post post = new Post();
         Post findPost = post.builder()
                 .userId(1L)
@@ -48,8 +48,6 @@ public class TestDataInit {
                 .build();
 
         postRepository.save(post);
-        return post;
-
     }
 
 
