@@ -35,10 +35,10 @@ public class Post extends BaseTimeEntity {
     @ColumnDefault("false")
     private Boolean official; //인기글
 
-    @Column(insertable = false, updatable = false)
+    @Column(insertable = false)
     @ColumnDefault("0")
     private int views; //조회수
-    @Column(insertable = false, updatable = false)
+    @Column(insertable = false)
     @ColumnDefault("0")
     private int hearts; //좋아요
 
