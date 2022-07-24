@@ -14,7 +14,6 @@ function CardinalSelectBox({ classNames, setValue }) {
       name="cardinal"
       className={`cardinal-select-box ${classNames}`}
       onChange={onChange}
-      defaultValue="23"
     >
       <option disabled selected>
         기수
