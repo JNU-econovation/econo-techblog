@@ -6,19 +6,16 @@ import heart from '../img/heart.png';
 import clickheart from '../img/clickheart.png';
 import '../css/Liked.css';
 
-const Liked = function ({ liked, setLiked }) {
-  const onClick = () => {
-    setLiked(!liked);
-  };
+const Liked = function ({ active, setActive }) {
   return (
     <div className="liked">
       <button
-        onClick={onClick}
-        className={liked ? 'liked__button liked__button--on' : 'liked__button'}
+        onClick={setActive}
+        className={active ? 'liked__button liked__button--on' : 'liked__button'}
         type="button"
       >
         <span className="liked__span">좋아요</span>
-        {liked ? (
+        {active ? (
           <img src={clickheart} alt="liked" className="liked__img" />
         ) : (
           <img src={heart} alt="liked" className="liked__img" />
@@ -29,8 +26,8 @@ const Liked = function ({ liked, setLiked }) {
 };
 
 Liked.propTypes = {
-  liked: PropTypes.bool.isRequired,
-  setLiked: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired,
+  setActive: PropTypes.func.isRequired,
 };
 
 export default Liked;

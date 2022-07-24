@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
+/* eslint-disable object-shorthand */
 
 import './css/Post.css';
 import PostInfo from './components/PostInfo';
@@ -10,7 +11,7 @@ import CommentList from './components/CommentList';
 import Liked from './components/Liked';
 
 const GET_POST = gql`
-  query getPost($postId: Int!) {
+  query getPost($postId: Int!, $userId: Int!) {
     findPostByPostId(id: $postId) {
       postId
       userName
@@ -22,19 +23,20 @@ const GET_POST = gql`
       views
       hearts
     }
+    isHeart(postId: $postId, userId: $userId)
   }
 `;
 
 // 좋아요 상태 업데이트
 const SET_LIKED = gql`
-  mutation setLiked($heartRequest: heartRequestDto!) {
+  mutation updateHeartState($heartRequest: HeartRequestDto!) {
     updateHeartState(heartRequestDto: $heartRequest)
   }
 `;
 
 // 게시물 삭제
 const DELETE_POST = gql`
-  mutation delete($postId: Int!) {
+  mutation deletePost($postId: Int!) {
     deletePost(postId: $postId)
   }
 `;
@@ -42,32 +44,60 @@ const DELETE_POST = gql`
 const Post = function () {
   const navigate = useNavigate();
   // const { id } = useParams();
-  const id = 1;
-  const { data, loading, error } = useQuery(GET_POST, {
+  const id = 5;
+  const { data, loading } = useQuery(GET_POST, {
     variables: {
       postId: id,
+      userId: 1,
     },
   });
   console.log(data);
   const [updateHeartState] = useMutation(SET_LIKED, {
-    onCompleted: (result) => {
-      console.log(result);
+    // eslint-disable-next-line no-shadow
+    update(cache, { data: { updateHeartState } }) {
+      const { findPostByPostId } = cache.readQuery({
+        query: GET_POST,
+        variables: {
+          postId: id,
+          userId: 1,
+        },
+      });
+      const nowPost = { ...findPostByPostId };
+      if (updateHeartState > nowPost.hearts) {
+        nowPost.hearts += 1;
+        cache.writeQuery({
+          query: GET_POST,
+          variables: {
+            postId: id,
+            userId: 1,
+          },
+          data: { findPostByPostId: nowPost, isHeart: true },
+        });
+      } else {
+        nowPost.hearts -= 1;
+        cache.writeQuery({
+          query: GET_POST,
+          variables: {
+            postId: id,
+            userId: 1,
+          },
+          data: { findPostByPostId: nowPost, isHeart: false },
+        });
+      }
     },
   });
   const [deletePost] = useMutation(DELETE_POST, {
-    onCompleted: (result) => {
-      console.log(`게시물 삭제 결과 => ${result}`);
+    onCompleted: () => {
+      navigate(-1); // 삭제 시 이전 페이지로 이동
     },
   });
-  const [active, setActive] = useState(false);
-  const onClick = () => {
-    setActive(!active);
+  const onClick = (active) => {
     updateHeartState({
       variables: {
         heartRequest: {
           postId: id,
           userId: 1,
-          isHeart: active,
+          isHeart: !active,
         },
       },
     });
@@ -78,10 +108,8 @@ const Post = function () {
         postId: id,
       },
     });
-    navigate(-1); // 삭제 시 이전 페이지로 이동
   };
-  if (loading) return <p>loading</p>;
-  if (error) return <p>ERR_CONNECTION_REFUSED</p>;
+  if (loading) return 'Loading';
   return (
     <div className="post">
       <div className="post-middle">
@@ -95,7 +123,7 @@ const Post = function () {
         />
         <Tags tags={data.findPostByPostId.categoryList} />
         <PostDesc />
-        <Liked active={active} setActive={onClick} />
+        <Liked active={data.isHeart} setActive={() => onClick(data.isHeart)} />
       </div>
       <div className="post-partition" />
       <CommentList />
