@@ -1,5 +1,6 @@
 package com.econovation.tcono.web.controller;
 
+import com.econovation.tcono.domain.user.Role;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.web.dto.UserCreateRequestDto;
 import com.econovation.tcono.web.dto.UserFindDto;
@@ -51,6 +52,9 @@ public class UserController {
         List<User> findUser = userService.findUserByUserName(userName);
         return userName;
     }
+    @GetMapping("/api/user/role/{page}/{role}")
+    public List<User> findUserByRole(@PathVariable int page, @PathVariable String role){ return userService.findUserByRole(page, role); }
+
     @GetMapping("/api/find-email/")
     public User findEmail(@Valid @ModelAttribute UserFindDto userFindDto){
         return userService.findUserByYearAndUserName(userFindDto);

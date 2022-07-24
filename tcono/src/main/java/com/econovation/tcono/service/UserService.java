@@ -1,6 +1,7 @@
 package com.econovation.tcono.service;
 
 import com.econovation.tcono.domain.auth.ConfirmationToken;
+import com.econovation.tcono.domain.user.Role;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.web.dto.UserCreateRequestDto;
 import com.econovation.tcono.web.dto.UserFindDto;
@@ -8,7 +9,6 @@ import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.econovation.tcono.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -46,7 +46,17 @@ public class UserService {
         return userRepository.findAll(pageable).toList();
     }
 
-
+//    /**
+//     * Get All User
+//     * @param int : page
+//     * @return User
+//     */
+    @Transactional
+    public List<User> findUserByRole(int page, String role){
+        Role translatedRole = Role.valueOf(role);
+        Pageable pageable = PageRequest.of(page, 8);
+        return userRepository.findAll(pageable).stream().filter(u->u.getRole() == translatedRole).collect(Collectors.toList());
+    }
     /**
      * Get User By One userId
      * @param Long : userId
