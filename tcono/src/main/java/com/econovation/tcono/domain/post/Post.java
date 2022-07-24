@@ -62,11 +62,11 @@ public class Post extends BaseTimeEntity {
         this.title = title;
         this.mainCategory = mainCategory;
     }
-    public void decreaseHearts(){
+    public void decreaseHearts() {
         this.hearts -= 1;
     }
 
-    public void increaseHearts(){
+    public void increaseHearts() {
         this.hearts += 1;
     }
 
