@@ -79,5 +79,6 @@ public class User extends BaseTimeEntity {
         this.userEmail = userUpdateRequestDto.toEntity().getUserEmail();
         this.userName = userUpdateRequestDto.toEntity().getUserName();
         this.year = userUpdateRequestDto.toEntity().getYear();
+        this.role = userUpdateRequestDto.toEntity().getRole();
     }
 }
