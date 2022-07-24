@@ -7,8 +7,10 @@ import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
 import Write from './Write/Write';
 import Manager from './Manager/Manager';
-import FindInfo from './FindInfo/FindInfo';
+import FindID from './FindID/FindID';
 import Layout from './Layout/Layout';
+import MyPage from './MyPage/MyPage';
+import FindPassword from './FindPassword/FindPassword';
 
 function App() {
   return (
@@ -19,7 +21,9 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/write" element={<Write />} />
         <Route path="/admin" element={<Manager />} />
-        <Route path="/findinfo" element={<FindInfo />} />
+        <Route path="/findid" element={<FindID />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/findpassword" element={<FindPassword />} />
       </Route>
     </Routes>
   );
