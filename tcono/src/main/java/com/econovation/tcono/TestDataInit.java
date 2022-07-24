@@ -1,9 +1,11 @@
 package com.econovation.tcono;
 
 
+import com.econovation.tcono.domain.post.*;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,13 +16,15 @@ import javax.annotation.PostConstruct;
 public class TestDataInit {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final CategoryRepository categoryRepository;
 
     /**
      * 테스트용 데이터 추가
      */
     @PostConstruct
     @Transactional
-    public void init() {
+    public void initUser() {
         User user = new User();
         User findUser = user.builder()
                 .userEmail("ymecca730135@gmail.com")
@@ -30,5 +34,46 @@ public class TestDataInit {
                 .pinCode("1234")
                 .build();
         userRepository.save(findUser);
+    }
+
+    @PostConstruct
+    @Transactional
+    public Post initPost() {
+        Post post = new Post();
+        Post findPost = post.builder()
+                .userId(1L)
+                .content("ㅈㅂㅈㅂㅈㅂㅈㅂ 성공")
+                .title("멋알")
+                .mainCategory(MainCategory.getMainCategory(1))
+                .build();
+
+        postRepository.save(post);
+        return post;
+
+    }
+
+
+    @PostConstruct
+    @Transactional
+    public void initCategoryOne() {
+        Category category1 = new Category();
+        Category findCategory = Category.builder()
+                .categoryName("이윤성")
+                .post(initPost())
+                .build();
+
+        categoryRepository.save(category1);
+    }
+
+    @PostConstruct
+    @Transactional
+    public void initCategoryTwo() {
+        Category category2 = new Category();
+        Category findCategory = Category.builder()
+                .categoryName("이혜은")
+                .post(initPost())
+                .build();
+
+        categoryRepository.save(category2);
     }
 }
