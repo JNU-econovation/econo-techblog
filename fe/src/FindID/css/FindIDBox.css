@@ -53,3 +53,22 @@
     border-radius: 40px;
     cursor: pointer;
 }
+
+.find-id-error__modal{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(94, 94, 94, 0.4);
+    z-index: 9999;
+    
+}
+
+.find-id-error__modal-box{
+    background-color: white;
+    color:black;
+    margin: auto 0;
+    opacity: 1;
+}
