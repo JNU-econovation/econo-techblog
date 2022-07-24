@@ -10,7 +10,7 @@ import SelectBox from './SelectBox';
 import noImg from '../img/no_img.png';
 import more from '../img/post_more.png';
 
-const PostInfo = function ({ author, date, views, hearts }) {
+const PostInfo = function ({ author, date, views, hearts, onDelete }) {
   const [isOpen, setOpen] = useState(false);
   const onClick = () => {
     setOpen(!isOpen);
@@ -29,7 +29,7 @@ const PostInfo = function ({ author, date, views, hearts }) {
           <img src={more} alt="more" className="post-info__img" />
         </button>
       </div>
-      {isOpen && <SelectBox />}
+      {isOpen && <SelectBox onDelete={onDelete} />}
     </div>
   );
 };
@@ -37,8 +37,9 @@ const PostInfo = function ({ author, date, views, hearts }) {
 PostInfo.propTypes = {
   author: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  views: PropTypes.string.isRequired,
-  hearts: PropTypes.string.isRequired,
+  views: PropTypes.number.isRequired,
+  hearts: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default PostInfo;
