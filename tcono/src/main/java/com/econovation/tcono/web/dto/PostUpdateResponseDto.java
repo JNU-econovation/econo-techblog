@@ -29,7 +29,7 @@ public class PostUpdateResponseDto {
     @Builder
     public PostUpdateResponseDto(Post post, List<String>categoryName) {
         this.postId=post.getId();
-        this.userId=post.getUserId();`
+        this.userId=post.getUserId();
         this.content = post.getContent();
         this.title = post.getTitle();
         this.mainCategoryNumber=post.getMainCategory().getMainCategoryNumber();
