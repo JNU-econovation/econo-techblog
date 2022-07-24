@@ -95,12 +95,16 @@ schema {
     mutation: Mutation,
 }
 
+
 #Root Query
 type Query{
     #    -----------Post------------------------f------
 #    findAllPosts(mainCategoryNumber:Int, page : Int): [PostResponseDto!]!
     findPostByPostId(id : Int) : PostResponseDto!
 #    search(keyword : String , page : Int) : [PostResponseDto]!
+
+    # ---------------Heart------------------------------
+    isHeart(postId:Int, userId:Int): Boolean!
     #    ---------Comment--------------------
 }
 

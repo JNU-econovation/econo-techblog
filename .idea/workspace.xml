@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec79d42c-2991-4815-b692-2593af2ab946" name="Changes" comment="refactor : category entity 메서드 분리">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/domain/heart/HeartMutationResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/domain/heart/HeartMutationResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/domain/heart/HeartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/tcono/src/main/java/com/econovation/tcono/domain/heart/HeartRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +30,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
