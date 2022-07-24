@@ -9,6 +9,7 @@ import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.econovation.tcono.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,13 @@ public class UserService {
     private static final String NOT_CORRECT_USER_MESSAGE = "비밀번호나 이메일이 일치하지 않습니다.";
 
     private final UserRepository userRepository;
-    private final ConfirmationTokenService confirmationTokenService;
+    private ConfirmationTokenService confirmationTokenService;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+        this.confirmationTokenService = confirmationTokenService;
+    }
 
 
     /**

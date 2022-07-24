@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +36,9 @@ import java.util.List;
 @RestController
 public class UserController {
 
+    @Autowired
     private final UserService userService;
+    @Autowired
     private final LoginService loginService;
 
     @GetMapping("/api/user/all/{page}")
