@@ -31,7 +31,6 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin("*")
 @RestController
 public class UserController {
 
