@@ -35,10 +35,9 @@ public class TestDataInit {
                 .build();
         userRepository.save(findUser);
     }
-
     @PostConstruct
     @Transactional
-    public void initPost() {
+    public void initPost(){
         Post post = new Post();
         Post findPost = post.builder()
                 .userId(1L)
@@ -47,32 +46,29 @@ public class TestDataInit {
                 .mainCategory(MainCategory.getMainCategory(1))
                 .build();
 
-        postRepository.save(post);
+        postRepository.save(findPost);
     }
-
-
     @PostConstruct
     @Transactional
-    public void initCategoryOne() {
+    public void initCategory() {
         Category category1 = new Category();
         Category findCategory = Category.builder()
                 .categoryName("이윤성")
                 .post(postRepository.findById(1L).get())
                 .build();
 
-        categoryRepository.save(category1);
+        categoryRepository.save(findCategory);
     }
-
     @PostConstruct
     @Transactional
-    public void initCategoryTwo() {
+    public void initCategory2(){
         Category category2 = new Category();
-        Category findCategory = Category.builder()
+        Category findCategory2 = Category.builder()
                 .categoryName("이혜은")
                 .post(postRepository.findById(1L).get())
                 .build();
 
-        categoryRepository.save(category2);
+        categoryRepository.save(findCategory2);
     }
 
 }

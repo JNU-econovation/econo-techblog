@@ -1,7 +1,6 @@
 package com.econovation.tcono.service;
 
 import com.econovation.tcono.domain.auth.ConfirmationToken;
-import com.econovation.tcono.domain.auth.ConfirmationTokenRepository;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.web.dto.UserCreateRequestDto;
 import com.econovation.tcono.web.dto.UserFindDto;
@@ -9,6 +8,9 @@ import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.econovation.tcono.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +32,20 @@ public class UserService {
     private static final String NOT_CORRECT_USER_MESSAGE = "비밀번호나 이메일이 일치하지 않습니다.";
 
     private final UserRepository userRepository;
-    private final ConfirmationTokenRepository confirmationTokenRepository;
     private final ConfirmationTokenService confirmationTokenService;
+
+
+    /**
+     * Get All User
+     * @param int : page
+     * @return User
+     */
+    @Transactional
+    public List<User> findUserAll(int page){
+        Pageable pageable = PageRequest.of(page, 8);
+        return userRepository.findAll(pageable).toList();
+    }
+
 
     /**
      * Get User By One userId

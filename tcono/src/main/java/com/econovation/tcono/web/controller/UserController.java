@@ -37,6 +37,9 @@ public class UserController {
     private final UserService userService;
     private final LoginService loginService;
 
+    @GetMapping("/api/user/all/{page}")
+    public List<User> findUserAll(@PathVariable int page){return userService.findUserAll(page);}
+
     @GetMapping("/api/user/{userId}")
     public User findUserById(@PathVariable Long userId) { return userService.findUserById(userId);}
 
