@@ -59,7 +59,7 @@ public class TestDataInit {
         Category category1 = new Category();
         Category findCategory = Category.builder()
                 .categoryName("이윤성")
-                .post(initPost())
+                .post(postRepository.findById(1L).get())
                 .build();
 
         categoryRepository.save(category1);
@@ -71,9 +71,10 @@ public class TestDataInit {
         Category category2 = new Category();
         Category findCategory = Category.builder()
                 .categoryName("이혜은")
-                .post(initPost())
+                .post(postRepository.findById(1L).get())
                 .build();
 
         categoryRepository.save(category2);
     }
+
 }
