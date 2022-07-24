@@ -56,14 +56,14 @@ public class PostQueryResolver implements GraphQLQueryResolver {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
 
-//        User user=userRepository.findById(post.getUserId())
-//                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
+        User user=userRepository.findById(post.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
 
         List<String>categoryNameList=post.getCategoryList().stream().map(Category::getCategoryName).collect(Collectors.toList());
         String categoryName=String.join(",",categoryNameList);
 
         increaseViews(post); //조회수 증가
-        return new PostResponseDto(post.getId(),"수민",post.getContent(),post.getTitle(),post.getMainCategory().getMainCategoryNumber(),categoryName,post.getCreatedDate(),post.getHearts(),post.getViews());
+        return new PostResponseDto(post,user,categoryName);
     }
     //user.getUserName()
 

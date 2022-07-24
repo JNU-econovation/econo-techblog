@@ -21,7 +21,6 @@ import java.util.Optional;
 public class HeartMutationResolver implements GraphQLMutationResolver {
     private static final String NOT_FOUND_USER_MESSAGE = "존재하지 않은 회원입니다.";
     private static final String NOT_FOUND_POST_MESSAGE = "해당 페이지가 존재하지 않습니다.";
-
     private Post post;
 
     @Autowired
@@ -29,19 +28,28 @@ public class HeartMutationResolver implements GraphQLMutationResolver {
     @Autowired
     private HeartRepository heartRepository;
 
+    @Transactional
+    public Post findPost(Long postId){
+        Post post=postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
+
+        return post;
+    }
+
 
 
     @Transactional
     public int updateHeartState(HeartRequestDto heartRequestDto) {
-        Post post=postRepository.findById(heartRequestDto.getPostId())
-                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
-        //좋아요 삭제
+        Post post=findPost(heartRequestDto.getPostId());
+        //좋아요 생성
         if (heartRequestDto.getIsHeart()) {
-            heartRepository.delete(heartRequestDto.toEntity(post));
-            return post.decreaseHearts();
-        } else { // 좋아요 추가
+            log.info("좋아요 생성");
             heartRepository.save(heartRequestDto.toEntity(post));
             return post.increaseHearts();
+        } else { // 좋아요 삭제
+            log.info("좋아요 삭제");
+            heartRepository.deleteHeartByUserIdAndPostId(heartRequestDto.getUserId(),post);
+            return post.decreaseHearts();
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.econovation.tcono.web.dto;
 
+import com.econovation.tcono.domain.post.Post;
+import com.econovation.tcono.domain.user.User;
 import lombok.Builder;
 
 import java.util.List;
@@ -17,16 +19,16 @@ public class PostResponseDto {
     private int views;
 
     @Builder
-    public PostResponseDto(Long postId, String userName, String content, String title, int mainCategoryNumber, String categoryList, String createdDate, int hearts, int views) {
-        this.postId = postId;
-        this.userName = userName;
-        this.content = content;
-        this.title = title;
-        this.mainCategoryNumber = mainCategoryNumber;
+    public PostResponseDto(Post post, User user, String categoryList) {
+        this.postId = post.getId();
+        this.userName = user.getUserName();
+        this.content = post.getContent();
+        this.title = post.getTitle();
+        this.mainCategoryNumber = post.getMainCategory().getMainCategoryNumber();
         this.categoryList=categoryList;
-        this.createdDate = createdDate;
-        this.hearts = hearts;
-        this.views = views;
+        this.createdDate = post.getCreatedDate();
+        this.hearts = post.getHearts();
+        this.views = post.getViews();
 
     }
 }
