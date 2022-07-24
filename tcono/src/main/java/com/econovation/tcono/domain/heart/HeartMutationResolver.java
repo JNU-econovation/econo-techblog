@@ -28,7 +28,6 @@ public class HeartMutationResolver implements GraphQLMutationResolver {
     @Autowired
     private HeartRepository heartRepository;
 
-    @Transactional
     public Post findPost(Long postId){
         Post post=postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
@@ -45,11 +44,12 @@ public class HeartMutationResolver implements GraphQLMutationResolver {
         if (heartRequestDto.getIsHeart()) {
             log.info("좋아요 생성");
             heartRepository.save(heartRequestDto.toEntity(post));
-            return post.increaseHearts();
+            post.increaseHearts();
         } else { // 좋아요 삭제
             log.info("좋아요 삭제");
             heartRepository.deleteHeartByUserIdAndPostId(heartRequestDto.getUserId(),post);
-            return post.decreaseHearts();
+            post.decreaseHearts();
         }
+        return post.getHearts();
     }
 }
