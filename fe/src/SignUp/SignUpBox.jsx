@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import CardinalSelectBox from '../components/CardinalSelectBox';
 import InputElement from '../components/InputElement';
@@ -39,6 +40,20 @@ function SignUpBox() {
       pinCode: 1111,
     };
     console.log('verify request data', requestData);
+    axios
+      .post('/api/user?', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+        data: requestData,
+      })
+      .then((response) => {
+        alert('회원가입 완료. 이메일을 확인해주세요.');
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
   };
 
   return (
