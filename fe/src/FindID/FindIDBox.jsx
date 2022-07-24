@@ -30,7 +30,7 @@ function FindIDBox() {
   };
   return (
     <div className="find-id-box">
-      <h3 className="find-id-box-title">아이디 찾기</h3>
+      <div className="find-id-box-title">아이디 찾기</div>
       <h4>아이디를 잃어버리셨나요?</h4>
       <p>걱정하지 마세요. 아이디 찾기는 간단합니다.</p>
       <p>이름과 기수만 알려주세요.</p>
