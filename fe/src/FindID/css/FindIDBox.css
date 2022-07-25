@@ -86,6 +86,7 @@
 }
 
 .find-id-error__modal-box p {
+  font-size: 0.9em;
   color: #292929;
   margin-bottom: 22px;
 }
