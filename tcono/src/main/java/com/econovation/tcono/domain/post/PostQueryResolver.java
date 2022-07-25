@@ -3,6 +3,7 @@ package com.econovation.tcono.domain.post;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
+import com.econovation.tcono.web.dto.PostByIdResponseDto;
 import com.econovation.tcono.web.dto.PostListResponseDto;
 import com.econovation.tcono.web.dto.PostResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +42,12 @@ public class PostQueryResolver implements GraphQLQueryResolver {
     @Transactional
     public List<PostListResponseDto> findAllPosts(int mainCategoryNumber, int page) {
         Pageable pageable = PageRequest.of(page, 5);
-
+        if(mainCategoryNumber==0){
+            List<Post> allPostsByMainCategory = postRepository.findPosts(pageable);
+            return allPostsByMainCategory.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+                    .collect(Collectors.toList());
+        }
         List<Post> allPostsByMainCategory = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber),pageable);
-
         return allPostsByMainCategory.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
                 .collect(Collectors.toList());
     }
@@ -95,7 +99,8 @@ public class PostQueryResolver implements GraphQLQueryResolver {
 //    }
 
     @Transactional
-    public Long postCounts(){
+    public Long postCounts() {
         return postRepository.countPosts();
     }
+    //특정 user의 post
 }
