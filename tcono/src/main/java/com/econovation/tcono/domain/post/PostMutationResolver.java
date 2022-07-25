@@ -1,5 +1,6 @@
 package com.econovation.tcono.domain.post;
 
+import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.econovation.tcono.web.dto.*;
@@ -35,8 +36,9 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      */
     @Transactional
     public PostCreateResponseDto createPost(PostCreateRequestDto postCreateRequestDto) {
-//        User user = userRepository.findById(postCreateRequestDto.getUserId())
-//                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
+        User user = userRepository.findById(postCreateRequestDto.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
+
         Post post = postRepository.save(postCreateRequestDto.toPostEntity());
 
         //,로 구분된 category를 List형태로 바꿈
@@ -105,24 +107,16 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      */
     
     @Transactional
-    public List<Post> findOfficial(){
-        List<Post> post = postRepository.findAll().stream()
+    public List<PostListResponseDto> findOfficial(){
+        List<Post> officialPost = postRepository.findAll().stream()
                 .filter(x -> x.getViews() > 2)
                 .limit(3)
                 .collect(Collectors.toList());
 
         // 추후 조건 추가 : && x.getViews() > 10)
+        officialPost.forEach(Post::updateOfficial);
+        return officialPost.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+                .collect(Collectors.toList());
 
-        post.forEach(Post::updateOfficial);
-
-//        List<String>categoryNameList=post.forEach(x->x.getCategoryList().stream()
-//                        .map(Category::getCategoryName))
-//
-//                .map(Category::getCategoryName).collect(Collectors.toList());
-//        String categoryName=String.join(",",categoryNameList);
-//
-//        List<PostResponseDto>postList=post.
-//                forEach(x->new PostResponseDto(x.getId(),userRepository.findById(x.getUserId()),x.getContent(),x.getTitle(),x.getMainCategory().getMainCategoryNumber(),x.getCategoryList().,x.getCreatedDate(),x.getHearts(),x.getViews()));
-        return post;
     }
 }
