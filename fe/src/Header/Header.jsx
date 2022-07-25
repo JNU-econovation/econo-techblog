@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import LoginButton from './components/LoginButton';
@@ -17,6 +17,16 @@ function Header() {
   const onLogoClick = () => {
     navigate('/');
   };
+
+  useEffect(() => {
+    const loginSession = sessionStorage.getItem('isLogin');
+
+    if (loginSession === 'true') {
+      setIsLogin(() => true);
+    } else {
+      setIsLogin(() => false);
+    }
+  }, []);
   return (
     <header className="header">
       <button
@@ -34,7 +44,7 @@ function Header() {
       </ul>
       <div className="header-right-box">
         <Search />
-        {isLogin ? <div>login 완료</div> : <LoginButton />}
+        {isLogin ? <div>***님</div> : <LoginButton />}
       </div>
     </header>
   );

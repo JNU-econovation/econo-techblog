@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import CardinalSelectBox from '../components/CardinalSelectBox';
 import InputElement from '../components/InputElement';
@@ -39,6 +40,21 @@ function SignUpBox() {
       pinCode: 1111,
     };
     console.log('verify request data', requestData);
+    axios({
+      method: 'post',
+      url: '/api/user?',
+      data: requestData,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+      .then((response) => {
+        alert('회원가입 완료. 이메일을 확인해주세요.');
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
   };
 
   return (
@@ -78,6 +94,12 @@ function SignUpBox() {
         classNames="sign-up-box-cardinal__select"
         setValue={setYear}
       />
+      <input
+        classNames="sign-up-box-pin-code__input"
+        type="number"
+        maxLength="4"
+      />
+
       <div className="sign-up-box--agree__container">
         <input type="checkbox" checked={isAgree} onChange={onCheckHandler} />
         <span>이용약관 및 개인정보 처리방침에 동의합니다.</span>

@@ -34,3 +34,9 @@
   height: 100%;
 }
 
+.header-logo__button{
+  appearance: none;
+  border: none;
+  background-color: white;
+  height: 97%;
+}
