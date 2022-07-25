@@ -11,6 +11,7 @@ import FindID from './FindID/FindID';
 import Layout from './Layout/Layout';
 import MyPage from './MyPage/MyPage';
 import FindPassword from './FindPassword/FindPassword';
+import NewPassword from './NewPassword/NewPassword';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/findid" element={<FindID />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/findpassword" element={<FindPassword />} />
+        <Route path="/newpassword" element={<NewPassword />} />
       </Route>
     </Routes>
   );
