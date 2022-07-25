@@ -57,8 +57,11 @@ function FindIDBox() {
                 X
               </button>
             </div>
-            <div>
-              <p>잘못된 계정인증 요청입니다.</p>
+            <div className="find-id-error__modal-box--content">
+              <p>
+                <span className="warning-style">잘못된 계정인증 요청</span>
+                입니다.
+              </p>
               <p>
                 아이디 비밀번호 찾기를 다시하거나 사이트 관리자에게 계정정보를
                 문의해주세요.

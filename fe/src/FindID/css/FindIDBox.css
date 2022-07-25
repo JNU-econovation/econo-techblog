@@ -15,6 +15,7 @@
   margin: 0;
   color: #444444;
   font-family: 'Noto Sans KR';
+  margin-bottom: 7px;
 }
 
 .find-id-box p {
@@ -27,7 +28,7 @@
 .find-id-box-title {
   font-size: 23px;
   position: relative;
-  top: -22px;
+  top: -25px;
   padding: 10px;
   background-color: #2269fa;
   color: white;
@@ -37,13 +38,14 @@
 .find-id-name__input {
   display: block;
   width: 70%;
-  margin-bottom: 10px;
+  margin: 20px 0;
 }
 
 .find-id-cardinal__select {
   display: block;
   height: 56px;
   width: 71%;
+  margin-bottom: 33px;
 }
 
 .find-id-btn {
@@ -80,13 +82,53 @@
   color: black;
   opacity: 1;
   border-radius: 20px;
+  width: 500px;
 }
 
+.find-id-error__modal-box p {
+  color: #292929;
+  margin-bottom: 22px;
+}
+
+.find-id-error__modal-box--content {
+  padding: 25px;
+}
 .find-id-error__modal-box--header {
   display: flex;
   background-color: #2269fa;
+  border-radius: 20px 20px 0 0;
+  justify-content: space-between;
 }
 
 .find-id-error__modal-box--header h3 {
+  padding-left: 25px;
   color: white;
+}
+
+.find-id-error__modal-box--header button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background-color: #2269fa;
+  color: white;
+  border-radius: 20px;
+  padding-right: 25px;
+}
+
+.find-id-error__modal-box--close-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  color: white;
+  background-color: #2269fa;
+  border-radius: 28px;
+  width: 20%;
+  height: 40px;
+  margin-bottom: 25px;
+}
+
+.warning-style {
+  color: red;
 }
