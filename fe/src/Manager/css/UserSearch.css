@@ -6,15 +6,16 @@
     border-radius: 15px;
 }
 
-.user-search input {
+.user-search__input {
     border: none;
     font-size: 14px;
+    width: 130px;
 }
 
-.user-search input:focus {
+.user-search__input:focus {
     outline: none;
 }
 
-.user-search img {
+.user-search__img {
     margin: 0px 20px;
 }

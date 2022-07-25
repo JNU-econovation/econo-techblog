@@ -8,10 +8,10 @@ import '../css/Comment.css';
 const Comment = function ({ name, desc }) {
   return (
     <div className="comment">
-      <img src={noImg} alt="no-img" />
+      <img src={noImg} alt="no-img" className="comment__img" />
       <div className="comment-info">
-        <span className="comment-writer">{name}</span>
-        <span className="comment-desc">{desc}</span>
+        <span className="comment-info__writer">{name}</span>
+        <span className="comment-info__desc">{desc}</span>
       </div>
     </div>
   );

@@ -4,9 +4,12 @@ import './Footer.css';
 const Footer = function () {
   return (
     <div className="footer">
-      <div className="footerbox">
-        <p className="footertext">Copyright 2022 ECONOVATION</p>
-        <p className="footertext">All rights reserved</p>
+      <div className="footer__box">
+        <p className="footer__text">
+          Copyright 2022 ECONOVATION
+          <br />
+          All rights reserved
+        </p>
       </div>
     </div>
   );

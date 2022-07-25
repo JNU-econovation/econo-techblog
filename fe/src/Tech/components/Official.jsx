@@ -1,14 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/Official.css';
 
 import noImg from '../img/no_img.png';
-import date from '../img/day.png';
-import looked from '../img/feather_eye.png';
-import liked from '../img/heart.png';
-
 import PostDetails from '../../components/PostDetails';
-import Tags from './Tags';
-import Partition from '../../components/Partition';
+import Tags from '../../components/Tags';
 
 const result = {
   author: '에코노베이션',
@@ -20,29 +15,46 @@ const result = {
 };
 
 const Official = function () {
+  const [officialNum, setOfficialNum] = useState(0);
+  const onChangePost = (index) => {
+    if (index > 1) {
+      setOfficialNum(0);
+    } else {
+      setOfficialNum(officialNum + 1);
+    }
+  };
   return (
     <div className="official">
-      <div className="official-img" />
+      <div className="official__img" />
       <div className="official-info">
-        <div className="official-top">
+        <div className="official-info-top">
           <span className="official-title">{result.title}</span>
           <Tags />
         </div>
-        <div className="official-middle">
+        <div className="official-info-middle">
           <span>{result.desc}</span>
         </div>
-        <div className="official-bottom">
-          <div className="official-bottom-left">
-            <img src={noImg} alt="no-img" />
-            <span>{result.author}</span>
+        <div className="official-info-bottom">
+          <div className="official-info-bottom-left">
+            <img
+              src={noImg}
+              alt="no-img"
+              className="official-info-bottom-left__img"
+            />
+            <span className="official-info-bottom-left__span">
+              {result.author}
+            </span>
           </div>
-          <PostDetails src={date} alt="date" info={result.date} />
-          <Partition />
-          <PostDetails src={looked} alt="looked" info={result.looked} />
-          <Partition />
-          <PostDetails src={liked} alt="liked" info={result.liked} />
+          <PostDetails date="2022.05.04" views="21" hearts="21" />
         </div>
       </div>
+      <button
+        className="official__next"
+        type="button"
+        onClick={() => onChangePost(officialNum)}
+      >
+        {'>'}
+      </button>
     </div>
   );
 };

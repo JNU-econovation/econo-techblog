@@ -1,24 +1,33 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 
 import '../css/SidebarItem.css';
 
-import person from '../img/ID.png';
+import people from '../img/people.png';
 
 const SidebarItem = function ({ id, name, num, isSelected, onClick }) {
+  const param = ['request', 'all', 'USER', 'GUEST', 'ADMIN'];
   return (
-    <li
-      className={isSelected ? 'sidebar-item selected' : 'sidebar-item'}
-      onClick={() => onClick(id)}
+    <Link
+      to={`/admin/role/${param[id - 1]}`}
+      style={{ textDecoration: 'none' }}
     >
-      <span>{name}</span>
-      <div className="sidebar-item-right">
-        <img src={person} alt="person" />
-        <span>{num}</span>
+      <div
+        className={
+          isSelected ? 'sidebar-item sidebar-item--selected' : 'sidebar-item'
+        }
+        onClick={() => onClick(id)}
+      >
+        <span className="sidebar-item__name">{name}</span>
+        <div className="sidebar-item-right">
+          <img src={people} alt="person" className="sidebar-item-right__img" />
+          <span className="sidebar-item-right__num">{num}</span>
+        </div>
       </div>
-    </li>
+    </Link>
   );
 };
 
