@@ -1,5 +1,6 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
@@ -9,72 +10,47 @@ import '../../components/css/Pagination.css';
 import noImg from '../img/no_img.png';
 import settings from '../img/settings.png';
 import SettingBox from './SettingBox';
+import { useParams } from 'react-router-dom';
 
 const UserList = function () {
-  const data = [
-    {
-      id: 1,
-      name: '이윤성',
-      email: '181111@jnu.ac.kr',
-      usertype: '관리자',
-      year: '21기',
-    },
-    {
-      id: 2,
-      name: '이윤성',
-      email: '181111@jnu.ac.kr',
-      usertype: '관리자',
-      year: '21기',
-    },
-    {
-      id: 3,
-      name: '이윤성',
-      email: '181111@jnu.ac.kr',
-      usertype: '관리자',
-      year: '21기',
-    },
-    {
-      id: 4,
-      name: '이윤성',
-      email: '181111@jnu.ac.kr',
-      usertype: '관리자',
-      year: '21기',
-    },
-    {
-      id: 5,
-      name: '이윤성',
-      email: '181111@jnu.ac.kr',
-      usertype: '관리자',
-      year: '21기',
-    },
-    {
-      id: 6,
-      name: '이윤성',
-      email: '181111@jnu.ac.kr',
-      usertype: '관리자',
-      year: '21기',
-    },
-    {
-      id: 7,
-      name: '이윤성',
-      email: '181111@jnu.ac.kr',
-      usertype: '관리자',
-      year: '21기',
-    },
-    {
-      id: 8,
-      name: '이윤성',
-      email: '181111@jnu.ac.kr',
-      usertype: '관리자',
-      year: '21기',
-    },
-  ];
+  const { role } = useParams();
+  const title = () => {
+    switch (role) {
+      case 'all':
+        return '전체 회원 관리';
+      case 'USER':
+        return '일반 회원 관리';
+      case 'GUEST':
+        return '게스트 회원 관리';
+      case 'ADMIN':
+        return '관리자 회원 관리';
+    }
+  };
+  const [users, setUsers] = useState([]);
   const columns = ['이름', '이메일', '사용자 타입', '기수', '설정'];
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setCurrentPage] = useState(0);
+  useEffect(() => {
+    if (role === 'all') {
+      getUsers(`http://54.180.29.85:8080/api/user/all/${page}`);
+    } else {
+      getUsers(`http://54.180.29.85:8080/api/user/role/${page}/${role}`);
+    }
+  }, [role, page]);
+  const getUsers = (url) => {
+    axios
+      .get(url)
+      .then((response) => {
+        setUsers(response.data);
+        console.log('response', response);
+      })
+      .catch((error) => {
+        console.log('erroe', error);
+      });
+  };
   const onClick = () => {};
   return (
     <div>
-      <h2 className="userlist__title">전체 회원 관리</h2>
+      <h2 className="userlist__title">{title()}</h2>
       <table className="userlist-table">
         <colgroup>
           <col width="12%" />
@@ -91,7 +67,7 @@ const UserList = function () {
           </tr>
         </thead>
         <tbody>
-          {data.map(({ id, name, email, usertype, year }) => (
+          {users.map(({ id, userName, userEmail, role, year }) => (
             <tr key={id} className="userlist-table__tr">
               <td>
                 <div className="userlist-table-user">
@@ -100,11 +76,11 @@ const UserList = function () {
                     alt="noImg"
                     className="userlist-table-user__img"
                   />
-                  <span className="userlist-table-user__name">{name}</span>
+                  <span className="userlist-table-user__name">{userName}</span>
                 </div>
               </td>
-              <td>{email}</td>
-              <td>{usertype}</td>
+              <td>{userEmail}</td>
+              <td>{role}</td>
               <td>{year}</td>
               <td className="userlist-setting">
                 <button
@@ -127,10 +103,10 @@ const UserList = function () {
         </tbody>
       </table>
       <Pagination
-        activePage={currentPage}
-        itemsCountPerPage={5}
-        totalItemsCount={data.length}
-        pageRangeDisplayed={3}
+        activePage={page}
+        itemsCountPerPage={8}
+        totalItemsCount={users.length}
+        pageRangeDisplayed={5}
         prevPageText="<"
         nextPageText=">"
         onChange={setCurrentPage}

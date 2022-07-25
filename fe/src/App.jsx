@@ -12,6 +12,11 @@ import Layout from './Layout/Layout';
 import MyPage from './MyPage/MyPage';
 import FindPassword from './FindPassword/FindPassword';
 import NewPassword from './NewPassword/NewPassword';
+import Tech from './Tech/Tech';
+import Post from './Post/Post';
+import UserList from './Manager/components/UserList';
+import UserInfo from './Manager/components/UserInfo';
+import Search from './Search/Search';
 
 function App() {
   return (
@@ -21,11 +26,23 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/admin" element={<Manager />} />
         <Route path="/findid" element={<FindID />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/findpassword" element={<FindPassword />} />
         <Route path="/newpassword" element={<NewPassword />} />
+        <Route path="/posts" element={<Tech />}>
+          <Route path=":category" element={<Tech />} />
+        </Route>
+        <Route path="/post" element={<Post />} />
+        <Route path="/admin" element={<Manager />}>
+          <Route path="/admin/role" element={<UserList />}>
+            <Route path=":role" element={<UserList />} />
+          </Route>
+          <Route path="/admin/user" element={<UserInfo />}>
+            <Route path=":id" element={<UserInfo />} />
+          </Route>
+        </Route>
+        <Route path="/search" element={<Search />} />
       </Route>
     </Routes>
   );

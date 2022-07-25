@@ -7,24 +7,28 @@ import Tags from './Tags';
 import PostDetails from './PostDetails';
 import noImg from './img/no_img.png';
 
-const PostBox = function ({ id, title, summary }) {
+const PostBox = function ({ post }) {
   return (
     <div className="post-box">
       <div className="post-box__img" />
       <div className="post-box-info">
         <div className="post-box-info-top">
-          <span className="post-box-info__title">{title}</span>
-          <Tags />
+          <span className="post-box-info__title">{post.title}</span>
+          <Tags tags={post.categoryName} />
         </div>
         <div className="post-box-info-middle">
-          <span>{summary}</span>
+          <span className="post-box-info__content">{post.content}</span>
         </div>
         <div className="post-box-info-bottom">
           <div className="post-box-info-details">
-            <PostDetails date="2022.05.04" views="21" hearts="21" />
+            <PostDetails
+              date={post.createdDate}
+              views={post.views}
+              hearts={post.hearts}
+            />
           </div>
           <div className="post-box-info-author">
-            <span>{id}</span>
+            <span>{post.userName}</span>
             <img
               src={noImg}
               alt="no-img"
@@ -38,9 +42,8 @@ const PostBox = function ({ id, title, summary }) {
 };
 
 PostBox.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  summary: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  post: PropTypes.object.isRequired,
 };
 
 export default PostBox;
