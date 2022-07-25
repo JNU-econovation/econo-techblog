@@ -40,13 +40,14 @@ function SignUpBox() {
       pinCode: 1111,
     };
     console.log('verify request data', requestData);
-    axios
-      .post('/api/user?', {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-        data: requestData,
-      })
+    axios({
+      method: 'post',
+      url: '/api/user?',
+      data: requestData,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
       .then((response) => {
         alert('회원가입 완료. 이메일을 확인해주세요.');
         console.log(response);
@@ -93,6 +94,12 @@ function SignUpBox() {
         classNames="sign-up-box-cardinal__select"
         setValue={setYear}
       />
+      <input
+        classNames="sign-up-box-pin-code__input"
+        type="number"
+        maxLength="4"
+      />
+
       <div className="sign-up-box--agree__container">
         <input type="checkbox" checked={isAgree} onChange={onCheckHandler} />
         <span>이용약관 및 개인정보 처리방침에 동의합니다.</span>
