@@ -105,6 +105,7 @@ type Query{
 
     # ---------------Heart------------------------------
     isHeart(postId:Int, userId:Int): Boolean!
+    totalHeartsByUser(userId:Int):Int!
     #    ---------Comment--------------------
 }
 
