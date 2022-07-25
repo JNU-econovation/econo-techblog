@@ -92,15 +92,18 @@ public class PostQueryResolver implements GraphQLQueryResolver {
      * title로 like 검색 기능
      */
 //    @Transactional
-//    public List<PostResponseDto> search(String keyword, int page) {
+//    public List<PostListResponseDto> search(String keyword, int page) {
 //        Pageable pageable = PageRequest.of(page, 5);
 //        List<Post> postList = postRepository.findByTitleContaining(keyword, pageable);
-//        return postList;
+//        return allPostsByMainCategory.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+//                .collect(Collectors.toList())cx;
 //    }
 
     @Transactional
-    public Long postCounts() {
-        return postRepository.countPosts();
+    public Long postCounts(int mainCategoryNumber) {
+        if(mainCategoryNumber==0){
+            return postRepository.countPosts();
+        }
+        return postRepository.countPostsByMainCategory(MainCategory.getMainCategory(mainCategoryNumber));
     }
-    //특정 user의 post
 }

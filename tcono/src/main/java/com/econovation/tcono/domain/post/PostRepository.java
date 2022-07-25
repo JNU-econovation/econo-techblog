@@ -39,6 +39,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p where p.userId=:userId")
     List<Post> findByUserId(@Param("userId") Long userId);
 
+    @Query("select count(p) from Post p where p.mainCategory=:mainCategory")
+    Long countPostsByMainCategory(@Param("mainCategory")MainCategory mainCategory);
+
     @Query("select count(p) from Post p")
     Long countPosts();
 
