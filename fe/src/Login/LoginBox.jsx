@@ -34,6 +34,7 @@ function LoginBox() {
     })
       .then((response) => {
         loginDispatch({ type: 'LOGIN', ...response.data });
+        sessionStorage.setItem('uid', response.data.id);
         navigate('/');
       })
       .catch((error) => {
