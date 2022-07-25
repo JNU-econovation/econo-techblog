@@ -33,7 +33,7 @@ function LoginBox() {
       },
     })
       .then((response) => {
-        loginDispatch(response.data);
+        loginDispatch({ type: 'LOGIN', ...response.data });
         navigate('/');
       })
       .catch((error) => {

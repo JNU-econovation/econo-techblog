@@ -7,27 +7,31 @@ import React, { createContext, useReducer, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 const loginInfo = {
-  createdDate: '2022/07/25 05:52:16',
+  createdDate: '',
   emailVerified: false,
-  id: 1,
-  role: 'USER',
-  userEmail: 'ymecca730135@gmail.com',
-  userName: '이서현',
-  year: 23,
+  id: -1,
+  role: '',
+  userEmail: '',
+  userName: '',
+  year: -1,
 };
 
-function loginReducer(state) {
+function loginReducer(state, action) {
   const saveData = {
-    createdDate: state.createdDate,
-    emailVerified: state.emailVerified,
-    id: state.id,
-    role: state.role,
-    userEmail: state.userEmail,
-    userName: state.userName,
-    year: state.year,
+    createdDate: action.createdDate,
+    emailVerified: action.emailVerified,
+    id: action.id,
+    role: action.role,
+    userEmail: action.userEmail,
+    userName: action.userName,
+    year: action.year,
   };
-  console.log('saveData', saveData);
-  return saveData;
+  switch (action.type) {
+    case 'LOGIN':
+      return saveData;
+    default:
+      throw Error('Unhandle Action');
+  }
 }
 
 const LoginStateContext = createContext();
@@ -45,11 +49,20 @@ export function LoginProvider({ children }) {
 }
 
 export function useLoginStateContext() {
-  return useContext(LoginStateContext);
+  const context = useContext(LoginStateContext);
+  if (!context) {
+    throw new Error('Cannot find TodoProvider');
+  }
+  return context;
 }
 
 export function useLoginDispatchContext() {
-  return useContext(LoginDispatchContext);
+  const context = useContext(LoginDispatchContext);
+  if (!context) {
+    throw new Error('Cannot find TodoProvider');
+  }
+  console.log('uselogindispatchcontetx', context);
+  return context;
 }
 
 LoginProvider.propTypes = {
