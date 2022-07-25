@@ -28,11 +28,10 @@ public class PostListResponseDto {
         this.content = post.getContent();
         this.title = post.getTitle();
         this.mainCategoryNumber = post.getMainCategory().getMainCategoryNumber();
-        this.categoryName=String.join(",",categoryList.stream().map(x->new CategoryNameDto(x)).collect(Collectors.toList()).toString());
+        this.categoryName=String.join(",",categoryList.stream().map(x->x.getCategoryName()).collect(Collectors.toList()));
         this.createdDate = post.getCreatedDate();
         this.hearts = post.getHearts();
         this.views = post.getViews();
-
     }
 
 

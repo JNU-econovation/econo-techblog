@@ -135,7 +135,7 @@ type Mutation{
     createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
     updatePost(postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
     deletePost(postId : Int):Boolean,
-    findOfficial: [Post!]!,
+    findOfficial: [PostListResponseDto!]!,
     #
     #       -----------Heart------------------------------
     updateHeartState(heartRequestDto:HeartRequestDto): Int!
