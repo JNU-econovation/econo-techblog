@@ -43,7 +43,7 @@ public class PostQueryResolver implements GraphQLQueryResolver {
         Pageable pageable = PageRequest.of(page, 5);
 
         List<Post> allPostsByMainCategory = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber),pageable);
-//        return allPostsByMainCategory;
+
         return allPostsByMainCategory.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
                 .collect(Collectors.toList());
     }
