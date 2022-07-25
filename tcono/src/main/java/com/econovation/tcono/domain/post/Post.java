@@ -29,6 +29,7 @@ public class Post extends BaseTimeEntity {
     //post 작성자 이름
     @Column(updatable = false)
     private Long userId;
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     private String title;
     @Column(insertable = false, updatable = false,nullable = true)
