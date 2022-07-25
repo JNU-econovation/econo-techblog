@@ -1,0 +1,25 @@
+.tag-search {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 2px 15px;
+    border-radius: 28px;
+    border: solid 1px #d9d9d9;
+    background-color: #fff
+}
+
+.tag-search__input {
+    border: none;
+    background-color: inherit;
+    width: 300px;
+    height: 30px;
+    color: #2269fa;
+}
+
+.tag-search__input:focus {
+    outline: none;
+}
+
+.tag-search__img {
+    height: 14px;
+}

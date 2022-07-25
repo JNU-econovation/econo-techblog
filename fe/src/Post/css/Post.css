@@ -4,7 +4,7 @@
 }
 
 .post-middle {
-    width: 60%;
+    width: 70%;
     margin-top: 70px;
     margin-left: auto;
     margin-right: auto;
@@ -14,5 +14,10 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    border: solid 1px #bbb;
+    border-bottom: solid 1px #bbb;
+}
+
+.post__title {
+    font-size: 30px;
+    font-weight: bold;
 }

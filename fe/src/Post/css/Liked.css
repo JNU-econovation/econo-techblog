@@ -2,27 +2,27 @@
     margin: 50px 0px;
 }
 
-.liked-btn {
+.liked__button {
     display: flex;
     align-items: center;
     border-radius: 39px;
     border: solid 1px #bbb;
     background-color: #fff;
-    padding: 5px 12px;
+    padding: 9px 17px;
     color: #999;
     margin-left: auto;
 }
 
-.liked-btn span {
+.liked__span {
     font-size: 12px;
 }
 
-.liked-btn img {
+.liked__img {
     width: 13px;
     margin-left: 5px;
 }
 
-.on {
+.liked__button--on {
     color: #ff3535;
     border: solid 1px #ff3535;
 }

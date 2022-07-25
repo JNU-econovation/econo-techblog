@@ -1,12 +1,20 @@
 .post-details {
     display: flex;
     align-items: center;
-    margin-right: 20px;
     color: #7f7f7f;
     font-size: 15px;
 }
 
-.post-details img {
-    margin: 0px 10px;
+.post-details__img {
+    height: 12px;
+    margin-top: 3px;
+    margin-right: 10px;
 }
 
+.post-details__bar {
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 4px;
+    height: 14px;
+}

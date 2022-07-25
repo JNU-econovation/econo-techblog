@@ -1,47 +1,45 @@
 import React, { useState } from 'react';
-import PostDetails from '../../components/PostDetails';
-import Partition from '../../components/Partition';
-import '../css/PostInfo.css';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
+/* eslint-disable object-curly-newline */
 
-import noImg from '../img/no_img.png';
-import date from '../img/day.png';
-import looked from '../img/feather_eye.png';
-import liked from '../img/heart.png';
+import '../css/PostInfo.css';
+import PostDetails from '../../components/PostDetails';
 import SelectBox from './SelectBox';
 
-const result = {
-  author: '에코노베이션',
-  date: '2022.05.04',
-  looked: '21',
-  liked: '21',
-};
+import noImg from '../img/no_img.png';
+import more from '../img/post_more.png';
 
-const PostInfo = function () {
+const PostInfo = function ({ author, date, views, hearts, onDelete }) {
   const [isOpen, setOpen] = useState(false);
   const onClick = () => {
     setOpen(!isOpen);
   };
   return (
     <div className="post-info">
-      <div className="post-info-list">
+      <div className="post-info__content">
         <div className="post-info-left">
           <div className="post-info-author">
-            <img src={noImg} alt="no-img" />
-            <span>{result.author}</span>
+            <img src={noImg} alt="no-img" className="post-info-author__img" />
+            <span>{author}</span>
           </div>
-          <PostDetails src={date} alt="date" info={result.date} />
-          <Partition />
-          <PostDetails src={looked} alt="looked" info={result.looked} />
-          <Partition />
-          <PostDetails src={liked} alt="liked" info={result.liked} />
+          <PostDetails date={date} views={views} hearts={hearts} />
         </div>
-        <button type="button" className="select-btn" onClick={onClick}>
-          ・・・
+        <button type="button" className="post-info__button" onClick={onClick}>
+          <img src={more} alt="more" className="post-info__img" />
         </button>
       </div>
-      {isOpen && <SelectBox />}
+      {isOpen && <SelectBox onDelete={onDelete} />}
     </div>
   );
+};
+
+PostInfo.propTypes = {
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  views: PropTypes.number.isRequired,
+  hearts: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default PostInfo;

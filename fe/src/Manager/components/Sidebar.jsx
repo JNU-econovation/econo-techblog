@@ -16,7 +16,7 @@ const Sidebar = function () {
       id: 2,
       name: '전체 회원 관리',
       num: 67,
-      isSelected: true,
+      isSelected: false,
     },
     {
       id: 3,
@@ -54,9 +54,18 @@ const Sidebar = function () {
     <div className="sidebar">
       <div className="sidebar-box">
         <UserSearch />
-        <p>Join</p>
-        <ul className="sidebar-nav">
-          {navArr.map((elem) => (
+        <p className="sidebar-box__title">Join</p>
+        <SidebarItem
+          key={navArr[0].id}
+          id={navArr[0].id}
+          name={navArr[0].name}
+          num={navArr[0].num}
+          isSelected={navArr[0].isSelected}
+          onClick={onClick}
+        />
+        <p className="sidebar-box__title">User</p>
+        <div className="sidebar-box-nav">
+          {navArr.slice(1).map((elem) => (
             <SidebarItem
               key={elem.id}
               id={elem.id}
@@ -66,7 +75,7 @@ const Sidebar = function () {
               onClick={onClick}
             />
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

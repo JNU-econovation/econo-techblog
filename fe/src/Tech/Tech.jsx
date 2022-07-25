@@ -1,14 +1,44 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
+import { gql, useQuery } from '@apollo/client';
+
 import './css/Tech.css';
 import '../components/css/Pagination.css';
+import write from './img/write.png';
 
 import Banner from './components/Banner';
 import Official from './components/Official';
-import Recent from './components/Recent';
+import PostBox from '../components/PostBox';
+
+const GET_POSTS = gql`
+  query getPosts($mainCategory: String!) {
+    findAllPosts(mainCategory: $mainCategory) {
+      id
+      userId
+      content
+      title
+      official
+      views
+      hearts
+      mainCategory
+    }
+  }
+`;
 
 const Tech = function () {
   const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
+  const onClick = () => {
+    navigate('/write');
+  };
+
+  const result = useQuery(GET_POSTS, {
+    variables: {
+      mainCategory: 'TECH',
+    },
+  });
+  console.log(result);
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 5;
   const getMovies = async () => {
@@ -18,6 +48,7 @@ const Tech = function () {
     const json = await response.json();
     setMovies(json.data.movies);
   };
+
   useEffect(() => {
     getMovies();
   }, []);
@@ -32,15 +63,25 @@ const Tech = function () {
   return (
     <div className="tech">
       <Banner />
-      <div className="posts">
-        <div className="official-posts">
-          <p>Official</p>
+      <div className="tech__posts">
+        <div className="tech-official">
+          <div className="tech-official-top">
+            <p className="tech__title">Official</p>
+            <button
+              type="button"
+              className="tech-write_button"
+              onClick={onClick}
+            >
+              <img src={write} alt="write" className="tech-write__img" />
+              <span>글쓰기</span>
+            </button>
+          </div>
           <Official />
         </div>
-        <div className="recent-posts">
-          <p>Recent posts</p>
+        <div className="tech-recent">
+          <p className="tech__title">Recent posts</p>
           {currentPosts(movies).map((item) => (
-            <Recent
+            <PostBox
               key={item.id}
               id={item.id}
               title={item.title}
