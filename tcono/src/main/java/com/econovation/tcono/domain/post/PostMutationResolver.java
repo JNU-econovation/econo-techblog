@@ -4,6 +4,7 @@ import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.econovation.tcono.web.dto.*;
+import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,6 +23,7 @@ import java.util.stream.Stream;
 public class PostMutationResolver implements GraphQLMutationResolver {
     private static final String NOT_FOUND_POST_MESSAGE = "해당 페이지가 존재하지 않습니다.";
     private static final String NOT_FOUND_USER_MESSAGE = "해당 유저가 존재하지 않습니다.";
+    private static final String NOT_FOUND_MAINCATEGORY_MESSAGE = "해당 메인카테고리가 존재하지 않습니다.";
     @Autowired
     private PostRepository postRepository;
     @Autowired
@@ -39,6 +42,9 @@ public class PostMutationResolver implements GraphQLMutationResolver {
         User user = userRepository.findById(postCreateRequestDto.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
 
+        if(postCreateRequestDto.getMainCategoryNumber()==0){
+            throw new IllegalArgumentException(NOT_FOUND_MAINCATEGORY_MESSAGE);
+        }
         Post post = postRepository.save(postCreateRequestDto.toPostEntity());
 
         //,로 구분된 category를 List형태로 바꿈
@@ -105,18 +111,20 @@ public class PostMutationResolver implements GraphQLMutationResolver {
      *
      * @return boolean
      */
-    
+
+    //TODO : official 조건 추가
     @Transactional
     public List<PostListResponseDto> findOfficial(){
         List<Post> officialPost = postRepository.findAll().stream()
                 .filter(x -> x.getViews() > 2)
+                .sorted(Comparator.comparing(Post::getModifiedDate))
                 .limit(3)
                 .collect(Collectors.toList());
 
-        // 추후 조건 추가 : && x.getViews() > 10)
         officialPost.forEach(Post::updateOfficial);
         return officialPost.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
                 .collect(Collectors.toList());
+
 
     }
 }
