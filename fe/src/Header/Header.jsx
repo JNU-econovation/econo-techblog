@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -7,11 +8,13 @@ import NavItem from './components/NavItem';
 import Search from './components/Search';
 import testLogo from './img/test_logo.png';
 import './Header.css';
+import { useLoginStateContext } from '../Context/LoginContext';
 
 function Header() {
   // eslint-disable-next-line no-unused-vars
   const [isLogin, setIsLogin] = useState(false);
-
+  const loginContext = useLoginStateContext();
+  const [loginUserInfo, setLoginUserInfo] = useState(loginContext);
   const navigate = useNavigate();
 
   const onLogoClick = () => {
@@ -19,14 +22,19 @@ function Header() {
   };
 
   useEffect(() => {
-    const loginSession = sessionStorage.getItem('isLogin');
+    console.log('rerender from lc');
+    const data = { ...loginContext };
+    console.log(data);
+    setLoginUserInfo(data);
+  }, [loginContext]);
 
-    if (loginSession === 'true') {
-      setIsLogin(() => true);
-    } else {
+  useEffect(() => {
+    if (loginUserInfo.id === -1) {
       setIsLogin(() => false);
+    } else {
+      setIsLogin(() => true);
     }
-  }, []);
+  }, [loginUserInfo]);
   return (
     <header className="header">
       <button
@@ -44,7 +52,7 @@ function Header() {
       </ul>
       <div className="header-right-box">
         <Search />
-        {isLogin ? <div>***님</div> : <LoginButton />}
+        {isLogin ? <div>{loginUserInfo.userName}님</div> : <LoginButton />}
       </div>
     </header>
   );
