@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +7,7 @@ import CardinalSelectBox from '../components/CardinalSelectBox';
 import InputElement from '../components/InputElement';
 import './css/FindIDBox.css';
 
-function FindIDBox() {
+function FindIDBox({ setIsFindID, setUser }) {
   const [userName, setUserName] = useState('');
   const [year, setYear] = useState(23);
   const navigate = useNavigate();
@@ -21,6 +22,11 @@ function FindIDBox() {
       .get(`/api/find-email/?year=${year}&userName=${userName}`)
       .then((response) => {
         console.log('response', response);
+        setUser({
+          email: response.data.userEmail,
+          name: response.data.userName,
+        });
+        setIsFindID(() => true);
         navigate('/findid'); // 추후 수정
       })
       .catch((error) => {

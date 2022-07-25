@@ -5,10 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import InputElement from '../components/InputElement';
 import SignUpLinkBtn from './SignUpLinkBtn';
 import LoginLink from './LoginLink';
+import { useLoginDispatchContext } from '../Context/LoginContext';
 import './css/LoginBox.css';
 
 function LoginBox() {
   const navigate = useNavigate();
+  const loginDispatch = useLoginDispatchContext();
+
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginFail, setIsLoginFail] = useState(true);
@@ -30,15 +33,12 @@ function LoginBox() {
       },
     })
       .then((response) => {
-        console.log(response);
+        loginDispatch({ type: 'LOGIN', ...response.data });
         navigate('/');
-        sessionStorage.setItem('isLogin', true);
-        localStorage.setItem('session', response);
       })
       .catch((error) => {
         console.log('error', error);
         setIsLoginFail(() => false);
-        sessionStorage.setItem('isLogin', false);
       });
   };
 
