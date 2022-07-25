@@ -9,7 +9,7 @@ import App from './App';
 import { LoginProvider } from './Context/LoginContext';
 
 const client = new ApolloClient({
-  uri: 'http://54.180.29.85:8080/graphql/',
+  uri: 'http://54.180.29.85:8080/graphqls/',
   cache: new InMemoryCache(),
 });
 

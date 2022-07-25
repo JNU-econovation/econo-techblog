@@ -1,10 +1,10 @@
 import React from 'react';
-import './Post.css';
+import './RecentPost.css';
 
 const Post = function () {
   return (
     <div className="post">
-      <div className="post-img" />
+      <div className="post__img" />
       <div className="post-info">
         <span className="post-title">
           구름톡 업데이트 48시간 전, 그 치열함에
@@ -17,10 +17,10 @@ const Post = function () {
           <span>#html </span>
           <span>#css </span>
         </div>
-        <div className="post-writer">
-          <span className="writer-name">에코노베이션</span>
-          <div className="writer-img" />
-        </div>
+      </div>
+      <div className="post-writer">
+        <span className="writer-name">에코노베이션</span>
+        <div className="writer-img" />
       </div>
     </div>
   );

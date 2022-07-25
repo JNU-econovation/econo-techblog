@@ -30,10 +30,15 @@
 }
 
 .post-box-info-middle {
+    width: 90%;
     margin: 10px 0px;
+    color: #163235;
+    height: 60px;
+}
+
+.post-box-info__content {
     font-size: 14px;
     line-height: 1.6;
-    color: #163235;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
