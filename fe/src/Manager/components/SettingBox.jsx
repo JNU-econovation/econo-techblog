@@ -8,7 +8,7 @@ import '../css/SettingBox.css';
 const SettingBox = function ({ id }) {
   return (
     <div className="setting-box">
-      <Link to={`/admin/${id}`}>
+      <Link to={`/admin/user/${id}`}>
         <button type="button" className="setting-box-show__button">
           게시글 보기
         </button>

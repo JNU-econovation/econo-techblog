@@ -1,6 +1,6 @@
 /* eslint-disable */
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 
@@ -9,8 +9,12 @@ import '../css/SidebarItem.css';
 import people from '../img/people.png';
 
 const SidebarItem = function ({ id, name, num, isSelected, onClick }) {
+  const param = ['request', 'all', 'USER', 'GUEST', 'ADMIN'];
   return (
-    <Link to="/admin/users" style={{ textDecoration: 'none' }}>
+    <Link
+      to={`/admin/role/${param[id - 1]}`}
+      style={{ textDecoration: 'none' }}
+    >
       <div
         className={
           isSelected ? 'sidebar-item sidebar-item--selected' : 'sidebar-item'
