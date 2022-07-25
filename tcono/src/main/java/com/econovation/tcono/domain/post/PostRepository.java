@@ -19,6 +19,9 @@ import java.util.Optional;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+    @Query("select p from Post p")
+    List<Post> findPosts(Pageable pageable);
+
     @Query("select p from Post p where p.mainCategory= :mainCategory")
     List<Post> findAllByMainCategory(@Param("mainCategory") MainCategory mainCategory,Pageable pageable);
 
