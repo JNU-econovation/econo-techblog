@@ -1,7 +1,7 @@
 .post {
     display: flex;
     flex-direction: column;
-    width: 370px;
+    width: 380px;
     height: fit-content;
     border-radius: 15px;
     box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16);
@@ -10,15 +10,15 @@
     margin: 20px;
 }
 
-.post-img{
-    height: 190px;
+.post__img{
+    height: 240px;
     background-color: black;
 }
 
 .post-info {
     display: flex;
     flex-direction: column;
-    padding: 15px;
+    padding: 10px;
 }
 
 .post-title{
@@ -58,9 +58,11 @@
 }
 
 .post-writer {
+    padding: 10px;
     display: flex;
     justify-content: right;
     align-items: center;
+    background-color: rgb(144, 165, 190, 0.16);
 }
 
 .writer-name {
