@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@toast-ui/editor/dist/toastui-editor.css';
@@ -8,10 +8,12 @@ import HashtagInput from './HashtagInput';
 import TitleInput from './TitleInput';
 import CategorySelectBox from './CategorySelectBox';
 import './css/Write.css';
+import { useLoginStateContext } from '../Context/LoginContext';
 
 function Write() {
   const editorRef = useRef();
   const navigate = useNavigate();
+  const loginContext = useLoginStateContext();
   const onSubmit = () => {
     const contentHTML = editorRef.current?.getInstance().getHTML();
     const contentMarkdown = editorRef.current?.getInstance().getMarkdown();
@@ -22,6 +24,10 @@ function Write() {
   const onCancelClick = () => {
     navigate(-1);
   };
+
+  if (loginContext.id === -1) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div className="write">
