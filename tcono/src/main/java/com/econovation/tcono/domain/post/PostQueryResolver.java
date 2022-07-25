@@ -93,4 +93,9 @@ public class PostQueryResolver implements GraphQLQueryResolver {
 //        List<Post> postList = postRepository.findByTitleContaining(keyword, pageable);
 //        return postList;
 //    }
+
+    @Transactional
+    public Long postCounts(){
+        return postRepository.countPosts();
+    }
 }
