@@ -14,25 +14,21 @@ function LoginBox() {
   const [isLoginFail, setIsLoginFail] = useState(true);
 
   const onLoginClick = () => {
-    const requestData = {
-      userEmail,
-      password,
-    };
+    const form = new FormData();
+    form.append('userEmail', userEmail);
+    form.append('password', password);
+    console.log('requestFormData', form);
 
-    console.log('requestData', requestData);
-
-    axios
-      .post('/api/login', {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
-          'Content-Type': 'application/json',
-        },
-        data: {
-          userEmail: 'ymecca730135@gmail.com',
-          passgword: '12a3f2awkcnwi4!',
-        },
-      })
+    axios({
+      method: 'post',
+      url: '/api/login',
+      data: form,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+        'Content-Type': '*',
+      },
+    })
       .then((response) => {
         console.log(response);
         navigate('/');
