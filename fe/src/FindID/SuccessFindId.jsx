@@ -1,30 +1,26 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 
 import checkCircle from './img/check_circle.png';
 import './css/SuccessFindId.css';
 
-const dummyData = {
-  name: '이윤성',
-  email: 'dbsdltjd123@gmail.com',
-};
+function SuccessFindId({ email, name }) {
+  const [userEmail, setUserEmail] = useState('');
 
-function SuccessFindId() {
-  const [email, setEmail] = useState('');
   const filterId = (id) => {
-    setEmail(() => id.replace(id.substr(0, 3), '***'));
+    setUserEmail(() => id.replace(id.substr(0, 3), '***'));
   };
-  // 첫 요청시에만
   useEffect(() => {
-    filterId(dummyData.email);
+    filterId(email);
   }, []);
   return (
     <div className="success-find-id">
       <img className="check-circle" alt="check" src={checkCircle} />
       <div className="name-container">
-        <span className="user-name">{dummyData.name}</span>
+        <span className="user-name">{name}</span>
         님의 ID는
       </div>
-      <div className="email-container">{email}</div>
+      <div className="email-container">{userEmail}</div>
       <p>
         개인정보 도용에 대한 피해방지를 위하여
         <br />
