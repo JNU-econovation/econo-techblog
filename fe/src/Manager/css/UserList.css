@@ -41,6 +41,10 @@
     color: #2269fa;
 }
 
+.userlist-setting {
+    position: relative;
+}
+
 .userlist-setting-btn {
     border: none;
     background-color: inherit;

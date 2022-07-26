@@ -27,10 +27,6 @@
     width: 30px;
 }
 
-.setting {
-    position: relative;
-}
-
 .table-user {
     display: flex;
     align-items: center;
