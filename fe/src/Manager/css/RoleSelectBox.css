@@ -47,3 +47,7 @@
     padding-left: 9px;
     cursor: pointer;
 }
+
+.hidden {
+    display: none;
+}

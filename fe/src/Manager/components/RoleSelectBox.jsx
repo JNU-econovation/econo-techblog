@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
 
 import '../css/RoleSelectBox.css';
 import select from '../img/select_more.png';
 
-const RoleSelectBox = function () {
+const RoleSelectBox = function ({ isRejectable }) {
   const [open, setOpen] = useState(false);
   const [option, setOption] = useState('권한');
   const onOpen = () => {
@@ -41,9 +43,19 @@ const RoleSelectBox = function () {
         <li className="role-select-box__item" onClick={onClick}>
           관리자 회원
         </li>
+        <li
+          className={isRejectable ? 'role-select-box__item' : 'hidden'}
+          onClick={onClick}
+        >
+          가입 거절
+        </li>
       </ul>
     </div>
   );
+};
+
+RoleSelectBox.propTypes = {
+  isRejectable: PropTypes.bool.isRequired,
 };
 
 export default RoleSelectBox;
