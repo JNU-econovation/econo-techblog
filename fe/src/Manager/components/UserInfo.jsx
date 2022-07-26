@@ -30,7 +30,7 @@ const UserInfo = function () {
           <span>{`${user.year}기  |  ${user.role}`}</span>
           <span>작성글 6</span>
         </div>
-        <button type="button" className="userlist-edit__button">
+        <button type="button" className="userinfo-edit__button">
           수정하기
         </button>
       </div>
