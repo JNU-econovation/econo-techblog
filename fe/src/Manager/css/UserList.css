@@ -1,12 +1,48 @@
+.userlist {
+    width: 90%;
+    margin: 30px auto 30px auto;
+}
+
+.userlist-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .userlist__title{
     font-size: 20px;
-    width: 90%;
-    margin: 35px auto 15px auto;
+}
+
+.userlist-edit {
+    display: flex;
+    align-items: center;
+}
+
+.userlist-edit__button {
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2269fa;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.userlist-text {
+    font-size: 14px;
+    font-weight: normal;
+    color: #8f8f8f;
+}
+
+.userlist-text--blue {
+    font-weight: bold;
+    color: #2269fa;
 }
 
 .userlist-table {
-    width: 90%;
-    margin: 0px auto;
+    width: 100%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
