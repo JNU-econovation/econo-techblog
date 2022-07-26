@@ -9,12 +9,12 @@ const SettingBox = function ({ id }) {
   return (
     <div className="setting-box">
       <Link to={`/admin/user/${id}`}>
-        <button type="button" className="setting-box-show__button">
-          게시글 보기
+        <button type="button" className="setting-box-edit__button">
+          수정하기
         </button>
       </Link>
-      <button type="button" className="setting-box-edit__button">
-        수정하기
+      <button type="button" className="setting-box-resign__button">
+        탈퇴시키기
       </button>
     </div>
   );
