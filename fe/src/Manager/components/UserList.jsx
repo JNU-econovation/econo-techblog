@@ -86,10 +86,10 @@ const UserList = function () {
         <colgroup>
           <col width="6%" />
           <col width="10%" />
-          <col width="35%" />
+          <col width="34%" />
           <col width="20%" />
           <col width="20%" />
-          <col width="9%" />
+          <col width="10%" />
         </colgroup>
         <thead className="table__thead">
           <tr>

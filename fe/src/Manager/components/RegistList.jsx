@@ -9,7 +9,7 @@ import noImg from '../img/no_img.png';
 import RoleSelectBox from './RoleSelectBox';
 
 const RegistList = function () {
-  const columns = ['', '이름', '이메일', '사용자 타입', '기수', '설정'];
+  const columns = ['', '이름', '이메일', '사용자 타입', '기수', '가입일'];
   const [users, setUsers] = useState([]);
   const [page, setCurrentPage] = useState(0);
   useEffect(() => {
@@ -20,6 +20,7 @@ const RegistList = function () {
         userEmail: '181111@jnu.ac.kr',
         role: 'GUEST',
         year: '21기',
+        createdAt: '2022.07.26',
       },
     ];
     setUsers(data);
@@ -44,10 +45,10 @@ const RegistList = function () {
         <colgroup>
           <col width="6%" />
           <col width="10%" />
-          <col width="35%" />
+          <col width="34%" />
           <col width="20%" />
           <col width="20%" />
-          <col width="9%" />
+          <col width="10%" />
         </colgroup>
         <thead className="table__thead">
           <tr>
@@ -57,7 +58,7 @@ const RegistList = function () {
           </tr>
         </thead>
         <tbody>
-          {users.map(({ id, userName, userEmail, role, year }) => (
+          {users.map(({ id, userName, userEmail, role, year, createdAt }) => (
             <tr key={id} className="table__tr">
               <td>
                 <input
@@ -77,7 +78,7 @@ const RegistList = function () {
               <td>{userEmail}</td>
               <td>{role}</td>
               <td>{year}</td>
-              <td className="regist-list-setting">수락</td>
+              <td>{createdAt}</td>
             </tr>
           ))}
         </tbody>
