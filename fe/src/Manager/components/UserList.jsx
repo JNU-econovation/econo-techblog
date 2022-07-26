@@ -11,6 +11,7 @@ import noImg from '../img/no_img.png';
 import settings from '../img/settings.png';
 import SettingBox from './SettingBox';
 import { useParams } from 'react-router-dom';
+import RoleSelectBox from './RoleSelectBox';
 
 const UserList = function () {
   const { role } = useParams();
@@ -26,38 +27,68 @@ const UserList = function () {
         return '관리자 회원 관리';
     }
   };
+  const [checkedList, setCheckedList] = useState([]);
+  const onChange = (checked, item) => {
+    if (checked) {
+      setCheckedList([...checkedList, item]);
+    } else if (!checked) {
+      setCheckedList(checkedList.filter((el) => el !== item));
+    }
+  };
   const [users, setUsers] = useState([]);
-  const columns = ['이름', '이메일', '사용자 타입', '기수', '설정'];
+  const columns = ['', '이름', '이메일', '사용자 타입', '기수', '설정'];
   const [page, setCurrentPage] = useState(0);
   useEffect(() => {
-    if (role === 'all') {
-      getUsers(`http://54.180.29.85:8080/api/user/all/${page}`);
-    } else {
-      getUsers(`http://54.180.29.85:8080/api/user/role/${page}/${role}`);
-    }
+    // if (role === 'all') {
+    //   getUsers(`http://54.180.29.85:8080/api/user/all/${page}`);
+    // } else {
+    //   getUsers(`http://54.180.29.85:8080/api/user/role/${page}/${role}`);
+    // }
+    const data = [
+      {
+        id: 1,
+        userName: '이윤성',
+        userEmail: '181111@jnu.ac.kr',
+        role: 'GUEST',
+        year: '21기',
+      },
+    ];
+    setUsers(data);
   }, [role, page]);
-  const getUsers = (url) => {
-    axios
-      .get(url)
-      .then((response) => {
-        setUsers(response.data);
-        console.log('response', response);
-      })
-      .catch((error) => {
-        console.log('erroe', error);
-      });
-  };
+  // const getUsers = (url) => {
+  //   axios
+  //     .get(url)
+  //     .then((response) => {
+  //       setUsers(response.data);
+  //       console.log('response', response);
+  //     })
+  //     .catch((error) => {
+  //       console.log('erroe', error);
+  //     });
+  // };
   const onClick = () => {};
   return (
-    <div>
-      <h2 className="userlist__title">{title()}</h2>
+    <div className="userlist">
+      <div className="userlist-top">
+        <h2 className="userlist__title">{title()}</h2>
+        <div className="userlist-edit">
+          <span className="userlist-text userlist-text--blue">선택한 회원</span>
+          <span className="userlist-text">을</span>
+          <RoleSelectBox />
+          <span className="userlist-text">(으)로</span>
+          <button type="button" className="userlist-edit__button">
+            변경하기
+          </button>
+        </div>
+      </div>
       <table className="userlist-table">
         <colgroup>
-          <col width="12%" />
-          <col width="40%" />
+          <col width="6%" />
+          <col width="10%" />
+          <col width="35%" />
           <col width="20%" />
           <col width="20%" />
-          <col width="8%" />
+          <col width="9%" />
         </colgroup>
         <thead className="userlist-table__thead">
           <tr>
@@ -69,6 +100,15 @@ const UserList = function () {
         <tbody>
           {users.map(({ id, userName, userEmail, role, year }) => (
             <tr key={id} className="userlist-table__tr">
+              <td>
+                <input
+                  type="checkbox"
+                  name="user"
+                  value={id}
+                  className="postlist-table__checkbox"
+                  onChange={(e) => onChange(e.target.checked, e.target.value)}
+                />
+              </td>
               <td>
                 <div className="userlist-table-user">
                   <img
