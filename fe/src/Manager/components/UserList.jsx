@@ -1,16 +1,16 @@
 /* eslint-disable */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 
 import '../css/UserList.css';
+import '../css/Table.css';
 import '../../components/css/Pagination.css';
 import noImg from '../img/no_img.png';
 import settings from '../img/settings.png';
 import SettingBox from './SettingBox';
-import { useParams } from 'react-router-dom';
 import RoleSelectBox from './RoleSelectBox';
 
 const UserList = function () {
@@ -35,6 +35,7 @@ const UserList = function () {
       setCheckedList(checkedList.filter((el) => el !== item));
     }
   };
+
   const [users, setUsers] = useState([]);
   const columns = ['', '이름', '이메일', '사용자 타입', '기수', '설정'];
   const [page, setCurrentPage] = useState(0);
@@ -74,14 +75,14 @@ const UserList = function () {
         <div className="userlist-edit">
           <span className="userlist-text userlist-text--blue">선택한 회원</span>
           <span className="userlist-text">을</span>
-          <RoleSelectBox />
+          <RoleSelectBox isRejectable={false} />
           <span className="userlist-text">(으)로</span>
           <button type="button" className="userlist-edit__button">
             변경하기
           </button>
         </div>
       </div>
-      <table className="userlist-table">
+      <table className="table">
         <colgroup>
           <col width="6%" />
           <col width="10%" />
@@ -90,7 +91,7 @@ const UserList = function () {
           <col width="20%" />
           <col width="9%" />
         </colgroup>
-        <thead className="userlist-table__thead">
+        <thead className="table__thead">
           <tr>
             {columns.map((column) => (
               <th key={column}>{column}</th>
@@ -99,7 +100,7 @@ const UserList = function () {
         </thead>
         <tbody>
           {users.map(({ id, userName, userEmail, role, year }) => (
-            <tr key={id} className="userlist-table__tr">
+            <tr key={id} className="table__tr">
               <td>
                 <input
                   type="checkbox"
@@ -110,13 +111,9 @@ const UserList = function () {
                 />
               </td>
               <td>
-                <div className="userlist-table-user">
-                  <img
-                    src={noImg}
-                    alt="noImg"
-                    className="userlist-table-user__img"
-                  />
-                  <span className="userlist-table-user__name">{userName}</span>
+                <div className="table-user">
+                  <img src={noImg} alt="noImg" className="table-user__img" />
+                  <span className="table-user__name">{userName}</span>
                 </div>
               </td>
               <td>{userEmail}</td>
