@@ -1,6 +1,8 @@
-/* eslint-disable */
-import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+/* eslint-disable object-curly-newline */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React from 'react';
+import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 
@@ -12,7 +14,7 @@ const SidebarItem = function ({ id, name, num, isSelected, onClick }) {
   const param = ['request', 'all', 'USER', 'GUEST', 'ADMIN'];
   return (
     <Link
-      to={`/admin/role/${param[id - 1]}`}
+      to={id === 1 ? '/admin/regist' : `/admin/role/${param[id - 1]}`}
       style={{ textDecoration: 'none' }}
     >
       <div
