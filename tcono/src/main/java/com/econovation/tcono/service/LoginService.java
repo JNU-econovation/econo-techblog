@@ -5,12 +5,14 @@ import com.econovation.tcono.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class LoginService {
 
@@ -27,7 +29,7 @@ public class LoginService {
         List<User> collect = userRepository.findByUserEmail(email).stream()
                 .filter(m -> m.getPassword().equals(password))
                 .collect(Collectors.toList());
-        User user = collect.stream().findFirst().get();
+        User user = collect.get(0);
         return user;
 //        Optional<User> firstUser = userRepository.findByUserEmail(email).stream().findFirst();
 //        User user = firstUser.get();
