@@ -54,5 +54,5 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0"
   },
-  "proxy":"http://54.180.29.85:8080"
+  "proxy": "http://168.131.30.127:8080"
 }
