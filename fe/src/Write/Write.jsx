@@ -8,12 +8,10 @@ import HashtagInput from './HashtagInput';
 import TitleInput from './TitleInput';
 import CategorySelectBox from './CategorySelectBox';
 import './css/Write.css';
-import { useLoginStateContext } from '../Context/LoginContext';
 
 function Write() {
   const editorRef = useRef();
   const navigate = useNavigate();
-  const loginContext = useLoginStateContext();
   const onSubmit = () => {
     const contentHTML = editorRef.current?.getInstance().getHTML();
     const contentMarkdown = editorRef.current?.getInstance().getMarkdown();
@@ -25,7 +23,7 @@ function Write() {
     navigate(-1);
   };
 
-  if (loginContext.id === -1) {
+  if (sessionStorage.getItem('uid') === null) {
     return <Navigate to="/login" />;
   }
 
