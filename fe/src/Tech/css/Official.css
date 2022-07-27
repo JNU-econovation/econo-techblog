@@ -1,4 +1,4 @@
-.official {
+.official-post {
     display: flex;
     border-radius: 15px;
     overflow: hidden;
@@ -62,8 +62,23 @@
     color: #7f7f7f;
 }
 
+.official-bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-.official__next {
+.official__button {
+    width: 7px;
+    height: 7px;
     border: none;
-    background-color: inherit;
+    border-radius: 50px;
+    background-color: #4e4e4e;
+    opacity: 0.2;
+    padding: 0px;
+    margin: 0px 4px;
+}
+
+.official__button--current {
+    opacity: 1;
 }
