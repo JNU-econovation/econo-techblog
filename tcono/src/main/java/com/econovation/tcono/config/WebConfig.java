@@ -3,6 +3,7 @@ package com.econovation.tcono.config;
 import com.econovation.tcono.Interceptor.LogInterceptor;
 import com.econovation.tcono.Interceptor.LoginCheckInterceptor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -28,13 +29,21 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/", "/api/user/**","/api/user","/api/file","**/*.graphql","**/*.graphqls","/api/usernames/**","/api/confirm-email/**", "/api/login", "/api/logout","/api/find-email/**",
                         "/css/**", "/*.ico", "/error","/api/file");
     }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080")
-                .allowedMethods("*")
-                .maxAge(3600)
-                .allowedHeaders("header1","header2");
+    @Bean
+    public FilterRegistrationBean<CorsFilter> CorsFilter(){
+        FilterRegistrationBean<CorsFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new CorsFilter());
+        registrationBean.addUrlPatterns("/api/*");
+        registrationBean.setOrder(1);
+        registrationBean.setName("first-filter");
+        return registrationBean;
     }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("http:localhost:8080")
+//                .allowedMethods("*")
+//                .maxAge(3000);
+////                .allowCredentials(true);
+//    }
 }
