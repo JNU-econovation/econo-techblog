@@ -16,6 +16,7 @@ function SignUpBox() {
   // eslint-disable-next-line no-unused-vars
   const [year, setYear] = useState(-1);
   const [passwdStatus, setPasswdStatus] = useState('');
+  const [pinCode, setPinCode] = useState('');
 
   useEffect(() => {
     if (isEmptyStatus(password, confirmPasswd)) {
@@ -31,13 +32,20 @@ function SignUpBox() {
     setIsAgree(() => e.target.checked);
   };
 
+  const onPincodeHandler = (e) => {
+    setPinCode(e.target.value);
+  };
+
+  const onKeyUpHandler = (e) => {
+    setPinCode(e.target.value.replace(/[^0-9]/g, ''));
+  };
   const onSubmit = () => {
     const requestData = {
       userEmail,
       password,
       year,
       userName,
-      pinCode: 1111,
+      pinCode,
     };
     console.log('verify request data', requestData);
     axios({
@@ -46,6 +54,8 @@ function SignUpBox() {
       data: requestData,
       headers: {
         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+        'Content-Type': '*',
       },
     })
       .then((response) => {
@@ -95,9 +105,13 @@ function SignUpBox() {
         setValue={setYear}
       />
       <input
-        classNames="sign-up-box-pin-code__input"
-        type="number"
-        maxLength="4"
+        className="sign-up-box-pin-code__input"
+        type="text"
+        placeholder="PIN CODE"
+        maxLength={4}
+        value={pinCode}
+        onChange={onPincodeHandler}
+        onKeyUp={onKeyUpHandler}
       />
 
       <div className="sign-up-box--agree__container">

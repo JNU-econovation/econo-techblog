@@ -11,11 +11,11 @@ function ResetPassword() {
 
   useEffect(() => {
     if (isEmptyStatus(password, confirmPassword)) {
-      setPasswordStatus('');
+      setPasswordStatus(() => '');
     } else if (isSamePasswd(password, confirmPassword)) {
-      setPasswordStatus('비밀번호가 일치합니다.');
+      setPasswordStatus(() => '비밀번호가 일치합니다.');
     } else {
-      setPasswordStatus('비밀번호가 일치하지 않습니다.');
+      setPasswordStatus(() => '비밀번호가 일치하지 않습니다.');
     }
   }, [password, confirmPassword]);
   return (
