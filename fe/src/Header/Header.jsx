@@ -22,9 +22,8 @@ function Header() {
   };
 
   useEffect(() => {
-    console.log('rerender from lc');
     const data = { ...loginContext };
-    console.log(data);
+    console.log('rerender from login context', data);
     setLoginUserInfo(data);
   }, [loginContext]);
 
