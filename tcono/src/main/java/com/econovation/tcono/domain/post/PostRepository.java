@@ -19,6 +19,9 @@ import java.util.Optional;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+    @Query("select p from Post p")
+    List<Post> findPosts(Pageable pageable);
+
     @Query("select p from Post p where p.mainCategory= :mainCategory")
     List<Post> findAllByMainCategory(@Param("mainCategory") MainCategory mainCategory,Pageable pageable);
 
@@ -32,4 +35,14 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     int updateViews(@Param("id")Long id);
 
     List<Post> findByTitleContaining(String keyword, Pageable pageable);
+
+    @Query("select p from Post p where p.userId=:userId")
+    List<Post> findByUserId(@Param("userId") Long userId);
+
+    @Query("select count(p) from Post p where p.mainCategory=:mainCategory")
+    Long countPostsByMainCategory(@Param("mainCategory")MainCategory mainCategory);
+
+    @Query("select count(p) from Post p")
+    Long countPosts();
+
 }

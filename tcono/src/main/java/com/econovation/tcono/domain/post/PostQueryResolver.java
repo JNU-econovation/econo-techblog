@@ -3,6 +3,8 @@ package com.econovation.tcono.domain.post;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
+import com.econovation.tcono.web.dto.PostByIdResponseDto;
+import com.econovation.tcono.web.dto.PostListResponseDto;
 import com.econovation.tcono.web.dto.PostResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +40,16 @@ public class PostQueryResolver implements GraphQLQueryResolver {
      * 페이징 처리(10개)
      */
     @Transactional
-    public List<Post> findAllPosts(int mainCategoryNumber, int page) {
+    public List<PostListResponseDto> findAllPosts(int mainCategoryNumber, int page) {
         Pageable pageable = PageRequest.of(page, 5);
-
-        List<Post> postList = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber),pageable);
-        postList.forEach(x->x.getCategoryList().toString());
-        return postList;
+        if(mainCategoryNumber==0){
+            List<Post> allPostsByMainCategory = postRepository.findPosts(pageable);
+            return allPostsByMainCategory.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+                    .collect(Collectors.toList());
+        }
+        List<Post> allPostsByMainCategory = postRepository.findAllByMainCategory(MainCategory.getMainCategory(mainCategoryNumber),pageable);
+        return allPostsByMainCategory.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -85,10 +91,19 @@ public class PostQueryResolver implements GraphQLQueryResolver {
      * @return List<Post>
      * title로 like 검색 기능
      */
-//    @Transactional
-//    public List<PostResponseDto> search(String keyword, int page) {
-//        Pageable pageable = PageRequest.of(page, 5);
-//        List<Post> postList = postRepository.findByTitleContaining(keyword, pageable);
-//        return postList;
-//    }
+    @Transactional
+    public List<PostListResponseDto> search(String keyword, int page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        List<Post> postList = postRepository.findByTitleContaining(keyword, pageable);
+        return postList.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Long postCounts(int mainCategoryNumber) {
+        if(mainCategoryNumber==0){
+            return postRepository.countPosts();
+        }
+        return postRepository.countPostsByMainCategory(MainCategory.getMainCategory(mainCategoryNumber));
+    }
 }

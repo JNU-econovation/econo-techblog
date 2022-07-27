@@ -34,10 +34,10 @@ public class TestDataInit {
                 .pinCode("1234")
                 .build();
         userRepository.save(findUser);
-//    }
+    }
 //    @PostConstruct
 //    @Transactional
-//    public void initPost(){
+    public void initPost(){
         Post post = new Post();
         Post findPost = post.builder()
                 .userId(1L)
@@ -47,10 +47,10 @@ public class TestDataInit {
                 .build();
 
         postRepository.save(findPost);
-//    }
+    }
 //    @PostConstruct
 //    @Transactional
-//    public void initCategory() {
+    public void initCategory() {
         Category category1 = new Category();
         Category findCategory = Category.builder()
                 .categoryName("이윤성")
@@ -58,10 +58,10 @@ public class TestDataInit {
                 .build();
 
         categoryRepository.save(findCategory);
-//    }
+    }
 //    @PostConstruct
 //    @Transactional
-//    public void initCategory2(){
+    public void initCategory2(){
         Category category2 = new Category();
         Category findCategory2 = Category.builder()
                 .categoryName("이혜은")

@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -45,5 +47,19 @@ public class HeartQueryResolver implements GraphQLQueryResolver {
             return true;
         }
         return false;
+    }
+
+    @Transactional
+    public int totalHeartsByUser(Long userId) {
+        //찾고자 하는 유저 찾고
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
+
+        List<Post> postList = postRepository.findByUserId(userId); //해당 user가 쓴 총 post 찾기
+        int totalHeartByUser = postList.stream()
+                .mapToInt(Post::getHearts)
+                .sum();
+
+        return totalHeartByUser;
     }
 }
