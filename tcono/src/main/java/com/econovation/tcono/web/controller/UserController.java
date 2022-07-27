@@ -48,6 +48,13 @@ public class UserController {
     @GetMapping("/api/user/pinCode/{pinCode}")
     public User findUserBypinCode(@PathVariable String pinCode) { return userService.findUserByPinCode(pinCode);}
 
+    @GetMapping("/api/user/count/{role}")
+    public Long countUserByRole(@PathVariable String role){return userService.countUserByRole(role);}
+
+    @GetMapping("/api/user/count")
+    public Long countAllUser(){return userService.countAllUser();}
+
+
     @GetMapping("/api/usernames/{userName}")
     public String findUserByUserName(@PathVariable String userName){
         List<User> findUser = userService.findUserByUserName(userName);
