@@ -58,6 +58,18 @@ public class UserService {
         Pageable pageable = PageRequest.of(page, 8);
         return userRepository.findAll(pageable).stream().filter(u->u.getRole() == translatedRole).collect(Collectors.toList());
     }
+
+    @Transactional
+    public Long countAllUser(){
+        return userRepository.count();
+    }
+
+
+    @Transactional
+    public Long countUserByRole(String role){
+        Role translatedRole = Role.valueOf(role);
+        return userRepository.countAllByRole(translatedRole);
+    }
     /**
      * Get User By One userId
      * @param Long : userId
