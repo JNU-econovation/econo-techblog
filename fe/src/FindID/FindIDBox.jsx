@@ -20,13 +20,13 @@ function FindIDBox({ setIsFindID, setUser }) {
   const onSubmit = () => {
     axios({
       method: 'get',
-      url: `/api/find-email/?year=${year}&userName=${userName}`,
+      url: `http://168.131.30.127:8080/api/find-email/?year=${year}&userName=${userName}`,
       headers: {
         'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'X-PINGOTHER, Content-Type',
-        'Access-Control-Max-Age': '86400',
+        'Access-Control-Allow-Methods': 'PUT, GET, HEAD, POST, DELETE, OPTIONS',
+        'Access-Control-Request-Headers': 'X-PINGOTHER, Content-Type',
         'Content-Type': '*',
+        'Access-Control-Allow-Credentials': 'true',
       },
     })
       .then((response) => {

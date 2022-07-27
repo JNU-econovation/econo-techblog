@@ -50,7 +50,7 @@ function SignUpBox() {
     console.log('verify request data', requestData);
     axios({
       method: 'post',
-      url: '/api/user?',
+      url: 'http://168.131.30.127:8080/api/user?',
       data: requestData,
       headers: {
         'Access-Control-Allow-Origin': '*',
