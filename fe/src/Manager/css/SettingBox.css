@@ -11,8 +11,8 @@
     background-color: #fff;
 }
 
-.setting-box-show__button,
-.setting-box-edit__button {
+.setting-box-edit__button,
+.setting-box-resign__button {
     width: 110px;
     border: none;
     background-color: inherit;
@@ -21,11 +21,11 @@
     text-align: start;
 }
 
-.setting-box-show__button {
+.setting-box-edit__button {
     border-bottom: solid 1px #f5f5f5;
     padding-bottom: 5px;
 }
 
-.setting-box-edit__button {
+.setting-box-resign__button {
     padding-top: 5px;
 }

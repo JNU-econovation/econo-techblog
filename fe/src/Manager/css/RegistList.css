@@ -1,24 +1,24 @@
-.userlist {
+.regist-list {
     width: 90%;
     margin: 30px auto;
 }
 
-.userlist-top {
+.regist-list-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.userlist__title{
+.regist-list__title{
     font-size: 20px;
 }
 
-.userlist-edit {
+.regist-list-edit {
     display: flex;
     align-items: center;
 }
 
-.userlist-edit__button {
+.regist-list-edit__button {
     height: 30px;
     width: 80px;
     border: none;
@@ -30,40 +30,13 @@
     color: #fff;
 }
 
-.userlist-text {
+.regist-list-text {
     font-size: 14px;
     font-weight: normal;
     color: #8f8f8f;
 }
 
-.userlist-text--blue {
+.regist-list-text--blue {
     font-weight: bold;
     color: #2269fa;
 }
-
-.userlist-setting {
-    position: relative;
-}
-
-.userlist-setting-btn {
-    border: none;
-    background-color: inherit;
-}
-
-.userlist-setting-btn__img {
-    margin-top: 6px;
-    width: 14px;
-}
-
-.userlist-setting-box {
-    display: none;
-}
-
-.userlist-setting-btn:hover + .userlist-setting-box {
-    display:block;
-}
-
-.userlist-setting-box:hover {
-    display: block;
-}
-

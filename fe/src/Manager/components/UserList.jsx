@@ -1,16 +1,17 @@
 /* eslint-disable */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 
 import '../css/UserList.css';
+import '../css/Table.css';
 import '../../components/css/Pagination.css';
 import noImg from '../img/no_img.png';
 import settings from '../img/settings.png';
 import SettingBox from './SettingBox';
-import { useParams } from 'react-router-dom';
+import RoleSelectBox from './RoleSelectBox';
 
 const UserList = function () {
   const { role } = useParams();
@@ -26,40 +27,71 @@ const UserList = function () {
         return '관리자 회원 관리';
     }
   };
+  const [checkedList, setCheckedList] = useState([]);
+  const onChange = (checked, item) => {
+    if (checked) {
+      setCheckedList([...checkedList, item]);
+    } else if (!checked) {
+      setCheckedList(checkedList.filter((el) => el !== item));
+    }
+  };
+
   const [users, setUsers] = useState([]);
-  const columns = ['이름', '이메일', '사용자 타입', '기수', '설정'];
+  const columns = ['', '이름', '이메일', '사용자 타입', '기수', '설정'];
   const [page, setCurrentPage] = useState(0);
   useEffect(() => {
-    if (role === 'all') {
-      getUsers(`http://54.180.29.85:8080/api/user/all/${page}`);
-    } else {
-      getUsers(`http://54.180.29.85:8080/api/user/role/${page}/${role}`);
-    }
+    // if (role === 'all') {
+    //   getUsers(`http://54.180.29.85:8080/api/user/all/${page}`);
+    // } else {
+    //   getUsers(`http://54.180.29.85:8080/api/user/role/${page}/${role}`);
+    // }
+    const data = [
+      {
+        id: 1,
+        userName: '이윤성',
+        userEmail: '181111@jnu.ac.kr',
+        role: 'GUEST',
+        year: '21기',
+      },
+    ];
+    setUsers(data);
   }, [role, page]);
-  const getUsers = (url) => {
-    axios
-      .get(url)
-      .then((response) => {
-        setUsers(response.data);
-        console.log('response', response);
-      })
-      .catch((error) => {
-        console.log('erroe', error);
-      });
-  };
+  // const getUsers = (url) => {
+  //   axios
+  //     .get(url)
+  //     .then((response) => {
+  //       setUsers(response.data);
+  //       console.log('response', response);
+  //     })
+  //     .catch((error) => {
+  //       console.log('erroe', error);
+  //     });
+  // };
   const onClick = () => {};
   return (
-    <div>
-      <h2 className="userlist__title">{title()}</h2>
-      <table className="userlist-table">
+    <div className="userlist">
+      <div className="userlist-top">
+        <h2 className="userlist__title">{title()}</h2>
+        <div className="userlist-edit">
+          <span className="userlist-text userlist-text--blue">선택한 회원</span>
+          <span className="userlist-text">을</span>
+          <RoleSelectBox isRejectable={false} />
+          <span className="userlist-text">(으)로</span>
+          <button type="button" className="userlist-edit__button">
+            변경하기
+          </button>
+        </div>
+      </div>
+      <table className="table">
         <colgroup>
-          <col width="12%" />
-          <col width="40%" />
+          <col width="6%" />
+          <col width="10%" />
+          <col width="34%" />
           <col width="20%" />
           <col width="20%" />
-          <col width="8%" />
+          <col width="10%" />
         </colgroup>
-        <thead className="userlist-table__thead">
+        <thead className="table__thead">
           <tr>
             {columns.map((column) => (
               <th key={column}>{column}</th>
@@ -68,15 +100,20 @@ const UserList = function () {
         </thead>
         <tbody>
           {users.map(({ id, userName, userEmail, role, year }) => (
-            <tr key={id} className="userlist-table__tr">
+            <tr key={id} className="table__tr">
               <td>
-                <div className="userlist-table-user">
-                  <img
-                    src={noImg}
-                    alt="noImg"
-                    className="userlist-table-user__img"
-                  />
-                  <span className="userlist-table-user__name">{userName}</span>
+                <input
+                  type="checkbox"
+                  name="user"
+                  value={id}
+                  className="postlist-table__checkbox"
+                  onChange={(e) => onChange(e.target.checked, e.target.value)}
+                />
+              </td>
+              <td>
+                <div className="table-user">
+                  <img src={noImg} alt="noImg" className="table-user__img" />
+                  <span className="table-user__name">{userName}</span>
                 </div>
               </td>
               <td>{userEmail}</td>

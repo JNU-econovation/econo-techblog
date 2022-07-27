@@ -1,0 +1,45 @@
+.table {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+    border-collapse: collapse;
+}
+
+.table__thead {
+    background-color: #f5f5f5;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7a7a7a;
+    height: 40px;
+}
+
+.table__thead th:first-child {
+    border-top-left-radius: 15px;
+}
+
+.table__thead th:last-child {
+    border-top-right-radius: 15px;
+}
+
+.table__tr {
+    height: 60px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    border-top: solid 1px #f2f2f2;
+}
+
+.table-user__img {
+    width: 30px;
+}
+
+.table-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-user__name{
+    width: 60px;
+}
