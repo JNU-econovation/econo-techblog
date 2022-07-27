@@ -3,11 +3,13 @@ package com.econovation.tcono.domain.post;
 import com.econovation.tcono.domain.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.persistence.*;
@@ -50,7 +52,6 @@ public class Post extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
     private List<Category> categoryList = new ArrayList<>();
-
 
     @Enumerated(EnumType.STRING)
     private MainCategory mainCategory; //대분류

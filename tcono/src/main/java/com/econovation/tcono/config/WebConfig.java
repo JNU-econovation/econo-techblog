@@ -19,22 +19,22 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LogInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/*.ico","**/*.graphql","**/*.graphqls" ,"/error", "/api/usernames/**" ,"/api/login","/api/user/**","/api/confirm-email/**","/api/unique-email/**");
+                .excludePathPatterns("/css/**", "/*.ico","**/*.graphql","**/*.graphqls" ,"/error", "/api/usernames/**" ,"/api/login","/api/user/**",
+                        "/api/confirm-email/**","/api/unique-email/**","/api/file");
 
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/", "/api/user/**","/api/user","**/*.graphql","**/*.graphqls","/api/usernames/**","/api/confirm-email/**", "/api/login", "/api/logout","/api/find-email/**",
-                        "/css/**", "/*.ico", "/error");
+                .excludePathPatterns("/", "/api/user/**","/api/user","/api/file","**/*.graphql","**/*.graphqls","/api/usernames/**","/api/confirm-email/**", "/api/login", "/api/logout","/api/find-email/**",
+                        "/css/**", "/*.ico", "/error","/api/file");
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("*")
+                .allowedOrigins("http://localhost:8080")
                 .allowedMethods("*")
                 .maxAge(3600)
-                .allowedHeaders("header1","header2")
-                .allowCredentials(true);
+                .allowedHeaders("header1","header2");
     }
 }

@@ -20,6 +20,7 @@ public class FileStore {
     public String getFullPath(String filename) {
         return fileDir + filename;
     }
+
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles)
             throws IOException {
         List<UploadFile> storeFileResult = new ArrayList<>();
@@ -39,11 +40,14 @@ public class FileStore {
         String storeFileName = createStoreFileName(originalFilename);
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
         return new UploadFile(originalFilename, storeFileName);
-    } private String createStoreFileName(String originalFilename) {
+    }
+
+    private String createStoreFileName(String originalFilename) {
         String ext = extractExt(originalFilename);
         String uuid = UUID.randomUUID().toString();
         return uuid + "." + ext;
     }
+
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
