@@ -114,7 +114,7 @@ input CommentCreateRequestDto{
     userId:Int
     postId:Int
     content:String
-    group:Int
+    parent:Int
     seq:Int
 }
 
@@ -125,12 +125,12 @@ input CommentUpdateRequestDto{
     content:String
 }
 
-type CommentResponseDto{
+type CommentCreateResponseDto{
     commentId:Int
     userName:String
     postId:Int
     content:String
-    group:Int
+    parent:Int
     seq:Int
     createdDate:String
 }
@@ -171,6 +171,6 @@ type Mutation{
     updateHeartState(heartRequestDto:HeartRequestDto): Int!,
     #
     #      -----------Comment------------------------------
-    createComment(commentCreateRequestDto:CommentCreateRequestDto):CommentResponseDto!,
+    createComment(commentCreateRequestDto:CommentCreateRequestDto):CommentCreateResponseDto!,
 #    updateComment(commentUpdateRequestDto:CommentUpdateRequestDto):CommentResponseDto!
 }

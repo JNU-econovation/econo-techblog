@@ -13,19 +13,19 @@ public class CommentCreateResponseDto {
     private String userName;
     private Long postId;
     private String content;
-    private int group;
+    private int parent;
 
     private String createdDate;
     private int seq;
 
     @Builder
-    public CommentCreateResponseDto(Comment comment, User user){
-        this.commentId=comment.getCommentId();
-        this.userName=user.getUserName();
-        this.postId=comment.getPost().getId();
-        this.content= comment.getContent();;
-        this.seq=comment.getSeq();
-        this.group=comment.getGroup();
+    public CommentCreateResponseDto(Comment comment, User user) {
+        this.commentId = comment.getCommentId();
+        this.userName = user.getUserName();
+        this.postId = comment.getPost().getId();
+        this.content = comment.getContent();
+        this.seq = comment.getSeq();
+        this.parent = comment.getParent();
+        this.createdDate=comment.getCreatedDate();
     }
-
 }

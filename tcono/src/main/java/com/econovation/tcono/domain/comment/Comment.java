@@ -7,16 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Table(name="comment")
 @DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment extends BaseTimeEntity {//자식 댓글
+public class Comment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COMMENT_ID")
@@ -29,19 +31,21 @@ public class Comment extends BaseTimeEntity {//자식 댓글
     @Lob
     @Column(nullable = false)
     private String content;
-    private int group;// 부모댓글의 Id
+    @ColumnDefault("0")
+    private int parent;// 부모댓글의 Id
 
+    @ColumnDefault("0")
     private int seq;//부모댓글내 순서
-
-    private Boolean isRemoved = false;//제거 유무
+    @ColumnDefault("false")
+    private Boolean isRemoved;//제거 유무
 
     @Builder
-    public Comment(Long userId, Post post, String content, int group,int seq) {
+    public Comment(Long userId, Post post, String content, int parent,int seq) {
         this.userId = userId;
         this.post = post;
         this.content = content;
         this.seq=seq;
-        this.group = group;
+        this.parent=parent;
     }
 
     //==수정==/

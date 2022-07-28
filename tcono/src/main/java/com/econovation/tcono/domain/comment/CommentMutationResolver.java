@@ -21,7 +21,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     private static final String NOT_FOUND_POST_MESSAGE = "해당 페이지는 존재하지 않습니다.";
 
     @Autowired
-    private CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
