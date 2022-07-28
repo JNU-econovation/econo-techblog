@@ -15,6 +15,7 @@ import RoleSelectBox from './RoleSelectBox';
 
 const UserList = function () {
   const { role } = useParams();
+  const columns = ['', '이름', '이메일', '사용자 타입', '기수', '설정'];
   const title = () => {
     switch (role) {
       case 'all':
@@ -28,46 +29,99 @@ const UserList = function () {
     }
   };
   const [checkedList, setCheckedList] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [page, setCurrentPage] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [currentOption, setCurrentOption] = useState('GUEST');
+  const getUsers = (url) => {
+    console.log('url:', url);
+    axios({
+      method: 'get',
+      url: url,
+      headers: {
+        'Content-Type': '*/*',
+      },
+    })
+      .then((response) => {
+        setUsers(response.data);
+        console.log('response', response);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  };
+  const onOpen = () => {
+    setOpen(!open);
+  };
+  const onSelect = (item) => {
+    setCurrentOption(item.target.innerText);
+    setOpen(false);
+  };
   const onChange = (checked, item) => {
     if (checked) {
-      setCheckedList([...checkedList, item]);
+      setCheckedList((checkedList) => [...checkedList, item]);
     } else if (!checked) {
       setCheckedList(checkedList.filter((el) => el !== item));
     }
   };
-
-  const [users, setUsers] = useState([]);
-  const columns = ['', '이름', '이메일', '사용자 타입', '기수', '설정'];
-  const [page, setCurrentPage] = useState(0);
   useEffect(() => {
-    // if (role === 'all') {
-    //   getUsers(`http://54.180.29.85:8080/api/user/all/${page}`);
-    // } else {
-    //   getUsers(`http://54.180.29.85:8080/api/user/role/${page}/${role}`);
-    // }
-    const data = [
-      {
-        id: 1,
-        userName: '이윤성',
-        userEmail: '181111@jnu.ac.kr',
-        role: 'GUEST',
-        year: '21기',
-      },
-    ];
-    setUsers(data);
-  }, [role, page]);
-  // const getUsers = (url) => {
-  //   axios
-  //     .get(url)
-  //     .then((response) => {
-  //       setUsers(response.data);
-  //       console.log('response', response);
-  //     })
-  //     .catch((error) => {
-  //       console.log('erroe', error);
-  //     });
-  // };
-  const onClick = () => {};
+    if (role === 'all') {
+      getUsers(`http://168.131.30.127:8080/api/user/all/${page}`);
+    } else {
+      getUsers(`http://168.131.30.127:8080/api/user/role/${page}/${role}`);
+    }
+    setLoading(true);
+    // const data = [
+    //   {
+    //     id: 1,
+    //     userName: '이윤성',
+    //     userEmail: '181111@jnu.ac.kr',
+    //     role: 'GUEST',
+    //     year: '21기',
+    //   },
+    //   {
+    //     id: 2,
+    //     userName: '이윤성',
+    //     userEmail: '181111@jnu.ac.kr',
+    //     role: 'GUEST',
+    //     year: '21기',
+    //   },
+    // ];
+    // setUsers(data);
+  }, [role, page, loading]);
+
+  // 사용자 권한 변경
+  const onEditClick = () => {
+    checkedList.forEach((userId) => {
+      const user = users.find((elem) => elem.id == userId);
+      console.log('user', user);
+      if (user) {
+        const requestData = {
+          userEmail: user.userEmail,
+          year: user.year,
+          userName: user.userName,
+          role: currentOption,
+        };
+        console.log('data', requestData);
+        axios({
+          method: 'post',
+          url: 'http://168.131.30.127:8080/api/user',
+          data: requestData,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+          .then((response) => {
+            console.log('response', response);
+          })
+          .catch((error) => {
+            console.log('error', error);
+          });
+        setLoading(false);
+      }
+    });
+  };
   return (
     <div className="userlist">
       <div className="userlist-top">
@@ -75,9 +129,19 @@ const UserList = function () {
         <div className="userlist-edit">
           <span className="userlist-text userlist-text--blue">선택한 회원</span>
           <span className="userlist-text">을</span>
-          <RoleSelectBox isRejectable={false} />
+          <RoleSelectBox
+            isRejectable={false}
+            onOpen={onOpen}
+            onSelect={onSelect}
+            isOpen={open}
+            currentOption={currentOption}
+          />
           <span className="userlist-text">(으)로</span>
-          <button type="button" className="userlist-edit__button">
+          <button
+            onClick={onEditClick}
+            type="submit"
+            className="userlist-edit__button"
+          >
             변경하기
           </button>
         </div>
@@ -120,11 +184,7 @@ const UserList = function () {
               <td>{role}</td>
               <td>{year}</td>
               <td className="userlist-setting">
-                <button
-                  type="button"
-                  className="userlist-setting-btn"
-                  onClick={onClick}
-                >
+                <button type="button" className="userlist-setting-btn">
                   <img
                     src={settings}
                     alt="settings"

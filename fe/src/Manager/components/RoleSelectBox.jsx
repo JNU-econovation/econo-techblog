@@ -1,22 +1,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 
 import '../css/RoleSelectBox.css';
 import select from '../img/select_more.png';
 
-const RoleSelectBox = function ({ isRejectable }) {
-  const [open, setOpen] = useState(false);
-  const [option, setOption] = useState('권한');
-  const onOpen = () => {
-    setOpen(!open);
-  };
-  const onClick = (item) => {
-    setOption(item.target.innerText);
-    setOpen(false);
-  };
+const RoleSelectBox = function ({
+  isRejectable,
+  onOpen,
+  onSelect,
+  isOpen,
+  currentOption,
+}) {
   return (
     <div className="role-select-box">
       <button
@@ -24,28 +21,28 @@ const RoleSelectBox = function ({ isRejectable }) {
         className="role-select-box__current"
         onClick={onOpen}
       >
-        <span>{option}</span>
+        <span>{currentOption}</span>
         <img src={select} alt="select more" className="role-select-box__img" />
       </button>
       <ul
         className={
-          open
+          isOpen
             ? 'role-select-box__list role-select-box__list--open'
             : 'role-select-box__list'
         }
       >
-        <li className="role-select-box__item" onClick={onClick}>
-          게스트 회원
+        <li className="role-select-box__item" onClick={onSelect}>
+          GUEST
         </li>
-        <li className="role-select-box__item" onClick={onClick}>
-          일반 회원
+        <li className="role-select-box__item" onClick={onSelect}>
+          USER
         </li>
-        <li className="role-select-box__item" onClick={onClick}>
-          관리자 회원
+        <li className="role-select-box__item" onClick={onSelect}>
+          ADMIN
         </li>
         <li
           className={isRejectable ? 'role-select-box__item' : 'hidden'}
-          onClick={onClick}
+          onClick={onSelect}
         >
           가입 거절
         </li>
@@ -56,6 +53,10 @@ const RoleSelectBox = function ({ isRejectable }) {
 
 RoleSelectBox.propTypes = {
   isRejectable: PropTypes.bool.isRequired,
+  onOpen: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  currentOption: PropTypes.string.isRequired,
 };
 
 export default RoleSelectBox;
