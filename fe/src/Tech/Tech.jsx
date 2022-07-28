@@ -13,6 +13,7 @@ import PostBox from '../components/PostBox';
 
 const GET_POSTS = gql`
   query findAllPosts($mainCategoryNumber: Int!, $page: Int!) {
+    postCounts(mainCategoryNumber: $mainCategoryNumber)
     findAllPosts(mainCategoryNumber: $mainCategoryNumber, page: $page) {
       postId
       userName
@@ -38,7 +39,7 @@ const Tech = function () {
       page: currentPage,
     },
   });
-  console.log(data);
+  console.log('findAllPosts', data);
   const navigate = useNavigate();
   const onClick = () => {
     navigate('/write');
@@ -82,7 +83,7 @@ const Tech = function () {
           <Pagination
             activePage={currentPage}
             itemsCountPerPage={7}
-            totalItemsCount={currentPosts.length}
+            totalItemsCount={data ? data.postCounts : 0}
             pageRangeDisplayed={5}
             prevPageText="<"
             nextPageText=">"
