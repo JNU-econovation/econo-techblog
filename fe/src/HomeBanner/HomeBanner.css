@@ -1,12 +1,24 @@
 .home-banner{
-    margin: 20px 10% 0 10%;
     height: 70vh;
     display: flex;
-    justify-content: space-between;
-    background-color: #2269FA;
-    border-radius: 12px;
+    background-image: url('./img/home_banner_img.png');
+    background-size: cover;
+    align-items: center;
 }
 
+.home-banner-side__text{
+    position: relative;
+    right: 10px;
+    transform: rotate(0.75turn);
+    color: white;
+    font-weight: normal;
+    font-size: 20px;
+    margin: 0;
+}
+.home-banner h1{
+    font-size: 99px;
+    margin: 0;
+}
 .home-banner-text{
     margin: auto 0%;
     width: 30%;
