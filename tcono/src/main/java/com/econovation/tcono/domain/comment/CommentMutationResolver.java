@@ -4,11 +4,8 @@ import com.econovation.tcono.domain.post.Post;
 import com.econovation.tcono.domain.post.PostRepository;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
-import com.econovation.tcono.web.dto.CommentCreateRequestDto;
-import com.econovation.tcono.web.dto.CommentDeleteRequestDto;
-import com.econovation.tcono.web.dto.CommentResponseDto;
+import com.econovation.tcono.web.dto.*;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.econovation.tcono.web.dto.CommentUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -64,18 +61,11 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     }
 
     @Transactional
-    public CommentResponseDto createReply(CommentCreateRequestDto commentCreateRequestDto) {
+    public CommentResponseDto createReply(ReplyCreateRequestDto replyCreateRequestDto){
+        User user=isUser(replyCreateRequestDto.getUserId());
+        Post post=isPost(replyCreateRequestDto.getPostId());
 
-        User user=isUser(commentCreateRequestDto.getUserId());
-        Post post=isPost(commentCreateRequestDto.getPostId());
-
-        Integer parentNumber= commentRepository.countByParent();
-        if(parentNumber==null){
-            Comment newComment=commentCreateRequestDto.toEntity(post,0);
-            commentRepository.save(newComment);
-            return new CommentResponseDto(newComment,user);
-        }
-        Comment newComment=commentCreateRequestDto.toEntity(post,parentNumber);
+        Comment newComment=replyCreateRequestDto.toEntity(post);
         commentRepository.save(newComment);
         return new CommentResponseDto(newComment,user);
     }

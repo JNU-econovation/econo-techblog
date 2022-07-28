@@ -124,6 +124,13 @@ input CommentUpdateRequestDto{
     content:String
 }
 
+input ReplyCreateRequestDto{
+    userId:Int
+    postId:Int
+    content:String
+    parent:Int
+}
+
 type CommentResponseDto{
     commentId:Int
     userName:String
@@ -170,5 +177,6 @@ type Mutation{
     #
     #      -----------Comment------------------------------
     createComment(commentCreateRequestDto:CommentCreateRequestDto):CommentResponseDto!,
+    createReply(replyCreateRequestDto:ReplyCreateRequestDto):CommentResponseDto!,
     updateComment(commentUpdateRequestDto:CommentUpdateRequestDto):CommentResponseDto!
 }
