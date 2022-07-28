@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
 /* eslint-disable object-shorthand */
 
@@ -43,15 +43,14 @@ const DELETE_POST = gql`
 
 const Post = function () {
   const navigate = useNavigate();
-  // const { id } = useParams();
-  const id = 5;
+  const { id } = useParams();
   const { data, loading } = useQuery(GET_POST, {
     variables: {
       postId: id,
       userId: 1,
     },
   });
-  console.log(data);
+  console.log('findPostByPostId', data);
   const [updateHeartState] = useMutation(SET_LIKED, {
     // eslint-disable-next-line no-shadow
     update(cache, { data: { updateHeartState } }) {
@@ -109,7 +108,7 @@ const Post = function () {
       },
     });
   };
-  if (loading) return 'Loading';
+  if (loading) return null;
   return (
     <div className="post">
       <div className="post-middle">

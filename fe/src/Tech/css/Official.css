@@ -1,4 +1,4 @@
-.official {
+.official-post {
     display: flex;
     border-radius: 15px;
     overflow: hidden;
@@ -28,14 +28,21 @@
 }
 
 .official-info-middle {
-    margin: 20px 0px;
-    font-size: 15px;
+    margin: 10px 0px;
+    display: flex;
+    align-items: flex-start;
+    width: 700px;
+    height: 80px;
+}
+
+.official-info__content{
+    font-size: 12px;
+    color: rgba(0,0,0,0.7);
     line-height: 1.6;
-    color: #163235;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 
@@ -62,8 +69,23 @@
     color: #7f7f7f;
 }
 
+.official-bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-.official__next {
+.official__button {
+    width: 7px;
+    height: 7px;
     border: none;
-    background-color: inherit;
+    border-radius: 50px;
+    background-color: #4e4e4e;
+    opacity: 0.2;
+    padding: 0px;
+    margin: 0px 4px;
+}
+
+.official__button--current {
+    opacity: 1;
 }

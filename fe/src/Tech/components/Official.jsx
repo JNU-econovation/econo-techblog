@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react';
-import '../css/Official.css';
+import { Link } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
 
+import '../css/Official.css';
 import noImg from '../img/no_img.png';
 import PostDetails from '../../components/PostDetails';
 import Tags from '../../components/Tags';
@@ -22,77 +24,94 @@ const FIND_OFFICIAL = gql`
   }
 `;
 
-const result = {
-  author: '에코노베이션',
-  title: '행복한 에코노베이션',
-  desc: '안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는 채상아 입니다.이전 글에서 말씀드렸듯이 Android 구름톡을 가지고 돌아왔습니다. 지난 2월, 구름톡 성과를 가지고 전사 발표까지 하게 됐는데요. 정말 영광이었습니다. 발표를 하고 나서 가장 공감받았던 부분은 바로 “정말 힘들었습니다” (한숨) 부분이었습니다. 안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는 채상아 입니다.이전 글에서 말씀드렸듯이 Android 구름톡을 가지고 돌아왔습니다. 지난 2월, 구름톡 성과를 가지고 전사 발표까지 하게 됐는데요. 정말 영광이었습니다. 발표를 하고 나서 가장 공감받았던 부분은 바로 “정말 힘들었습니다” (한숨) 부분이었습니다.',
-  date: '2021.05.04',
-  looked: 21,
-  liked: 21,
-};
-
 const Official = function () {
-  // const [officialList, setOfficialList] = useState([]);
-  const [currentPost, setCurrentPost] = useState({});
-  const [findOfficial] = useMutation(FIND_OFFICIAL, {
+  const [officialPosts, setOfficialPosts] = useState([]);
+  const [currentPost, setCurrentPost] = useState();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [findOfficial, { loading }] = useMutation(FIND_OFFICIAL, {
     // eslint-disable-next-line no-shadow
     onCompleted(data) {
-      console.log(data);
-      // setOfficialList(data);
-      // if (findOfficial.length > 0) setCurrentPost(officialList[0]);
+      console.log('findOfficial', data.findOfficial);
+      setOfficialPosts(data.findOfficial);
     },
   });
   useEffect(() => {
+    console.log('여기!!!!');
     findOfficial();
   }, []);
-  const [officialNum, setOfficialNum] = useState(0);
-  const onChangePost = (index) => {
-    if (index > 1) {
-      setOfficialNum(0);
-    } else {
-      setOfficialNum(index + 1);
-    }
-    setCurrentPost(officialNum);
-    console.log(currentPost);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setCurrentIndex((currentValue) => {
+        if (currentValue < officialPosts.length - 1) {
+          return currentValue + 1;
+        }
+        return 0;
+      });
+    }, 3500);
+    return () => clearTimeout(timeoutId);
+  }, [officialPosts]);
+
+  useEffect(() => {
+    setCurrentPost(officialPosts[currentIndex]);
+  }, [currentIndex, officialPosts]);
+
+  const onClick = (direction) => {
+    setCurrentIndex(direction);
   };
+
+  if (loading || !currentPost) return null;
   return (
     <div className="official">
-      <div className="official__img" />
-      <div className="official-info">
-        <div className="official-info-top">
-          <span className="official-title">{result.title}</span>
-          <Tags tags="CSS, HTML" />
-        </div>
-        <div className="official-info-middle">
-          <span>{result.desc}</span>
-        </div>
-        <div className="official-info-bottom">
-          <div className="official-info-bottom-left">
-            <img
-              src={noImg}
-              alt="no-img"
-              className="official-info-bottom-left__img"
-            />
-            <span className="official-info-bottom-left__span">
-              {result.author}
-            </span>
-          </div>
-          <PostDetails
-            date="2022.05.04"
-            views={result.looked}
-            hearts={result.liked}
-          />
-        </div>
-      </div>
-      <button
-        className="official__next"
-        type="button"
-        onClick={() => onChangePost(officialNum)}
+      <Link
+        to={`/post/${currentPost.postId}`}
+        style={{ textDecoration: 'none' }}
       >
-        {'>'}
-      </button>
+        <div className="official-post">
+          <div className="official__img" />
+          <div className="official-info">
+            <div className="official-info-top">
+              <span className="official-title">{currentPost.title}</span>
+              <Tags tags={currentPost.categoryName} />
+            </div>
+            <div className="official-info-middle">
+              <span className="official-info__content">랄라라라</span>
+            </div>
+            <div className="official-info-bottom">
+              <div className="official-info-bottom-left">
+                <img
+                  src={noImg}
+                  alt="no-img"
+                  className="official-info-bottom-left__img"
+                />
+                <span className="official-info-bottom-left__span">
+                  {currentPost.userName}
+                </span>
+              </div>
+              <PostDetails
+                date="2022.05.04"
+                views={currentPost.views}
+                hearts={currentPost.hearts}
+              />
+            </div>
+          </div>
+        </div>
+      </Link>
+      <div className="official-bottom">
+        {officialPosts.map((post, index) => (
+          <button
+            key={post.postId}
+            type="button"
+            onClick={() => onClick(index)}
+            className={
+              currentIndex === index
+                ? 'official__button official__button--current'
+                : 'official__button'
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 };
-
 export default Official;

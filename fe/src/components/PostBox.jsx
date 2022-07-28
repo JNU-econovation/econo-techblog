@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 
@@ -9,35 +10,37 @@ import noImg from './img/no_img.png';
 
 const PostBox = function ({ post }) {
   return (
-    <div className="post-box">
-      <div className="post-box__img" />
-      <div className="post-box-info">
-        <div className="post-box-info-top">
-          <span className="post-box-info__title">{post.title}</span>
-          <Tags tags={post.categoryName} />
-        </div>
-        <div className="post-box-info-middle">
-          <span className="post-box-info__content">{post.content}</span>
-        </div>
-        <div className="post-box-info-bottom">
-          <div className="post-box-info-details">
-            <PostDetails
-              date={post.createdDate}
-              views={post.views}
-              hearts={post.hearts}
-            />
+    <Link to={`/post/${post.postId}`} style={{ textDecoration: 'none' }}>
+      <div className="post-box">
+        <div className="post-box__img" />
+        <div className="post-box-info">
+          <div className="post-box-info-top">
+            <span className="post-box-info__title">{post.title}</span>
+            <Tags tags={post.categoryName} />
           </div>
-          <div className="post-box-info-author">
-            <span>{post.userName}</span>
-            <img
-              src={noImg}
-              alt="no-img"
-              className="post-box-info-author__img"
-            />
+          <div className="post-box-info-middle">
+            <span className="post-box-info__content">{post.content}</span>
+          </div>
+          <div className="post-box-info-bottom">
+            <div className="post-box-info-details">
+              <PostDetails
+                date={post.createdDate}
+                views={post.views}
+                hearts={post.hearts}
+              />
+            </div>
+            <div className="post-box-info-author">
+              <span>{post.userName}</span>
+              <img
+                src={noImg}
+                alt="no-img"
+                className="post-box-info-author__img"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

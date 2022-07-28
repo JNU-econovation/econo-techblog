@@ -5,10 +5,9 @@ import PropTypes from 'prop-types';
 import './css/Tags.css';
 
 const Tags = function ({ tags }) {
-  const tag = tags ? tags.split(',') : [];
   return (
     <div className="tags">
-      {tag.map((elem) => (
+      {(tags ? tags.split(',') : []).map((elem) => (
         <span key={elem} className="tag">
           {`#${elem}`}
         </span>

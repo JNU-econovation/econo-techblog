@@ -11,7 +11,7 @@ const UserInfo = function () {
   const [user, setUser] = useState({});
   useEffect(() => {
     axios
-      .get(`http://54.180.29.85:8080/api/user/${id}`)
+      .get(`http://168.131.30.127:8080/api/user/${id}`)
       .then((response) => {
         setUser(response.data);
         console.log('response', response);

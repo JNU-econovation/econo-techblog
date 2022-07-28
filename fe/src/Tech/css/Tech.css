@@ -26,6 +26,10 @@
     padding: 8px 15px;
 }
 
+.tech-write_button--hidden {
+    display: none;
+}
+
 .tech-write__img {
     height: 12px;
     margin-right: 8px;

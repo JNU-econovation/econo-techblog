@@ -3,12 +3,11 @@
     border-top: solid 2px #eee;
     border-bottom: solid 2px #eee;
     align-items: center;
-    height: 200px;
 }
 
 .post-box__img {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 15px;
     background-color: #4e4e4e;
 }
@@ -27,22 +26,25 @@
     font-weight: bold;
     font-size: 18px;
     margin-right: 20px;
+    color: #000;
 }
 
 .post-box-info-middle {
-    width: 90%;
     margin: 10px 0px;
-    color: #163235;
-    height: 60px;
+    display: flex;
+    align-items: flex-start;
+    width: 900px;
+    height: 80px;
 }
 
 .post-box-info__content {
-    font-size: 14px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.7);
     line-height: 1.6;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 

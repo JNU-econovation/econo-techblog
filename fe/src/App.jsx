@@ -16,7 +16,7 @@ import Tech from './Tech/Tech';
 import Post from './Post/Post';
 import UserList from './Manager/components/UserList';
 import UserInfo from './Manager/components/UserInfo';
-import Search from './Search/Search';
+import PostSearch from './PostSearch/PostSearch';
 import RegistList from './Manager/components/RegistList';
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
         <Route path="/posts" element={<Tech />}>
           <Route path=":category" element={<Tech />} />
         </Route>
-        <Route path="/post" element={<Post />} />
+        <Route path="/post/:id" element={<Post />} />
         <Route path="/admin" element={<Manager />}>
           <Route path="/admin/regist" element={<RegistList />} />
           <Route path="/admin/role" element={<UserList />}>
@@ -44,7 +44,7 @@ function App() {
             <Route path=":id" element={<UserInfo />} />
           </Route>
         </Route>
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<PostSearch />} />
       </Route>
     </Routes>
   );

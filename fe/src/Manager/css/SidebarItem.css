@@ -11,6 +11,7 @@
 .sidebar-item__name {
     font-size: 15px;
     font-weight: 500;
+    color: #292929;
 }
 .sidebar-item-right {
     display: flex;
