@@ -20,12 +20,10 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     private static final String NOT_FOUND_COMMENT_MESSAGE = "해당 댓글은 존재하지 않습니다.";
     private static final String DELETE_COMMENT_MESSAGE = "해당 댓글은 삭제되었습니다.";
 
-    @Autowired
+
     private final CommentRepository commentRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
     @Transactional
     public User getUser(Long userId) {
@@ -56,8 +54,8 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
         Post post = getPost(commentCreateRequestDto.getPostId());
 
         Integer parentNumber = commentRepository.countByParent();
-        if (parentNumber == null) {
-            Comment newComment = commentCreateRequestDto.toEntity(post, 0);
+        if(parentNumber==null) {
+            Comment newComment = commentCreateRequestDto.toEntity(post, 1);
             commentRepository.save(newComment);
             return new CommentResponseDto(newComment, user);
         }
@@ -101,7 +99,6 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
         comment.updateComment(commentUpdateRequestDto.getContent());
         return new CommentResponseDto(comment, user);
     }
-
 }
 
 

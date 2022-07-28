@@ -15,6 +15,7 @@ public class CommentDeleteRequestDto {
     private Long postId;
     private Long commentId;
 
+
     @Builder
     public CommentDeleteRequestDto(Long userId, Long postId, Long commentId){
         this.userId=userId;

@@ -30,6 +30,7 @@ public class CommentCreateRequestDto {
                 .post(post)
                 .content(content)
                 .parent(parent)
+                .seq(0)
                 .build();
     }
 }
