@@ -1,67 +1,39 @@
-/* eslint-disable */
+/* eslint-disable object-curly-newline */
 import React, { useState } from 'react';
 import Pagination from 'react-js-pagination';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
+import { gql, useQuery } from '@apollo/client';
 
 import '../css/PostList.css';
 
-const PostList = function () {
-  const columns = ['게시판', '제목', '작성일', '조회', '설정'];
-  const [currentPage, setCurrentPage] = useState(1);
-  const [checkedList, setCheckedList] = useState([]);
-  const onChange = (checked, item) => {
-    if (checked) {
-      setCheckedList([...checkedList, item]);
-    } else if (!checked) {
-      setCheckedList(checkedList.filter((el) => el !== item));
+const POST_BY_USER = gql`
+  query postByUser($userId: Int!) {
+    postByUser(userId: $userId) {
+      postId
+      userName
+      content
+      title
+      mainCategoryNumber
+      categoryName
+      createdDate
+      views
+      hearts
     }
-  };
-  const onDelete = () => {
-    console.log(checkedList);
-  };
-  const posts = [
-    {
-      id: 1,
-      category: 'Culture',
-      title: '가나다라에코노베이션',
-      date: '2022.07.18',
-      looked: 21,
+  }
+`;
+
+const PostList = function ({ uid, onChange }) {
+  const columns = ['게시판', '제목', '작성일', '조회', '설정'];
+  const category = ['Tech', 'Culture', 'Trouble shooting'];
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, loading } = useQuery(POST_BY_USER, {
+    variables: {
+      userId: uid,
     },
-    {
-      id: 2,
-      category: 'Culture',
-      title: '가나다라에코노베이션',
-      date: '2022.07.18',
-      looked: 21,
-    },
-    {
-      id: 3,
-      category: 'Culture',
-      title: '가나다라에코노베이션',
-      date: '2022.07.18',
-      looked: 21,
-    },
-    {
-      id: 4,
-      category: 'Culture',
-      title: '가나다라에코노베이션',
-      date: '2022.07.18',
-      looked: 21,
-    },
-    {
-      id: 5,
-      category: 'Culture',
-      title: '가나다라에코노베이션',
-      date: '2022.07.18',
-      looked: 21,
-    },
-    {
-      id: 6,
-      category: 'Culture',
-      title: '가나다라에코노베이션',
-      date: '2022.07.18',
-      looked: 21,
-    },
-  ];
+  });
+
+  if (loading) return null;
   return (
     <div className="postlist">
       <table className="postlist-table">
@@ -80,45 +52,45 @@ const PostList = function () {
           </tr>
         </thead>
         <tbody>
-          {posts.map(({ id, category, title, date, looked }) => (
-            <tr key={id} className="postlist-table__tr">
-              <td>{category}</td>
-              <td>{title}</td>
-              <td>{date}</td>
-              <td>{looked}</td>
-              <td>
-                <input
-                  type="checkbox"
-                  name="post"
-                  value={id}
-                  className="postlist-table__checkbox"
-                  onChange={(e) => onChange(e.target.checked, e.target.value)}
-                />
-              </td>
-            </tr>
-          ))}
+          {data.postByUser.map(
+            ({ postId, mainCategoryNumber, title, createdDate, views }) => (
+              <tr key={postId} className="postlist-table__tr">
+                <td>{category[mainCategoryNumber - 1]}</td>
+                <td>{title}</td>
+                <td>{createdDate}</td>
+                <td>{views}</td>
+                <td>
+                  <input
+                    type="checkbox"
+                    name="post"
+                    value={postId}
+                    className="postlist-table__checkbox"
+                    onChange={(e) => onChange(e.target.checked, e.target.value)}
+                  />
+                </td>
+              </tr>
+            ),
+          )}
         </tbody>
       </table>
-      {posts.length < 6 ? null : (
+      {data.postByUser.length < 7 ? null : (
         <Pagination
           activePage={currentPage}
-          itemsCountPerPage={5}
-          totalItemsCount={posts.length}
-          pageRangeDisplayed={3}
+          itemsCountPerPage={6}
+          totalItemsCount={data.postByUser.length}
+          pageRangeDisplayed={5}
           prevPageText="<"
           nextPageText=">"
           onChange={setCurrentPage}
         />
       )}
-      <button
-        type="button"
-        onClick={onDelete}
-        className="postlist-delete__button"
-      >
-        삭제
-      </button>
     </div>
   );
+};
+
+PostList.propTypes = {
+  uid: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default PostList;
