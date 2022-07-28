@@ -18,6 +18,8 @@ public class PostListResponseDto {
     private int mainCategoryNumber;//대분류
     private String categoryName;
     private String createdDate;
+
+    private String modifiedDate;
     private int hearts;
     private int views;
 
@@ -30,6 +32,7 @@ public class PostListResponseDto {
         this.mainCategoryNumber = post.getMainCategory().getMainCategoryNumber();
         this.categoryName=String.join(",",categoryList.stream().map(x->x.getCategoryName()).collect(Collectors.toList()));
         this.createdDate = post.getCreatedDate();
+        this.modifiedDate=post.getModifiedDate();
         this.hearts = post.getHearts();
         this.views = post.getViews();
     }
