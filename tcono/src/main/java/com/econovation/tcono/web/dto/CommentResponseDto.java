@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Data
 @Getter
-public class CommentCreateResponseDto {
+public class CommentResponseDto {
     private Long commentId;//comment Id 정보
     private String userName;
     private Long postId;
@@ -19,7 +19,7 @@ public class CommentCreateResponseDto {
     private int seq;
 
     @Builder
-    public CommentCreateResponseDto(Comment comment, User user) {
+    public CommentResponseDto(Comment comment, User user) {
         this.commentId = comment.getCommentId();
         this.userName = user.getUserName();
         this.postId = comment.getPost().getId();
