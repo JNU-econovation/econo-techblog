@@ -1,62 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import './RecentPosts.css';
+import { gql, useQuery } from '@apollo/client';
 
 import RecentPost from './components/RecentPost';
 
-const postsList = [
-  {
-    id: 1,
-    title: '구름톡 업데이트 48시간 전, 그 치열함에',
-    desc: '안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는 채상아 입니다. 이전 글에서 말씀드렸듯이 Android',
-    tags: ['html', 'css'],
-    writer: '에코노베이션',
-  },
-  {
-    id: 2,
-    title: '구름톡 업데이트 48시간 전, 그 치열함에',
-    desc: '안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는 채상아 입니다. 이전 글에서 말씀드렸듯이 Android',
-    tags: ['html', 'css'],
-    writer: '에코노베이션',
-  },
-  {
-    id: 3,
-    title: '구름톡 업데이트 48시간 전, 그 치열함에',
-    desc: '안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는 채상아 입니다. 이전 글에서 말씀드렸듯이 Android',
-    tags: ['html', 'css'],
-    writer: '에코노베이션',
-  },
-  {
-    id: 4,
-    title: '구름톡 업데이트 48시간 전, 그 치열함에',
-    desc: '안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는 채상아 입니다. 이전 글에서 말씀드렸듯이 Android',
-    tags: ['html', 'css'],
-    writer: '에코노베이션',
-  },
-  {
-    id: 5,
-    title: '구름톡 업데이트 48시간 전, 그 치열함에',
-    desc: '안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는 채상아 입니다. 이전 글에서 말씀드렸듯이 Android',
-    tags: ['html', 'css'],
-    writer: '에코노베이션',
-  },
-  {
-    id: 6,
-    title: '구름톡 업데이트 48시간 전, 그 치열함에',
-    desc: '안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는 채상아 입니다. 이전 글에서 말씀드렸듯이 Android',
-    tags: ['html', 'css'],
-    writer: '에코노베이션',
-  },
-];
+const GET_POSTS = gql`
+  query findAllPosts($mainCategoryNumber: Int!, $page: Int!) {
+    findAllPosts(mainCategoryNumber: $mainCategoryNumber, page: $page) {
+      postId
+      userName
+      content
+      title
+      mainCategoryNumber
+      categoryName
+      createdDate
+      views
+      hearts
+    }
+  }
+`;
 
 const RecentPosts = function () {
-  const [posts, setPosts] = useState([]);
-  const getTechPosts = () => {
-    setPosts(postsList);
-  };
-  useEffect(() => {
-    getTechPosts();
-  }, []);
-
+  const [currentPosts, setCurrentPosts] = useState([]);
+  const [currCategory, setCurrCategory] = useState(0);
   const [navArr, setArr] = useState([
     {
       id: 1,
@@ -74,6 +40,18 @@ const RecentPosts = function () {
       active: false,
     },
   ]);
+  const { data } = useQuery(GET_POSTS, {
+    variables: {
+      mainCategoryNumber: currCategory,
+      page: 0,
+    },
+  });
+  console.log('recentposts', data);
+  useEffect(() => {
+    if (data) {
+      setCurrentPosts(data.findAllPosts);
+    }
+  }, [data]);
   const onClick = (id) => {
     setArr(
       navArr.map((item) => {
@@ -86,6 +64,7 @@ const RecentPosts = function () {
         return elem;
       }),
     );
+    setCurrCategory(id);
   };
   return (
     <div className="recent-posts">
@@ -107,13 +86,8 @@ const RecentPosts = function () {
         ))}
       </div>
       <div className="recent-posts-box">
-        {posts.map((item) => (
-          <RecentPost
-            key={item.id}
-            title={item.title}
-            desc={item.desc}
-            writer={item.writer}
-          />
+        {currentPosts.map((item) => (
+          <RecentPost key={item.id} post={item} />
         ))}
       </div>
     </div>
