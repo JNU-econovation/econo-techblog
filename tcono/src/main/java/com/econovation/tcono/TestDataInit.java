@@ -35,6 +35,16 @@ public class TestDataInit {
                 .build();
         userRepository.save(findUser);
 
+        User user2 = new User();
+        User findUser2 = user.builder()
+                .userEmail("ksoomin25@gmail.com")
+                .password("pan145300!A")
+                .year(21L)
+                .userName("김수민")
+                .pinCode("1234")
+                .build();
+        userRepository.save(findUser2);
+
         Post post = new Post();
         Post findPost = post.builder()
                 .userId(1L)
