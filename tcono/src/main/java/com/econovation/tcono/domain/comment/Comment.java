@@ -29,19 +29,18 @@ public class Comment extends BaseTimeEntity {//자식 댓글
     @Lob
     @Column(nullable = false)
     private String content;
-
-    private int depth; // 일반 댓글 = 0, 대댓글 = 1
-
     private int group;// 부모댓글의 Id
+
+    private int seq;//부모댓글내 순서
 
     private Boolean isRemoved = false;//제거 유무
 
     @Builder
-    public Comment(Long userId, Post post, String content, int depth, int group) {
+    public Comment(Long userId, Post post, String content, int group,int seq) {
         this.userId = userId;
         this.post = post;
         this.content = content;
-        this.depth = depth;
+        this.seq=seq;
         this.group = group;
     }
 

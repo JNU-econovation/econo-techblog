@@ -92,10 +92,16 @@ public class PostQueryResolver implements GraphQLQueryResolver {
      * title로 like 검색 기능
      */
     @Transactional
-    public List<PostListResponseDto> search(String keyword, int page) {
+    public List<PostListResponseDto> search(String title,int mainCategoryNumber, int page) {
         Pageable pageable = PageRequest.of(page, 5);
-        List<Post> postList = postRepository.findByTitleContaining(keyword, pageable);
-        return postList.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+        MainCategory mainCategory=MainCategory.getMainCategory(mainCategoryNumber);
+        if(mainCategoryNumber!=0){
+            List<Post> searchPost = postRepository.findByTitleContainingAndMainCategory(title,mainCategory,pageable);
+            return searchPost.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+                    .collect(Collectors.toList());
+        }
+        List<Post>searchPost=postRepository.findByTitleContaining(title,pageable);
+        return searchPost.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
                 .collect(Collectors.toList());
     }
 
@@ -105,5 +111,12 @@ public class PostQueryResolver implements GraphQLQueryResolver {
             return postRepository.countPosts();
         }
         return postRepository.countPostsByMainCategory(MainCategory.getMainCategory(mainCategoryNumber));
+    }
+
+    @Transactional
+    public List<PostListResponseDto> postByUser(Long userId) {
+        List<Post> postList = postRepository.findByUserId(userId);
+        return postList.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+                .collect(Collectors.toList());
     }
 }
