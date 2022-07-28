@@ -75,7 +75,7 @@ const Official = function () {
               <Tags tags={currentPost.categoryName} />
             </div>
             <div className="official-info-middle">
-              <span>랄라라라</span>
+              <span className="official-info__content">랄라라라</span>
             </div>
             <div className="official-info-bottom">
               <div className="official-info-bottom-left">
