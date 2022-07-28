@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class UploadPictureNameDto {
-    private MultipartFile attachFile;
+//    private MultipartFile attachFile;
     private Long postId;
     private Long userId;
 }
