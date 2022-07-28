@@ -72,7 +72,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
      */
 
     @Transactional
-    public CommentResponseDto createReply(ReplyCreateRequestDto replyCreateRequestDto) {
+    public CommentResponseDto createNestedComments(ReplyCreateRequestDto replyCreateRequestDto) {
         User user = getUser(replyCreateRequestDto.getUserId());
         Post post = getPost(replyCreateRequestDto.getPostId());
 

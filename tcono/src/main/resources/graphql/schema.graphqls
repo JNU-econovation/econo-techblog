@@ -177,6 +177,6 @@ type Mutation{
     #
     #      -----------Comment------------------------------
     createComment(commentCreateRequestDto:CommentCreateRequestDto):CommentResponseDto!,
-    createReply(replyCreateRequestDto:ReplyCreateRequestDto):CommentResponseDto!,
+    createNestedComments(replyCreateRequestDto:ReplyCreateRequestDto):CommentResponseDto!,
     updateComment(commentUpdateRequestDto:CommentUpdateRequestDto):CommentResponseDto!
 }
