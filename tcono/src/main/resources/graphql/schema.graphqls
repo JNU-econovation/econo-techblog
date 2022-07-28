@@ -158,6 +158,7 @@ type Query{
     isHeart(postId:Int, userId:Int): Boolean!
     totalHeartsByUser(userId:Int):Int!
     #    ---------Comment--------------------
+    findCommentByPost(postId:Int): [CommentResponseDto]
 }
 
 
