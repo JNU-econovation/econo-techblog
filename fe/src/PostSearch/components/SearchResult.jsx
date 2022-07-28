@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 import React, { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
@@ -9,60 +10,66 @@ import SearchNavItem from './SearchNavItem';
 import PostBox from '../../components/PostBox';
 
 const GET_SEARCH = gql`
-  query getSearch($currentKeyword: String!, $page: Int!) {
-    search(keyword: $currentKeyword, page: $page) {
-      id
-      userId
+  query getSearch($keyword: String!, $mainCategoryNumber: Int!, $page: Int!) {
+    search(
+      keyword: $keyword
+      mainCategoryNumber: $mainCategoryNumber
+      page: $page
+    ) {
+      postId
+      userName
       content
       title
-      official
+      mainCategoryNumber
+      categoryName
+      createdDate
       views
       hearts
-      mainCategoryNumber
     }
   }
 `;
 
 const SearchResult = function () {
   // const { currentKeyword } = useParams();
-  const [currentPosts, setCurrentPosts] = useState([]);
-  const currentKeyword = 'C++';
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const { data } = useQuery(GET_SEARCH, {
-    variables: {
-      keyword: currentKeyword,
-      page: currentPage,
-    },
-  });
-  console.log(data);
-  useEffect(() => {
-    if (data) {
-      setCurrentPosts(data.findAllPosts);
-    }
-  }, [data]);
   const [navArr, setArr] = useState([
     {
-      id: 1,
+      id: 0,
       name: '전체',
       active: true,
     },
     {
-      id: 2,
+      id: 1,
       name: 'Tech',
       active: false,
     },
     {
-      id: 3,
+      id: 2,
       name: 'Culture',
       active: false,
     },
     {
-      id: 4,
+      id: 3,
       name: 'Trouble Shooting',
       active: false,
     },
   ]);
+  const [currCategory, setCurrCategory] = useState(0);
+  const [currentPosts, setCurrentPosts] = useState([]);
+  const keyword = '멋';
+  const [currentPage, setCurrentPage] = useState(0);
+  const { data } = useQuery(GET_SEARCH, {
+    variables: {
+      keyword: keyword,
+      mainCategoryNumber: currCategory,
+      page: currentPage,
+    },
+  });
+  console.log('search', data);
+  useEffect(() => {
+    if (data) {
+      setCurrentPosts(data.search);
+    }
+  }, [data]);
   const onClick = (id) => {
     setArr(
       navArr.map((item) => {
@@ -75,12 +82,13 @@ const SearchResult = function () {
         return elem;
       }),
     );
+    setCurrCategory(id);
   };
   const postNum = [5, 3, 0, 2]; // 검색 결과
   return (
     <div className="search-result">
       <div className="search-result__text">
-        <span className="search-result__keyword">{currentKeyword}</span>
+        <span className="search-result__keyword">{keyword}</span>
         <span className="search-result__num">검색결과 (총 6건)</span>
       </div>
       <div className="search-result__nav">
@@ -89,7 +97,7 @@ const SearchResult = function () {
             key={elem.id}
             id={elem.id}
             name={elem.name}
-            num={postNum[elem.id - 1]}
+            num={postNum[elem.id]}
             active={elem.active}
             onClick={onClick}
           />
