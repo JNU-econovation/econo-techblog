@@ -1,8 +1,15 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
+import { useLoginStateContext } from '../Context/LoginContext';
 import './css/Profile.css';
 
-function Profile() {
+function Profile({ isMyInfoSelect, setIsMyInfoSelect }) {
+  const loginState = useLoginStateContext();
+
+  const onClickProfileEdit = () => {
+    setIsMyInfoSelect(() => !isMyInfoSelect);
+  };
   return (
     <div className="profile">
       <h3>프로필</h3>
@@ -10,12 +17,24 @@ function Profile() {
         <div className="profile-content__container">
           <img alt="profile_img" className="profile__img" />
           <div className="profile-description__container">
-            <p>이윤성 님</p>
-            <p>182761@jnu.ac.kr</p>
-            <p> 21기 | 일반 회원</p>
+            <p>
+              <span>{loginState.userName}</span>
+              <span>님</span>
+            </p>
+            <span>{loginState.userEmail}</span>
+            <p>
+              <span>{loginState.year}</span>
+              <span>기</span>
+              <span>|</span>
+              <span>{loginState.role}</span>
+            </p>
           </div>
         </div>
-        <button className="profile-edit__button" type="button">
+        <button
+          className="profile-edit__button"
+          type="button"
+          onClick={onClickProfileEdit}
+        >
           내 정보 수정
         </button>
       </div>

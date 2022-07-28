@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@toast-ui/editor/dist/toastui-editor.css';
@@ -23,9 +24,10 @@ function Write() {
     navigate(-1);
   };
 
-  if (sessionStorage.getItem('uid') === null) {
-    return <Navigate to="/login" />;
-  }
+  // 로그인 로직 완료시 주석 해제
+  // if (sessionStorage.getItem('uid') === null) {
+  //   return <Navigate to="/login" />;
+  // }
 
   return (
     <div className="write">
@@ -63,6 +65,21 @@ function Write() {
             placeholder="여기에 내용을 입력하세요.."
             previewStyle="vertical"
             height="100%"
+            hooks={{
+              addImageBlobHook: async (blob, callback) => {
+                console.log(blob);
+                // 1. 첨부된 이미지 파일을 서버로 전송후, 이미지 경로 url을 받아온다.
+                // const imgUrl = await .... 서버 전송 / 경로 수신 코드 ...
+                axios({
+                  method: 'post',
+                  url: '/api/file/',
+                }).then((response) => {
+                  console.log(response);
+                  callback('http://localhost:3000/img/카레유.png', '카레유'); // image URL, text는 alt
+                });
+                // 2. 첨부된 이미지를 화면에 표시(경로는 임의로 넣었다.)
+              },
+            }}
           />
         </div>
       </div>

@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import LoginButton from './components/LoginButton';
 import NavItem from './components/NavItem';
@@ -13,28 +14,30 @@ import { useLoginStateContext } from '../Context/LoginContext';
 function Header() {
   // eslint-disable-next-line no-unused-vars
   const [isLogin, setIsLogin] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState(false);
   const loginContext = useLoginStateContext();
-  const [loginUserInfo, setLoginUserInfo] = useState(loginContext);
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
   const onLogoClick = () => {
     navigate('/');
   };
 
-  useEffect(() => {
-    console.log('rerender from lc');
-    const data = { ...loginContext };
-    console.log(data);
-    setLoginUserInfo(data);
-  }, [loginContext]);
+  const onMouseOverHandler = () => {
+    setIsMouseOver(() => true);
+  };
+
+  const onMouseOutHandler = () => {
+    setIsMouseOver(() => false);
+  };
 
   useEffect(() => {
-    if (loginUserInfo.id === -1) {
+    if (loginContext.id === -1) {
       setIsLogin(() => false);
     } else {
       setIsLogin(() => true);
     }
-  }, [loginUserInfo]);
+  }, [loginContext]);
   return (
     <header className="header">
       <button
@@ -52,7 +55,19 @@ function Header() {
       </ul>
       <div className="header-right-box">
         <Search />
-        {isLogin ? <div>{loginUserInfo.userName}님</div> : <LoginButton />}
+        {isLogin ? (
+          <div onMouseOver={onMouseOverHandler} onMouseOut={onMouseOutHandler}>
+            <span className="header__user-name">{loginContext.userName}</span>님
+            {isMouseOver ? (
+              <div>
+                <Link to="/mypage">My Page</Link>
+                <Link to="/write">Write</Link>
+              </div>
+            ) : undefined}
+          </div>
+        ) : (
+          <LoginButton />
+        )}
       </div>
     </header>
   );

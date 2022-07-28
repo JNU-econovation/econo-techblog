@@ -40,3 +40,7 @@
   background-color: white;
   height: 97%;
 }
+
+.header__user-name{
+  font-weight: bold;
+}

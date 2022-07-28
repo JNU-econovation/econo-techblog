@@ -24,13 +24,8 @@ function LoginBox() {
 
     axios({
       method: 'post',
-      url: '/api/login',
+      url: 'http://168.131.30.127:8080/api/login',
       data: form,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
-        'Content-Type': '*',
-      },
     })
       .then((response) => {
         loginDispatch({ type: 'LOGIN', ...response.data });
