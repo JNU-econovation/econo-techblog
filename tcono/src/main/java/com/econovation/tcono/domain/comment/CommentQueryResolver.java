@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.units.qual.C;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,9 @@ public class CommentQueryResolver implements GraphQLQueryResolver {
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
 
         List<Comment> comment = commentRepository.findCommentsByPost(post);
-        return comment.stream().map(x -> new CommentResponseDto(x))
+        List<CommentResponseDto> collect = comment.stream().map(CommentResponseDto::new)
+                .sorted(Comparator.comparing(CommentResponseDto::getParent))
                 .collect(Collectors.toList());
+        return collect;
     }
 }
