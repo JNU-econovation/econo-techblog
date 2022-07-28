@@ -36,9 +36,14 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
         Post post = postRepository.findById(commentCreateRequestDto.getPostId())
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
 
-        Comment newComment=commentCreateRequestDto.toEntity(post,1);
+        Integer parentNumber= commentRepository.countByParent();
+        if(parentNumber==null){
+            Comment newComment=commentCreateRequestDto.toEntity(post,0);
+            commentRepository.save(newComment);
+            return new CommentCreateResponseDto(newComment,user);
+        }
+        Comment newComment=commentCreateRequestDto.toEntity(post,parentNumber);
         commentRepository.save(newComment);
-
         return new CommentCreateResponseDto(newComment,user);
     }
 

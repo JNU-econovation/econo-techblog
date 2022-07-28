@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment,Long> {
-
+    @Query("select count(c)from Comment c group by c.parent")
+    Integer countByParent();
 }
