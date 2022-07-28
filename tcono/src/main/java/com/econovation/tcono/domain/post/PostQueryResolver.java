@@ -106,4 +106,11 @@ public class PostQueryResolver implements GraphQLQueryResolver {
         }
         return postRepository.countPostsByMainCategory(MainCategory.getMainCategory(mainCategoryNumber));
     }
+
+    @Transactional
+    public List<PostListResponseDto> postByUser(Long userId) {
+        List<Post> postList = postRepository.findByUserId(userId);
+        return postList.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
+                .collect(Collectors.toList());
+    }
 }

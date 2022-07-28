@@ -92,6 +92,7 @@ type PostListResponseDto{
     mainCategoryNumber:Int
     categoryName:String
     createdDate:String
+    modifiedDate:String
     views:Int
     hearts:Int
 }
@@ -108,10 +109,36 @@ input HeartRequestDto {
     isHeart:Boolean
 }
 
+#====Comment====#
+input CommentCreateRequestDto{
+    userId:Int
+    postId:Int
+    content:String
+    group:Int
+    seq:Int
+}
+
+input CommentUpdateRequestDto{
+    commentId:Int
+    userId:Int
+    postId:Int
+    content:String
+}
+
+type CommentResponseDto{
+    commentId:Int
+    userName:String
+    postId:Int
+    content:String
+    group:Int
+    seq:Int
+    createdDate:String
+}
+
 # 타입 시스템 정의
 schema {
     query: Query
-    mutation: Mutation,
+    mutation: Mutation
 }
 
 
@@ -122,12 +149,14 @@ type Query{
     findPostByPostId(id : Int) : PostResponseDto!
     search(keyword : String , page : Int) : [PostListResponseDto]!
     postCounts(mainCategoryNumber:Int):Int
+    postByUser(userId:Int):[PostListResponseDto]!
 
     # ---------------Heart------------------------------
     isHeart(postId:Int, userId:Int): Boolean!
     totalHeartsByUser(userId:Int):Int!
     #    ---------Comment--------------------
 }
+
 
 
 #Root Mutation
@@ -139,8 +168,9 @@ type Mutation{
     findOfficial: [PostListResponseDto!]!,
     #
     #       -----------Heart------------------------------
-    updateHeartState(heartRequestDto:HeartRequestDto): Int!
+    updateHeartState(heartRequestDto:HeartRequestDto): Int!,
     #
-    #    #    -----------Comment------------------------------
-    #
+    #      -----------Comment------------------------------
+    createComment(commentCreateRequestDto:CommentCreateRequestDto):CommentResponseDto!,
+#    updateComment(commentUpdateRequestDto:CommentUpdateRequestDto):CommentResponseDto!
 }
