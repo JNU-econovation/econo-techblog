@@ -28,7 +28,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     private PostRepository postRepository;
 
     @Transactional
-    public User getUser(Long userId){
+    public User getUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
 
@@ -36,59 +36,71 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     }
 
     @Transactional
-    public Post getPost(Long postId){
+    public Post getPost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
 
         return post;
     }
 
+    /**
+     * 댓글 생성 기능
+     *
+     * @param commentCreateRequestDto : userId:Long, postId:Long, content:String
+     * @return CommentResponseDto : commentId:Long, userName:String, postId: Long, content:String, parent:Int
+     */
     @Transactional
     public CommentResponseDto createComment(CommentCreateRequestDto commentCreateRequestDto) {
 
-        User user=getUser(commentCreateRequestDto.getUserId());
-        Post post=getPost(commentCreateRequestDto.getPostId());
+        User user = getUser(commentCreateRequestDto.getUserId());
+        Post post = getPost(commentCreateRequestDto.getPostId());
 
-        Integer parentNumber= commentRepository.countByParent();
-        if(parentNumber==null){
-            Comment newComment=commentCreateRequestDto.toEntity(post,0);
+        Integer parentNumber = commentRepository.countByParent();
+        if (parentNumber == null) {
+            Comment newComment = commentCreateRequestDto.toEntity(post, 0);
             commentRepository.save(newComment);
-            return new CommentResponseDto(newComment,user);
+            return new CommentResponseDto(newComment, user);
         }
-        Comment newComment=commentCreateRequestDto.toEntity(post,parentNumber);
+        Comment newComment = commentCreateRequestDto.toEntity(post, parentNumber);
         commentRepository.save(newComment);
-        return new CommentResponseDto(newComment,user);
+        return new CommentResponseDto(newComment, user);
     }
+
+    /**
+     * 대댓글 생성 기능
+     *
+     * @param replyCreateRequestDto : userId:Long, postId:Long, content:String, parent:Int)
+     * @return CommentResponseDto : commentId:Long, userName:String, postId: Long, content:String, parent:Int
+     */
 
     @Transactional
-    public CommentResponseDto createReply(ReplyCreateRequestDto replyCreateRequestDto){
-        User user=getUser(replyCreateRequestDto.getUserId());
-        Post post=getPost(replyCreateRequestDto.getPostId());
+    public CommentResponseDto createReply(ReplyCreateRequestDto replyCreateRequestDto) {
+        User user = getUser(replyCreateRequestDto.getUserId());
+        Post post = getPost(replyCreateRequestDto.getPostId());
 
-        Comment newComment=replyCreateRequestDto.toEntity(post);
+        Comment newComment = replyCreateRequestDto.toEntity(post);
         commentRepository.save(newComment);
-        return new CommentResponseDto(newComment,user);
+        return new CommentResponseDto(newComment, user);
     }
+
+    /**
+     * 대/댓글 수정 기능
+     *
+     * @param commentUpdateRequestDto : commentId:Long, userId:Long, postId: Long, content:String
+     * @return CommentResponseDto : commentId:Long, userName:String, postId: Long, content:String, parent:Int)
+     */
     @Transactional
     public CommentResponseDto updateComment(CommentUpdateRequestDto commentUpdateRequestDto) {
 
-        User user=getUser(commentUpdateRequestDto.getUserId());
-        Post post=getPost(commentUpdateRequestDto.getPostId());
+        User user = getUser(commentUpdateRequestDto.getUserId());
+        Post post = getPost(commentUpdateRequestDto.getPostId());
 
-        Comment comment=commentRepository.findById(commentUpdateRequestDto.getCommentId())
-                .orElseThrow(()->new IllegalArgumentException(NOT_FOUND_COMMENT_MESSAGE));
+        Comment comment = commentRepository.findById(commentUpdateRequestDto.getCommentId())
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_COMMENT_MESSAGE));
 
         comment.updateComment(commentUpdateRequestDto.getContent());
-        return new CommentResponseDto(comment,user);
+        return new CommentResponseDto(comment, user);
     }
-
-//    @Transactional
-//    public Boolean deleteComment(CommentDeleteRequestDto commentDeleteRequestDto){
-//        Comment comment = commentRepository.findById(commentDeleteRequestDto.getCommentId())
-//                        .orElseThrow(()->new IllegalArgumentException(NOT_FOUND_COMMENT_MESSAGE));
-//        comment.remove();
-//
-//    }
 
 }
 

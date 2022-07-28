@@ -114,7 +114,6 @@ input CommentCreateRequestDto{
     userId:Int
     postId:Int
     content:String
-    parent:Int
 }
 
 input CommentUpdateRequestDto{
@@ -137,7 +136,6 @@ type CommentResponseDto{
     postId:Int
     content:String
     parent:Int
-    createdDate:String
 }
 
 # 타입 시스템 정의
