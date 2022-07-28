@@ -7,6 +7,10 @@
     color: white;
 }
 
+.profile span{
+    font-size: 0.8em;
+}
+
 .profile__container{
     background-color: white;
     border: 2px solid #f1f1f1;
