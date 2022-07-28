@@ -15,13 +15,37 @@
     font-size: 20px;
     margin: 0;
 }
+
 .home-banner h1{
     font-size: 99px;
     margin: 0;
 }
+
+.home-banner a{
+    height: 35px;
+    width: 35px;
+}
+
+.home-banner img{
+}
+
 .home-banner-text{
     margin: auto 0%;
     width: 30%;
     height: auto;
     color: white;
+}
+
+.home-banner-button__container{
+    position: relative;
+    top: -25%;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: 45px;
+}
+
+.home-banner__link{
+    cursor: pointer;
+    margin-bottom: 10px;
 }
