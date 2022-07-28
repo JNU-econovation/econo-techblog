@@ -15,11 +15,13 @@ import java.util.UUID;
 @Component
 public class FileStore {
 
-    private String fileDir = "../../uploadFolder/";
+    @Value("${file.dir}")
+    private String fileDir;
 
     public String getFullPath(String filename) {
         return fileDir + filename;
     }
+
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles)
             throws IOException {
         List<UploadFile> storeFileResult = new ArrayList<>();
@@ -30,20 +32,21 @@ public class FileStore {
         }
         return storeFileResult;
     }
-    public UploadFile storeFile(MultipartFile multipartFile) throws IOException
-    {
-        if (multipartFile.isEmpty()) {
-            return null;
-        }
+    public UploadFile storeFile(MultipartFile multipartFile) throws IOException {
         String originalFilename = multipartFile.getOriginalFilename();
+        System.out.println("originalFilename = " + originalFilename);
         String storeFileName = createStoreFileName(originalFilename);
+        System.out.println("storeFileName = " + storeFileName);
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
         return new UploadFile(originalFilename, storeFileName);
-    } private String createStoreFileName(String originalFilename) {
+    }
+
+    private String createStoreFileName(String originalFilename) {
         String ext = extractExt(originalFilename);
         String uuid = UUID.randomUUID().toString();
         return uuid + "." + ext;
     }
+
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);

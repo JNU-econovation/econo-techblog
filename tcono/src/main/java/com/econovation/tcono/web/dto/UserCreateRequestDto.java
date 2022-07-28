@@ -17,7 +17,6 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class UserCreateRequestDto {
 
-
     @NotEmpty
     private String userEmail;
 
