@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import LoginButton from './components/LoginButton';
 import NavItem from './components/NavItem';
@@ -13,12 +14,21 @@ import { useLoginStateContext } from '../Context/LoginContext';
 function Header() {
   // eslint-disable-next-line no-unused-vars
   const [isLogin, setIsLogin] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState(false);
   const loginContext = useLoginStateContext();
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
   const onLogoClick = () => {
     navigate('/');
+  };
+
+  const onMouseOverHandler = () => {
+    setIsMouseOver(() => true);
+  };
+
+  const onMouseOutHandler = () => {
+    setIsMouseOver(() => false);
   };
 
   useEffect(() => {
@@ -46,8 +56,14 @@ function Header() {
       <div className="header-right-box">
         <Search />
         {isLogin ? (
-          <div>
+          <div onMouseOver={onMouseOverHandler} onMouseOut={onMouseOutHandler}>
             <span className="header__user-name">{loginContext.userName}</span>님
+            {isMouseOver ? (
+              <div>
+                <Link to="/mypage">My Page</Link>
+                <Link to="/write">Write</Link>
+              </div>
+            ) : undefined}
           </div>
         ) : (
           <LoginButton />
