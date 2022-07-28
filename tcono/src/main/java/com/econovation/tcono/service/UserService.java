@@ -32,8 +32,14 @@ public class UserService {
     private static final String EXIST_ALREADY_USER_MESSAGE = "해당 이메일은 이미 회원가입 돼 있습니다.";
     private static final String NOT_CORRECT_USER_MESSAGE = "비밀번호나 이메일이 일치하지 않습니다.";
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     private ConfirmationTokenService confirmationTokenService;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+        this.confirmationTokenService = confirmationTokenService;
+    }
 
 
     /**

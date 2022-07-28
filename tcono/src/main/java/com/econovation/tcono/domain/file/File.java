@@ -31,23 +31,24 @@ import javax.persistence.OneToOne;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Picture extends BaseTimeEntity{
+public class File extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PICTURE_ID")
+    @Column(name = "FILE_ID")
     private Long id;
+
+    private String origName;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="POST_ID")
     private Post post;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="USER_ID")
-    private User user;
-
     private String storeFileName;
 
     private String uploadFileName;
+
+    @Column(updatable = false)
+    private Long userId;
 
     @ColumnDefault("false")
     private boolean isDeleted;

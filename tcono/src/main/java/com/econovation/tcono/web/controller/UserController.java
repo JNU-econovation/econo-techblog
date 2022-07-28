@@ -36,7 +36,9 @@ import java.util.List;
 @RestController
 public class UserController {
 
+    @Autowired
     private final UserService userService;
+    @Autowired
     private final LoginService loginService;
 
     @GetMapping("/api/user/all/{page}")
@@ -87,7 +89,7 @@ public class UserController {
     public User createUser(@RequestBody UserCreateRequestDto userCreateRequestDto){ return userService.createUser(userCreateRequestDto); }
 
     @PostMapping("/api/login")
-    public User login(@Valid @ModelAttribute UserLoginRequestDto userLoginRequestDto, BindingResult bindingResult, HttpServletRequest request) {
+    public User login(@RequestBody UserLoginRequestDto userLoginRequestDto, BindingResult bindingResult, HttpServletRequest request) {
 
         User loginMember = loginService.login(userLoginRequestDto.getUserEmail(),userLoginRequestDto.getPassword());
 
