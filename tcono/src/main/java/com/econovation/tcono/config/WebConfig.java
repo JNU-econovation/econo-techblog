@@ -15,26 +15,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LogInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/css/**", "/*.ico","**/*.graphql","**/*.graphqls" ,"/error", "/api/usernames/**" ,"/api/login","/api/user/**",
-                        "/api/confirm-email/**","/api/unique-email/**","/api/file");
+                        "/api/confirm-email/**","/api/unique-email/**","/api/file","/api/**");
 
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/", "/api/user/**","/api/user","/api/file","**/*.graphql","**/*.graphqls","/api/usernames/**","/api/confirm-email/**", "/api/login", "/api/logout","/api/find-email/**",
-                        "/css/**", "/*.ico", "/error","/api/file");
+                        "/css/**", "/*.ico", "/error","/api/file","/api/**");
     }
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**")
-//                .allowedOrigins("*")
-//                .allowedMethods("*");
-////                .allowCredentials(true);
-//    }
 }
