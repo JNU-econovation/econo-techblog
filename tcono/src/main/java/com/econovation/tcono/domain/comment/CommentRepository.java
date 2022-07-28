@@ -16,6 +16,9 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
     @Query("select max(c.parent) from Comment c")
     Optional<Integer> findCommentGroup();
 
+    @Query("select max(c.seq) from Comment c where c.parent=:parent")
+    Optional<Integer> findCommentsByParentAndSeq(@Param("parent")int Parent);
+
     @Query("select c from Comment c where c.post=:post")
     List<Comment> findCommentsByPost(@Param("post") Post post);
 }

@@ -62,4 +62,9 @@ public class Comment extends BaseTimeEntity {
     public void changeParent(int parent) {
         this.parent = parent + 1;
     }
+
+    //==댓글 내 순서==/
+    public void changeSeq(int seq) {
+        this.seq = seq + 1;
+    }
 }

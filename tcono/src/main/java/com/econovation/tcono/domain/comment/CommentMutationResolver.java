@@ -76,9 +76,17 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
         User user = getUser(replyCreateRequestDto.getUserId());
         Post post = getPost(replyCreateRequestDto.getPostId());
 
-        Comment newComment = replyCreateRequestDto.toEntity(post);
-        commentRepository.save(newComment);
-        return new CommentResponseDto(newComment);
+        Integer parentNumber = commentRepository.findCommentGroup()
+                .orElseThrow(()->new IllegalArgumentException(NOT_FOUND_COMMENT_MESSAGE));
+
+        Integer seqNumber=commentRepository.findCommentsByParentAndSeq(parentNumber).get();
+
+
+        Comment comment = replyCreateRequestDto.toEntity(post);
+        comment.changeSeq(seqNumber);
+
+        commentRepository.save(comment);
+        return new CommentResponseDto(comment);
     }
 
     /**
