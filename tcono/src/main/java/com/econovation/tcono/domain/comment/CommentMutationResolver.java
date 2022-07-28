@@ -53,15 +53,15 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
         User user = getUser(commentCreateRequestDto.getUserId());
         Post post = getPost(commentCreateRequestDto.getPostId());
 
-        Integer parentNumber = commentRepository.countByParent();
-        if(parentNumber==null) {
-            Comment newComment = commentCreateRequestDto.toEntity(post, 1);
-            commentRepository.save(newComment);
-            return new CommentResponseDto(newComment, user);
-        }
-        Comment newComment = commentCreateRequestDto.toEntity(post, parentNumber);
-        commentRepository.save(newComment);
-        return new CommentResponseDto(newComment, user);
+        //댓글 그룹 번호 생성하기
+        Integer parentNumber = commentRepository.findCommentGroup().orElse(0);
+
+        Comment comment = commentCreateRequestDto.toEntity(post);
+        comment.changeParent(parentNumber);
+
+        commentRepository.save(comment);
+//        return new CommentResponseDto(comment, user);
+        return new CommentResponseDto(comment);
     }
 
     /**
@@ -78,7 +78,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
 
         Comment newComment = replyCreateRequestDto.toEntity(post);
         commentRepository.save(newComment);
-        return new CommentResponseDto(newComment, user);
+        return new CommentResponseDto(newComment);
     }
 
     /**
@@ -97,7 +97,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_COMMENT_MESSAGE));
 
         comment.updateComment(commentUpdateRequestDto.getContent());
-        return new CommentResponseDto(comment, user);
+        return new CommentResponseDto(comment);
     }
 }
 

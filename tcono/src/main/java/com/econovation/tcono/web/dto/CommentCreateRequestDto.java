@@ -24,12 +24,11 @@ public class CommentCreateRequestDto {
         this.content = content;
     }
 
-    public Comment toEntity(Post post,int parent) {
+    public Comment toEntity(Post post) {
         return Comment.builder()
                 .userId(userId)
                 .post(post)
                 .content(content)
-                .parent(parent)
                 .seq(0)
                 .build();
     }

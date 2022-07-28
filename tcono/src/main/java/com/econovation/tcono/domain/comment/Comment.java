@@ -14,7 +14,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Table(name="comment")
+@Table(name = "comment")
 @DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,23 +28,24 @@ public class Comment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "POST_ID")
     private Post post;
-    @Lob
+
     @Column(nullable = false)
     private String content;
     @ColumnDefault("0")
+    @Column(nullable = true)
     private int parent;// 부모댓글의 Id
 
-    private int seq;//댓글 vs 대댓글 구분
+    private int seq;//댓글 vs 대댓글구분
     @ColumnDefault("false")
     private Boolean isRemoved;//제거 유무
 
     @Builder
-    public Comment(Long userId, Post post, String content, int parent,int seq) {
+    public Comment(Long userId, Post post, String content, int parent, int seq) {
         this.userId = userId;
         this.post = post;
         this.content = content;
-        this.parent=parent;
-        this.seq=seq;
+        this.parent = parent;
+        this.seq = seq;
     }
 
     //==수정==/
@@ -55,5 +56,10 @@ public class Comment extends BaseTimeEntity {
     //==삭제==/
     public void remove() {
         this.isRemoved = true;
+    }
+
+    //==댓글그룹==/
+    public void changeParent(int parent) {
+        this.parent = parent + 1;
     }
 }

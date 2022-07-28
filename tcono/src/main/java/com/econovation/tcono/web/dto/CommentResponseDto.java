@@ -10,16 +10,16 @@ import lombok.Getter;
 @Getter
 public class CommentResponseDto {
     private Long commentId;//comment Id 정보
-    private String userName;
+    private Long userId;
     private Long postId;
     private String content;
     private int parent;
     private int seq;
 
     @Builder
-    public CommentResponseDto(Comment comment, User user) {
+    public CommentResponseDto(Comment comment) {
         this.commentId = comment.getCommentId();
-        this.userName = user.getUserName();
+        this.userId=comment.getUserId();
         this.postId = comment.getPost().getId();
         this.content = comment.getContent();
         this.parent = comment.getParent();

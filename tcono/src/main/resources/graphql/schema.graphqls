@@ -132,10 +132,11 @@ input ReplyCreateRequestDto{
 
 type CommentResponseDto{
     commentId:Int
-    userName:String
+    userId:Int
     postId:Int
     content:String
     parent:Int
+    seq:Int
 }
 
 # 타입 시스템 정의

@@ -9,11 +9,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment,Long> {
-    @Query("select count(c)from Comment c group by c.parent")
-    Integer countByParent();
+    @Query("select max(c.parent) from Comment c")
+    Optional<Integer> findCommentGroup();
 
     @Query("select c from Comment c where c.post=:post")
     List<Comment> findCommentsByPost(@Param("post") Post post);

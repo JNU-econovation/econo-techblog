@@ -22,5 +22,4 @@ public class CommentDeleteRequestDto {
         this.postId=postId;
         this.commentId=commentId;
     }
-
 }

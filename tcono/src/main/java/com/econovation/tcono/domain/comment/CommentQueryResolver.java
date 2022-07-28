@@ -27,7 +27,7 @@ public class CommentQueryResolver implements GraphQLQueryResolver {
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
 
         List<Comment> comment = commentRepository.findCommentsByPost(post);
-        return comment.stream().map(x -> new CommentResponseDto(x, userRepository.findById(x.getUserId()).get()))
+        return comment.stream().map(x -> new CommentResponseDto(x))
                 .collect(Collectors.toList());
     }
 }
