@@ -115,7 +115,6 @@ input CommentCreateRequestDto{
     postId:Int
     content:String
     parent:Int
-    seq:Int
 }
 
 input CommentUpdateRequestDto{
@@ -131,7 +130,6 @@ type CommentResponseDto{
     postId:Int
     content:String
     parent:Int
-    seq:Int
     createdDate:String
 }
 
