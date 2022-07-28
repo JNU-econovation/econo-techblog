@@ -13,7 +13,6 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @Getter
-@Setter
 @NoArgsConstructor
 public class UserCreateRequestDto {
 
@@ -24,7 +23,6 @@ public class UserCreateRequestDto {
     @Password
     private String password;
 
-    @NotEmpty
     @Range(min =1, max = 50)
     private Long year;
 
@@ -36,11 +34,12 @@ public class UserCreateRequestDto {
 
     public User toEntity(){
         return User.builder()
+                .userName(userName)
                 .userEmail(userEmail)
                 .password(password)
                 .year(year)
                 .pinCode(pinCode)
                 .role(Role.GUEST)
-                .userName(userName).build();
+                .build();
     }
 }

@@ -35,13 +35,13 @@ public class UserService {
     private static final String OVERLAP_PASSWORD_MESSAGE = "기존의 비밀번호를 입력했습니다.";
 
     private final UserRepository userRepository;
-    private ConfirmationTokenService confirmationTokenService;
+    private final ConfirmationTokenService confirmationTokenService;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-        this.confirmationTokenService = confirmationTokenService;
-    }
+//    @Autowired
+//    public UserService(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//        this.confirmationTokenService = confirmationTokenService;
+//    }
 
     @Transactional
     public String sendfindingPasswordConfirmationCode(String name, Long year){
@@ -164,6 +164,7 @@ public class UserService {
 //        없는 이메일일 경우에만 회원가입을 실시
         if(!existUserEmail.toString().isEmpty()){
             User save = userRepository.save(user);
+            log.info(user.getUserName());
             UUID token = confirmationTokenService.createEmailConfirmationToken(save.getId(), save.getUserEmail());
             log.info("userId : ", save.getId());
             return save;

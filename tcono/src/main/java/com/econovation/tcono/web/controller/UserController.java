@@ -70,11 +70,9 @@ public class UserController{
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @PostMapping("/api/user/{userId}")
-    public User updateUser(@PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
+    public User updateUser(@PathVariable Long userId, @ModelAttribute UserUpdateRequestDto userUpdateRequestDto) {
             return userService.updateUser(userId, userUpdateRequestDto);
             }
-
-
 
     @DeleteMapping("/api/user/{userId}")
     public Long deleteUser(@PathVariable Long userId) {
