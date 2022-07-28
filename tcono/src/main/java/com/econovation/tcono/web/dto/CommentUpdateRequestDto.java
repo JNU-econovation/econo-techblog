@@ -3,14 +3,15 @@ package com.econovation.tcono.web.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
 @Getter
+@NoArgsConstructor
 public class CommentUpdateRequestDto {
     private Long commentId;
     private Long userId;
     private Long postId;
-
     private String content;
 
     @Builder

@@ -2,29 +2,33 @@ package com.econovation.tcono.web.dto;
 
 import com.econovation.tcono.domain.comment.Comment;
 import com.econovation.tcono.domain.post.Post;
-import com.econovation.tcono.domain.user.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+
+import javax.persistence.*;
 
 @Data
 @Getter
 @NoArgsConstructor
-public class CommentCreateRequestDto {
-    private Long userId; //유저정보
-    private Long postId; // 글정보
-    private String content;//내용
+public class ReplyCreateRequestDto {
 
+    private Long userId;
+    private Long postId;
+    private String content;
+    private int parent;// 그룹핑 넘버
 
     @Builder
-    public CommentCreateRequestDto(Long userId, Long postId, String content) {
+    public ReplyCreateRequestDto(Long userId, Long postId, String content,int parent) {
         this.userId = userId;
         this.postId = postId;
         this.content = content;
+        this.parent=parent;
     }
 
-    public Comment toEntity(Post post,int parent) {
+    public Comment toEntity(Post post) {
         return Comment.builder()
                 .userId(userId)
                 .post(post)
