@@ -76,7 +76,7 @@ public class FileController {
 
     @PostMapping("/api/file")
     public Picture saveFile(UploadPictureNameDto form) throws IOException {
-//        Picture uploadPicture = null;
+        Picture picture = null;
 //        log.info("request={}", request);
         log.info("userName={}", form.getUserId());
 //        log.info("multipartFile={}", form.getImageFiles());
@@ -87,8 +87,8 @@ public class FileController {
         //            파일 2개 이상일 때
 //        List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
 
-//        //  DB에 저장하기
-//        if (!form.getAttachFile().isEmpty()) {
+        //  DB에 저장하기
+        if (!form.getAttachFile().isEmpty()) {
             MultipartFile formAttachFile = form.getAttachFile();
 //            List<MultipartFile> imageFiles = form.getImageFiles();
             //  파일 이름 설정
@@ -111,13 +111,13 @@ public class FileController {
             User user = userRepsitory.findById(form.getUserId()).get();
             Post post = postRepository.findById(form.getPostId()).get();
 
-            Picture uploadPicture = Picture.builder()
+            Picture picture = Picture.builder()
                     .user(user)
                     .post(post)
                     .uploadFileName(attachFile.getUploadFileName())
                     .storeFileName(attachFile.getStoreFileName())
                     .build();
-//        }
-        return uploadPicture;
+        }
+        return picture;
     }
 }
