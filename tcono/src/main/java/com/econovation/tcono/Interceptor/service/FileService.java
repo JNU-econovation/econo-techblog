@@ -1,4 +1,4 @@
-package com.econovation.tcono.service;
+package com.econovation.tcono.Interceptor.service;
 
 import com.econovation.tcono.domain.file.FileRepository;
 import com.econovation.tcono.web.dto.UploadFile;

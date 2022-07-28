@@ -1,4 +1,4 @@
-package com.econovation.tcono.service;
+package com.econovation.tcono.Interceptor.service;
 
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;

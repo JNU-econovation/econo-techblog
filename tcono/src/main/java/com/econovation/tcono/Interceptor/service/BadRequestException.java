@@ -1,4 +1,4 @@
-package com.econovation.tcono.service;
+package com.econovation.tcono.Interceptor.service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
