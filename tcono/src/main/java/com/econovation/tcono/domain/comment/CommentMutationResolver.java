@@ -5,6 +5,7 @@ import com.econovation.tcono.domain.post.PostRepository;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.domain.user.UserRepository;
 import com.econovation.tcono.web.dto.CommentCreateRequestDto;
+import com.econovation.tcono.web.dto.CommentDeleteRequestDto;
 import com.econovation.tcono.web.dto.CommentResponseDto;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.econovation.tcono.web.dto.CommentUpdateRequestDto;
@@ -20,6 +21,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     private static final String NOT_FOUND_USER_MESSAGE = "해당 유저는 존재하지 않습니다";
     private static final String NOT_FOUND_POST_MESSAGE = "해당 페이지는 존재하지 않습니다.";
     private static final String NOT_FOUND_COMMENT_MESSAGE = "해당 댓글은 존재하지 않습니다.";
+    private static final String DELETE_COMMENT_MESSAGE = "해당 댓글은 삭제되었습니다.";
 
     @Autowired
     private final CommentRepository commentRepository;
@@ -60,6 +62,23 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
         commentRepository.save(newComment);
         return new CommentResponseDto(newComment,user);
     }
+
+    @Transactional
+    public CommentResponseDto createReply(CommentCreateRequestDto commentCreateRequestDto) {
+
+        User user=isUser(commentCreateRequestDto.getUserId());
+        Post post=isPost(commentCreateRequestDto.getPostId());
+
+        Integer parentNumber= commentRepository.countByParent();
+        if(parentNumber==null){
+            Comment newComment=commentCreateRequestDto.toEntity(post,0);
+            commentRepository.save(newComment);
+            return new CommentResponseDto(newComment,user);
+        }
+        Comment newComment=commentCreateRequestDto.toEntity(post,parentNumber);
+        commentRepository.save(newComment);
+        return new CommentResponseDto(newComment,user);
+    }
     @Transactional
     public CommentResponseDto updateComment(CommentUpdateRequestDto commentUpdateRequestDto) {
 
@@ -73,15 +92,12 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
         return new CommentResponseDto(comment,user);
     }
 
-
-
-
-//    public void remove(Long id) throws Exception {
-//        Comment comment = commentRepository.findById(id)
-//                .orElseThrow(() -> new Exception("댓글이 없습니다."));
+//    @Transactional
+//    public Boolean deleteComment(CommentDeleteRequestDto commentDeleteRequestDto){
+//        Comment comment = commentRepository.findById(commentDeleteRequestDto.getCommentId())
+//                        .orElseThrow(()->new IllegalArgumentException(NOT_FOUND_COMMENT_MESSAGE));
 //        comment.remove();
-//        List<Comment> removableCommentList = comment.findRemovableList();
-//        removableCommentList.forEach(removableComment -> commentRepository.delete(removableComment));
+//
 //    }
 
 }

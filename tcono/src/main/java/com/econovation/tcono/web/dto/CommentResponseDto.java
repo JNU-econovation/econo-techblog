@@ -14,9 +14,7 @@ public class CommentResponseDto {
     private Long postId;
     private String content;
     private int parent;
-
     private String createdDate;
-    private int seq;
 
     @Builder
     public CommentResponseDto(Comment comment, User user) {
@@ -24,7 +22,6 @@ public class CommentResponseDto {
         this.userName = user.getUserName();
         this.postId = comment.getPost().getId();
         this.content = comment.getContent();
-        this.seq = comment.getSeq();
         this.parent = comment.getParent();
         this.createdDate=comment.getCreatedDate();
     }

@@ -34,17 +34,14 @@ public class Comment extends BaseTimeEntity {
     @ColumnDefault("0")
     private int parent;// 부모댓글의 Id
 
-    @ColumnDefault("0")
-    private int seq;//부모댓글내 순서
     @ColumnDefault("false")
     private Boolean isRemoved;//제거 유무
 
     @Builder
-    public Comment(Long userId, Post post, String content, int parent,int seq) {
+    public Comment(Long userId, Post post, String content, int parent) {
         this.userId = userId;
         this.post = post;
         this.content = content;
-        this.seq=seq;
         this.parent=parent;
     }
 
