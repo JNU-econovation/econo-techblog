@@ -117,14 +117,13 @@ public class PostMutationResolver implements GraphQLMutationResolver {
     public List<PostListResponseDto> findOfficial(){
         List<Post> officialPost = postRepository.findAll().stream()
                 .filter(x -> x.getViews() > 2)
-                .sorted(Comparator.comparing(Post::getModifiedDate))
                 .limit(3)
                 .collect(Collectors.toList());
 
         officialPost.forEach(Post::updateOfficial);
+        officialPost.stream().sorted(Comparator.comparing(Post::getModifiedDate).reversed());
         return officialPost.stream().map(x->new PostListResponseDto(x,userRepository.findById(x.getUserId()),x.getCategoryList()))
                 .collect(Collectors.toList());
-
 
     }
 }
