@@ -40,7 +40,18 @@ public class UserService {
         this.userRepository = userRepository;
         this.confirmationTokenService = confirmationTokenService;
     }
-
+    @Transactional
+    public String sendfindingPasswordConfirmationCode(String name, Long year){
+        /**이름, 기수를 받아 회원을 조회
+         * 회원 이메일을 추출
+         * 그 이메일로 난수 6글자를 보냄
+         * */
+        List<User> byUserName = userRepository.findByUserName(name).stream().filter(u->u.getYear() == year)
+                .collect(Collectors.toList());
+        User first = byUserName.stream().findFirst().get();
+        String userEmail = first.getUserEmail();
+        return confirmationTokenService.createEmailConfirmationToken(userEmail);
+    }
 
     /**
      * Get All User
@@ -63,6 +74,15 @@ public class UserService {
         Role translatedRole = Role.valueOf(role);
         Pageable pageable = PageRequest.of(page, 8);
         return userRepository.findAll(pageable).stream().filter(u->u.getRole() == translatedRole).collect(Collectors.toList());
+    }
+    @Transactional
+    public Long countAllUser(){
+        return userRepository.count();
+    }
+    @Transactional
+    public Long countUserByRole(String role){
+        Role translatedRole = Role.valueOf(role);
+        return userRepository.countAllByRole(translatedRole);
     }
     /**
      * Get User By One userId

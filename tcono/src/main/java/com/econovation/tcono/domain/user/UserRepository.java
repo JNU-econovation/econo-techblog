@@ -24,4 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
     Optional<User> findUserByPinCode(String pinCode);
 
     Page<User> findAll(Pageable pageable);
+
+    Long countAllByRole(Role role);
 }
