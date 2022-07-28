@@ -25,34 +25,22 @@ const GET_SEARCH = gql`
 
 const SearchResult = function () {
   // const { currentKeyword } = useParams();
+  const [currentPosts, setCurrentPosts] = useState([]);
   const currentKeyword = 'C++';
   const [currentPage, setCurrentPage] = useState(1);
-  const postPerPage = 5;
-  const indexOfLast = currentPage * postPerPage;
-  const indexOfFirst = indexOfLast - postPerPage;
-  const currentPosts = (posts) => {
-    let slicePosts = 0;
-    slicePosts = posts.slice(indexOfFirst, indexOfLast);
-    return slicePosts;
-  };
-  const result = useQuery(GET_SEARCH, {
+
+  const { data } = useQuery(GET_SEARCH, {
     variables: {
       keyword: currentKeyword,
       page: currentPage,
     },
   });
-  console.log(result);
-  const [movies, setMovies] = useState([]);
-  const getMovies = async () => {
-    const response = await fetch(
-      'https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year',
-    );
-    const json = await response.json();
-    setMovies(json.data.movies);
-  };
+  console.log(data);
   useEffect(() => {
-    getMovies();
-  }, []);
+    if (data) {
+      setCurrentPosts(data.findAllPosts);
+    }
+  }, [data]);
   const [navArr, setArr] = useState([
     {
       id: 1,
@@ -93,7 +81,7 @@ const SearchResult = function () {
     <div className="search-result">
       <div className="search-result__text">
         <span className="search-result__keyword">{currentKeyword}</span>
-        <span className="search-result__num">{`검색결과 (총 ${result[0]}건)`}</span>
+        <span className="search-result__num">검색결과 (총 6건)</span>
       </div>
       <div className="search-result__nav">
         {navArr.map((elem) => (
@@ -108,18 +96,13 @@ const SearchResult = function () {
         ))}
       </div>
       <div>
-        {currentPosts(movies).map((item) => (
-          <PostBox
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            summary={item.summary}
-          />
+        {currentPosts.map((item) => (
+          <PostBox key={item.postId} post={item} />
         ))}
         <Pagination
           activePage={currentPage}
           itemsCountPerPage={5}
-          totalItemsCount={movies.length}
+          totalItemsCount={currentPosts.length}
           pageRangeDisplayed={3}
           prevPageText="<"
           nextPageText=">"
