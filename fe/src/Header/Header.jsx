@@ -14,7 +14,7 @@ function Header() {
   // eslint-disable-next-line no-unused-vars
   const [isLogin, setIsLogin] = useState(false);
   const loginContext = useLoginStateContext();
-  const [loginUserInfo, setLoginUserInfo] = useState(loginContext);
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
   const onLogoClick = () => {
@@ -22,18 +22,12 @@ function Header() {
   };
 
   useEffect(() => {
-    const data = { ...loginContext };
-    console.log('rerender from login context', data);
-    setLoginUserInfo(data);
-  }, [loginContext]);
-
-  useEffect(() => {
-    if (loginUserInfo.id === -1) {
+    if (loginContext.id === -1) {
       setIsLogin(() => false);
     } else {
       setIsLogin(() => true);
     }
-  }, [loginUserInfo]);
+  }, [loginContext]);
   return (
     <header className="header">
       <button
@@ -51,7 +45,13 @@ function Header() {
       </ul>
       <div className="header-right-box">
         <Search />
-        {isLogin ? <div>{loginUserInfo.userName}님</div> : <LoginButton />}
+        {isLogin ? (
+          <div>
+            <span className="header__user-name">{loginContext.userName}</span>님
+          </div>
+        ) : (
+          <LoginButton />
+        )}
       </div>
     </header>
   );
