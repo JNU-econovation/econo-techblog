@@ -108,7 +108,7 @@ const Post = function () {
       },
     });
   };
-  if (loading) return 'Loading';
+  if (loading) return null;
   return (
     <div className="post">
       <div className="post-middle">
