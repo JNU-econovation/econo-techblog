@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './RecentPosts.css';
-import more from './img/more.png';
 
 import RecentPost from './components/RecentPost';
 
@@ -90,7 +89,7 @@ const RecentPosts = function () {
   };
   return (
     <div className="recent-posts">
-      <p className="recent-posts__title">Recent Posts</p>
+      <h2 className="recent-posts__title">Recent Posts</h2>
       <div className="recent-posts-nav">
         {navArr.map((elem) => (
           <button
@@ -107,10 +106,6 @@ const RecentPosts = function () {
           </button>
         ))}
       </div>
-      <button className="recent-posts-more-btn" type="button">
-        <span className="more-text">more</span>
-        <img className="more-img" src={more} alt="more" />
-      </button>
       <div className="recent-posts-box">
         {posts.map((item) => (
           <RecentPost
