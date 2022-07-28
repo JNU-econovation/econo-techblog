@@ -1,0 +1,182 @@
+scalar Void
+
+type Post{
+    id:ID!
+    userId:Int
+    content:String
+    title:String!
+    official:Boolean
+    categoryList:[Category]
+    views:Int!
+    hearts:Int!
+    mainCategory: MainCategory
+}
+
+enum MainCategory{
+    TOTAL
+    TECH
+    CULTURE
+    TROUBLE_SHOOTING
+}
+
+type Category{
+    Id : ID!
+    Post : Post
+    categoryName :String
+}
+
+#====PostCreateDto====#
+
+input PostCreateRequestDto{
+    userId:Int
+    content: String
+    title: String
+    mainCategoryNumber:Int
+    categorySplitByComma:String
+}
+
+type PostCreateResponseDto{
+    postId:Int
+    userId: Int
+    content: String
+    title: String
+    mainCategoryNumber: Int
+    categorySplitByComma: String
+    createdDate: String
+    hearts:Int
+    views:Int
+}
+
+#====PostUpdateDto======#
+input PostUpdateRequestDto{
+    postId:Int
+    content: String
+    title: String
+    mainCategoryNumber:Int
+    categorySplitByComma: String
+}
+
+type PostUpdateResponseDto{
+    postId:Int
+    userId: Int
+    content: String
+    title: String
+    mainCategoryNumber:Int
+    categorySplitByComma: String
+    createdDate : String
+    views: Int
+    hearts: Int
+}
+
+#=====PostResponseDto=====#
+
+type PostResponseDto{
+    postId: Int
+    userName:String
+    content: String
+    title: String
+    mainCategoryNumber:Int
+    categoryList:String
+    createdDate:String
+    views:Int
+    hearts:Int
+}
+
+#=====PostListResponseDto=====#
+
+type PostListResponseDto{
+    postId: Int
+    userName:String
+    content: String
+    title: String
+    mainCategoryNumber:Int
+    categoryName:String
+    createdDate:String
+    modifiedDate:String
+    views:Int
+    hearts:Int
+}
+
+type CategoryNameDto {
+    categoryName:String
+}
+
+#====HeartRequestDto====#
+
+input HeartRequestDto {
+    postId : Int
+    userId:Int
+    isHeart:Boolean
+}
+
+#====Comment====#
+input CommentCreateRequestDto{
+    userId:Int
+    postId:Int
+    content:String
+    parent:Int
+}
+
+input CommentUpdateRequestDto{
+    commentId:Int
+    userId:Int
+    postId:Int
+    content:String
+}
+
+input ReplyCreateRequestDto{
+    userId:Int
+    postId:Int
+    content:String
+    parent:Int
+}
+
+type CommentResponseDto{
+    commentId:Int
+    userName:String
+    postId:Int
+    content:String
+    parent:Int
+    createdDate:String
+}
+
+# 타입 시스템 정의
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+
+#Root Query
+type Query{
+    #    -----------Post------------------------f------
+    findAllPosts(mainCategoryNumber:Int, page : Int): [PostListResponseDto!]!
+    findPostByPostId(id : Int) : PostResponseDto!
+    search(keyword : String ,mainCategoryNumber:Int, page : Int) : [PostListResponseDto]!
+    postCounts(mainCategoryNumber:Int):Int
+    postByUser(userId:Int):[PostListResponseDto]!
+
+    # ---------------Heart------------------------------
+    isHeart(postId:Int, userId:Int): Boolean!
+    totalHeartsByUser(userId:Int):Int!
+    #    ---------Comment--------------------
+}
+
+
+
+#Root Mutation
+type Mutation{
+    #    -----------Post------------------------------
+    createPost(postCreateRequestDto: PostCreateRequestDto): PostCreateResponseDto!,
+    updatePost(postUpdateRequestDto: PostUpdateRequestDto): PostUpdateResponseDto!,
+    deletePost(postId : Int):Boolean,
+    findOfficial: [PostListResponseDto!]!,
+    #
+    #       -----------Heart------------------------------
+    updateHeartState(heartRequestDto:HeartRequestDto): Int!,
+    #
+    #      -----------Comment------------------------------
+    createComment(commentCreateRequestDto:CommentCreateRequestDto):CommentResponseDto!,
+    createReply(replyCreateRequestDto:ReplyCreateRequestDto):CommentResponseDto!,
+    updateComment(commentUpdateRequestDto:CommentUpdateRequestDto):CommentResponseDto!
+}

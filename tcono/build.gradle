@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'blog.econovation'
+group = 'com.econovation'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -23,16 +23,37 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+//	update null field setting
+	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
+//	file upload and download
+	implementation 'commons-io:commons-io:2.8.0'
+	implementation 'commons-fileupload:commons-fileupload:1.4'
+
+//	SpringBoot Mail Setting
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+//	SpringBoot Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+// H2 DataBase Setting
+	//=====add=====
+	runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	//=====add=====
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 //	GraphQL Setting
-//	implementation group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '11.0.0'
-//	implementation group: 'com.graphql-java-kickstart', name: 'graphql-java-tools', version: '11.0.0'
 	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
 	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
 
 	implementation 'org.springframework.session:spring-session-core'
-	compileOnly 'org.projectlombok:lombok'
+    implementation 'junit:junit:4.13.1'
+    compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mockito:mockito-all:1.9.5'
 	testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:11.0.0'
 }
 
