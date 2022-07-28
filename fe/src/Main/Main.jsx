@@ -2,6 +2,8 @@ import React from 'react';
 import HomeBanner from '../HomeBanner/HomeBanner';
 import RecentPosts from '../RecentPosts/RecentPosts';
 import HomeOffical from './HomeOffical';
+import BottomBanner from '../BottomBanner/BottomBanner';
+import Footer from '../Footer/Footer';
 
 const Main = function () {
   return (
@@ -9,6 +11,8 @@ const Main = function () {
       <HomeBanner />
       <HomeOffical />
       <RecentPosts />
+      <BottomBanner />
+      <Footer />
     </div>
   );
 };
