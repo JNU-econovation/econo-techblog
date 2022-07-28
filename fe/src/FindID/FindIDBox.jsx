@@ -22,11 +22,8 @@ function FindIDBox({ setIsFindID, setUser }) {
       method: 'get',
       url: `http://168.131.30.127:8080/api/find-email/?year=${year}&userName=${userName}`,
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Access-Control-Allow-Methods': 'PUT, GET, HEAD, POST, DELETE, OPTIONS',
-        'Access-Control-Request-Headers': 'X-PINGOTHER, Content-Type',
-        'Content-Type': '*',
-        'Access-Control-Allow-Credentials': 'true',
+        'Access-Allow-Control-Origin': '*',
+        'Content-Type': 'multipart/form-data',
       },
     })
       .then((response) => {

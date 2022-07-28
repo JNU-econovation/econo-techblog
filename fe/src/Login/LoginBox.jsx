@@ -29,7 +29,7 @@ function LoginBox() {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
-        'Content-Type': '*',
+        'Content-Type': 'multipart/form-data',
       },
     })
       .then((response) => {
