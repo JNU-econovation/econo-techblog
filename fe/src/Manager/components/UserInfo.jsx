@@ -9,6 +9,7 @@ import PostList from './PostList';
 const UserInfo = function () {
   const { id } = useParams();
   const [user, setUser] = useState({});
+  const [checkedList, setCheckedList] = useState([]);
   useEffect(() => {
     axios
       .get(`http://168.131.30.127:8080/api/user/${id}`)
@@ -20,6 +21,18 @@ const UserInfo = function () {
         console.log('erroe', error);
       });
   }, []);
+
+  const onChange = (checked, item) => {
+    if (checked) {
+      setCheckedList([...checkedList, item]);
+    } else if (!checked) {
+      setCheckedList(checkedList.filter((el) => el !== item));
+    }
+  };
+  const onDelete = () => {
+    console.log(checkedList);
+  };
+
   return (
     <div className="userinfo">
       <div className="userinfo-top">
@@ -30,11 +43,15 @@ const UserInfo = function () {
           <span>{`${user.year}기  |  ${user.role}`}</span>
           <span>작성글 6</span>
         </div>
-        <button type="button" className="userinfo-edit__button">
-          수정하기
+        <button
+          type="button"
+          onClick={onDelete}
+          className="userinfo-delete__button"
+        >
+          삭제
         </button>
       </div>
-      <PostList />
+      <PostList uid={id} onChange={onChange} />
     </div>
   );
 };
