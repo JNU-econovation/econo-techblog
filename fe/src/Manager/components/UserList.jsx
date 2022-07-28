@@ -87,11 +87,12 @@ const UserList = function () {
         form.append('role', currentOption);
         axios({
           method: 'post',
-          url: 'http://168.131.30.127:8080/api/user',
+          url: `http://168.131.30.127:8080/api/user/${user.id}`,
           data: form,
         })
           .then((response) => {
             console.log('response', response);
+            location.reload();
           })
           .catch((error) => {
             console.log('error', error);
