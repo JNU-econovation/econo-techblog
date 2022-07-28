@@ -15,8 +15,7 @@ import java.util.UUID;
 @Component
 public class FileStore {
 
-    @Value("${file.dir}")
-    private String fileDir;
+    private String fileDir = "../../uploadFolder/";
 
     public String getFullPath(String filename) {
         return fileDir + filename;
@@ -32,11 +31,13 @@ public class FileStore {
         }
         return storeFileResult;
     }
-    public UploadFile storeFile(MultipartFile multipartFile) throws IOException {
+    public UploadFile storeFile(MultipartFile multipartFile) throws IOException
+    {
+        if (multipartFile.isEmpty()) {
+            return null;
+        }
         String originalFilename = multipartFile.getOriginalFilename();
-        System.out.println("originalFilename = " + originalFilename);
         String storeFileName = createStoreFileName(originalFilename);
-        System.out.println("storeFileName = " + storeFileName);
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
         return new UploadFile(originalFilename, storeFileName);
     }

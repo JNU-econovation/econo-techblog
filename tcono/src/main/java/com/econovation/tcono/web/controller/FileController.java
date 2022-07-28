@@ -10,25 +10,18 @@ package com.econovation.tcono.web.controller;
  import com.econovation.tcono.file.FileStore;
  import com.econovation.tcono.web.dto.UploadFile;
  import com.econovation.tcono.web.dto.UploadPictureNameDto;
- import lombok.RequiredArgsConstructor;
  import lombok.extern.slf4j.Slf4j;
- import org.springframework.beans.factory.annotation.Value;
  import org.springframework.core.io.UrlResource;
  import org.springframework.http.HttpHeaders;
  import org.springframework.http.ResponseEntity;
  import org.springframework.stereotype.Controller;
- import org.springframework.web.bind.annotation.CrossOrigin;
  import org.springframework.web.bind.annotation.GetMapping;
  import org.springframework.web.bind.annotation.ModelAttribute;
  import org.springframework.web.bind.annotation.PathVariable;
  import org.springframework.web.bind.annotation.PostMapping;
- import org.springframework.web.bind.annotation.RequestMapping;
- import org.springframework.web.bind.annotation.RequestPart;
- import org.springframework.web.bind.annotation.RestController;
  import org.springframework.web.multipart.MultipartFile;
  import org.springframework.web.util.UriUtils;
 
- import javax.servlet.ServletException;
  import javax.servlet.http.HttpServletRequest;
  import java.io.IOException;
  import java.net.MalformedURLException;
@@ -37,21 +30,16 @@ package com.econovation.tcono.web.controller;
  import java.io.File;
  import java.util.Optional;
 
-@RestController
-@RequestMapping("/api")
 @Slf4j
-@RequiredArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@Controller
 public class FileController {
 
-    @Value("${file.dir}")
-    private String fileDir;
+    private String fileDir = "../../uploadFolder/";
 
-
-    private final FileStore fileStore;
-    private final PictureRepository pictureRepository;
-    private final UserRepository userRepsitory;
-    private final PostRepository postRepository;
+    private FileStore fileStore;
+    private PictureRepository pictureRepository;
+    private UserRepository userRepsitory;
+    private PostRepository postRepository;
 
 //    글 불러오면 저장된 사진 여러개를 전달
 
@@ -61,7 +49,7 @@ public class FileController {
      * @return
      * @throws IOException
      */
-    @GetMapping("/post/picture/{postId}")
+    @GetMapping("/api/post/picture/{postId}")
     public List<ResponseEntity> getFilesByPost(@PathVariable Long postId) throws MalformedURLException {
         List<Picture> files = pictureRepository.findByPost(postId);
         List<ResponseEntity> list = null;
@@ -86,42 +74,50 @@ public class FileController {
     }
 
 
-    @PostMapping("/file")
-    public Picture saveFile(UploadPictureNameDto form,@RequestPart MultipartFile uploadFile) throws IOException{
+    @PostMapping("/api/file")
+    public Picture saveFile(UploadPictureNameDto form) throws IOException {
+//        Picture uploadPicture = null;
+//        log.info("request={}", request);
         log.info("userName={}", form.getUserId());
-        log.info(uploadFile.getContentType());
-        final String FILE_NOT_EXCEPTION = "FILE NOT EXCEPTION";
+//        log.info("multipartFile={}", form.getImageFiles());
+
         //   DB가 아닌 파일 서버 폴더에 저장하기
         //            파일 1개일때
-        if(uploadFile != null){
+        UploadFile attachFile = fileStore.storeFile(form.getAttachFile());
+        //            파일 2개 이상일 때
+//        List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
 
-            UploadFile attachFile = fileStore.storeFile(uploadFile);
-            //            파일 2개 이상일 때
-    //        List<UploadFile> storeImageFiles = fileStore.storeFiles(form.getImageFiles());
+//        //  DB에 저장하기
+//        if (!form.getAttachFile().isEmpty()) {
+            MultipartFile formAttachFile = form.getAttachFile();
+//            List<MultipartFile> imageFiles = form.getImageFiles();
+            //  파일 이름 설정
+            String fullPath = fileDir + formAttachFile.getOriginalFilename();
+            log.info("파일 저장 fullPath={}", fullPath);
+        //  파일 저장하기
+        //  formAttachFile.transferTo(new File(fullPath));
+        //  한 글에 여러 사진이 있으면 1씩 이름을 추가한다.
 
-    //        //  DB에 저장하기
-    //        if (!form.getAttachFile().isEmpty()) {
 
-    //            MultipartFile formAttachFile = form.getAttachFile();
-    //            List<MultipartFile> imageFiles = form.getImageFiles();
-                //  파일 이름 설정
-                String fullPath = fileDir + uploadFile.getOriginalFilename();
-                log.info("파일 저장 fullPath={}", fullPath);
-                uploadFile.transferTo(new File(fullPath));
+//            for(MultipartFile multipartFile : imageFiles){
+//                int index = 0;
+//                String plusIndex = String.valueOf(index);
+//                multipartFile.transferTo(new File(fullPath + plusIndex));
+//                index += 1;
+//            }
+                formAttachFile.transferTo(new File(fullPath));
 
-    //            삽입 user, post 조회
-                User user = userRepsitory.findById(form.getUserId()).get();
-                Post post = postRepository.findById(form.getPostId()).get();
+//            삽입 user, post 조회
+            User user = userRepsitory.findById(form.getUserId()).get();
+            Post post = postRepository.findById(form.getPostId()).get();
 
-                Picture uploadPicture = Picture.builder()
-                        .user(user)
-                        .post(post)
-                        .uploadFileName(attachFile.getUploadFileName())
-                        .storeFileName(attachFile.getStoreFileName())
-                        .build();
-                Picture save = pictureRepository.save(uploadPicture);
-                return save;
-        }
-        throw new IOException(FILE_NOT_EXCEPTION);
+            Picture uploadPicture = Picture.builder()
+                    .user(user)
+                    .post(post)
+                    .uploadFileName(attachFile.getUploadFileName())
+                    .storeFileName(attachFile.getStoreFileName())
+                    .build();
+//        }
+        return uploadPicture;
     }
 }

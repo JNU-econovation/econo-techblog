@@ -17,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class UserCreateRequestDto {
 
+
     @NotEmpty
     private String userEmail;
 
@@ -24,6 +25,7 @@ public class UserCreateRequestDto {
     @Password
     private String password;
 
+    @NotEmpty
     @Range(min =1, max = 50)
     private Long year;
 

@@ -31,71 +31,69 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api")
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController
 public class UserController {
 
     private final UserService userService;
     private final LoginService loginService;
 
-    @GetMapping("/user/all/{page}")
+    @GetMapping("/api/user/all/{page}")
     public List<User> findUserAll(@PathVariable int page){return userService.findUserAll(page);}
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/api/user/{userId}")
     public User findUserById(@PathVariable Long userId) { return userService.findUserById(userId);}
 
-    @GetMapping("/user/pinCode/{pinCode}")
+    @GetMapping("/api/user/pinCode/{pinCode}")
     public User findUserBypinCode(@PathVariable String pinCode) { return userService.findUserByPinCode(pinCode);}
 
-    @GetMapping("/user/count/{role}")
+    @GetMapping("/api/user/count/{role}")
     public Long countUserByRole(@PathVariable String role){return userService.countUserByRole(role);}
 
-    @GetMapping("/user/count")
+    @GetMapping("/api/user/count")
     public Long countAllUser(){return userService.countAllUser();}
 
 
-    @GetMapping("/usernames/{userName}")
+    @GetMapping("/api/usernames/{userName}")
     public String findUserByUserName(@PathVariable String userName){
         List<User> findUser = userService.findUserByUserName(userName);
         return userName;
     }
-    @GetMapping("/user/role/{page}/{role}")
+    @GetMapping("/api/user/role/{page}/{role}")
     public List<User> findUserByRole(@PathVariable int page, @PathVariable String role){ return userService.findUserByRole(page, role); }
 
-    @GetMapping("/find-email/")
+    @GetMapping("/api/find-email/")
     public User findEmail(@Valid @ModelAttribute UserFindDto userFindDto){
         return userService.findUserByYearAndUserName(userFindDto);
     }
 
-    @GetMapping("/user/email/{userEmail}")
+    @GetMapping("/api/user/email/{userEmail}")
     public User findUserByEmail(@PathVariable String userEmail) { return userService.findUserByUserEmail(userEmail);}
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @PutMapping("/user/{userId}")
+    @PutMapping("/api/user/{userId}")
     public User updateUser(@PathVariable Long userId, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
         return userService.updateUser(userId, userUpdateRequestDto);
     }
 
-    @DeleteMapping("/user/{userId}")
+    @DeleteMapping("/api/user/{userId}")
     public Long deleteUser(@PathVariable Long userId) {
         userService.deleteUserById(userId);
         return userId;
     }
 //    ${도메인}/confirm-email?token=${token의 ID값}
 //    으로 접근시 이메일 인증 로직으로 남겨준다.
-    @GetMapping("/confirm-email/{token}")
+    @GetMapping("/api/confirm-email/{token}")
     public void confirmEmail(@PathVariable String token) {
         log.info(token);
         userService.confirmEmail(token);
     }
 
-    @PostMapping("/user")
-    public User createUser(@Valid @ModelAttribute UserCreateRequestDto userCreateRequestDto){ return userService.createUser(userCreateRequestDto); }
+    @PostMapping("/api/user")
+    public User createUser(@RequestBody UserCreateRequestDto userCreateRequestDto){ return userService.createUser(userCreateRequestDto); }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public User login(@Valid @ModelAttribute UserLoginRequestDto userLoginRequestDto, BindingResult bindingResult, HttpServletRequest request) {
 
         User loginMember = loginService.login(userLoginRequestDto.getUserEmail(),userLoginRequestDto.getPassword());
