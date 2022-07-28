@@ -3,6 +3,7 @@ package com.econovation.tcono.web.controller;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.web.dto.UserCreateRequestDto;
 import com.econovation.tcono.web.dto.UserFindDto;
+import com.econovation.tcono.web.dto.UserPasswordUpdateDto;
 import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.econovation.tcono.service.LoginService;
 import com.econovation.tcono.service.UserService;
@@ -51,7 +52,6 @@ public class UserController{
     @GetMapping("/api/user/count")
     public Long countAllUser(){return userService.countAllUser();}
 
-
     @GetMapping("/api/usernames/{userName}")
     public String findUserByUserName(@PathVariable String userName){
             List<User> findUser = userService.findUserByUserName(userName);
@@ -89,13 +89,17 @@ public class UserController{
             userService.confirmEmail(token);
             }
 
-    @GetMapping("/api/find-password/{userName}/{")
+            //  비밀번호 수정을 위한 인증번호 출력.
+    @PostMapping("/api/find-password/")
     public String findPassword(@Valid @ModelAttribute UserFindDto userFindDto){
     //        Code를 이메일로 보내기
             return userService.sendfindingPasswordConfirmationCode(userFindDto.getUserName(),userFindDto.getYear());
-            }
+        }
 
     @PostMapping("/api/user/set-password/")
+    public String setPassword(@Valid @ModelAttribute UserPasswordUpdateDto userPasswordUpdateDto){
+        return userService.setPassword(userPasswordUpdateDto);
+    }
 
     @PostMapping("/api/user")
     public User createUser(@Valid @ModelAttribute UserCreateRequestDto userCreateRequestDto){ return userService.createUser(userCreateRequestDto); }

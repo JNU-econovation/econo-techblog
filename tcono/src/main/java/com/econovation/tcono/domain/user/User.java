@@ -74,6 +74,9 @@ public class User extends BaseTimeEntity {
         emailVerified = true;
         role = Role.USER;
     }
+    public void setPassword(String password){
+        this.password = password;
+    }
 
     public void update(UserUpdateRequestDto userUpdateRequestDto){
         this.userEmail = userUpdateRequestDto.toEntity().getUserEmail();

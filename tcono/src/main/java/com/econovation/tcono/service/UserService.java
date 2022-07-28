@@ -5,6 +5,7 @@ import com.econovation.tcono.domain.user.Role;
 import com.econovation.tcono.domain.user.User;
 import com.econovation.tcono.web.dto.UserCreateRequestDto;
 import com.econovation.tcono.web.dto.UserFindDto;
+import com.econovation.tcono.web.dto.UserPasswordUpdateDto;
 import com.econovation.tcono.web.dto.UserUpdateRequestDto;
 import com.econovation.tcono.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class UserService {
     private static final String NOT_FOUND_EMAIL_MESSAGE = "해당 이메일을 찾을 수 없습니다.";
     private static final String EXIST_ALREADY_USER_MESSAGE = "해당 이메일은 이미 회원가입 돼 있습니다.";
     private static final String NOT_CORRECT_USER_MESSAGE = "비밀번호나 이메일이 일치하지 않습니다.";
+    private static final String OVERLAP_PASSWORD_MESSAGE = "기존의 비밀번호를 입력했습니다.";
 
     private final UserRepository userRepository;
     private ConfirmationTokenService confirmationTokenService;
@@ -40,6 +42,7 @@ public class UserService {
         this.userRepository = userRepository;
         this.confirmationTokenService = confirmationTokenService;
     }
+
     @Transactional
     public String sendfindingPasswordConfirmationCode(String name, Long year){
         /**이름, 기수를 받아 회원을 조회
@@ -53,6 +56,16 @@ public class UserService {
         return confirmationTokenService.createEmailConfirmationToken(userEmail);
     }
 
+    @Transactional
+    public String setPassword(UserPasswordUpdateDto userPasswordUpdateDto){
+        User user = userRepository.findUserByUserNameAndYear(userPasswordUpdateDto.getUserName(),userPasswordUpdateDto.getYear());
+        if(user.getPassword() == userPasswordUpdateDto.getPassword()){
+            throw new IllegalArgumentException(OVERLAP_PASSWORD_MESSAGE);
+        }
+        String password = userPasswordUpdateDto.getPassword();
+        user.setPassword(password);
+        return password;
+    }
     /**
      * Get All User
      * @param int : page
