@@ -1,5 +1,6 @@
 package com.econovation.tcono.domain.user;
 
+import com.econovation.tcono.domain.post.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +13,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-    Long countAllByRole(Role role);
 
     @Query("SELECT u FROM User u WHERE u.userName = :userName")
     List<User> findByUserName(@Param("userName") String userName);
