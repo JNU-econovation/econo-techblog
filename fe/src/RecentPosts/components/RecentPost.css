@@ -1,8 +1,8 @@
 .post {
     display: flex;
     flex-direction: column;
-    width: 380px;
-    height: fit-content;
+    width: 446px;
+    height: 465px;
     border-radius: 15px;
     box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16);
     overflow: hidden;
@@ -11,14 +11,13 @@
 }
 
 .post__img{
-    height: 240px;
+    height: 299px;
     background-color: black;
 }
 
 .post-info {
     display: flex;
     flex-direction: column;
-    padding: 10px;
 }
 
 .post-title{
@@ -28,7 +27,6 @@
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
-    margin: 5px 0px;
 }
 
 .post-desc {
