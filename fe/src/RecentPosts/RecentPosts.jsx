@@ -22,7 +22,7 @@ const GET_POSTS = gql`
 
 const RecentPosts = function () {
   const [currentPosts, setCurrentPosts] = useState([]);
-  const [currCategory, setCurrCategory] = useState(0);
+  const [currCategory, setCurrCategory] = useState(1);
   const [navArr, setArr] = useState([
     {
       id: 1,
@@ -49,9 +49,14 @@ const RecentPosts = function () {
   console.log('recentposts', data);
   useEffect(() => {
     if (data) {
-      setCurrentPosts(data.findAllPosts);
+      const slicePosts = data.findAllPosts;
+      if (slicePosts.length > 6) {
+        setCurrentPosts(slicePosts.slice(0, 7));
+      } else {
+        setCurrentPosts(slicePosts);
+      }
     }
-  }, [data]);
+  }, [data, currCategory]);
   const onClick = (id) => {
     setArr(
       navArr.map((item) => {
