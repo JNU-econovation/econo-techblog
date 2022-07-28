@@ -147,7 +147,7 @@ type Query{
     #    -----------Post------------------------f------
     findAllPosts(mainCategoryNumber:Int, page : Int): [PostListResponseDto!]!
     findPostByPostId(id : Int) : PostResponseDto!
-    search(keyword : String , page : Int) : [PostListResponseDto]!
+    search(keyword : String ,mainCategoryNumber:Int, page : Int) : [PostListResponseDto]!
     postCounts(mainCategoryNumber:Int):Int
     postByUser(userId:Int):[PostListResponseDto]!
 

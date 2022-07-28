@@ -34,7 +34,11 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("update Post p set p.views = p.views + 1 where p.id = :id")
     int updateViews(@Param("id")Long id);
 
-    List<Post> findByTitleContaining(String keyword, Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE p.title LIKE %:title% and p.mainCategory=:mainCategory")
+    List<Post> findByTitleContainingAndMainCategory(@Param("title") String title,@Param("mainCategory")MainCategory mainCategory, Pageable pageable);
+
+    @Query("SELECT p FROM Post p WHERE p.title LIKE %:title%")
+    List<Post> findByTitleContaining(@Param("title") String title, Pageable pageable);
 
     @Query("select p from Post p where p.userId=:userId")
     List<Post> findByUserId(@Param("userId") Long userId);
