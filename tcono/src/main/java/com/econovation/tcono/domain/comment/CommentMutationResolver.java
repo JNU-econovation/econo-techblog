@@ -28,7 +28,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     private PostRepository postRepository;
 
     @Transactional
-    public User isUser(Long userId){
+    public User getUser(Long userId){
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_USER_MESSAGE));
 
@@ -36,7 +36,7 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     }
 
     @Transactional
-    public Post isPost(Long postId){
+    public Post getPost(Long postId){
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_POST_MESSAGE));
 
@@ -46,8 +46,8 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     @Transactional
     public CommentResponseDto createComment(CommentCreateRequestDto commentCreateRequestDto) {
 
-        User user=isUser(commentCreateRequestDto.getUserId());
-        Post post=isPost(commentCreateRequestDto.getPostId());
+        User user=getUser(commentCreateRequestDto.getUserId());
+        Post post=getPost(commentCreateRequestDto.getPostId());
 
         Integer parentNumber= commentRepository.countByParent();
         if(parentNumber==null){
@@ -62,8 +62,8 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
 
     @Transactional
     public CommentResponseDto createReply(ReplyCreateRequestDto replyCreateRequestDto){
-        User user=isUser(replyCreateRequestDto.getUserId());
-        Post post=isPost(replyCreateRequestDto.getPostId());
+        User user=getUser(replyCreateRequestDto.getUserId());
+        Post post=getPost(replyCreateRequestDto.getPostId());
 
         Comment newComment=replyCreateRequestDto.toEntity(post);
         commentRepository.save(newComment);
@@ -72,8 +72,8 @@ public class CommentMutationResolver implements GraphQLMutationResolver {
     @Transactional
     public CommentResponseDto updateComment(CommentUpdateRequestDto commentUpdateRequestDto) {
 
-        User user=isUser(commentUpdateRequestDto.getUserId());
-        Post post=isPost(commentUpdateRequestDto.getPostId());
+        User user=getUser(commentUpdateRequestDto.getUserId());
+        Post post=getPost(commentUpdateRequestDto.getPostId());
 
         Comment comment=commentRepository.findById(commentUpdateRequestDto.getCommentId())
                 .orElseThrow(()->new IllegalArgumentException(NOT_FOUND_COMMENT_MESSAGE));
