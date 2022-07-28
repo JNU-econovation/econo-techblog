@@ -13,10 +13,10 @@ public class CommentCreateResponseDto {
     private String userName;
     private Long postId;
     private String content;
-    private int depth;
     private int group;
 
     private String createdDate;
+    private int seq;
 
     @Builder
     public CommentCreateResponseDto(Comment comment, User user){
@@ -24,7 +24,7 @@ public class CommentCreateResponseDto {
         this.userName=user.getUserName();
         this.postId=comment.getPost().getId();
         this.content= comment.getContent();;
-        this.depth=comment.getDepth();
+        this.seq=comment.getSeq();
         this.group=comment.getGroup();
     }
 

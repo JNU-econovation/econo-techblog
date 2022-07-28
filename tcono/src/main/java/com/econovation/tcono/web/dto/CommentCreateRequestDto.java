@@ -6,32 +6,31 @@ import com.econovation.tcono.domain.user.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
 @Getter
+@NoArgsConstructor
 public class CommentCreateRequestDto {
     private Long userId; //유저정보
     private Long postId; // 글정보
-    private String content;
-    private int depth; //댓글? 대댓글?
-    private int group;//부모댓글
+    private String content;//내용
+
 
     @Builder
-    public CommentCreateRequestDto(Long userId, Long postId, String content, int depth, int group) {
+    public CommentCreateRequestDto(Long userId, Long postId, String content) {
         this.userId = userId;
         this.postId = postId;
         this.content = content;
-        this.depth = depth;
-        this.group = group;
     }
 
-    public Comment toEntity(Post post) {
+    public Comment toEntity(Post post,int group) {
         return Comment.builder()
                 .userId(userId)
                 .post(post)
                 .content(content)
-                .depth(depth)
                 .group(group)
+                .seq(0)
                 .build();
     }
 
