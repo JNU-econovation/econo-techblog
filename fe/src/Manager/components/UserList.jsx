@@ -72,23 +72,6 @@ const UserList = function () {
       getUsers(`http://168.131.30.127:8080/api/user/role/${page}/${role}`);
     }
     setLoading(true);
-    // const data = [
-    //   {
-    //     id: 1,
-    //     userName: '이윤성',
-    //     userEmail: '181111@jnu.ac.kr',
-    //     role: 'GUEST',
-    //     year: '21기',
-    //   },
-    //   {
-    //     id: 2,
-    //     userName: '이윤성',
-    //     userEmail: '181111@jnu.ac.kr',
-    //     role: 'GUEST',
-    //     year: '21기',
-    //   },
-    // ];
-    // setUsers(data);
   }, [role, page, loading]);
 
   // 사용자 권한 변경
@@ -97,20 +80,15 @@ const UserList = function () {
       const user = users.find((elem) => elem.id == userId);
       console.log('user', user);
       if (user) {
-        const requestData = {
-          userEmail: user.userEmail,
-          year: user.year,
-          userName: user.userName,
-          role: currentOption,
-        };
-        console.log('data', requestData);
+        const form = new FormData();
+        form.append('userEmail', user.userEmail);
+        form.append('year', user.year);
+        form.append('userName', user.userName);
+        form.append('role', currentOption);
         axios({
           method: 'post',
           url: 'http://168.131.30.127:8080/api/user',
-          data: requestData,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-          },
+          data: form,
         })
           .then((response) => {
             console.log('response', response);
