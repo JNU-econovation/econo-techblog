@@ -1,29 +1,44 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable max-len */
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import './RecentPost.css';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
 
-const Post = function () {
+import './RecentPost.css';
+import noImg from '../../components/img/no_img.png';
+
+const RecentPost = function ({ post }) {
+  const formatDate = post.createdDate.split(' ')[0].replace(/\//gi, '.');
   return (
-    <div className="post">
-      <div className="post__img" />
-      <div className="post-info">
-        <span className="post-title">
-          구름톡 업데이트 48시간 전, 그 치열함에
-        </span>
-        <span className="post-desc">
-          안녕하세요. 우아한형제들에서 만화경 안드로이드 앱을 개발하고 있는
-          채상아 입니다. 이전 글에서 말씀드렸듯이 Android
-        </span>
-        <div className="post-tags">
-          <span>#html </span>
-          <span>#css </span>
+    <div className="recent-post">
+      <div className="recent-post__img" />
+      <div className="recent-post-info">
+        <div className="recent-post-title">{post.title}</div>
+        <div className="recent-post-middle">
+          <span className="recent-post-desc">{post.content}</span>
         </div>
       </div>
-      <div className="post-writer">
-        <span className="writer-name">에코노베이션</span>
-        <div className="writer-img" />
+      <div className="recent-post-bottom">
+        <div className="recent-post-tags">
+          {post.categoryName.split(',').map((tag, index) => (
+            <span key={index} className="recent-post__tag">{`#${tag}`}</span>
+          ))}
+        </div>
+        <div className="recent-post-writer">
+          <div className="recent-post-bottom__info">
+            <span className="writer-name">{post.userName}</span>
+            <span className="recent-post__date">{formatDate}</span>
+          </div>
+          <img className="writer-img" src={noImg} alt="user-img" />
+        </div>
       </div>
     </div>
   );
 };
 
-export default Post;
+RecentPost.propTypes = {
+  post: PropTypes.object.isRequired,
+};
+
+export default RecentPost;

@@ -25,14 +25,14 @@
     font-weight: bold;
 }
 
-.userinfo-edit__button {
+.userinfo-delete__button {
     height: 30px;
     width: 85px;
+    margin-top: auto;
     margin-left: auto;
     border: none;
     border-radius: 5px;
-    background-color: #2269fa;
-    color: #fff;
+    background-color: #d2d2d2;
     font-size: 12px;
     font-weight: 500;
 }

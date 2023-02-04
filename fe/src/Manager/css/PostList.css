@@ -27,16 +27,3 @@
     width: 15px;
     height: 15px;
 }
-
-.postlist-delete__button {
-    height: 30px;
-    width: 85px;
-    float: right;
-    position: relative;
-    top: -50px;
-    border: none;
-    border-radius: 5px;
-    background-color: #d2d2d2;
-    font-size: 12px;
-    font-weight: 500;
-}
